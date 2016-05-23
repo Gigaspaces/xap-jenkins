@@ -1,0 +1,36 @@
+# Miscellaneous Hudson litter
+
+*.log
+*.tmp
+*.old
+*.bak
+*.jar
+*.json
+
+# Generated Hudson state
+jenkins_home/.owner
+jenkins_home/secret.key
+jenkins_home/queue.xml
+jenkins_home/fingerprints/
+jenkins_home/shelvedProjects/
+jenkins_home/updates/
+jenkins_home/init.groovy.d/
+jenkins_home/secrets
+jenkins_home/war
+
+# Tools that Hudson manages
+jenkins_home/tools/
+
+# Extracted plugins
+jenkins_home/plugins/*/
+
+# Job state
+builds/
+workspace/
+lastStable
+lastSuccessful
+nextBuildNumber
+
+m2
+workspaces
+*~
