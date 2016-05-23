@@ -37,3 +37,6 @@ nextBuildNumber
 m2
 workspaces
 *~
+
+.idea
+*.iml
