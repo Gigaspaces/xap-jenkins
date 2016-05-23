@@ -1,0 +1,71 @@
+[user]
+	email = xap-builder@gigaspaces.com
+	name = XAP builder
+[core]
+	autocrlf = input
+
+[alias]
+
+# basic
+cp = cherry-pick
+st = status -s
+cl = clone
+ci = commit
+co = checkout
+br = branch
+diff = diff --word-diff
+dc = diff --cached
+
+# reset commands
+r = reset
+r1 = reset HEAD^
+r2 = reset HEAD^^
+rh = reset --hard
+rh1 = reset HEAD^ --hard
+rh2 = reset HEAD^^ --hard
+
+
+# log
+ls = log --pretty=format:"%C(yellow)%h\\ %Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+le = log --oneline --decorate
+#with files modified
+ll = log --pretty=format:"%C(yellow)%h\\ %C(green)%ar%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+l0 = log --pretty=format:"%h\\ %ar\\ %s\\ [%cn]" --decorate --numstat
+
+# ls with time
+lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+
+lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(r
+eset)' --all
+lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset)
+ %C(dim white)- %an%C(reset)' --all
+lg = !"git lg1"
+
+# history of files
+fl = log -u
+
+
+# Show modified files in last commit:
+dl = "!git ll -1"
+
+# Show a diff last commit:
+dlc = diff --cached HEAD^
+
+# Show content (full diff) of a commit given a revision:
+dr  = "!f() { git diff "$1"^.."$1"; }; f"
+lc  = "!f() { git ll "$1"^.."$1"; }; f"
+diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+
+# Find a file path in codebase:
+f = "!git ls-files | grep -i"
+
+
+# List all your Aliases (la)
+la = "!git config -l | grep alias | cut -c 7-"
+
+# Show the last tag:
+lt = describe --tags --abbrev=0
+[push]
+default = simple
