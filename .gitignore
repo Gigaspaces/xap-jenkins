@@ -18,6 +18,7 @@ jenkins_home/init.groovy.d/
 jenkins_home/secrets
 jenkins_home/war
 jenkins_home/logs
+jenkins_home/users
 modules
 
 # Tools that Hudson manages

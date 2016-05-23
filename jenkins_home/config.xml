@@ -7,35 +7,339 @@
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.GlobalMatrixAuthorizationStrategy">
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:barak</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:boaz</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:boris</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:kobi</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:moran</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:niv</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:tamirs</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:tamirt</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:yael</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:yechiel</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:yohaha</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:barak</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:boaz</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:boris</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:kobi</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:moran</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:niv</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:tamirs</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:tamirt</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:yael</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:yechiel</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:yohaha</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:barak</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:boaz</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:boris</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:kobi</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:moran</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:niv</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:tamirs</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:tamirt</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:yael</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:yechiel</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:yohaha</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:barak</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:boaz</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:boris</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:kobi</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:moran</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:niv</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:tamirs</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:tamirt</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:yael</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:yechiel</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:yohaha</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:barak</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:boaz</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:boris</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:kobi</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:moran</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:niv</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:tamirs</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:tamirt</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:yael</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:yechiel</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:yohaha</permission>
     <permission>hudson.model.Computer.Build:barak</permission>
+    <permission>hudson.model.Computer.Build:boaz</permission>
+    <permission>hudson.model.Computer.Build:boris</permission>
+    <permission>hudson.model.Computer.Build:kobi</permission>
+    <permission>hudson.model.Computer.Build:moran</permission>
+    <permission>hudson.model.Computer.Build:niv</permission>
+    <permission>hudson.model.Computer.Build:tamirs</permission>
+    <permission>hudson.model.Computer.Build:tamirt</permission>
+    <permission>hudson.model.Computer.Build:yael</permission>
+    <permission>hudson.model.Computer.Build:yechiel</permission>
+    <permission>hudson.model.Computer.Build:yohaha</permission>
     <permission>hudson.model.Computer.Configure:barak</permission>
+    <permission>hudson.model.Computer.Configure:boaz</permission>
+    <permission>hudson.model.Computer.Configure:boris</permission>
+    <permission>hudson.model.Computer.Configure:kobi</permission>
+    <permission>hudson.model.Computer.Configure:moran</permission>
+    <permission>hudson.model.Computer.Configure:niv</permission>
+    <permission>hudson.model.Computer.Configure:tamirs</permission>
+    <permission>hudson.model.Computer.Configure:tamirt</permission>
+    <permission>hudson.model.Computer.Configure:yael</permission>
+    <permission>hudson.model.Computer.Configure:yechiel</permission>
+    <permission>hudson.model.Computer.Configure:yohaha</permission>
     <permission>hudson.model.Computer.Connect:barak</permission>
+    <permission>hudson.model.Computer.Connect:boaz</permission>
+    <permission>hudson.model.Computer.Connect:boris</permission>
+    <permission>hudson.model.Computer.Connect:kobi</permission>
+    <permission>hudson.model.Computer.Connect:moran</permission>
+    <permission>hudson.model.Computer.Connect:niv</permission>
+    <permission>hudson.model.Computer.Connect:tamirs</permission>
+    <permission>hudson.model.Computer.Connect:tamirt</permission>
+    <permission>hudson.model.Computer.Connect:yael</permission>
+    <permission>hudson.model.Computer.Connect:yechiel</permission>
+    <permission>hudson.model.Computer.Connect:yohaha</permission>
     <permission>hudson.model.Computer.Create:barak</permission>
+    <permission>hudson.model.Computer.Create:boaz</permission>
+    <permission>hudson.model.Computer.Create:boris</permission>
+    <permission>hudson.model.Computer.Create:kobi</permission>
+    <permission>hudson.model.Computer.Create:moran</permission>
+    <permission>hudson.model.Computer.Create:niv</permission>
+    <permission>hudson.model.Computer.Create:tamirs</permission>
+    <permission>hudson.model.Computer.Create:tamirt</permission>
+    <permission>hudson.model.Computer.Create:yael</permission>
+    <permission>hudson.model.Computer.Create:yechiel</permission>
+    <permission>hudson.model.Computer.Create:yohaha</permission>
     <permission>hudson.model.Computer.Delete:barak</permission>
+    <permission>hudson.model.Computer.Delete:boaz</permission>
+    <permission>hudson.model.Computer.Delete:boris</permission>
+    <permission>hudson.model.Computer.Delete:kobi</permission>
+    <permission>hudson.model.Computer.Delete:moran</permission>
+    <permission>hudson.model.Computer.Delete:niv</permission>
+    <permission>hudson.model.Computer.Delete:tamirs</permission>
+    <permission>hudson.model.Computer.Delete:tamirt</permission>
+    <permission>hudson.model.Computer.Delete:yael</permission>
+    <permission>hudson.model.Computer.Delete:yechiel</permission>
+    <permission>hudson.model.Computer.Delete:yohaha</permission>
     <permission>hudson.model.Computer.Disconnect:barak</permission>
+    <permission>hudson.model.Computer.Disconnect:boaz</permission>
+    <permission>hudson.model.Computer.Disconnect:boris</permission>
+    <permission>hudson.model.Computer.Disconnect:kobi</permission>
+    <permission>hudson.model.Computer.Disconnect:moran</permission>
+    <permission>hudson.model.Computer.Disconnect:niv</permission>
+    <permission>hudson.model.Computer.Disconnect:tamirs</permission>
+    <permission>hudson.model.Computer.Disconnect:tamirt</permission>
+    <permission>hudson.model.Computer.Disconnect:yael</permission>
+    <permission>hudson.model.Computer.Disconnect:yechiel</permission>
+    <permission>hudson.model.Computer.Disconnect:yohaha</permission>
     <permission>hudson.model.Hudson.Administer:barak</permission>
+    <permission>hudson.model.Hudson.Administer:boaz</permission>
+    <permission>hudson.model.Hudson.Administer:boris</permission>
+    <permission>hudson.model.Hudson.Administer:kobi</permission>
+    <permission>hudson.model.Hudson.Administer:moran</permission>
+    <permission>hudson.model.Hudson.Administer:niv</permission>
+    <permission>hudson.model.Hudson.Administer:tamirs</permission>
+    <permission>hudson.model.Hudson.Administer:tamirt</permission>
+    <permission>hudson.model.Hudson.Administer:yael</permission>
+    <permission>hudson.model.Hudson.Administer:yechiel</permission>
+    <permission>hudson.model.Hudson.Administer:yohaha</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:barak</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:boaz</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:boris</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:kobi</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:moran</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:niv</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:tamirs</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:tamirt</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:yael</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:yechiel</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:yohaha</permission>
     <permission>hudson.model.Hudson.Read:barak</permission>
+    <permission>hudson.model.Hudson.Read:boaz</permission>
+    <permission>hudson.model.Hudson.Read:boris</permission>
+    <permission>hudson.model.Hudson.Read:kobi</permission>
+    <permission>hudson.model.Hudson.Read:moran</permission>
+    <permission>hudson.model.Hudson.Read:niv</permission>
+    <permission>hudson.model.Hudson.Read:tamirs</permission>
+    <permission>hudson.model.Hudson.Read:tamirt</permission>
+    <permission>hudson.model.Hudson.Read:yael</permission>
+    <permission>hudson.model.Hudson.Read:yechiel</permission>
+    <permission>hudson.model.Hudson.Read:yohaha</permission>
     <permission>hudson.model.Hudson.RunScripts:barak</permission>
+    <permission>hudson.model.Hudson.RunScripts:boaz</permission>
+    <permission>hudson.model.Hudson.RunScripts:boris</permission>
+    <permission>hudson.model.Hudson.RunScripts:kobi</permission>
+    <permission>hudson.model.Hudson.RunScripts:moran</permission>
+    <permission>hudson.model.Hudson.RunScripts:niv</permission>
+    <permission>hudson.model.Hudson.RunScripts:tamirs</permission>
+    <permission>hudson.model.Hudson.RunScripts:tamirt</permission>
+    <permission>hudson.model.Hudson.RunScripts:yael</permission>
+    <permission>hudson.model.Hudson.RunScripts:yechiel</permission>
+    <permission>hudson.model.Hudson.RunScripts:yohaha</permission>
     <permission>hudson.model.Hudson.UploadPlugins:barak</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:boaz</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:boris</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:kobi</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:moran</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:niv</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:tamirs</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:tamirt</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:yael</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:yechiel</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:yohaha</permission>
     <permission>hudson.model.Item.Build:barak</permission>
+    <permission>hudson.model.Item.Build:boaz</permission>
+    <permission>hudson.model.Item.Build:boris</permission>
+    <permission>hudson.model.Item.Build:kobi</permission>
+    <permission>hudson.model.Item.Build:moran</permission>
+    <permission>hudson.model.Item.Build:niv</permission>
+    <permission>hudson.model.Item.Build:tamirs</permission>
+    <permission>hudson.model.Item.Build:tamirt</permission>
+    <permission>hudson.model.Item.Build:yael</permission>
+    <permission>hudson.model.Item.Build:yechiel</permission>
+    <permission>hudson.model.Item.Build:yohaha</permission>
     <permission>hudson.model.Item.Cancel:barak</permission>
+    <permission>hudson.model.Item.Cancel:boaz</permission>
+    <permission>hudson.model.Item.Cancel:boris</permission>
+    <permission>hudson.model.Item.Cancel:kobi</permission>
+    <permission>hudson.model.Item.Cancel:moran</permission>
+    <permission>hudson.model.Item.Cancel:niv</permission>
+    <permission>hudson.model.Item.Cancel:tamirs</permission>
+    <permission>hudson.model.Item.Cancel:tamirt</permission>
+    <permission>hudson.model.Item.Cancel:yael</permission>
+    <permission>hudson.model.Item.Cancel:yechiel</permission>
+    <permission>hudson.model.Item.Cancel:yohaha</permission>
     <permission>hudson.model.Item.Configure:barak</permission>
+    <permission>hudson.model.Item.Configure:boaz</permission>
+    <permission>hudson.model.Item.Configure:boris</permission>
+    <permission>hudson.model.Item.Configure:kobi</permission>
+    <permission>hudson.model.Item.Configure:moran</permission>
+    <permission>hudson.model.Item.Configure:niv</permission>
+    <permission>hudson.model.Item.Configure:tamirs</permission>
+    <permission>hudson.model.Item.Configure:tamirt</permission>
+    <permission>hudson.model.Item.Configure:yael</permission>
+    <permission>hudson.model.Item.Configure:yechiel</permission>
+    <permission>hudson.model.Item.Configure:yohaha</permission>
     <permission>hudson.model.Item.Create:barak</permission>
+    <permission>hudson.model.Item.Create:boaz</permission>
+    <permission>hudson.model.Item.Create:boris</permission>
+    <permission>hudson.model.Item.Create:kobi</permission>
+    <permission>hudson.model.Item.Create:moran</permission>
+    <permission>hudson.model.Item.Create:niv</permission>
+    <permission>hudson.model.Item.Create:tamirs</permission>
+    <permission>hudson.model.Item.Create:tamirt</permission>
+    <permission>hudson.model.Item.Create:yael</permission>
+    <permission>hudson.model.Item.Create:yechiel</permission>
+    <permission>hudson.model.Item.Create:yohaha</permission>
     <permission>hudson.model.Item.Delete:barak</permission>
+    <permission>hudson.model.Item.Delete:boris</permission>
+    <permission>hudson.model.Item.Delete:kobi</permission>
+    <permission>hudson.model.Item.Delete:moran</permission>
+    <permission>hudson.model.Item.Delete:niv</permission>
     <permission>hudson.model.Item.Discover:barak</permission>
+    <permission>hudson.model.Item.Discover:boaz</permission>
+    <permission>hudson.model.Item.Discover:boris</permission>
+    <permission>hudson.model.Item.Discover:kobi</permission>
+    <permission>hudson.model.Item.Discover:moran</permission>
+    <permission>hudson.model.Item.Discover:niv</permission>
+    <permission>hudson.model.Item.Discover:tamirs</permission>
+    <permission>hudson.model.Item.Discover:tamirt</permission>
+    <permission>hudson.model.Item.Discover:yael</permission>
+    <permission>hudson.model.Item.Discover:yechiel</permission>
+    <permission>hudson.model.Item.Discover:yohaha</permission>
     <permission>hudson.model.Item.Read:barak</permission>
+    <permission>hudson.model.Item.Read:boaz</permission>
+    <permission>hudson.model.Item.Read:boris</permission>
+    <permission>hudson.model.Item.Read:kobi</permission>
+    <permission>hudson.model.Item.Read:moran</permission>
+    <permission>hudson.model.Item.Read:niv</permission>
+    <permission>hudson.model.Item.Read:tamirs</permission>
+    <permission>hudson.model.Item.Read:tamirt</permission>
+    <permission>hudson.model.Item.Read:yael</permission>
+    <permission>hudson.model.Item.Read:yechiel</permission>
+    <permission>hudson.model.Item.Read:yohaha</permission>
     <permission>hudson.model.Item.Workspace:barak</permission>
+    <permission>hudson.model.Item.Workspace:boaz</permission>
+    <permission>hudson.model.Item.Workspace:boris</permission>
+    <permission>hudson.model.Item.Workspace:kobi</permission>
+    <permission>hudson.model.Item.Workspace:moran</permission>
+    <permission>hudson.model.Item.Workspace:niv</permission>
+    <permission>hudson.model.Item.Workspace:tamirs</permission>
+    <permission>hudson.model.Item.Workspace:tamirt</permission>
+    <permission>hudson.model.Item.Workspace:yael</permission>
+    <permission>hudson.model.Item.Workspace:yechiel</permission>
+    <permission>hudson.model.Item.Workspace:yohaha</permission>
     <permission>hudson.model.Run.Delete:barak</permission>
+    <permission>hudson.model.Run.Delete:boaz</permission>
+    <permission>hudson.model.Run.Delete:boris</permission>
+    <permission>hudson.model.Run.Delete:kobi</permission>
+    <permission>hudson.model.Run.Delete:moran</permission>
+    <permission>hudson.model.Run.Delete:niv</permission>
+    <permission>hudson.model.Run.Delete:tamirs</permission>
+    <permission>hudson.model.Run.Delete:tamirt</permission>
+    <permission>hudson.model.Run.Delete:yael</permission>
+    <permission>hudson.model.Run.Delete:yechiel</permission>
+    <permission>hudson.model.Run.Delete:yohaha</permission>
     <permission>hudson.model.Run.Update:barak</permission>
+    <permission>hudson.model.Run.Update:boaz</permission>
+    <permission>hudson.model.Run.Update:boris</permission>
+    <permission>hudson.model.Run.Update:kobi</permission>
+    <permission>hudson.model.Run.Update:moran</permission>
+    <permission>hudson.model.Run.Update:niv</permission>
+    <permission>hudson.model.Run.Update:tamirs</permission>
+    <permission>hudson.model.Run.Update:tamirt</permission>
+    <permission>hudson.model.Run.Update:yael</permission>
+    <permission>hudson.model.Run.Update:yechiel</permission>
+    <permission>hudson.model.Run.Update:yohaha</permission>
     <permission>hudson.model.View.Configure:barak</permission>
+    <permission>hudson.model.View.Configure:boaz</permission>
+    <permission>hudson.model.View.Configure:boris</permission>
+    <permission>hudson.model.View.Configure:kobi</permission>
+    <permission>hudson.model.View.Configure:moran</permission>
+    <permission>hudson.model.View.Configure:niv</permission>
+    <permission>hudson.model.View.Configure:tamirs</permission>
+    <permission>hudson.model.View.Configure:tamirt</permission>
+    <permission>hudson.model.View.Configure:yael</permission>
+    <permission>hudson.model.View.Configure:yechiel</permission>
+    <permission>hudson.model.View.Configure:yohaha</permission>
     <permission>hudson.model.View.Create:barak</permission>
+    <permission>hudson.model.View.Create:boaz</permission>
+    <permission>hudson.model.View.Create:boris</permission>
+    <permission>hudson.model.View.Create:kobi</permission>
+    <permission>hudson.model.View.Create:moran</permission>
+    <permission>hudson.model.View.Create:niv</permission>
+    <permission>hudson.model.View.Create:tamirs</permission>
+    <permission>hudson.model.View.Create:tamirt</permission>
+    <permission>hudson.model.View.Create:yael</permission>
+    <permission>hudson.model.View.Create:yechiel</permission>
+    <permission>hudson.model.View.Create:yohaha</permission>
     <permission>hudson.model.View.Delete:barak</permission>
+    <permission>hudson.model.View.Delete:boaz</permission>
+    <permission>hudson.model.View.Delete:boris</permission>
+    <permission>hudson.model.View.Delete:kobi</permission>
+    <permission>hudson.model.View.Delete:moran</permission>
+    <permission>hudson.model.View.Delete:niv</permission>
+    <permission>hudson.model.View.Delete:tamirs</permission>
+    <permission>hudson.model.View.Delete:tamirt</permission>
+    <permission>hudson.model.View.Delete:yael</permission>
+    <permission>hudson.model.View.Delete:yechiel</permission>
+    <permission>hudson.model.View.Delete:yohaha</permission>
     <permission>hudson.model.View.Read:barak</permission>
+    <permission>hudson.model.View.Read:boaz</permission>
+    <permission>hudson.model.View.Read:boris</permission>
+    <permission>hudson.model.View.Read:kobi</permission>
+    <permission>hudson.model.View.Read:moran</permission>
+    <permission>hudson.model.View.Read:niv</permission>
+    <permission>hudson.model.View.Read:tamirs</permission>
+    <permission>hudson.model.View.Read:tamirt</permission>
+    <permission>hudson.model.View.Read:yael</permission>
+    <permission>hudson.model.View.Read:yechiel</permission>
+    <permission>hudson.model.View.Read:yohaha</permission>
+    <permission>hudson.scm.SCM.Tag:boaz</permission>
+    <permission>hudson.scm.SCM.Tag:boris</permission>
+    <permission>hudson.scm.SCM.Tag:kobi</permission>
+    <permission>hudson.scm.SCM.Tag:moran</permission>
+    <permission>hudson.scm.SCM.Tag:niv</permission>
+    <permission>hudson.scm.SCM.Tag:tamirs</permission>
+    <permission>hudson.scm.SCM.Tag:tamirt</permission>
+    <permission>hudson.scm.SCM.Tag:yael</permission>
+    <permission>hudson.scm.SCM.Tag:yechiel</permission>
+    <permission>hudson.scm.SCM.Tag:yohaha</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
     <disableSignup>false</disableSignup>
