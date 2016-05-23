@@ -17,6 +17,8 @@ jenkins_home/updates/
 jenkins_home/init.groovy.d/
 jenkins_home/secrets
 jenkins_home/war
+jenkins_home/logs/
+jenkins_home/jobs/
 
 # Tools that Hudson manages
 jenkins_home/tools/
