@@ -119,7 +119,7 @@
   <prebuilders/>
   <postbuilders>
     <hudson.tasks.Maven>
-      <targets>-B -pl open-core-dist validate -P generate-zip </targets>
+      <targets>-B -pl open-core-dist process-sources -P generate-zip -P copy-artifact-and-submit-to-newman -Dgs.version=12.0.0 -Dgs.milestone=m1 -Dgs.buildnumber=15790-${BUILD_NUMBER}</targets>
       <mavenName>(Default)</mavenName>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
