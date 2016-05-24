@@ -24,8 +24,19 @@ jenkins_home/identity.key.enc
 jenkins_home/hudson.tasks.Mailer.xml
 jenkins_home/config-history/
 
-jenkins_home/hudson.plugins.disk_usage.DiskUsageProjectActionFactory.xml
-jenkins_home/hudson.plugins.disk_usage.DiskUsageProperty.xml
+hudson.plugins.disk_usage.DiskUsageProjectActionFactory.xml
+hudson.plugins.disk_usage.DiskUsageProperty.xml
+
+hudson.maven.MavenModuleSet.xml
+hudson.scm.CVSSCM.xml
+hudson.scm.SubversionSCM.xml
+hudson.tasks.Ant.xml
+hudson.plugins.build_timeout.operations.BuildStepOperation.xml
+hudson.plugins.emailext.ExtendedEmailPublisher.xml
+jobConfigHistory.xml
+org.jenkinsci.plugins.ParameterizedRemoteTrigger.RemoteBuildConfiguration.xml
+
+
 disk-usage.xml
 
 modules
