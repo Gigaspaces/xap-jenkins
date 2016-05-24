@@ -231,6 +231,7 @@
     <permission>hudson.model.Item.Delete:kobi</permission>
     <permission>hudson.model.Item.Delete:moran</permission>
     <permission>hudson.model.Item.Delete:niv</permission>
+    <permission>hudson.model.Item.Delete:yohaha</permission>
     <permission>hudson.model.Item.Discover:barak</permission>
     <permission>hudson.model.Item.Discover:boaz</permission>
     <permission>hudson.model.Item.Discover:boris</permission>

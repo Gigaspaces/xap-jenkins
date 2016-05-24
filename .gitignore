@@ -19,6 +19,7 @@ jenkins_home/secrets
 jenkins_home/war
 jenkins_home/logs
 jenkins_home/users
+jenkins_home/hudson.plugins.git.GitSCM.xml
 modules
 
 # Tools that Hudson manages
