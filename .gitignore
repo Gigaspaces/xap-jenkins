@@ -26,6 +26,8 @@ jenkins_home/config-history/
 
 hudson.plugins.disk_usage.DiskUsageProjectActionFactory.xml
 hudson.plugins.disk_usage.DiskUsageProperty.xml
+jenkins.plugins.slack.SlackNotifier.xml
+jenkins.plugins.slack.webhook.GlobalConfig.xml
 
 hudson.maven.MavenModuleSet.xml
 hudson.scm.CVSSCM.xml
