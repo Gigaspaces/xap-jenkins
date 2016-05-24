@@ -13,6 +13,35 @@
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
     <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.TextParameterDefinition>
+          <name>RELEASEVERSION</name>
+          <description>release and tag name</description>
+          <defaultValue>12.0.0-m41</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>XAPVERSION</name>
+          <description></description>
+          <defaultValue>12.0.0</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>MILESTONE</name>
+          <description></description>
+          <defaultValue>m41</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>XAPBUILDNUMBER</name>
+          <description></description>
+          <defaultValue>15790-${BUILD_NUMBER}</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>NEXTVERSION</name>
+          <description></description>
+          <defaultValue>12.0.0</defaultValue>
+        </hudson.model.TextParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.4">
     <configVersion>2</configVersion>
@@ -42,7 +71,7 @@
     <groupId>com.gigaspaces</groupId>
     <artifactId>open-core</artifactId>
   </rootModule>
-  <goals>clean -B  release:clean -DautoVersionSubmodules=true -DdevelopmentVersion=12.0.0-SNAPSHOT -DreleaseVersion=12.0.0-m41 -DignoreSnapshots=true release:prepare  -Darguments=&quot;-DskipTests -Dgs.version=12.0.0 -Dgs.milestone=m41 -Dgs.buildnumber=15790-${BUILD_NUMBER}&quot;</goals>
+  <goals>-B -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXTVERSION}-SNAPSHOT -DreleaseVersion=${RELEASEVERSION} -DignoreSnapshots=true release:prepare  -DskipTests -Darguments=&quot;-DskipTests -Dgs.version=${XAPVERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAPBUILDNUMBER}&quot;</goals>
   <defaultGoals>process-classes</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
@@ -61,17 +90,29 @@
   <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
   <reporters/>
   <publishers>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>release-prepare-xap</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-        <completeBuild>true</completeBuild>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
+    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.30">
+      <configs>
+        <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+          <configs>
+            <hudson.plugins.parameterizedtrigger.CurrentBuildParameters/>
+            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+              <properties>RELEASEVERSION=${RELEASEVERSION}</properties>
+            </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+          </configs>
+          <projects>release-prepare-xap</projects>
+          <condition>SUCCESS</condition>
+          <triggerWithNoParameters>false</triggerWithNoParameters>
+        </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+      </configs>
+    </hudson.plugins.parameterizedtrigger.BuildTrigger>
   </publishers>
-  <buildWrappers/>
+  <buildWrappers>
+    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.29">
+      <deleteDirs>false</deleteDirs>
+      <cleanupParameter></cleanupParameter>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.PreBuildCleanup>
+  </buildWrappers>
   <prebuilders/>
   <postbuilders/>
   <runPostStepsIfResult>

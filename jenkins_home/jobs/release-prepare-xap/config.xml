@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<maven2-moduleset plugin="maven-plugin@2.13">
+<maven2-moduleset plugin="maven-plugin@2.7.1">
   <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
@@ -27,7 +27,6 @@
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-    <gitTool>git</gitTool>
     <browser class="hudson.plugins.git.browser.AssemblaWeb">
       <url></url>
     </browser>
@@ -46,12 +45,11 @@
     <groupId>com.gigaspaces</groupId>
     <artifactId>open-core</artifactId>
   </rootModule>
-  <goals>-B -DautoVersionSubmodules=true -DdevelopmentVersion=12.0.0-SNAPSHOT -DreleaseVersion=12.0.0-m41 -DignoreSnapshots=true release:prepare  -DskipTests -Darguments=&quot;-DskipTests -Dgs.version=12.0.0 -Dgs.milestone=m41 -Dgs.buildnumber=15790-${BUILD_NUMBER}&quot;</goals>
+  <goals>-B -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${RELEASEVERSION} -DignoreSnapshots=true release:prepare  -DskipTests -Darguments=&quot;-DskipTests -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}&quot;</goals>
   <defaultGoals>package</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <ignoreUpstremChanges>true</ignoreUpstremChanges>
-  <ignoreUnsuccessfulUpstreams>false</ignoreUnsuccessfulUpstreams>
   <archivingDisabled>false</archivingDisabled>
   <siteArchivingDisabled>false</siteArchivingDisabled>
   <fingerprintingDisabled>false</fingerprintingDisabled>
@@ -129,6 +127,14 @@
     </hudson.plugins.emailext.ExtendedEmailPublisher>
   </publishers>
   <buildWrappers/>
+  <publishers/>
+  <buildWrappers>
+    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.29">
+      <deleteDirs>false</deleteDirs>
+      <cleanupParameter></cleanupParameter>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.PreBuildCleanup>
+  </buildWrappers>
   <prebuilders/>
   <postbuilders/>
   <runPostStepsIfResult>
