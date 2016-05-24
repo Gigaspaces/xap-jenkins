@@ -21,6 +21,7 @@ jenkins_home/logs
 jenkins_home/users
 jenkins_home/hudson.plugins.git.GitSCM.xml
 jenkins_home/identity.key.enc
+jenkins_home/hudson.tasks.Mailer.xml
 modules
 
 # Tools that Hudson manages

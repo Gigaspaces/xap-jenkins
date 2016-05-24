@@ -20,6 +20,15 @@ For the first run you will have to create empty folders that will contains the b
 4. Run the script `run.sh` from the `jenkins-docker` folder.
 5. login to jenkins with barak:barak and update the users remove the users you do not need.
 
+## Configuration
+
+### Email 
+
+smpt:server:smtp.gmail.com
+username:newman@gigaspaces.com
+password:***
+port:465
+
 
 
 
