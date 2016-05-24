@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<maven2-moduleset plugin="maven-plugin@2.13">
+<maven2-moduleset plugin="maven-plugin@2.7.1">
   <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
@@ -76,7 +76,6 @@
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <ignoreUpstremChanges>true</ignoreUpstremChanges>
-  <ignoreUnsuccessfulUpstreams>false</ignoreUnsuccessfulUpstreams>
   <archivingDisabled>false</archivingDisabled>
   <siteArchivingDisabled>false</siteArchivingDisabled>
   <fingerprintingDisabled>false</fingerprintingDisabled>
@@ -94,9 +93,12 @@
       <configs>
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
           <configs>
-            <hudson.plugins.parameterizedtrigger.CurrentBuildParameters/>
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-              <properties>RELEASEVERSION=${RELEASEVERSION}</properties>
+              <properties>RELEASEVERSION=${RELEASEVERSION}
+NEXTVERSION=${NEXTVERSION}
+XAPVERSION=${XAPVERSION}
+MILESTONE=${MILESTONE}
+XAPBUILDNUMBER=${XAPBUILDNUMBER}</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
           <projects>release-prepare-xap</projects>
