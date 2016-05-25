@@ -1,0 +1,65 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define">
+  <BODY>
+     <TABLE>
+       <TR><TD align="right">
+         <j:choose>
+           <j:when test="${build.result=='SUCCESS'}">
+             <IMG SRC="https://raw.githubusercontent.com/jenkinsci/jenkins/master/war/src/main/webapp/images/32x32/blue.gif" />
+           </j:when>
+     	  <j:when test="${build.result=='FAILURE'}">
+             <IMG SRC="https://raw.githubusercontent.com/jenkinsci/jenkins/master/war/src/main/webapp/images/32x32/red.gif" />
+           </j:when>
+           <j:otherwise>
+             <IMG SRC="https://raw.githubusercontent.com/jenkinsci/jenkins/master/war/src/main/webapp/images/32x32/yellow.gif" />
+           </j:otherwise>
+         </j:choose>
+       </TD><TD valign="center"><B style="font-size: 200%;">BUILD ${build.result}</B></TD></TR>
+       <TR><TD>Build URL</TD><TD><A href="${rooturl}${build.url}">${rooturl}${build.url}</A></TD></TR>
+       <TR><TD>Project:</TD><TD>${project.name}</TD></TR>
+       <TR><TD>Date of build:</TD><TD>${it.timestampString}</TD></TR>
+       <TR><TD>Build duration:</TD><TD>${build.durationString}</TD></TR>
+     </TABLE>
+     <BR/>     
+
+    <j:set var="changeSet" value="${build.changeSet}" />
+    <j:if test="${changeSet!=null}">
+      <j:set var="hadChanges" value="false" />
+      <TABLE width="100%">
+        <TR><TD colspan="2"><B>CHANGES</B></TD></TR>
+        <j:forEach var="cs" items="${changeSet}" varStatus="loop">
+          <j:set var="hadChanges" value="true" />
+          <j:set var="aUser" value="${cs.hudsonUser}"/>
+          <TR>
+            <TD colspan="2">${spc}Revision <B>${cs.commitId?:cs.revision?:cs.changeNumber}</B> by
+              <B>${aUser!=null?aUser.displayName:cs.author.displayName}: </B>
+              <B>(${cs.msgAnnotated})</B>
+             </TD>
+          </TR>
+          <j:forEach var="p" items="${cs.affectedFiles}">
+            <TR>
+              <TD width="10%">${spc}${p.editType.name}</TD>
+              <TD>${p.path}</TD>
+            </TR>
+          </j:forEach>
+        </j:forEach>
+        <j:if test="${!hadChanges}">
+          <TR><TD colspan="2">No Changes</TD></TR>
+        </j:if>
+      </TABLE>
+    <BR/>
+
+    </j:if>
+
+    <j:getStatic var="resultFailure" field="FAILURE" className="hudson.model.Result"/>
+    <j:if test="${build.result==resultFailure}">
+      <TABLE width="100%" cellpadding="0" cellspacing="0">
+        <TR><TD><B>CONSOLE OUTPUT</B></TD></TR>
+        <j:forEach var="line" items="${build.getLog(100)}"><TR><TD style="font-family:Courier New;" >${line}</TD></TR></j:forEach>
+      </TABLE>
+      <BR/>
+    </j:if>
+   
+
+  </BODY>
+</j:jelly>
