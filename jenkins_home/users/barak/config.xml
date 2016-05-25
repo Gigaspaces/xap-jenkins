@@ -29,7 +29,7 @@
       <passwordHash>#jbcrypt:$2a$10$QX.v7QEgi.x9AtGVSkmkTOaK5DtMDV8ye7BXNAZjQxaDF238LbEMy</passwordHash>
     </hudson.security.HudsonPrivateSecurityRealm_-Details>
     <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.11">
-      <emailAddress>barak.bar@gmail.com</emailAddress>
+      <emailAddress>barakbo@gigaspaces.com</emailAddress>
     </hudson.tasks.Mailer_-UserProperty>
     <jenkins.security.LastGrantedAuthoritiesProperty>
       <roles>

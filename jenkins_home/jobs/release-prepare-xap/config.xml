@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<maven2-moduleset plugin="maven-plugin@2.7.1">
+<maven2-moduleset plugin="maven-plugin@2.13">
   <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
@@ -45,6 +45,11 @@
           <description></description>
           <defaultValue>dummy</defaultValue>
         </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>BRANCH_NAME</name>
+          <description></description>
+          <defaultValue>dummy</defaultValue>
+        </hudson.model.TextParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -57,7 +62,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/master</name>
+        <name>*/${BRANCH_NAME}</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -84,6 +89,7 @@
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <ignoreUpstremChanges>true</ignoreUpstremChanges>
+  <ignoreUnsuccessfulUpstreams>false</ignoreUnsuccessfulUpstreams>
   <archivingDisabled>false</archivingDisabled>
   <siteArchivingDisabled>false</siteArchivingDisabled>
   <fingerprintingDisabled>false</fingerprintingDisabled>
@@ -154,7 +160,7 @@
       <buildServerUrl>http://xap-lab1002:8080/</buildServerUrl>
       <room></room>
       <startNotification>false</startNotification>
-      <notifySuccess>false</notifySuccess>
+      <notifySuccess>true</notifySuccess>
       <notifyAborted>false</notifyAborted>
       <notifyNotBuilt>false</notifyNotBuilt>
       <notifyUnstable>true</notifyUnstable>
