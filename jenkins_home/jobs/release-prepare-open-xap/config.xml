@@ -16,11 +16,6 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.TextParameterDefinition>
-          <name>RELEASE_VERSION</name>
-          <description>release and tag name</description>
-          <defaultValue>12.0.0-m41</defaultValue>
-        </hudson.model.TextParameterDefinition>
-        <hudson.model.TextParameterDefinition>
           <name>XAP_VERSION</name>
           <description></description>
           <defaultValue>12.0.0</defaultValue>
@@ -33,7 +28,7 @@
         <hudson.model.TextParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>15790-${BUILD_NUMBER}</defaultValue>
+          <defaultValue>15790</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>NEXT_VERSION</name>
@@ -77,7 +72,7 @@
     <groupId>com.gigaspaces</groupId>
     <artifactId>open-core</artifactId>
   </rootModule>
-  <goals>-B -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${RELEASE_VERSION} -DignoreSnapshots=true release:prepare -Dgs.release.arguments=&quot;-P generate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}&quot;</goals>
+  <goals>-B -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE} -DignoreSnapshots=true release:prepare -Dgs.release.arguments=&quot;-P generate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}&quot;</goals>
   <defaultGoals>process-classes</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
@@ -172,7 +167,6 @@
           <configs>
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
               <properties>BUILD_NUMBER=${BUILD_NUMBER}
-RELEASE_VERSION=${RELEASE_VERSION}
 XAP_VERSION=${XAP_VERSION}
 MILESTONE=${MILESTONE}
 XAP_BUILD_NUMBER=${XAP_BUILD_NUMBER}

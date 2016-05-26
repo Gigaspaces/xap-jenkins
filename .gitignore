@@ -28,6 +28,12 @@ hudson.plugins.disk_usage.DiskUsageProjectActionFactory.xml
 hudson.plugins.disk_usage.DiskUsageProperty.xml
 jenkins.plugins.slack.SlackNotifier.xml
 jenkins.plugins.slack.webhook.GlobalConfig.xml
+com.tikal.jenkins.plugins.multijob.PhaseJobsConfig.xml
+envInject.xml
+envinject-plugin-configuration.xml
+org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder.xml
+org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper.xml
+
 
 hudson.maven.MavenModuleSet.xml
 hudson.scm.CVSSCM.xml
