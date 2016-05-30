@@ -22,6 +22,8 @@
      </TABLE>
      <BR/>     
 
+    <j:set var="browser" value="${build.project.scm.effectiveBrowser}" />
+
     <j:set var="changeSet" value="${build.changeSet}" />
     <j:if test="${changeSet!=null}">
       <j:set var="hadChanges" value="false" />
@@ -29,19 +31,13 @@
         <TR><TD colspan="2"><B>CHANGES</B></TD></TR>
         <j:forEach var="cs" items="${changeSet}" varStatus="loop">
           <j:set var="hadChanges" value="true" />
-          <j:set var="aUser" value="${cs.hudsonUser}"/>
+          <j:set var="aUser" value="${cs.hudsonUser}"/>	
           <TR>
-            <TD colspan="2">${spc}Revision <B>${cs.commitId?:cs.revision?:cs.changeNumber}</B> by
-              <B>${aUser!=null?aUser.displayName:cs.author.displayName}: </B>
-              <B>(${cs.msgAnnotated})</B>
+            <TD colspan="2">${spc}<B style="color:rgb(0, 128, 0);">[${aUser!=null?aUser.displayName:cs.author.displayName}]</B>${spc}
+                             <A href="${browser.getChangeSetLink(cs)}">${cs.commitId?:cs.revision?:cs.changeNumber}</A>${spc}
+                             <B>${cs.msgAnnotated}</B>
              </TD>
           </TR>
-          <j:forEach var="p" items="${cs.affectedFiles}">
-            <TR>
-              <TD width="10%">${spc}${p.editType.name}</TD>
-              <TD>${p.path}</TD>
-            </TR>
-          </j:forEach>
         </j:forEach>
         <j:if test="${!hadChanges}">
           <TR><TD colspan="2">No Changes</TD></TR>
