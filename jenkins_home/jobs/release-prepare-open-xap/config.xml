@@ -69,10 +69,10 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <rootModule>
-    <groupId>com.gigaspaces</groupId>
+    <groupId>org.xap</groupId>
     <artifactId>open-core</artifactId>
   </rootModule>
-  <goals>-B -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE} -DignoreSnapshots=true release:prepare -Dgs.release.arguments=&quot;-P generate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}&quot;</goals>
+  <goals>-B -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE} -DignoreSnapshots=true release:prepare -Dgs.release.arguments=&quot;-Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER} -Dnewman.tags=DOTNET&quot;</goals>
   <defaultGoals>process-classes</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>

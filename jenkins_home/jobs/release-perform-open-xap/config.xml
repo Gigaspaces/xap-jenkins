@@ -16,9 +16,19 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.TextParameterDefinition>
-          <name>TAG_NAME</name>
-          <description>release and tag name</description>
-          <defaultValue>12.0.0-m41</defaultValue>
+          <name>XAP_VERSION</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>MILESTONE</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>XAP_BUILD_NUMBER</name>
+          <description></description>
+          <defaultValue></defaultValue>
         </hudson.model.TextParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -128,7 +138,9 @@
           <configs>
             <hudson.plugins.parameterizedtrigger.CurrentBuildParameters/>
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-              <properties>TAG_NAME=${TAG_NAME}</properties>
+              <properties>XAP_VERSION=${XAP_VERSION}
+MILESTONE=${MILESTONE}
+XAP_BUILD_NUMBER=${XAP_BUILD_NUMBER}</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
           <projects>release-perform-xap</projects>
@@ -148,7 +160,7 @@
   <prebuilders>
     <hudson.tasks.Shell>
       <command>echo scm.url=scm\:git\:git@github.com\:Gigaspaces/xap-open.git &gt;&gt; ${WORKSPACE}/release.properties
-echo scm.tag=${TAG_NAME} &gt;&gt; ${WORKSPACE}/release.properties</command>
+echo scm.tag=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE} &gt;&gt; ${WORKSPACE}/release.properties</command>
     </hudson.tasks.Shell>
   </prebuilders>
   <postbuilders/>

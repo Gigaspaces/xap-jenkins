@@ -16,9 +16,19 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.TextParameterDefinition>
-          <name>TAG_NAME</name>
-          <description>release and tag name</description>
-          <defaultValue>12.0.0-m41</defaultValue>
+          <name>XAP_VERSION</name>
+          <description></description>
+          <defaultValue>12.0.0</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>MILESTONE</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>XAP_BUILD_NUMBER</name>
+          <description></description>
+          <defaultValue></defaultValue>
         </hudson.model.TextParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -71,6 +81,27 @@
   <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
   <reporters/>
   <publishers>
+    <hudson.plugins.s3.S3BucketPublisher plugin="s3@0.10.3">
+      <profileName>org.openspaces</profileName>
+      <entries>
+        <hudson.plugins.s3.Entry>
+          <bucket>gigaspaces-repository-eu/com/gigaspaces/xap/${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}</bucket>
+          <sourceFile>gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip</sourceFile>
+          <excludedFile></excludedFile>
+          <storageClass>STANDARD</storageClass>
+          <selectedRegion>eu-west-1</selectedRegion>
+          <noUploadOnFailure>true</noUploadOnFailure>
+          <uploadFromSlave>false</uploadFromSlave>
+          <managedArtifacts>false</managedArtifacts>
+          <useServerSideEncryption>false</useServerSideEncryption>
+          <flatten>false</flatten>
+          <gzipFiles>false</gzipFiles>
+          <keepForever>false</keepForever>
+        </hudson.plugins.s3.Entry>
+      </entries>
+      <dontWaitForConcurrentBuildCompletion>false</dontWaitForConcurrentBuildCompletion>
+      <userMetadata/>
+    </hudson.plugins.s3.S3BucketPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.42">
       <recipientList>$DEFAULT_RECIPIENTS</recipientList>
       <configuredTriggers>
@@ -133,10 +164,14 @@
   <prebuilders>
     <hudson.tasks.Shell>
       <command>echo scm.url=scm\:git\:git@github.com\:Gigaspaces/xap.git &gt;&gt; ${WORKSPACE}/release.properties
-echo scm.tag=${TAG_NAME} &gt;&gt; ${WORKSPACE}/release.properties</command>
+echo scm.tag=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE} &gt;&gt; ${WORKSPACE}/release.properties</command>
     </hudson.tasks.Shell>
   </prebuilders>
-  <postbuilders/>
+  <postbuilders>
+    <hudson.tasks.Shell>
+      <command>wget http://192.168.10.10:80/master/${XAP_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip</command>
+    </hudson.tasks.Shell>
+  </postbuilders>
   <runPostStepsIfResult>
     <name>SUCCESS</name>
     <ordinal>0</ordinal>
