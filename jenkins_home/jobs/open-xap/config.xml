@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<maven2-moduleset plugin="maven-plugin@2.7.1">
+<maven2-moduleset plugin="maven-plugin@2.13">
   <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
@@ -45,7 +45,7 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <rootModule>
-    <groupId>com.gigaspaces</groupId>
+    <groupId>org.xap</groupId>
     <artifactId>open-core</artifactId>
   </rootModule>
   <goals>-T 4 clean install  -Dgs.version=12.0.0 -Dgs.milestone=m1 -Dgs.buildnumber=15790-${BUILD_NUMBER}</goals>
@@ -53,6 +53,7 @@
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>true</incrementalBuild>
   <ignoreUpstremChanges>false</ignoreUpstremChanges>
+  <ignoreUnsuccessfulUpstreams>false</ignoreUnsuccessfulUpstreams>
   <archivingDisabled>false</archivingDisabled>
   <siteArchivingDisabled>false</siteArchivingDisabled>
   <fingerprintingDisabled>false</fingerprintingDisabled>
@@ -92,7 +93,6 @@
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <recipientProviders>
               <hudson.plugins.emailext.plugins.recipients.DevelopersRecipientProvider/>
-              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
               <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
               <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
             </recipientProviders>
@@ -112,6 +112,7 @@
               <hudson.plugins.emailext.plugins.recipients.DevelopersRecipientProvider/>
               <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
               <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
+              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
             </recipientProviders>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
