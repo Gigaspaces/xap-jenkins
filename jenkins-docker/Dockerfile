@@ -42,6 +42,7 @@ VOLUME /var/jenkins_home
 VOLUME /home/${user}/.ssh
 VOLUME /home/${user}/.m2
 VOLUME /var/workspaces
+VOLUME /home/${user}/.m2_release
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want 
 # to set on a fresh new installation. Use it to bundle additional plugins 

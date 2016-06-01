@@ -33,6 +33,8 @@ envInject.xml
 envinject-plugin-configuration.xml
 org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder.xml
 org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper.xml
+jenkins_home/hudson.plugins.copyartifact.TriggeredBuildSelector.xml
+jenkins_home/hudson.plugins.s3.S3BucketPublisher.xml
 
 
 hudson.maven.MavenModuleSet.xml
@@ -64,6 +66,7 @@ lastSuccessful
 nextBuildNumber
 
 m2
+m2_release
 workspaces
 *~
 

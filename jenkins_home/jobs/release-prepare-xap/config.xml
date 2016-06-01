@@ -45,6 +45,16 @@
           <description></description>
           <defaultValue>dummy</defaultValue>
         </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>BUILD_NUMBER</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>NEWMAN_TAG</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -79,7 +89,7 @@
     <groupId>com.gigaspaces</groupId>
     <artifactId>open-core</artifactId>
   </rootModule>
-  <goals>-B -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE} -DignoreSnapshots=true release:prepare  -Dgs.release.arguments=&quot;-Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER} -Dnewman.tags=DOTNET&quot;</goals>
+  <goals>-B -DignoreSnapshots=true -DignoreSnapshots=true -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}-${MILESTONE} release:prepare  -Dgs.release.arguments=&quot;-P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dnewman.tags=${NEWMAN_TAG}&quot;</goals>
   <defaultGoals>package</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>

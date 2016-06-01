@@ -40,6 +40,11 @@
           <description></description>
           <defaultValue>master</defaultValue>
         </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>NEWMAN_TAG</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -72,7 +77,7 @@
     <groupId>org.xap</groupId>
     <artifactId>open-core</artifactId>
   </rootModule>
-  <goals>-B -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE} -DignoreSnapshots=true release:prepare -Dgs.release.arguments=&quot;-Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER} -Dnewman.tags=DOTNET&quot;</goals>
+  <goals>-B -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}-${MILESTONE} release:prepare -Dgs.release.arguments=&quot;-P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dnewman.tags=${NEWMAN_TAG}&quot;</goals>
   <defaultGoals>process-classes</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
@@ -171,7 +176,8 @@ XAP_VERSION=${XAP_VERSION}
 MILESTONE=${MILESTONE}
 XAP_BUILD_NUMBER=${XAP_BUILD_NUMBER}
 NEXT_VERSION=${NEXT_VERSION}
-BRANCH_NAME=${BRANCH_NAME}</properties>
+BRANCH_NAME=${BRANCH_NAME}
+NEWMAN_TAG=${NEWMAN_TAG}</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
           <projects>release-prepare-xap</projects>
@@ -188,7 +194,13 @@ BRANCH_NAME=${BRANCH_NAME}</properties>
       <externalDelete></externalDelete>
     </hudson.plugins.ws__cleanup.PreBuildCleanup>
   </buildWrappers>
-  <prebuilders/>
+  <prebuilders>
+    <hudson.tasks.Shell>
+      <command>#rm -rf /home/jenkins/.m2_release/repository/com/gigaspaces
+#rm -rf /home/jenkins/.m2_release/repository/org/openspaces
+#rm -rf /home/jenkins/.m2_release/repository/org/xap</command>
+    </hudson.tasks.Shell>
+  </prebuilders>
   <postbuilders/>
   <runPostStepsIfResult>
     <name>SUCCESS</name>
