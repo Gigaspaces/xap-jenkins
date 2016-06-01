@@ -9,6 +9,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:barak</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:boaz</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:boris</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:evgeny</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:kobi</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:moran</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:niv</permission>
@@ -20,6 +21,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:barak</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:boaz</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:boris</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:evgeny</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:kobi</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:moran</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:niv</permission>
@@ -31,6 +33,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:barak</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:boaz</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:boris</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:evgeny</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:kobi</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:moran</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:niv</permission>
@@ -42,6 +45,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:barak</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:boaz</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:boris</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:evgeny</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:kobi</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:moran</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:niv</permission>
@@ -53,6 +57,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:barak</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:boaz</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:boris</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:evgeny</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:kobi</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:moran</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:niv</permission>
@@ -64,6 +69,7 @@
     <permission>hudson.model.Computer.Build:barak</permission>
     <permission>hudson.model.Computer.Build:boaz</permission>
     <permission>hudson.model.Computer.Build:boris</permission>
+    <permission>hudson.model.Computer.Build:evgeny</permission>
     <permission>hudson.model.Computer.Build:kobi</permission>
     <permission>hudson.model.Computer.Build:moran</permission>
     <permission>hudson.model.Computer.Build:niv</permission>
@@ -75,6 +81,7 @@
     <permission>hudson.model.Computer.Configure:barak</permission>
     <permission>hudson.model.Computer.Configure:boaz</permission>
     <permission>hudson.model.Computer.Configure:boris</permission>
+    <permission>hudson.model.Computer.Configure:evgeny</permission>
     <permission>hudson.model.Computer.Configure:kobi</permission>
     <permission>hudson.model.Computer.Configure:moran</permission>
     <permission>hudson.model.Computer.Configure:niv</permission>
@@ -86,6 +93,7 @@
     <permission>hudson.model.Computer.Connect:barak</permission>
     <permission>hudson.model.Computer.Connect:boaz</permission>
     <permission>hudson.model.Computer.Connect:boris</permission>
+    <permission>hudson.model.Computer.Connect:evgeny</permission>
     <permission>hudson.model.Computer.Connect:kobi</permission>
     <permission>hudson.model.Computer.Connect:moran</permission>
     <permission>hudson.model.Computer.Connect:niv</permission>
@@ -97,6 +105,7 @@
     <permission>hudson.model.Computer.Create:barak</permission>
     <permission>hudson.model.Computer.Create:boaz</permission>
     <permission>hudson.model.Computer.Create:boris</permission>
+    <permission>hudson.model.Computer.Create:evgeny</permission>
     <permission>hudson.model.Computer.Create:kobi</permission>
     <permission>hudson.model.Computer.Create:moran</permission>
     <permission>hudson.model.Computer.Create:niv</permission>
@@ -108,6 +117,7 @@
     <permission>hudson.model.Computer.Delete:barak</permission>
     <permission>hudson.model.Computer.Delete:boaz</permission>
     <permission>hudson.model.Computer.Delete:boris</permission>
+    <permission>hudson.model.Computer.Delete:evgeny</permission>
     <permission>hudson.model.Computer.Delete:kobi</permission>
     <permission>hudson.model.Computer.Delete:moran</permission>
     <permission>hudson.model.Computer.Delete:niv</permission>
@@ -119,6 +129,7 @@
     <permission>hudson.model.Computer.Disconnect:barak</permission>
     <permission>hudson.model.Computer.Disconnect:boaz</permission>
     <permission>hudson.model.Computer.Disconnect:boris</permission>
+    <permission>hudson.model.Computer.Disconnect:evgeny</permission>
     <permission>hudson.model.Computer.Disconnect:kobi</permission>
     <permission>hudson.model.Computer.Disconnect:moran</permission>
     <permission>hudson.model.Computer.Disconnect:niv</permission>
@@ -130,6 +141,7 @@
     <permission>hudson.model.Hudson.Administer:barak</permission>
     <permission>hudson.model.Hudson.Administer:boaz</permission>
     <permission>hudson.model.Hudson.Administer:boris</permission>
+    <permission>hudson.model.Hudson.Administer:evgeny</permission>
     <permission>hudson.model.Hudson.Administer:kobi</permission>
     <permission>hudson.model.Hudson.Administer:moran</permission>
     <permission>hudson.model.Hudson.Administer:niv</permission>
@@ -141,6 +153,7 @@
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:barak</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:boaz</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:boris</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:evgeny</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:kobi</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:moran</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:niv</permission>
@@ -152,6 +165,7 @@
     <permission>hudson.model.Hudson.Read:barak</permission>
     <permission>hudson.model.Hudson.Read:boaz</permission>
     <permission>hudson.model.Hudson.Read:boris</permission>
+    <permission>hudson.model.Hudson.Read:evgeny</permission>
     <permission>hudson.model.Hudson.Read:kobi</permission>
     <permission>hudson.model.Hudson.Read:moran</permission>
     <permission>hudson.model.Hudson.Read:niv</permission>
@@ -163,6 +177,7 @@
     <permission>hudson.model.Hudson.RunScripts:barak</permission>
     <permission>hudson.model.Hudson.RunScripts:boaz</permission>
     <permission>hudson.model.Hudson.RunScripts:boris</permission>
+    <permission>hudson.model.Hudson.RunScripts:evgeny</permission>
     <permission>hudson.model.Hudson.RunScripts:kobi</permission>
     <permission>hudson.model.Hudson.RunScripts:moran</permission>
     <permission>hudson.model.Hudson.RunScripts:niv</permission>
@@ -174,6 +189,7 @@
     <permission>hudson.model.Hudson.UploadPlugins:barak</permission>
     <permission>hudson.model.Hudson.UploadPlugins:boaz</permission>
     <permission>hudson.model.Hudson.UploadPlugins:boris</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:evgeny</permission>
     <permission>hudson.model.Hudson.UploadPlugins:kobi</permission>
     <permission>hudson.model.Hudson.UploadPlugins:moran</permission>
     <permission>hudson.model.Hudson.UploadPlugins:niv</permission>
@@ -185,6 +201,7 @@
     <permission>hudson.model.Item.Build:barak</permission>
     <permission>hudson.model.Item.Build:boaz</permission>
     <permission>hudson.model.Item.Build:boris</permission>
+    <permission>hudson.model.Item.Build:evgeny</permission>
     <permission>hudson.model.Item.Build:kobi</permission>
     <permission>hudson.model.Item.Build:moran</permission>
     <permission>hudson.model.Item.Build:niv</permission>
@@ -196,6 +213,7 @@
     <permission>hudson.model.Item.Cancel:barak</permission>
     <permission>hudson.model.Item.Cancel:boaz</permission>
     <permission>hudson.model.Item.Cancel:boris</permission>
+    <permission>hudson.model.Item.Cancel:evgeny</permission>
     <permission>hudson.model.Item.Cancel:kobi</permission>
     <permission>hudson.model.Item.Cancel:moran</permission>
     <permission>hudson.model.Item.Cancel:niv</permission>
@@ -207,6 +225,7 @@
     <permission>hudson.model.Item.Configure:barak</permission>
     <permission>hudson.model.Item.Configure:boaz</permission>
     <permission>hudson.model.Item.Configure:boris</permission>
+    <permission>hudson.model.Item.Configure:evgeny</permission>
     <permission>hudson.model.Item.Configure:kobi</permission>
     <permission>hudson.model.Item.Configure:moran</permission>
     <permission>hudson.model.Item.Configure:niv</permission>
@@ -218,6 +237,7 @@
     <permission>hudson.model.Item.Create:barak</permission>
     <permission>hudson.model.Item.Create:boaz</permission>
     <permission>hudson.model.Item.Create:boris</permission>
+    <permission>hudson.model.Item.Create:evgeny</permission>
     <permission>hudson.model.Item.Create:kobi</permission>
     <permission>hudson.model.Item.Create:moran</permission>
     <permission>hudson.model.Item.Create:niv</permission>
@@ -235,6 +255,7 @@
     <permission>hudson.model.Item.Discover:barak</permission>
     <permission>hudson.model.Item.Discover:boaz</permission>
     <permission>hudson.model.Item.Discover:boris</permission>
+    <permission>hudson.model.Item.Discover:evgeny</permission>
     <permission>hudson.model.Item.Discover:kobi</permission>
     <permission>hudson.model.Item.Discover:moran</permission>
     <permission>hudson.model.Item.Discover:niv</permission>
@@ -246,6 +267,7 @@
     <permission>hudson.model.Item.Read:barak</permission>
     <permission>hudson.model.Item.Read:boaz</permission>
     <permission>hudson.model.Item.Read:boris</permission>
+    <permission>hudson.model.Item.Read:evgeny</permission>
     <permission>hudson.model.Item.Read:kobi</permission>
     <permission>hudson.model.Item.Read:moran</permission>
     <permission>hudson.model.Item.Read:niv</permission>
@@ -257,6 +279,7 @@
     <permission>hudson.model.Item.Workspace:barak</permission>
     <permission>hudson.model.Item.Workspace:boaz</permission>
     <permission>hudson.model.Item.Workspace:boris</permission>
+    <permission>hudson.model.Item.Workspace:evgeny</permission>
     <permission>hudson.model.Item.Workspace:kobi</permission>
     <permission>hudson.model.Item.Workspace:moran</permission>
     <permission>hudson.model.Item.Workspace:niv</permission>
@@ -268,6 +291,7 @@
     <permission>hudson.model.Run.Delete:barak</permission>
     <permission>hudson.model.Run.Delete:boaz</permission>
     <permission>hudson.model.Run.Delete:boris</permission>
+    <permission>hudson.model.Run.Delete:evgeny</permission>
     <permission>hudson.model.Run.Delete:kobi</permission>
     <permission>hudson.model.Run.Delete:moran</permission>
     <permission>hudson.model.Run.Delete:niv</permission>
@@ -279,6 +303,7 @@
     <permission>hudson.model.Run.Update:barak</permission>
     <permission>hudson.model.Run.Update:boaz</permission>
     <permission>hudson.model.Run.Update:boris</permission>
+    <permission>hudson.model.Run.Update:evgeny</permission>
     <permission>hudson.model.Run.Update:kobi</permission>
     <permission>hudson.model.Run.Update:moran</permission>
     <permission>hudson.model.Run.Update:niv</permission>
@@ -290,6 +315,7 @@
     <permission>hudson.model.View.Configure:barak</permission>
     <permission>hudson.model.View.Configure:boaz</permission>
     <permission>hudson.model.View.Configure:boris</permission>
+    <permission>hudson.model.View.Configure:evgeny</permission>
     <permission>hudson.model.View.Configure:kobi</permission>
     <permission>hudson.model.View.Configure:moran</permission>
     <permission>hudson.model.View.Configure:niv</permission>
@@ -301,6 +327,7 @@
     <permission>hudson.model.View.Create:barak</permission>
     <permission>hudson.model.View.Create:boaz</permission>
     <permission>hudson.model.View.Create:boris</permission>
+    <permission>hudson.model.View.Create:evgeny</permission>
     <permission>hudson.model.View.Create:kobi</permission>
     <permission>hudson.model.View.Create:moran</permission>
     <permission>hudson.model.View.Create:niv</permission>
@@ -312,6 +339,7 @@
     <permission>hudson.model.View.Delete:barak</permission>
     <permission>hudson.model.View.Delete:boaz</permission>
     <permission>hudson.model.View.Delete:boris</permission>
+    <permission>hudson.model.View.Delete:evgeny</permission>
     <permission>hudson.model.View.Delete:kobi</permission>
     <permission>hudson.model.View.Delete:moran</permission>
     <permission>hudson.model.View.Delete:niv</permission>
@@ -323,6 +351,7 @@
     <permission>hudson.model.View.Read:barak</permission>
     <permission>hudson.model.View.Read:boaz</permission>
     <permission>hudson.model.View.Read:boris</permission>
+    <permission>hudson.model.View.Read:evgeny</permission>
     <permission>hudson.model.View.Read:kobi</permission>
     <permission>hudson.model.View.Read:moran</permission>
     <permission>hudson.model.View.Read:niv</permission>
@@ -333,6 +362,7 @@
     <permission>hudson.model.View.Read:yohana</permission>
     <permission>hudson.scm.SCM.Tag:boaz</permission>
     <permission>hudson.scm.SCM.Tag:boris</permission>
+    <permission>hudson.scm.SCM.Tag:evgeny</permission>
     <permission>hudson.scm.SCM.Tag:kobi</permission>
     <permission>hudson.scm.SCM.Tag:moran</permission>
     <permission>hudson.scm.SCM.Tag:niv</permission>
