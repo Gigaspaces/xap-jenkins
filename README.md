@@ -30,6 +30,10 @@ password:***
 port:465
 
 
+		
+### Extended E-mail Notification
+
+Default content: `${SCRIPT, template="xap-groovy-html.template"}`
 
 
 
