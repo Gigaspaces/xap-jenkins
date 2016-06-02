@@ -18,13 +18,30 @@ TD.console { font-family:Courier New; }
 
 
 <% 
-   def branch = build.project.scm.deriveLocalBranchName(build.getEnvironment(listener).get("GIT_BRANCH")) 
-   def remoteRepos = build.project.scm.getParamExpandedRepos(build, listener);
-   def repository = "https://" + remoteRepos[0]?.getURIs()[0]?.toString().replace("git@","").replaceAll(/\.git$/, "").replaceAll(":", "/")
-   def github = repository + "/tree/" + branch
-   def gitChangesBaseURL = repository + "/commit/"
+   def error = null
+   def branch = "unknown"
+   def repository = "unknown"
+   def github = "unknown"
+   def gitChangesBaseURL = "unknown"
+   try{
+      branch = build.project.scm.deriveLocalBranchName(build.getEnvironment(listener).get("GIT_BRANCH")) 
+      def remoteRepos = build.project.scm.getParamExpandedRepos(build, listener);
+      repository = "https://" + remoteRepos[0]?.getURIs()[0]?.toString().replace("git@","").replaceAll(/\.git$/, "").replaceAll(":", "/")
+      github = repository + "/tree/" + branch
+      gitChangesBaseURL = repository + "/commit/"
+   }catch(all){
+      error = all + ""
+      
+   }
 %>
 
+<% 
+if(error != null){
+%>
+   <div>error = $error</div>
+<%
+}
+%>
 
 
 <TABLE>
