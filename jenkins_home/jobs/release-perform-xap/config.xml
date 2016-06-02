@@ -174,7 +174,7 @@ echo scm.tag=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE} &gt;&gt; ${WORKSPAC
   </prebuilders>
   <postbuilders>
     <hudson.tasks.Shell>
-      <command>wget http://192.168.10.10:80/master/${XAP_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip</command>
+      <command>wget http://192.168.10.10:80/${BRANCH_NAME}/${XAP_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip</command>
     </hudson.tasks.Shell>
   </postbuilders>
   <runPostStepsIfResult>
