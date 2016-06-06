@@ -41,10 +41,10 @@
   <concurrentBuild>false</concurrentBuild>
   <rootModule>
     <groupId>com.gigaspaces</groupId>
-    <artifactId>open-core</artifactId>
+    <artifactId>xap</artifactId>
   </rootModule>
   <goals>clean install -P quick_web_ui_build,generate-javadoc -Dgs.version=12.0.0 -Dgs.milestone=m1 -Dgs.buildnumber=15790-${BUILD_NUMBER}</goals>
-  <defaultGoals>package</defaultGoals>
+  <defaultGoals>process-classes</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <ignoreUpstremChanges>true</ignoreUpstremChanges>

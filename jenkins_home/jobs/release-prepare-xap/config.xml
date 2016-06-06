@@ -67,7 +67,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/${BRANCH_NAME}</name>
+        <name>*/master</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -87,10 +87,10 @@
   <concurrentBuild>false</concurrentBuild>
   <rootModule>
     <groupId>com.gigaspaces</groupId>
-    <artifactId>open-core</artifactId>
+    <artifactId>xap</artifactId>
   </rootModule>
-  <goals>-B -DignoreSnapshots=true -DignoreSnapshots=true -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}-${MILESTONE} release:prepare  -Dgs.release.arguments=&quot;-P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dnewman.tags=${NEWMAN_TAG}&quot;</goals>
-  <defaultGoals>package</defaultGoals>
+  <goals>-B -Dmaven.repo.local=/home/jenkins/.m2_release/repository -DignoreSnapshots=true -DignoreSnapshots=true -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER} release:prepare  -Dgs.release.arguments=&quot;-P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dnewman.tags=${NEWMAN_TAG}&quot;</goals>
+  <defaultGoals>process-classes</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <ignoreUpstremChanges>true</ignoreUpstremChanges>
@@ -167,8 +167,24 @@
       <externalDelete></externalDelete>
     </hudson.plugins.ws__cleanup.PreBuildCleanup>
   </buildWrappers>
-  <prebuilders/>
-  <postbuilders/>
+  <prebuilders>
+    <hudson.tasks.Maven>
+      <targets>release:branch -Dmaven.repo.local=/home/jenkins/.m2_release/repository -DbranchName=${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -DupdateWorkingCopyVersions=false</targets>
+      <mavenName>(Default)</mavenName>
+      <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+    </hudson.tasks.Maven>
+    <hudson.tasks.Shell>
+      <command>git checkout ${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}</command>
+    </hudson.tasks.Shell>
+  </prebuilders>
+  <postbuilders>
+    <hudson.tasks.Shell>
+      <command>git branch -d ${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}
+git push :${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}</command>
+    </hudson.tasks.Shell>
+  </postbuilders>
   <runPostStepsIfResult>
     <name>SUCCESS</name>
     <ordinal>0</ordinal>

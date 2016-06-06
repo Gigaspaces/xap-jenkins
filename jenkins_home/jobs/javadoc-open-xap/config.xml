@@ -45,7 +45,7 @@
   <concurrentBuild>false</concurrentBuild>
   <rootModule>
     <groupId>org.xap</groupId>
-    <artifactId>open-core</artifactId>
+    <artifactId>xap-open</artifactId>
   </rootModule>
   <goals>clean package -P generate-javadoc -Dgs.version=12.0.0 -Dgs.milestone=m1 -Dgs.buildnumber=15790-${BUILD_NUMBER}</goals>
   <defaultGoals>process-classes</defaultGoals>

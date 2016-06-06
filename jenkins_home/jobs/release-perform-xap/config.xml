@@ -86,27 +86,6 @@
   <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
   <reporters/>
   <publishers>
-    <hudson.plugins.s3.S3BucketPublisher plugin="s3@0.10.3">
-      <profileName>org.openspaces</profileName>
-      <entries>
-        <hudson.plugins.s3.Entry>
-          <bucket>gigaspaces-repository-eu/com/gigaspaces/xap/${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE}</bucket>
-          <sourceFile>gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip</sourceFile>
-          <excludedFile></excludedFile>
-          <storageClass>STANDARD</storageClass>
-          <selectedRegion>eu-west-1</selectedRegion>
-          <noUploadOnFailure>true</noUploadOnFailure>
-          <uploadFromSlave>false</uploadFromSlave>
-          <managedArtifacts>false</managedArtifacts>
-          <useServerSideEncryption>false</useServerSideEncryption>
-          <flatten>false</flatten>
-          <gzipFiles>false</gzipFiles>
-          <keepForever>false</keepForever>
-        </hudson.plugins.s3.Entry>
-      </entries>
-      <dontWaitForConcurrentBuildCompletion>false</dontWaitForConcurrentBuildCompletion>
-      <userMetadata/>
-    </hudson.plugins.s3.S3BucketPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.42">
       <recipientList>$DEFAULT_RECIPIENTS</recipientList>
       <configuredTriggers>
@@ -174,7 +153,12 @@ echo scm.tag=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE} &gt;&gt; ${WORKSPAC
   </prebuilders>
   <postbuilders>
     <hudson.tasks.Shell>
-      <command>wget http://192.168.10.10:80/${BRANCH_NAME}/${XAP_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip</command>
+      <command>wget http://192.168.10.10:80/${BRANCH_NAME}/${XAP_BUILD_NUMBER}/gigaspaces-open-xap-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip
+mvn xap-build-plugin:deploy-native -Dput.source=gigaspaces-open-xap-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip -Dput.target=com/gigaspaces/open-xap/${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE}
+
+wget http://192.168.10.10:80/${BRANCH_NAME}/${XAP_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip
+mvn xap-build-plugin:deploy-native -Dput.source=gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip -Dput.target=com/gigaspaces/xap/${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE}
+</command>
     </hudson.tasks.Shell>
   </postbuilders>
   <runPostStepsIfResult>
