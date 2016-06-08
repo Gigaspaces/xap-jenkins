@@ -22,8 +22,6 @@ TD.console { font-family:Courier New; }
    def xapMilestone = "unknown"
    def xapBuildNumber = "unknown"
 
-   gigaspaces-xap-open-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip
-   com/gigaspaces/xap-open/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}
 
    try{
      xapVersion = build.getEnvironment(listener).get("XAP_VERSION") 
@@ -62,7 +60,6 @@ if(error != null){
 }
 %>
 
-https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/12.0.0-15791-77-m1/gigaspaces-xap-premium-12.0.0-m1-b15791-77.zip
 
 <TABLE>
   <TR><TD align="right"><IMG SRC="https://raw.githubusercontent.com/jenkinsci/jenkins/master/war/src/main/webapp/images/32x32/<%= build.result.toString() == 'SUCCESS' ? "blue.gif" : build.result.toString() == 'FAILURE' ? 'red.gif' : 'yellow.gif' %>" />
@@ -73,8 +70,8 @@ https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/12.0.0-1579
   <TR><TD>Duration:</TD><TD>${build.durationString}</TD></TR>
   <TR><TD>Branch:</TD><TD><A href="${github}">${branch}</A></TD></TR>
   <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ${cause.shortDescription} <%  } %></TD></TR>
-  <TR><TD>XAP:</TD><TD><A ref="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${mavenVersion}/${xapZipName}">${xapZipZipName}</A></TD></TR> 
-  <TR><TD>XAP Permium:</TD><TD><A ref="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR> 
+  <TR><TD>XAP:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${mavenVersion}/${xapZipName}">${xapZipName}</A></TD></TR> 
+  <TR><TD>XAP Permium:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR> 
   <TR><TD>Maven release version:</TD><TD>${mavenVersion}</TD></TR> 
 </TABLE>
 <BR/>
