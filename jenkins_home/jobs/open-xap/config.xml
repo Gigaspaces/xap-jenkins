@@ -64,8 +64,11 @@
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>0 6 * * *</spec>
+    </hudson.triggers.TimerTrigger>
     <hudson.triggers.SCMTrigger>
-      <spec>* 7-19 * * *</spec>
+      <spec>* * * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>
@@ -74,7 +77,7 @@
     <groupId>org.xap</groupId>
     <artifactId>xap-open</artifactId>
   </rootModule>
-  <goals>-T 4 clean install  -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dgs.branch=${BRANCH_NAME} -Dnewman.tags=${NEWMAN_TAGS}</goals>
+  <goals>-T 4 clean install  -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dgs.branch=${BRANCH_NAME} -Dnewman.tags=${NEWMAN_TAGS} -P generate-zip</goals>
   <defaultGoals>process-classes</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>true</incrementalBuild>

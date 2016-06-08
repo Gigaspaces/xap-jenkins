@@ -65,7 +65,7 @@
   <concurrentBuild>false</concurrentBuild>
   <rootModule>
     <groupId>com.gigaspaces</groupId>
-    <artifactId>open-core</artifactId>
+    <artifactId>xap</artifactId>
   </rootModule>
   <goals>release:perform</goals>
   <defaultGoals>process-classes</defaultGoals>
@@ -148,16 +148,16 @@
   <prebuilders>
     <hudson.tasks.Shell>
       <command>echo scm.url=scm\:git\:git@github.com\:Gigaspaces/xap.git &gt;&gt; ${WORKSPACE}/release.properties
-echo scm.tag=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE} &gt;&gt; ${WORKSPACE}/release.properties</command>
+echo scm.tag=${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER} &gt;&gt; ${WORKSPACE}/release.properties</command>
     </hudson.tasks.Shell>
   </prebuilders>
   <postbuilders>
     <hudson.tasks.Shell>
-      <command>wget http://192.168.10.10:80/${BRANCH_NAME}/${XAP_BUILD_NUMBER}/gigaspaces-open-xap-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip
-mvn xap-build-plugin:deploy-native -Dput.source=gigaspaces-open-xap-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip -Dput.target=com/gigaspaces/open-xap/${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE}
+      <command>wget http://192.168.10.10:80/${XAP_VERSION}/${XAP_BUILD_NUMBER}/gigaspaces-xap-open-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip
+mvn xap-build-plugin:deploy-native -Dput.source=gigaspaces-xap-open-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip -Dput.target=com/gigaspaces/xap-open/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}
 
-wget http://192.168.10.10:80/${BRANCH_NAME}/${XAP_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip
-mvn xap-build-plugin:deploy-native -Dput.source=gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip -Dput.target=com/gigaspaces/xap/${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE}
+wget http://192.168.10.10:80/${XAP_VERSION}/${XAP_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip
+mvn xap-build-plugin:deploy-native -Dput.source=gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${XAP_BUILD_NUMBER}.zip -Dput.target=com/gigaspaces/xap/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}
 </command>
     </hudson.tasks.Shell>
   </postbuilders>

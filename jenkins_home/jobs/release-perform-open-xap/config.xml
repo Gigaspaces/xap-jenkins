@@ -18,12 +18,12 @@
         <hudson.model.TextParameterDefinition>
           <name>XAP_VERSION</name>
           <description></description>
-          <defaultValue></defaultValue>
+          <defaultValue>12.0.0</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue></defaultValue>
+          <defaultValue>m2</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
@@ -33,7 +33,7 @@
         <hudson.model.TextParameterDefinition>
           <name>BRANCH_NAME</name>
           <description></description>
-          <defaultValue></defaultValue>
+          <defaultValue>master</defaultValue>
         </hudson.model.TextParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -65,7 +65,7 @@
   <concurrentBuild>false</concurrentBuild>
   <rootModule>
     <groupId>org.xap</groupId>
-    <artifactId>open-core</artifactId>
+    <artifactId>xap-open</artifactId>
   </rootModule>
   <goals>release:perform</goals>
   <defaultGoals>process-classes</defaultGoals>
@@ -165,7 +165,7 @@ XAP_BUILD_NUMBER=${XAP_BUILD_NUMBER}</properties>
   <prebuilders>
     <hudson.tasks.Shell>
       <command>echo scm.url=scm\:git\:git@github.com\:Gigaspaces/xap-open.git &gt;&gt; ${WORKSPACE}/release.properties
-echo scm.tag=${XAP_VERSION}-${XAP_BUILD_NUMBER}-${MILESTONE} &gt;&gt; ${WORKSPACE}/release.properties</command>
+echo scm.tag=${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER} &gt;&gt; ${WORKSPACE}/release.properties</command>
     </hudson.tasks.Shell>
   </prebuilders>
   <postbuilders/>

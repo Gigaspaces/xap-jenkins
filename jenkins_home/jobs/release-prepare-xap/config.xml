@@ -55,6 +55,11 @@
           <description></description>
           <defaultValue></defaultValue>
         </hudson.model.TextParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>FINAL_BUILD_NUMBER</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -67,7 +72,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/master</name>
+        <name>*/${BRANCH_NAME}</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -89,7 +94,7 @@
     <groupId>com.gigaspaces</groupId>
     <artifactId>xap</artifactId>
   </rootModule>
-  <goals>-B -Dmaven.repo.local=/home/jenkins/.m2_release/repository -DignoreSnapshots=true -DignoreSnapshots=true -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER} release:prepare  -Dgs.release.arguments=&quot;-P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dnewman.tags=${NEWMAN_TAG}&quot;</goals>
+  <goals>clean -B -Dmaven.repo.local=/home/jenkins/.m2_release/repository -DignoreSnapshots=true -DignoreSnapshots=true -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER} release:prepare  -Dgs.release.arguments=&quot;-DskipTests -P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${FINAL_BUILD_NUMBER} -Dnewman.tags=${NEWMAN_TAG}&quot;</goals>
   <defaultGoals>process-classes</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
@@ -107,6 +112,28 @@
   <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
   <reporters/>
   <publishers>
+    <hudson.plugins.postbuildtask.PostbuildTask plugin="postbuild-task@1.8">
+      <tasks>
+        <hudson.plugins.postbuildtask.TaskProperties>
+          <logTexts>
+            <hudson.plugins.postbuildtask.LogProperties>
+              <logText>BUILD FAILED</logText>
+              <operator>OR</operator>
+            </hudson.plugins.postbuildtask.LogProperties>
+            <hudson.plugins.postbuildtask.LogProperties>
+              <logText>BUILD FAILURE</logText>
+              <operator>AND</operator>
+            </hudson.plugins.postbuildtask.LogProperties>
+          </logTexts>
+          <EscalateStatus>false</EscalateStatus>
+          <RunIfJobSuccessful>false</RunIfJobSuccessful>
+          <script>mvn -Dmaven.repo.local=/home/jenkins/.m2_release/repository release:rollback&#xd;
+git checkout master&#xd;
+git branch -D ${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}&#xd;
+git push origin :refs/heads/${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}</script>
+        </hudson.plugins.postbuildtask.TaskProperties>
+      </tasks>
+    </hudson.plugins.postbuildtask.PostbuildTask>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.42">
       <recipientList>$DEFAULT_RECIPIENTS</recipientList>
       <configuredTriggers>
@@ -116,10 +143,7 @@
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <recipientProviders>
-              <hudson.plugins.emailext.plugins.recipients.DevelopersRecipientProvider/>
-              <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
               <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
-              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
             </recipientProviders>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
@@ -134,10 +158,7 @@
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <recipientProviders>
-              <hudson.plugins.emailext.plugins.recipients.DevelopersRecipientProvider/>
-              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
               <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
-              <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
             </recipientProviders>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
@@ -166,23 +187,29 @@
       <cleanupParameter></cleanupParameter>
       <externalDelete></externalDelete>
     </hudson.plugins.ws__cleanup.PreBuildCleanup>
+    <EnvInjectBuildWrapper plugin="envinject@1.92.1">
+      <info>
+        <propertiesContent>BUILD_NUMBER=${BUILD_NUMBER}
+XAP_VERSION=${XAP_VERSION}
+MILESTONE=${MILESTONE}
+XAP_BUILD_NUMBER=${XAP_BUILD_NUMBER}
+FINAL_BUILD_NUMBER=${FINAL_BUILD_NUMBER}
+</propertiesContent>
+        <loadFilesFromMaster>false</loadFilesFromMaster>
+      </info>
+    </EnvInjectBuildWrapper>
   </buildWrappers>
   <prebuilders>
-    <hudson.tasks.Maven>
-      <targets>release:branch -Dmaven.repo.local=/home/jenkins/.m2_release/repository -DbranchName=${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -DupdateWorkingCopyVersions=false</targets>
-      <mavenName>(Default)</mavenName>
-      <usePrivateRepository>false</usePrivateRepository>
-      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
-      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
-    </hudson.tasks.Maven>
     <hudson.tasks.Shell>
-      <command>git checkout ${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}</command>
+      <command>mvn -Dmaven.repo.local=/home/jenkins/.m2_release/repository install -DskipTests
+git checkout -b ${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}</command>
     </hudson.tasks.Shell>
   </prebuilders>
   <postbuilders>
     <hudson.tasks.Shell>
-      <command>git branch -d ${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}
-git push :${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}</command>
+      <command>git checkout master
+git branch -D ${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}
+git push origin :refs/heads/${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}</command>
     </hudson.tasks.Shell>
   </postbuilders>
   <runPostStepsIfResult>
