@@ -43,7 +43,7 @@
     <groupId>com.gigaspaces</groupId>
     <artifactId>xap</artifactId>
   </rootModule>
-  <goals>clean install -P quick_web_ui_build,generate-javadoc -Dgs.version=12.0.0 -Dgs.milestone=m1 -Dgs.buildnumber=15790-${BUILD_NUMBER}</goals>
+  <goals>clean install -P quick_web_ui_build,aggregate-javadoc -Dgs.version=12.0.0 -Dgs.milestone=m1 -Dgs.buildnumber=15790-${BUILD_NUMBER}</goals>
   <defaultGoals>process-classes</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
