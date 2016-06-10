@@ -20,19 +20,19 @@ TD.console { font-family:Courier New; }
 <% 
    def xapVersion = "unknown"
    def xapMilestone = "unknown"
-   def xapBuildNumber = "unknown"
+   def finalBuildNumber = "unknown"
 
 
    try{
      xapVersion = build.getEnvironment(listener).get("XAP_VERSION") 
      xapMilestone = build.getEnvironment(listener).get("MILESTONE")
-     xapBuildNumber = build.getEnvironment(listener).get("XAP_BUILD_NUMBER")
+     finalBuildNumber = build.getEnvironment(listener).get("FINAL_BUILD_NUMBER")
 
    } catch(all){ 
    }
-   def xapPremiumZipName = "gigaspaces-xap-premium-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
-   def xapZipName = "gigaspaces-xap-open-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
-   def mavenVersion = xapVersion + "-" + xapMilestone + "-" + xapBuildNumber
+   def xapPremiumZipName = "gigaspaces-xap-premium-" + xapVersion + "-" +  xapMilestone + "-b" + finalBuildNumber + ".zip"
+   def xapZipName = "gigaspaces-xap-open-" + xapVersion + "-" +  xapMilestone + "-b" + finalBuildNumber + ".zip"
+   def mavenVersion = xapVersion + "-" + xapMilestone + "-" + finalBuildNumber
 
 
    def error = null
