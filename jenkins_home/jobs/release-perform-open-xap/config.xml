@@ -26,7 +26,7 @@
           <defaultValue>m2</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
-          <name>XAP_BUILD_NUMBER</name>
+          <name>FINAL_BUILD_NUMBER</name>
           <description></description>
           <defaultValue></defaultValue>
         </hudson.model.TextParameterDefinition>
@@ -95,8 +95,6 @@
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <recipientProviders>
-              <hudson.plugins.emailext.plugins.recipients.DevelopersRecipientProvider/>
-              <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
               <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
             </recipientProviders>
             <attachmentsPattern></attachmentsPattern>
@@ -112,10 +110,7 @@
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <recipientProviders>
-              <hudson.plugins.emailext.plugins.recipients.DevelopersRecipientProvider/>
-              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
               <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
-              <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
             </recipientProviders>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
@@ -145,7 +140,7 @@
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
               <properties>XAP_VERSION=${XAP_VERSION}
 MILESTONE=${MILESTONE}
-XAP_BUILD_NUMBER=${XAP_BUILD_NUMBER}</properties>
+FINAL_BUILD_NUMBER=${FINAL_BUILD_NUMBER}</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
           <projects>release-perform-xap</projects>
@@ -165,7 +160,7 @@ XAP_BUILD_NUMBER=${XAP_BUILD_NUMBER}</properties>
   <prebuilders>
     <hudson.tasks.Shell>
       <command>echo scm.url=scm\:git\:git@github.com\:Gigaspaces/xap-open.git &gt;&gt; ${WORKSPACE}/release.properties
-echo scm.tag=${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER} &gt;&gt; ${WORKSPACE}/release.properties</command>
+echo scm.tag=${XAP_VERSION}-${MILESTONE}-${FINAL_BUILD_NUMBER} &gt;&gt; ${WORKSPACE}/release.properties</command>
     </hudson.tasks.Shell>
   </prebuilders>
   <postbuilders/>

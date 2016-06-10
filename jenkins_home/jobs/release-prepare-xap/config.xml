@@ -94,7 +94,7 @@
     <groupId>com.gigaspaces</groupId>
     <artifactId>xap</artifactId>
   </rootModule>
-  <goals>clean -B -Dmaven.repo.local=/home/jenkins/.m2_release/repository -DignoreSnapshots=true -DignoreSnapshots=true -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER} release:prepare  -Dgs.release.arguments=&quot;-DskipTests -P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${FINAL_BUILD_NUMBER} -Dnewman.tags=${NEWMAN_TAG}&quot;</goals>
+  <goals>clean -B -Dmaven.repo.local=/home/jenkins/.m2_release/repository -DignoreSnapshots=true -DignoreSnapshots=true -DautoVersionSubmodules=true -DdevelopmentVersion=${NEXT_VERSION}-SNAPSHOT -DreleaseVersion=${XAP_VERSION}-${MILESTONE}-${FINAL_BUILD_NUMBER} release:prepare  -Dgs.release.arguments=&quot;-DskipTests -P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${FINAL_BUILD_NUMBER} -Dnewman.tags=${NEWMAN_TAG}&quot;</goals>
   <defaultGoals>process-classes</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
@@ -201,7 +201,7 @@ FINAL_BUILD_NUMBER=${FINAL_BUILD_NUMBER}
   </buildWrappers>
   <prebuilders>
     <hudson.tasks.Shell>
-      <command>mvn -Dmaven.repo.local=/home/jenkins/.m2_release/repository install -DskipTests
+      <command>mvn -B -Dmaven.repo.local=/home/jenkins/.m2_release/repository install -DskipTests
 git checkout -b ${XAP_VERSION}-${MILESTONE}-${XAP_BUILD_NUMBER}-${BUILD_NUMBER}</command>
     </hudson.tasks.Shell>
   </prebuilders>
