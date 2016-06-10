@@ -148,10 +148,10 @@ echo scm.tag=${XAP_VERSION}-${MILESTONE}-${FINAL_BUILD_NUMBER} &gt;&gt; ${WORKSP
   </prebuilders>
   <postbuilders>
     <hudson.tasks.Shell>
-      <command>wget http://192.168.10.10:80/${XAP_VERSION}-${MILESTONE}/${FINAL_BUILD_NUMBER}/gigaspaces-xap-open-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
+      <command>wget http://192.168.10.10:80/${BRANCH_NAME}/${FINAL_BUILD_NUMBER}/gigaspaces-xap-open-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
 mvn -Dmaven.repo.local=/home/jenkins/.m2_release/repository xap-build-plugin:deploy-native -Dput.source=gigaspaces-xap-open-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip -Dput.target=com/gigaspaces/xap-open/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE}-${FINAL_BUILD_NUMBER}
 
-wget http://192.168.10.10:80/${XAP_VERSION}-${MILESTONE}/${FINAL_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
+wget http://192.168.10.10:80/${BRANCH_NAME}/${FINAL_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
 mvn -Dmaven.repo.local=/home/jenkins/.m2_release/repository xap-build-plugin:deploy-native -Dput.source=gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip -Dput.target=com/gigaspaces/xap/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE}-${FINAL_BUILD_NUMBER}
 </command>
     </hudson.tasks.Shell>

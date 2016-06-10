@@ -140,7 +140,8 @@
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
               <properties>XAP_VERSION=${XAP_VERSION}
 MILESTONE=${MILESTONE}
-FINAL_BUILD_NUMBER=${FINAL_BUILD_NUMBER}</properties>
+FINAL_BUILD_NUMBER=${FINAL_BUILD_NUMBER}
+BRANCH_NAME=${BRANCH_NAME}</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
           <projects>release-perform-xap</projects>
