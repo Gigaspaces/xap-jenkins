@@ -70,8 +70,8 @@ if(error != null){
   <TR><TD>Duration:</TD><TD>${build.durationString}</TD></TR>
   <TR><TD>Branch:</TD><TD><A href="${github}">${branch}</A></TD></TR>
   <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ${cause.shortDescription} <%  } %></TD></TR>
-  <TR><TD>XAP:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${mavenVersion}/${xapZipName}">${xapZipName}</A></TD></TR> 
-  <TR><TD>XAP Permium:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR> 
+  <TR><TD>XAP:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${xapVersion}/${mavenVersion}/${xapZipName}">${xapZipName}</A></TD></TR> 
+  <TR><TD>XAP Permium:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR> 
   <TR><TD>Maven release version:</TD><TD>${mavenVersion}</TD></TR> 
 </TABLE>
 <BR/>

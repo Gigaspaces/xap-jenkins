@@ -403,10 +403,10 @@
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>release-perform-open-xap</string>
-        <string>release-perform-xap</string>
-        <string>release-prepare-open-xap</string>
-        <string>release-prepare-xap</string>
+        <string>release-perform-xap-closed</string>
+        <string>release-perform-xap-open</string>
+        <string>release-prepare-xap-closed</string>
+        <string>release-prepare-xap-open</string>
       </jobNames>
       <jobFilters/>
       <columns>
