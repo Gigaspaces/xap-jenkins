@@ -72,3 +72,4 @@ workspaces
 
 .idea
 *.iml
+.m2_release

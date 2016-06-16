@@ -5,8 +5,8 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-rm -r $1//org/xap      
-rm -r $1//org/gigaspaces 
-rm -r $1/com/gigaspaces 
-rm -r $1/org/openspaces 
-rm -r $1/com/gs         
+rm -rf $1/org/xap      
+rm -rf $1/org/gigaspaces 
+rm -rf $1/com/gigaspaces 
+rm -rf $1/org/openspaces 
+rm -rf $1/com/gs         
