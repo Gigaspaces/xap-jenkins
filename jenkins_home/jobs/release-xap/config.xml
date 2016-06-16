@@ -104,7 +104,7 @@
     <groupId>com.gigaspaces</groupId>
     <artifactId>xap</artifactId>
   </rootModule>
-  <goals>-B   javadoc:javadoc -Dmaven.repo.local=/var/jenkins_home/.m2_release/repository -DskipTests -Paggregate-javadoc,copy-artifact-and-submit-to-newman -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${FINAL_BUILD_NUMBER} -Dnewman.tags=${NEWMAN_TAG}</goals>
+  <goals>-B   install javadoc:javadoc -Dmaven.repo.local=/var/jenkins_home/.m2_release/repository -DskipTests -Paggregate-javadoc,copy-artifact-and-submit-to-newman -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${FINAL_BUILD_NUMBER} -Dnewman.tags=${NEWMAN_TAG}</goals>
   <defaultGoals>process-classes</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
