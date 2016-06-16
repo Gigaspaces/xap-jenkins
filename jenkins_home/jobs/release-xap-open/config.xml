@@ -102,7 +102,7 @@
     <groupId>org.gigaspaces</groupId>
     <artifactId>xap</artifactId>
   </rootModule>
-  <goals>clean -B install javadoc:javadoc -Dmaven.repo.local=/var/jenkins_home/.m2_release/repository  -DskipTests -Paggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${FINAL_BUILD_NUMBER} -Dnewman.tags=${NEWMAN_TAG}</goals>
+  <goals>-B install javadoc:javadoc -Dmaven.repo.local=/var/jenkins_home/.m2_release/repository  -DskipTests -Paggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${FINAL_BUILD_NUMBER} -Dnewman.tags=${NEWMAN_TAG}</goals>
   <defaultGoals>process-classes</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
@@ -263,7 +263,7 @@ fi
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>git checkout -b ${FINAL_VERSION}-builder-${BUILD_NUMBER} ${SVN_REVISION}</command>
+      <command>git checkout -b ${FINAL_VERSION}-builder-${BUILD_NUMBER} ${BRANCH_NAME}</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>/var/jenkins_home/scripts/update-version.sh ${WORKSPACE} ${FINAL_VERSION} </command>
@@ -274,7 +274,7 @@ fi
       <command>git add -u
 git commit -m &quot;commiting xap-open release ${FINAL_VERSION}-${BUILD_NUMBER}&quot;
 git push --set-upstream origin ${FINAL_VERSION}-builder-${BUILD_NUMBER}
-git tag ${FINAL_VERSION}-${MODE}
+git tag -a  ${FINAL_VERSION}-${MODE}  -m &quot;tag created for xap-open release ${FINAL_VERSION}-${BUILD_NUMBER} from branch ${FINAL_VERSION}-builder-${BUILD_NUMBER} that based on ${BRANCH_NAME}&quot;
 git push origin ${FINAL_VERSION}-${MODE}</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
