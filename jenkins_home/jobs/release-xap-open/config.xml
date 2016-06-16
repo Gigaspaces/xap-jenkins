@@ -263,7 +263,7 @@ fi
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>git checkout -b ${FINAL_VERSION}-builder ${SVN_REVISION}</command>
+      <command>git checkout -b ${FINAL_VERSION}-builder-${BUILD_NUMBER} ${SVN_REVISION}</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>/var/jenkins_home/scripts/update-version.sh ${WORKSPACE} ${FINAL_VERSION} </command>
@@ -272,15 +272,15 @@ fi
   <postbuilders>
     <hudson.tasks.Shell>
       <command>git add -u
-git commit -m &quot;commiting xap-open release ${FINAL_VERSION}&quot;
-git push --set-upstream origin ${FINAL_VERSION}-builder
+git commit -m &quot;commiting xap-open release ${FINAL_VERSION}-${BUILD_NUMBER}&quot;
+git push --set-upstream origin ${FINAL_VERSION}-builder-${BUILD_NUMBER}
 git tag ${FINAL_VERSION}-${MODE}
 git push origin ${FINAL_VERSION}-${MODE}</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>git checkout master
-git branch -D ${FINAL_VERSION}-builder
-git push origin :refs/heads/${FINAL_VERSION}-builder</command>
+git branch -D ${FINAL_VERSION}-builder-${BUILD_NUMBER}
+git push origin :refs/heads/${FINAL_VERSION}-builder-${BUILD_NUMBER}</command>
     </hudson.tasks.Shell>
   </postbuilders>
   <runPostStepsIfResult>
