@@ -102,7 +102,7 @@ function clean_m2 {
 # In case of none zero exit code exit code stop the release
 function mvn_install {
     pushd "$1"
-    cmd="mvn -Dmaven.repo.local=$M2/repository -DskipTests install"
+    cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests install"
     eval "$cmd"
     local r="$?"
     popd
@@ -120,7 +120,7 @@ function mvn_install {
 function mvn_deploy {
 
     pushd "$1"
-    cmd="mvn -Dmaven.repo.local=$M2/repository -DskipTests deploy:deploy"
+    cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests deploy:deploy"
     eval "$cmd"
     local r="$?"
     popd
