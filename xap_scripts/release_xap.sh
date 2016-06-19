@@ -101,14 +101,21 @@ function clean_m2 {
 # Call maven install from directory $1
 # In case of none zero exit code exit code stop the release
 function mvn_install {
+    local rep="$2"
     pushd "$1"
     #cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests install"
     local GIT_SHA=`git rev-parse HEAD`
-    local SHA_PROP="-Dgs.buildshapremium"
-    if [ "${2}" == "OPEN" ]; then
+    local SHA_PROP="-Dgs.buildshapremium"    
+    if [ "$repo" == "OPEN" ]; then
 	SHA_PROP="-Dgs.buildsha"
+	cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests install javadoc:jar -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} ${SHA_PROP}=${GIT_SHA}"
+    else
+	cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests install -P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} ${SHA_PROP}=${GIT_SHA}"
     fi
-    cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests javadoc:javadoc install -P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} ${SHA_PROP}=${GIT_SHA}"
+    echo "****************************************************************************************************"
+    echo "Installing $rep"
+    echo "Executing cmd: $cmd"
+    echo "****************************************************************************************************"
     eval "$cmd"
     local r="$?"
     popd
@@ -120,9 +127,15 @@ function mvn_install {
     fi
 }
 
+
+
 function publish_to_newman {
     pushd "$1"
-    cmd="mvn -B -Dmaven.repo.local=$M2/repository -o -pl open-core-dist process-sources -P generate-zip -P copy-artifact-and-submit-to-newman -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} -Dgs.branch=${BRANCH} -Dnewman.tags=${NEWMAN_TAGS}"
+    cmd="mvn -B -Dmaven.repo.local=$M2/repository -o -pl xap-dist process-sources -P generate-zip -P copy-artifact-and-submit-to-newman -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} -Dgs.branch=${BRANCH} -Dnewman.tags=${NEWMAN_TAGS}"
+    echo "****************************************************************************************************"
+    echo "Publish to newman"
+    echo "Executing cmd: $cmd"
+    echo "****************************************************************************************************"
     eval "$cmd"
     local r="$?"
     popd
@@ -141,7 +154,11 @@ function publish_to_newman {
 function mvn_deploy {
 
     pushd "$1"
-    cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests deploy:deploy"
+    cmd="mvn -B -Dmaven.repo.local=$M2/repository javadoc:jar -DskipTests deploy"
+    echo "****************************************************************************************************"
+    echo "Maven deploy"
+    echo "Executing cmd: $cmd"
+    echo "****************************************************************************************************"
     eval "$cmd"
     local r="$?"
     popd
@@ -213,6 +230,7 @@ function exit_if_tag_exists {
 # Delete the temporary local branch.
 # Push the tag
 # Call maven deploy.
+# upload zip to s3.
 function release_xap {
 
     local xap_open_url="git@github.com:Gigaspaces/xap-open.git"
@@ -220,7 +238,6 @@ function release_xap {
     local temp_branch_name="$BRANCH-$RELEASE_VERSION"    
     local xap_open_folder="$(get_folder $xap_open_url)"
     local xap_folder="$(get_folder $xap_url)"
-    echo "xap_folder is $xap_folder"
 
     printenv
 
@@ -232,7 +249,6 @@ function release_xap {
 	exit_if_tag_exists "$xap_open_folder" 
 	exit_if_tag_exists "$xap_folder" 
     fi
-
 
     clean_m2 
 
@@ -249,8 +265,7 @@ function release_xap {
 
     mvn_install "$xap_folder" "CLOSED"
     echo "Done installing xap"
-    times
-
+    times\
     
     commit_changes "$xap_open_folder" 
     commit_changes "$xap_folder"
@@ -264,8 +279,11 @@ function release_xap {
     
     if [ "$DEPLOY_ARTIFACTS" = "true" ]
     then
-	mvn_deploy "$xap_open_folder"
+	mvn_deploy "$xap_open_folder" 
 	mvn_deploy "$xap_folder"
+
+	upload_zip "$xap_open_folder" "xap-open"
+	upload_zip "$xap_folder" "xap"
     fi
 	times
 	echo "DONE."

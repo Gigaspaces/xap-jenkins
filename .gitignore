@@ -73,3 +73,6 @@ workspaces
 .idea
 *.iml
 .m2_release
+
+m2_release_xap
+xap_scripts/release-xap-setenv.sh

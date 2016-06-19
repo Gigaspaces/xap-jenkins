@@ -97,7 +97,9 @@ echo &quot;export TAG_NAME=$TAG_NAME&quot; &gt;&gt; /home/jenkins/xap_scripts/re
 echo &quot;export OVERRIDE_EXISTING_TAG=$OVERRIDE_EXISTING_TAG&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh
 echo &quot;export DEPLOY_ARTIFACTS=$DEPLOY_ARTIFACTS&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh
 echo &quot;export PERFORM_FULL_M2_CLEAN=$PERFORM_FULL_M2_CLEAN&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh
-echo &quot;export WORKSPACE=$XAP_WORKSPACE&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh</command>
+echo &quot;export WORKSPACE=$XAP_WORKSPACE&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh
+echo &quot;export M2=$M2&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh
+</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>/home/jenkins/xap_scripts/release_xap.sh /home/jenkins/xap_scripts/release-xap-setenv.sh</command>
