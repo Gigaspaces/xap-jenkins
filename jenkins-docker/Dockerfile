@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu 
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
@@ -10,7 +10,11 @@ RUN apt-get update
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:webupd8team/java -y
 RUN add-apt-repository ppa:git-core/ppa -y
-RUN apt-get update
+
+RUN apt-get update --fix-missing
+
+
+RUN apt-get install  -y git
 
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 
@@ -43,6 +47,9 @@ VOLUME /home/${user}/.ssh
 VOLUME /home/${user}/.m2
 VOLUME /var/workspaces
 VOLUME /home/${user}/.m2_release
+VOLUME /home/${user}/.m2_release_xap
+VOLUME /home/${user}/xap_scripts
+
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want 
 # to set on a fresh new installation. Use it to bundle additional plugins 
@@ -105,7 +112,6 @@ RUN tar xzf /tmp/apache-maven-3.3.9.tar.gz --strip-components=1 \
 RUN ln -s /opt/maven/bin/mvn /usr/local/bin
 RUN rm -f /tmp/apache-maven-3.3.9.tar.gz
 
-RUN apt-get install -y git
 
 USER ${user}
 
