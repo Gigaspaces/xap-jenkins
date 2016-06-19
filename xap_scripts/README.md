@@ -1,9 +1,9 @@
 # Scripts that can be used to release XAP
 
-The main script is `scripts/release_xap.sh` it is self contained, the other scrips there only to support when something is not working and you wish to continue manually.
+The main script is `release_xap.sh` it is self contained, the other scrips there only to support when something is not working and you wish to continue manually.
 The configuration (should be passed as first parameter) is the name of a enviroment file that contains serios of bash exports that will be used in by the script. 
 
-A sample configuration is in the file `scripts/setenv.sh`
+A sample configuration is in the file `setenv.sh`, the builder 
 
 First run is very slow because full git clone is done and maven m2 is empty.
 
@@ -11,7 +11,7 @@ After the first run it shoud take 20 min to release a new version.
 
 ## Running
 
-From the `scripts` folder type `release_xap.sh setenv.sh`
+Type `release_xap.sh setenv.sh` in console
 
 ## Configuration file explained
 
