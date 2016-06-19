@@ -86,7 +86,7 @@ function create_temp_branch {
 
 #
 function clean_m2 {
-    if [ "PERFORM_FULL_M2_CLEAN" = "true" ]
+    if [ "$PERFORM_FULL_M2_CLEAN" = "true" ]
     then
 	rm -rf $M2/repository
     else
