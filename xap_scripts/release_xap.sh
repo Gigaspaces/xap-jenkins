@@ -56,14 +56,14 @@ function clone {
     checkout_branch "$folder"
 }
 
-# Rename all version of each pom in $1 folder with $VERSION
+# Rename all version of each pom in $1 folder with $RELEASE_VERSION
 function rename_poms {
     # Find current version from the pom.xml file in $1 folder.
     local version="$(grep -m1 '<version>' $1/pom.xml | sed 's/<version>\(.*\)<\/version>/\1/')"
     # Since grep return the whole line there are spaces that needed to trim.
     local trimmed_version="$(echo -e "${version}" | tr -d '[[:space:]]')"
     # Find each pom.xml under $1 and replace every $trimmed_version with $VERSION
-    find "$1" -name "pom.xml" -exec sed -i.bak "s/$trimmed_version/$VERSION/" \{\} \;
+    find "$1" -name "pom.xml" -exec sed -i.bak "s/$trimmed_version/$RELEASE_VERSION/" \{\} \;
 }
 
 # Create a temporary branch for the pom changes commits.
@@ -102,7 +102,13 @@ function clean_m2 {
 # In case of none zero exit code exit code stop the release
 function mvn_install {
     pushd "$1"
-    cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests install"
+    #cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests install"
+    local GIT_SHA=`git rev-parse HEAD`
+    local SHA_PROP="-Dgs.buildshapremium"
+    if [ "${2}" == "OPEN" ]; then
+	SHA_PROP="-Dgs.buildsha"
+    fi
+    cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests javadoc:javadoc install -P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} ${SHA_PROP}=${GIT_SHA}"
     eval "$cmd"
     local r="$?"
     popd
@@ -113,6 +119,21 @@ function mvn_install {
         exit "$r"
     fi
 }
+
+function publish_to_newman {
+    pushd "$1"
+    cmd="mvn -B -Dmaven.repo.local=$M2/repository -o -pl open-core-dist process-sources -P generate-zip -P copy-artifact-and-submit-to-newman -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} -Dgs.branch=${BRANCH} -Dnewman.tags=${NEWMAN_TAGS}"
+    eval "$cmd"
+    local r="$?"
+    popd
+    if [ "$r" -ne 0 ]
+    then
+        times
+        echo "[ERROR] Failed While publishing to newman: $1, command is: $cmd, exit code is: $r"
+        exit "$r"
+    fi
+}
+
 
 # Call maven deploy from directory $1
 # It uses the target deploy:deploy to bypass the build.
@@ -137,7 +158,7 @@ function mvn_deploy {
 # It assume the branch is the local temp branch,
 function commit_changes {
     local folder="$1"
-    local msg="Modify poms to $VERSION in temp branch that was built on top of $BRANCH"
+    local msg="Modify poms to $RELEASE_VERSION in temp branch that was built on top of $BRANCH"
 
     pushd "$folder"
     git add -u
@@ -177,7 +198,7 @@ function exit_if_tag_exists {
     then
         times
         echo "[ERROR] Tag $TAG_NAME already exists in repository $folder, you can set OVERRIDE_EXISTING_TAG=\"true\" to override this tag"
-        exit "$r"
+        exit 1
     fi
     popd
 }
@@ -196,10 +217,12 @@ function release_xap {
 
     local xap_open_url="git@github.com:Gigaspaces/xap-open.git"
     local xap_url="git@github.com:Gigaspaces/xap.git"
-    local temp_branch_name="$BRANCH-$VERSION"    
+    local temp_branch_name="$BRANCH-$RELEASE_VERSION"    
     local xap_open_folder="$(get_folder $xap_open_url)"
     local xap_folder="$(get_folder $xap_url)"
     echo "xap_folder is $xap_folder"
+
+    printenv
 
     clone "$xap_open_url" 
     clone "$xap_url"
@@ -220,19 +243,24 @@ function release_xap {
     rename_poms "$xap_folder"
 
     
-    mvn_install "$xap_open_folder"
+    mvn_install "$xap_open_folder" "OPEN"
     echo "Done installing xap open"
     times
 
-    mvn_install "$xap_folder"
+    mvn_install "$xap_folder" "CLOSED"
     echo "Done installing xap"
     times
+
     
     commit_changes "$xap_open_folder" 
     commit_changes "$xap_folder"
 
     delete_temp_branch "$xap_open_folder" "$temp_branch_name"
     delete_temp_branch "$xap_folder" "$temp_branch_name"
+
+    publish_to_newman "$xap_folder"
+    echo "Done publishing to newman"
+    times
     
     if [ "$DEPLOY_ARTIFACTS" = "true" ]
     then
@@ -244,7 +272,7 @@ function release_xap {
 }
 
 
-release_xap 
+release_xap
 
 
 
