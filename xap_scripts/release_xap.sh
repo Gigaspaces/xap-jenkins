@@ -121,7 +121,6 @@ function mvn_install {
     popd
     if [ "$r" -ne 0 ]
     then
-        times
         echo "[ERROR] Failed While installing using maven in folder: $1, command is: $cmd, exit code is: $r"
         exit "$r"
     fi
@@ -141,7 +140,6 @@ function publish_to_newman {
     popd
     if [ "$r" -ne 0 ]
     then
-        times
         echo "[ERROR] Failed While publishing to newman: $1, command is: $cmd, exit code is: $r"
         exit "$r"
     fi
@@ -164,7 +162,6 @@ function mvn_deploy {
     popd
     if [ "$r" -ne 0 ]
     then
-        times
         echo "[ERROR] Failed While installing using maven in folder: $1, command is: $cmd, exit code is: $r"
         exit "$r"
     fi
@@ -213,11 +210,26 @@ function exit_if_tag_exists {
     local r="$?"
     if [ "$r" -eq 0 ]
     then
-        times
-        echo "[ERROR] Tag $TAG_NAME already exists in repository $folder, you can set OVERRIDE_EXISTING_TAG=\"true\" to override this tag"
+        echo "[ERROR] Tag $TAG_NAME already exists in repository $folder, you can set OVERRIDE_EXISTING_TAG=true to override this tag"
         exit 1
     fi
     popd
+}
+
+function upload_zip {
+   echo "uploading zip $1 $2"
+}
+
+let step=1
+
+function announce_step {
+    echo ""
+    echo "************************************************************************************************************************************************************"
+    echo "************************************************************************************************************************************************************"
+    echo "*                                                      Step [$step]: $1"
+    echo "************************************************************************************************************************************************************"
+    echo "************************************************************************************************************************************************************"
+    (( step++ ))
 }
 
 # Clone xap-open and xap.
@@ -238,59 +250,75 @@ function release_xap {
     local temp_branch_name="$BRANCH-$RELEASE_VERSION"    
     local xap_open_folder="$(get_folder $xap_open_url)"
     local xap_folder="$(get_folder $xap_url)"
-
+    
     printenv
 
+    announce_step "clone xap-open"
     clone "$xap_open_url" 
+    announce_step "clone xap"
     clone "$xap_url"
 
     if [ "$OVERRIDE_EXISTING_TAG" != "true" ] 
     then
+        announce_step "delete tag $TAG in xap open"
 	exit_if_tag_exists "$xap_open_folder" 
+        announce_step "delete tag $TAG in xap"
 	exit_if_tag_exists "$xap_folder" 
     fi
 
+    announce_step "clean m2"
     clean_m2 
 
+    announce_step "create temporary local branch $temp_branch_name in xap open"
     create_temp_branch "$temp_branch_name" "$xap_open_folder"
+    announce_step "create temporary local branch $temp_branch_name in xap"
     create_temp_branch "$temp_branch_name" "$xap_folder"
 
+    announce_step "rename poms in xap open"
     rename_poms "$xap_open_folder"
+    announce_step "rename poms in xap"
     rename_poms "$xap_folder"
 
     
+    announce_step "executing maven install on xap-open"
     mvn_install "$xap_open_folder" "OPEN"
     echo "Done installing xap open"
-    times
 
+
+    announce_step "executing maven install on xap"
     mvn_install "$xap_folder" "CLOSED"
     echo "Done installing xap"
-    times\
+
     
+    announce_step "commiting changes in xap open"
     commit_changes "$xap_open_folder" 
+    announce_step "commiting changes in xap"
     commit_changes "$xap_folder"
 
+    announce_step "delete temp branch $temp_branch_name in xap open"
     delete_temp_branch "$xap_open_folder" "$temp_branch_name"
+    announce_step "delete temp branch $temp_branch_name in xap"
     delete_temp_branch "$xap_folder" "$temp_branch_name"
 
+    announce_step "publish to newman"
     publish_to_newman "$xap_folder"
     echo "Done publishing to newman"
-    times
+
     
     if [ "$DEPLOY_ARTIFACTS" = "true" ]
     then
+	announce_step "deploying xap open"
 	mvn_deploy "$xap_open_folder" 
+	announce_step "deploying xap"
 	mvn_deploy "$xap_folder"
 
+	announce_step "uploading xap open zip"
 	upload_zip "$xap_open_folder" "xap-open"
+	announce_step "uploading xap zip"
 	upload_zip "$xap_folder" "xap"
     fi
-	times
-	echo "DONE."
+    echo "DONE."
 }
 
 
 release_xap
-
-
-
