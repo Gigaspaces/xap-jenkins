@@ -32,6 +32,11 @@ function checkout_branch {
         # Fetch all branch and tags from remote, prune tags that was deleted on the remote repository.
 	git fetch --tags --prune --quiet 
 	git checkout "$BRANCH"
+	if [ "$r" -ne 0 ]
+    then
+        echo "[ERROR] Failed While checking out branch: $BRANCH, exit code is: $r"
+        exit "$r"
+    fi
 	git rebase --no-stat
 	return "$?"
     ) 
@@ -233,11 +238,7 @@ function upload_zip {
     eval "$cmd"
     local r="$?"
     popd
-    if [ "$r" -ne 0 ]
-    then
-        echo "[ERROR] Failed While uploading zip: $1, command is: $cmd, exit code is: $r"
-        exit "$r"
-    fi
+
 }
 
 let step=1
