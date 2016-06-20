@@ -218,16 +218,26 @@ function exit_if_tag_exists {
 
 function upload_zip {
     echo "uploading zip $1 $2"
-    local folder="$1/xap-dist/target"
+    local folder="$1"
     pushd "$folder"
     if [ "$2" == "xap" ]
     then
-        cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=gigaspaces-xap-premium-$XAP_VERSION-$MILESTONE-b$FINAL_BUILD_NUMBER.zip -Dput.target=com/gigaspaces/xap/$XAP_VERSION/$FINAL_VERSION"
+        cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=xap-dist/target/gigaspaces-xap-premium-$XAP_VERSION-$MILESTONE-b$FINAL_BUILD_NUMBER.zip -Dput.target=com/gigaspaces/xap/$XAP_VERSION/$FINAL_VERSION"
     else
-        cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=gigaspaces-xap-open-$XAP_VERSION-$MILESTONE-b$FINAL_BUILD_NUMBER.zip -Dput.target=com/gigaspaces/xap-open/$XAP_VERSION/$FINAL_VERSION"
+        cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=xap-dist/target/gigaspaces-xap-open-$XAP_VERSION-$MILESTONE-b$FINAL_BUILD_NUMBER.zip -Dput.target=com/gigaspaces/xap-open/$XAP_VERSION/$FINAL_VERSION"
     fi
+    echo "****************************************************************************************************"
+    echo "uploading $2 zip"
+    echo "Executing cmd: $cmd"
+    echo "****************************************************************************************************"
     eval "$cmd"
+    local r="$?"
     popd
+    if [ "$r" -ne 0 ]
+    then
+        echo "[ERROR] Failed While uploading zip: $1, command is: $cmd, exit code is: $r"
+        exit "$r"
+    fi
 }
 
 let step=1
