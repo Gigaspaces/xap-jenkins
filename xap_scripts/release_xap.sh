@@ -217,7 +217,17 @@ function exit_if_tag_exists {
 }
 
 function upload_zip {
-   echo "uploading zip $1 $2"
+    echo "uploading zip $1 $2"
+    local folder="$1/xap-dist/target"
+    pushd "$folder"
+    if [ "$2" == "xap" ]
+    then
+        cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=gigaspaces-xap-premium-$XAP_VERSION-$MILESTONE-b$FINAL_BUILD_NUMBER.zip -Dput.target=com/gigaspaces/xap/$XAP_VERSION/$FINAL_VERSION"
+    else
+        cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=gigaspaces-xap-open-$XAP_VERSION-$MILESTONE-b$FINAL_BUILD_NUMBER.zip -Dput.target=com/gigaspaces/xap-open/$XAP_VERSION/$FINAL_VERSION"
+    fi
+    eval "$cmd"
+    popd
 }
 
 let step=1
@@ -336,7 +346,7 @@ function release_xap {
 	mvn_deploy "$xap_folder"
 
 	announce_step "uploading xap open zip"
-	upload_zip "$xap_open_folder" "xap-open"
+	upload_zip "$xap_folder" "xap-open"
 	announce_step "uploading xap zip"
 	upload_zip "$xap_folder" "xap"
     fi
