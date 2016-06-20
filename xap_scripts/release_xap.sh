@@ -237,6 +237,11 @@ function upload_zip {
     echo "****************************************************************************************************"
     eval "$cmd"
     local r="$?"
+    if [ "$r" -eq 0 ]
+    then
+        echo "[ERROR] failed to upload $2 zip, exit code:$r"
+        exit 1
+    fi
     popd
 
 }
