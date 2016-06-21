@@ -114,7 +114,7 @@ function mvn_install {
     local SHA_PROP="-Dgs.buildshapremium"    
     if [ "$repo" == "OPEN" ]; then
 	SHA_PROP="-Dgs.buildsha"
-	cmd="mvn -B -P release-generate-zip -Dmaven.repo.local=$M2/repository -DskipTests install javadoc:jar -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} ${SHA_PROP}=${GIT_SHA}"
+	cmd="mvn -B -P release-zip -Dmaven.repo.local=$M2/repository -DskipTests install javadoc:jar -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} ${SHA_PROP}=${GIT_SHA}"
     else
 	cmd="mvn -B -P extract-xap-open-folder -Dmaven.repo.local=$M2/repository -DskipTests install -P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} ${SHA_PROP}=${GIT_SHA}"
     fi
