@@ -46,8 +46,8 @@ TD.console { font-family:Courier New; }
   <TR><TD>Project:</TD><TD>${project.name}</TD></TR>
   <TR><TD>Date:</TD><TD>${it.timestampString}</TD></TR>
   <TR><TD>Duration:</TD><TD>${build.durationString}</TD></TR>
-  <TR><TD>XAP Premium Branch:</TD><TD><A href="https://github.com/Gigaspaces/xap/tree/${xapBranchName}">${xapBranchName}</A></TD></TR>
-  <TR><TD>XAP Open Branch:</TD><TD><A href="https://github.com/Gigaspaces/xap-open/tree/${xapBranchName}">${xapBranchName}</A></TD></TR>
+  <TR><TD>XAP Premium Tag:</TD><TD><A href="https://github.com/Gigaspaces/xap/tree/${xapTagName}">${xapBranchName}</A></TD></TR>
+  <TR><TD>XAP Open Tag:</TD><TD><A href="https://github.com/Gigaspaces/xap-open/tree/${xapTagName}">${xapBranchName}</A></TD></TR>
   <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ${cause.shortDescription} <%  } %></TD></TR>
   <TR><TD>XAP:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${xapVersion}/${mavenVersion}/${xapZipName}">${xapZipName}</A></TD></TR> 
   <TR><TD>XAP Permium:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR> 

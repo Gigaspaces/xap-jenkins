@@ -105,6 +105,7 @@ echo &quot;export WORKSPACE=$XAP_WORKSPACE&quot; &gt;&gt; /home/jenkins/xap_scri
 echo &quot;export M2=$M2&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh
 
 export FINAL_BUILD_NUMBER
+export TAG_NAME
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
