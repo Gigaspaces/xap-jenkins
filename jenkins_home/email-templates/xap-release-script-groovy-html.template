@@ -21,46 +21,23 @@ TD.console { font-family:Courier New; }
    def xapVersion = "unknown"
    def xapMilestone = "unknown"
    def xapBuildNumber = "unknown"
-   def finalVersion = "unknown"
+   def xapBranchName = "unknown"
+   def xapTagName = "unknown"
 
    try{
      xapVersion = build.getEnvironment(listener).get("XAP_VERSION") 
      xapMilestone = build.getEnvironment(listener).get("MILESTONE")
-     xapBuildNumber = build.getEnvironment(listener).get("XAP_BUILD_NUMBER")
+     xapBuildNumber = build.getEnvironment(listener).get("FINAL_BUILD_NUMBER")
      xapBranchName = build.getEnvironment(listener).get("BRANCH_NAME")
      xapTagName = build.getEnvironment(listener).get("TAG_NAME")
    } catch(all){ 
    }
    def xapPremiumZipName = "gigaspaces-xap-premium-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
    def xapZipName = "gigaspaces-xap-open-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
-   def mavenVersion = xapVersion-xapMilestone-xapBuildNumber
-
-
-   def error = null
-   def branch = "unknown"
-   def repository = "unknown"
-   def github = "unknown"
-   def gitChangesBaseURL = "unknown"
-
-   try{
-      branch = build.project.scm.deriveLocalBranchName(build.getEnvironment(listener).get("GIT_BRANCH")) 
-      def remoteRepos = build.project.scm.getParamExpandedRepos(build, listener);
-      repository = "https://" + remoteRepos[0]?.getURIs()[0]?.toString().replace("git@","").replaceAll(/\.git$/, "").replaceAll(":", "/")
-      github = repository + "/tree/" + branch
-      gitChangesBaseURL = repository + "/commit/"
-   }catch(all){
-      error = all + ""
-   }
+   def mavenVersion = xapVersion + "-" + xapMilestone + "-" + xapBuildNumber
+   def gitXAPChangesBaseURL = "https://github.com/Gigaspaces/xap/commit/"
+   def gitXAPOpenChangesBaseURL = "https://github.com/Gigaspaces/xap-open/commit/"
 %>
-
-<% 
-if(error != null){
-%>
-   <div>error = $error</div>
-<%
-}
-%>
-
 
 <TABLE>
   <TR><TD align="right"><IMG SRC="https://raw.githubusercontent.com/jenkinsci/jenkins/master/war/src/main/webapp/images/32x32/<%= build.result.toString() == 'SUCCESS' ? "blue.gif" : build.result.toString() == 'FAILURE' ? 'red.gif' : 'yellow.gif' %>" />
@@ -69,10 +46,12 @@ if(error != null){
   <TR><TD>Project:</TD><TD>${project.name}</TD></TR>
   <TR><TD>Date:</TD><TD>${it.timestampString}</TD></TR>
   <TR><TD>Duration:</TD><TD>${build.durationString}</TD></TR>
-  <TR><TD>Branch:</TD><TD><A href="${github}">${branch}</A></TD></TR>
+  <TR><TD>XAP Premium Branch:</TD><TD><A href="https://github.com/Gigaspaces/xap/tree/${xapBranchName}">${xapBranchName}</A></TD></TR>
+  <TR><TD>XAP Open Branch:</TD><TD><A href="https://github.com/Gigaspaces/xap-open/tree/${xapBranchName}">${xapBranchName}</A></TD></TR>
   <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ${cause.shortDescription} <%  } %></TD></TR>
   <TR><TD>XAP:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${xapVersion}/${mavenVersion}/${xapZipName}">${xapZipName}</A></TD></TR> 
   <TR><TD>XAP Permium:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR> 
+  <TR><TD>XAP Docs:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/xap-docs.jar">xap-docs</A></TD></TR> 
   <TR><TD>Maven release version:</TD><TD>${mavenVersion}</TD></TR> 
 </TABLE>
 <BR/>
@@ -84,29 +63,54 @@ if(changeSet != null) {
         def browser = build.project.scm.effectiveBrowser
 	def hadChanges = false %>
 	<TABLE width="100%">
-    <TR><TD class="bg1" colspan="2"><B>CHANGES</B></TD></TR>
-<% 	changeSet.each() { cs ->
-                def changesURL = ""
-		hadChanges = true
-                try{ 
-                   changesURL = browser.getChangeSetLink(cs)
-                }catch(all){
-		}
-                changesURL = changesURL == null ? (gitChangesBaseURL + cs.commitId) : changesURL
-        %>
-                  <TR>
-                    <TD colspan="2" class="bg2"><B style="color:rgb(0, 128, 0);">$cs.author: </B>&nbsp;&nbsp; 
-                      <A href="$changesURL">$cs.commitId</A>&nbsp;&nbsp;
-                      <SPAN> - <%= cs.msgAnnotated.replaceAll(/(GS-[0-9]+)/,  { all,  g -> "<A href=\"https://gigaspaces.atlassian.net/browse/$g\">$g</A>"}) %></SPAN>
-                     </TD>
-                  </TR>
-<%
-	} 
-	if(!hadChanges) { %>	
-        <TR><TD colspan="2">No Changes</TD></TR>
-<%	} %>
-  </TABLE>
-<BR/>
+    		<TR><TD class="bg1" colspan="2"><B>XAP Premium CHANGES</B></TD></TR>
+		<% 	changeSet.each() { cs ->
+                	def changesURL = ""
+			hadChanges = true
+                	try{ 
+                   		changesURL = browser.getChangeSetLink(cs)
+                	}catch(all){
+			}
+                	changesURL = changesURL == null ? (gitXAPChangesBaseURL + cs.commitId) : changesURL
+        	%>
+                  	<TR>
+                    		<TD colspan="2" class="bg2"><B style="color:rgb(0, 128, 0);">$cs.author: </B>&nbsp;&nbsp; 
+                      		<A href="$changesURL">$cs.commitId</A>&nbsp;&nbsp;
+                      		<SPAN> - <%= cs.msgAnnotated.replaceAll(/(GS-[0-9]+)/,  { all,  g -> "<A href=\"https://gigaspaces.atlassian.net/browse/$g\">$g</A>"}) %></SPAN>
+                     		</TD>
+                  		</TR>
+		<%
+			} 
+		if(!hadChanges) { %>	
+        		<TR><TD colspan="2">No Changes</TD></TR>
+		<%		} %>
+  	</TABLE>
+	<BR/>
+        <TABLE width="100%">
+                <TR><TD class="bg1" colspan="2"><B>XAP CHANGES</B></TD></TR>
+                <%      changeSet.each() { cs ->
+                        def changesURL = ""
+                        hadChanges = true
+                        try{
+                                changesURL = browser.getChangeSetLink(cs)
+                        }catch(all){
+                        }
+                        changesURL = changesURL == null ? (gitXAPOpenChangesBaseURL + cs.commitId) : changesURL
+                %>
+                        <TR>
+                                <TD colspan="2" class="bg2"><B style="color:rgb(0, 128, 0);">$cs.author: </B>&nbsp;&nbsp;
+                                <A href="$changesURL">$cs.commitId</A>&nbsp;&nbsp;
+                                <SPAN> - <%= cs.msgAnnotated.replaceAll(/(GS-[0-9]+)/,  { all,  g -> "<A href=\"https://gigaspaces.atlassian.net/browse/$g\">$g</A>"}) %></SPAN>
+                                </TD>
+                                </TR>
+                <%
+                        }
+                if(!hadChanges) { %>
+                        <TR><TD colspan="2">No Changes</TD></TR>
+                <%              } %>
+        </TABLE>
+        <BR/>
+
 <% } %>
 
 <!-- CONSOLE OUTPUT -->

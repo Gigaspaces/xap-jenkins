@@ -35,7 +35,7 @@
         <hudson.model.BooleanParameterDefinition>
           <name>OVERRIDE_EXISTING_TAG</name>
           <description></description>
-          <defaultValue>false</defaultValue>
+          <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>DEPLOY_ARTIFACTS</name>
@@ -82,7 +82,11 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers/>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>0 18 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -99,6 +103,8 @@ echo &quot;export DEPLOY_ARTIFACTS=$DEPLOY_ARTIFACTS&quot; &gt;&gt; /home/jenkin
 echo &quot;export PERFORM_FULL_M2_CLEAN=$PERFORM_FULL_M2_CLEAN&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh
 echo &quot;export WORKSPACE=$XAP_WORKSPACE&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh
 echo &quot;export M2=$M2&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh
+
+export FINAL_BUILD_NUMBER
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
@@ -160,7 +166,7 @@ echo &quot;export M2=$M2&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-se
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>${SCRIPT, template=&quot;xap-release-groovy-html.template&quot;}</defaultContent>
+      <defaultContent>${SCRIPT, template=&quot;xap-release-script-groovy-html.template&quot;}</defaultContent>
       <attachmentsPattern></attachmentsPattern>
       <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
       <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
