@@ -242,7 +242,26 @@ function upload_zip {
         echo "[ERROR] failed to upload $2 zip, exit code:$r"
     fi
     popd
+}
 
+function upload_docs {
+    echo "uploading docs $2"
+    local folder="$1"
+    pushd "$folder"
+
+    cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=xap-dist/target/package/xap-javadoc.jar -Dput.target=com/gigaspaces/xap/$XAP_VERSION/$FINAL_VERSION"
+
+    echo "****************************************************************************************************"
+    echo "uploading $2 javadoc"
+    echo "Executing cmd: $cmd"
+    echo "****************************************************************************************************"
+    eval "$cmd"
+    local r="$?"
+    if [ "$r" -eq 1 ]
+    then
+        echo "[ERROR] failed to upload $2 javadoc, exit code:$r"
+    fi
+    popd
 }
 
 let step=1
@@ -364,6 +383,8 @@ function release_xap {
 	upload_zip "$xap_folder" "xap-open"
 	announce_step "uploading xap zip"
 	upload_zip "$xap_folder" "xap"
+	announce_step "uploading xap docs"
+	upload_docs "$xap_folder" "xap"
     fi
     echo "DONE."
 }
