@@ -122,4 +122,3 @@ RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
 
 COPY gitconfig /home/${user}/.gitconfig
 
-
