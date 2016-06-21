@@ -249,7 +249,7 @@ function upload_docs {
     local folder="$1"
     pushd "$folder"
 
-    cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=xap-dist/target/package/xap-javadoc.jar -Dput.target=com/gigaspaces/xap/$XAP_VERSION/$FINAL_VERSION"
+    cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=xap-dist/target/package/docs/xap-javadoc.jar -Dput.target=com/gigaspaces/xap/$XAP_VERSION/$FINAL_VERSION"
 
     echo "****************************************************************************************************"
     echo "uploading $2 javadoc"
