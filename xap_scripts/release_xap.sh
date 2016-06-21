@@ -32,11 +32,12 @@ function checkout_branch {
         # Fetch all branch and tags from remote, prune tags that was deleted on the remote repository.
 	git fetch --tags --prune --quiet 
 	git checkout "$BRANCH"
-	if [ "$r" -ne 0 ]
-    then
-        echo "[ERROR] Failed While checking out branch: $BRANCH, exit code is: $r"
-        exit "$r"
-    fi
+        local r="$?"
+        if [ "$r" -ne 0 ]
+        then
+            echo "[ERROR] Failed While checking out branch: $BRANCH, exit code is: $r"
+            exit "$r"
+        fi
 	git rebase --no-stat
 	return "$?"
     ) 
@@ -318,7 +319,6 @@ function release_xap {
     local xap_open_folder="$(get_folder $xap_open_url)"
     local xap_folder="$(get_folder $xap_url)"
     
-    printenv
 
     announce_step "clone xap-open"
     clone "$xap_open_url" 
