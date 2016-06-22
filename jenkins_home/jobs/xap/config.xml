@@ -74,7 +74,7 @@
         </userRemoteConfigs>
         <branches>
           <hudson.plugins.git.BranchSpec>
-            <name>*/master</name>
+            <name>*/${BRANCH_NAME}</name>
           </hudson.plugins.git.BranchSpec>
         </branches>
         <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -91,11 +91,33 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers/>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>0 6 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+    <hudson.triggers.SCMTrigger>
+      <spec>* * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>echo &quot;from here you should run maven on ${WORKSPACE}/open-xap and ${WORKSPACE}/xap and then modify the xap-groovy-html.template to take the changes from both repo and display them&quot;</command>
+      <command>
+echo &quot;****************************************************************************************************&quot;
+    echo &quot;Installing xap-open&quot;
+echo &quot;****************************************************************************************************&quot;
+mvn -Daven.repo.local=/home/jenkins/.m2_one_xap -f xap-open/pom.xml -B -T 1C clean install -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dgs.branch=${BRANCH_NAME} -Dgs.buildsha=${GIT_COMMIT} -Dnewman.tags=${NEWMAN_TAGS} -P generate-zip -P release-zip
+
+echo &quot;****************************************************************************************************&quot;
+    echo &quot;Installing xap&quot;
+echo &quot;****************************************************************************************************&quot;
+mvn -Daven.repo.local=/home/jenkins/.m2_one_xap -f xap/pom.xml -B -T 1C clean install -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER}  -Dgs.buildshapremium=${GIT_COMMIT} -P quick_web_ui_build -P extract-xap-open-folder
+
+echo &quot;****************************************************************************************************&quot;
+    echo &quot;publishing artifacts to newman&quot;
+echo &quot;****************************************************************************************************&quot;
+mvn -Daven.repo.local=/home/jenkins/.m2_one_xap -f xap/xap-dist/pom.xml process-sources -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dgs.branch=${BRANCH_NAME} -Dnewman.tags=${NEWMAN_TAGS} -P generate-zip -P copy-artifact-and-submit-to-newman -P extract-xap-open-folder</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
