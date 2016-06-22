@@ -25,12 +25,12 @@
         <hudson.model.TextParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>The source branch for this xap-release</description>
-          <defaultValue>master</defaultValue>
+          <defaultValue>12.0.0-m4</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>TAG_NAME</name>
           <description></description>
-          <defaultValue>12.0.0-m4-NIGHTLY</defaultValue>
+          <defaultValue>12.0.0-m4-MILESTONE</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>OVERRIDE_EXISTING_TAG</name>
@@ -62,8 +62,8 @@
           <description></description>
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
-              <string>NIGHTLY</string>
               <string>MILESTONE</string>
+              <string>NIGHTLY</string>
               <string>GA</string>
               <string>PATCH</string>
             </a>
@@ -84,7 +84,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>0 18 * * *</spec>
+      <spec>0 16 * * *</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>

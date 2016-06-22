@@ -141,7 +141,7 @@ mvn -Daven.repo.local=/home/jenkins/.m2_one_xap -f xap/xap-dist/pom.xml process-
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>${SCRIPT, template=&quot;xap-groovy-html.template&quot;}</defaultContent>
+      <defaultContent>${SCRIPT, template=&quot;xap-build-email.template&quot;}</defaultContent>
       <attachmentsPattern></attachmentsPattern>
       <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
       <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
