@@ -112,7 +112,7 @@ function mvn_install {
     #cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests install"
     local GIT_SHA=`git rev-parse HEAD`
     local SHA_PROP="-Dgs.buildshapremium"    
-    if [ "$repo" == "OPEN" ]; then
+    if [ "$rep" == "OPEN" ]; then
 	SHA_PROP="-Dgs.buildsha"
 	cmd="mvn -B -P release-zip -Dmaven.repo.local=$M2/repository -DskipTests install javadoc:jar -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} ${SHA_PROP}=${GIT_SHA}"
     else
