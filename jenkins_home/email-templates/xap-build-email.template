@@ -45,7 +45,14 @@ if(changeSet != null) {
 <% 	changeSet.each() { cs ->
 		hadChanges = true
                 def changeURL = ""
-                if(build.changeSet.changeLogSetWrappers.asList().get(index).name.contains("xap-open")){
+                def build_name = ""
+                try{
+                    build_name = build.changeSet.changeLogSetWrappers.asList().get(index).name
+                } catch(all) {
+                    println(all)
+                    println("build.changeSet.changeLogSetWrappers: " + build.changeSet.changeLogSetWrappers)
+                }
+                if(build_name.contains("xap-open")){
 		   changeURL="https://github.com/Gigaspaces/xap-open/commit/" + cs.commitId
                 }else{
 		   changeURL="https://github.com/Gigaspaces/xap/commit/" + cs.commitId
