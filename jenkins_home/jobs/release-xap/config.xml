@@ -213,11 +213,10 @@ Milestone:${MILESTONE} &#xd;
 Build Number: ${FINAL_BUILD_NUMBER}&#xd;
 Maven Release Version:${XAP_VERSION}-${MILESTONE} -${FINAL_BUILD_NUMBER}&#xd;
 Tag: ${TAG_NAME} &#xd;
-SHA:${GIT_COMMIT} &#xd;
 Newman Tag: ${NEWMAN_TAGS}&#xd;
-XAP Download Link : https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE} -${FINAL_BUILD_NUMBER}/gigaspaces-xap-open-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip&#xd;
-XAP Premium Download Link: https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE} -${FINAL_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip&#xd;
-Docs:https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE} -${FINAL_BUILD_NUMBER}/xap-javadoc.jar</customMessage>
+XAP Download Link : https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE}-${FINAL_BUILD_NUMBER}/gigaspaces-xap-open-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip&#xd;
+XAP Premium Download Link: https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE}-${FINAL_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip&#xd;
+Docs:https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE}-${FINAL_BUILD_NUMBER}/xap-javadoc.jar</customMessage>
     </jenkins.plugins.slack.SlackNotifier>
   </publishers>
   <buildWrappers>
