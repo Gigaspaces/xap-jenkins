@@ -107,17 +107,17 @@
 echo &quot;****************************************************************************************************&quot;
     echo &quot;Installing xap-open&quot;
 echo &quot;****************************************************************************************************&quot;
-mvn -Daven.repo.local=/home/jenkins/.m2_one_xap -f xap-open/pom.xml -B -T 1C clean install -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dgs.branch=${BRANCH_NAME} -Dgs.buildsha=${GIT_COMMIT} -Dnewman.tags=${NEWMAN_TAGS} -P generate-zip -P release-zip
+mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-open/pom.xml -B -T 1C clean install -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dgs.branch=${BRANCH_NAME} -Dgs.buildsha=${GIT_COMMIT} -Dnewman.tags=${NEWMAN_TAGS} -P generate-zip -P release-zip
 
 echo &quot;****************************************************************************************************&quot;
     echo &quot;Installing xap&quot;
 echo &quot;****************************************************************************************************&quot;
-mvn -Daven.repo.local=/home/jenkins/.m2_one_xap -f xap/pom.xml -B -T 1C clean install -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER}  -Dgs.buildshapremium=${GIT_COMMIT} -P quick_web_ui_build -P extract-xap-open-folder
+mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap/pom.xml -B -T 1C clean install -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER}  -Dgs.buildshapremium=${GIT_COMMIT} -P quick_web_ui_build -P extract-xap-open-folder
 
 echo &quot;****************************************************************************************************&quot;
     echo &quot;publishing artifacts to newman&quot;
 echo &quot;****************************************************************************************************&quot;
-mvn -Daven.repo.local=/home/jenkins/.m2_one_xap -f xap/xap-dist/pom.xml process-sources -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dgs.branch=${BRANCH_NAME} -Dnewman.tags=${NEWMAN_TAGS} -P generate-zip -P copy-artifact-and-submit-to-newman -P extract-xap-open-folder</command>
+mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap/xap-dist/pom.xml process-sources -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dgs.branch=${BRANCH_NAME} -Dnewman.tags=${NEWMAN_TAGS} -P generate-zip -P copy-artifact-and-submit-to-newman -P extract-xap-open-folder</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -130,6 +130,9 @@ mvn -Daven.repo.local=/home/jenkins/.m2_one_xap -f xap/xap-dist/pom.xml process-
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <recipientProviders>
               <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
+              <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
+              <hudson.plugins.emailext.plugins.recipients.DevelopersRecipientProvider/>
+              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
             </recipientProviders>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
@@ -151,6 +154,24 @@ mvn -Daven.repo.local=/home/jenkins/.m2_one_xap -f xap/xap-dist/pom.xml process-
       <saveOutput>false</saveOutput>
       <disabled>false</disabled>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
+    <jenkins.plugins.slack.SlackNotifier plugin="slack@2.0.1">
+      <teamDomain></teamDomain>
+      <authToken></authToken>
+      <buildServerUrl>http://xap-lab1002:8080/</buildServerUrl>
+      <room></room>
+      <startNotification>false</startNotification>
+      <notifySuccess>true</notifySuccess>
+      <notifyAborted>false</notifyAborted>
+      <notifyNotBuilt>false</notifyNotBuilt>
+      <notifyUnstable>false</notifyUnstable>
+      <notifyFailure>true</notifyFailure>
+      <notifyBackToNormal>false</notifyBackToNormal>
+      <notifyRepeatedFailure>false</notifyRepeatedFailure>
+      <includeTestSummary>false</includeTestSummary>
+      <commitInfoChoice>NONE</commitInfoChoice>
+      <includeCustomMessage>false</includeCustomMessage>
+      <customMessage></customMessage>
+    </jenkins.plugins.slack.SlackNotifier>
   </publishers>
   <buildWrappers/>
 </project>
