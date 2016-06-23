@@ -175,6 +175,33 @@ export TAG_NAME
       <saveOutput>false</saveOutput>
       <disabled>false</disabled>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
+    <jenkins.plugins.slack.SlackNotifier plugin="slack@2.0.1">
+      <teamDomain></teamDomain>
+      <authToken></authToken>
+      <buildServerUrl>http://xap-lab1002:8080/</buildServerUrl>
+      <room></room>
+      <startNotification>false</startNotification>
+      <notifySuccess>true</notifySuccess>
+      <notifyAborted>false</notifyAborted>
+      <notifyNotBuilt>false</notifyNotBuilt>
+      <notifyUnstable>false</notifyUnstable>
+      <notifyFailure>true</notifyFailure>
+      <notifyBackToNormal>false</notifyBackToNormal>
+      <notifyRepeatedFailure>false</notifyRepeatedFailure>
+      <includeTestSummary>false</includeTestSummary>
+      <commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
+      <includeCustomMessage>true</includeCustomMessage>
+      <customMessage>Version:${XAP_VERSION} &#xd;
+Milestone:${MILESTONE} &#xd;
+Build Number: ${FINAL_BUILD_NUMBER}&#xd;
+Maven Release Version:${XAP_VERSION}-${MILESTONE} -${FINAL_BUILD_NUMBER}&#xd;
+Tag: ${TAG_NAME} &#xd;
+SHA:${GIT_COMMIT} &#xd;
+Newman Tag: ${NEWMAN_TAGS}&#xd;
+XAP Download Link : https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE} -${FINAL_BUILD_NUMBER}/gigaspaces-xap-open-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip&#xd;
+XAP Premium Download Link: https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE} -${FINAL_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip&#xd;
+Docs:https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${XAP_VERSION}/${XAP_VERSION}-${MILESTONE} -${FINAL_BUILD_NUMBER}/xap-javadoc.jar</customMessage>
+    </jenkins.plugins.slack.SlackNotifier>
   </publishers>
   <buildWrappers>
     <EnvInjectBuildWrapper plugin="envinject@1.92.1">

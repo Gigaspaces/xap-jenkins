@@ -168,9 +168,14 @@ mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap/xap-dist/pom.xml process
       <notifyBackToNormal>false</notifyBackToNormal>
       <notifyRepeatedFailure>false</notifyRepeatedFailure>
       <includeTestSummary>false</includeTestSummary>
-      <commitInfoChoice>NONE</commitInfoChoice>
-      <includeCustomMessage>false</includeCustomMessage>
-      <customMessage></customMessage>
+      <commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
+      <includeCustomMessage>true</includeCustomMessage>
+      <customMessage>Version:${XAP_VERSION} &#xd;
+Milestone:${MILESTONE} &#xd;
+Build Number: ${XAP_BUILD_NUMBER}-${BUILD_NUMBER}&#xd;
+Branch: ${BRANCH_NAME} &#xd;
+SHA:${GIT_COMMIT} &#xd;
+Newman Tag: ${NEWMAN_TAGS}</customMessage>
     </jenkins.plugins.slack.SlackNotifier>
   </publishers>
   <buildWrappers/>
