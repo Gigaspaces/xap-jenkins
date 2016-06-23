@@ -23,6 +23,7 @@ TD.console { font-family:Courier New; }
    def xapBuildNumber = "unknown"
    def xapBranchName = "unknown"
    def xapTagName = "unknown"
+   def mavenVersion = "unknown"
 
    try{
      xapVersion = build.getEnvironment(listener).get("XAP_VERSION") 
@@ -30,11 +31,11 @@ TD.console { font-family:Courier New; }
      xapBuildNumber = build.getEnvironment(listener).get("FINAL_BUILD_NUMBER")
      xapBranchName = build.getEnvironment(listener).get("BRANCH_NAME")
      xapTagName = build.getEnvironment(listener).get("TAG_NAME")
+     mavenVersion = build.getEnvironment(listener).get("FINAL_VERSION")
    } catch(all){ 
    }
    def xapPremiumZipName = "gigaspaces-xap-premium-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
    def xapZipName = "gigaspaces-xap-open-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
-   def mavenVersion = xapVersion + "-" + xapMilestone + "-" + xapBuildNumber
    def gitXAPChangesBaseURL = "https://github.com/Gigaspaces/xap/commit/"
    def gitXAPOpenChangesBaseURL = "https://github.com/Gigaspaces/xap-open/commit/"
 %>
