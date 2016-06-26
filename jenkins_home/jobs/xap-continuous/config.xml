@@ -108,7 +108,7 @@ echo &quot;*********************************************************************
     echo &quot;Installing xap-open&quot;
 echo &quot;****************************************************************************************************&quot;
 cd xap-open &amp;&amp; SHA_OPEN=`git rev-parse HEAD` &amp;&amp; cd -
-mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-open/pom.xml -B -T 1C clean install -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dgs.branch=${BRANCH_NAME} -Dgs.buildsha=${SHA_OPEN} -Dnewman.tags=${NEWMAN_TAGS} -P generate-zip -P release-zip
+mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-open/pom.xml -B -T 1C clean install -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dgs.branch=${BRANCH_NAME} -Dgs.buildsha=${SHA_OPEN} -Dnewman.tags=${NEWMAN_TAGS} -P release-zip
 
 echo &quot;****************************************************************************************************&quot;
     echo &quot;Installing xap&quot;

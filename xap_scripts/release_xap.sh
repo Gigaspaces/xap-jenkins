@@ -84,6 +84,14 @@ function rename_poms {
     find "$1" -name "pom.xml" -exec sed -i.bak "s/$trimmed_version/$RELEASE_VERSION/" \{\} \;
 }
 
+function add_missing_license_headers {
+    local dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    if [ -x "${dir}/add_license.sh" ]
+    then
+       ${dir}/add_license.sh "$1"
+    fi
+}
+
 # Create a temporary branch for the pom changes commits.
 # If such branch already exists delete it (is it wise ?)
 # Do not push this branch.
@@ -359,6 +367,8 @@ function release_xap {
     announce_step "rename poms in xap"
     rename_poms "$xap_folder"
 
+    announce_step "Adding missing license headers on xap-open"
+    add_missing_license_headers "$xap_open_folder"
     
     announce_step "executing maven install on xap-open"
     mvn_install "$xap_open_folder" "OPEN"
@@ -399,7 +409,7 @@ function release_xap {
 	announce_step "uploading xap docs"
 	upload_docs "$xap_folder" "xap"
     fi
-    echo "DONE."
+    announce_step "DONE !"
 }
 
 
