@@ -111,6 +111,7 @@ echo &quot;export DEPLOY_ARTIFACTS=$DEPLOY_ARTIFACTS&quot; &gt;&gt; /home/jenkin
 echo &quot;export PERFORM_FULL_M2_CLEAN=$PERFORM_FULL_M2_CLEAN&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh
 echo &quot;export WORKSPACE=$XAP_WORKSPACE&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh
 echo &quot;export M2=$M2&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh
+echo &quot;export BUILD_CAUSE=$BUILD_CAUSE&quot; &gt;&gt; /home/jenkins/xap_scripts/release-xap-setenv.sh
 
 export FINAL_BUILD_NUMBER
 export TAG_NAME

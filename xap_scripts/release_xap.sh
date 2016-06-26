@@ -7,6 +7,18 @@ fi
 
 source "$1"
 
+function uniquify_timer_triggered_nightly_git_tag_name {
+    if [[ "$TAG_NAME" == *NIGHTLY ]]
+    then
+        if [ "$BUILD_CAUSE" == "TIMERTRIGGER" ] 
+        then
+           TAG_NAME="${TAG_NAME}-$(date +'%A')"
+        fi
+    fi
+}
+
+uniquify_timer_triggered_nightly_git_tag_name
+
 
 # Get the folder from git url 
 # $1 is a git url of the form git@github.com:Gigaspaces/xap-open.git
@@ -299,6 +311,7 @@ function announce_step {
     (( step++ ))
     let start_time=$(date +'%s')
 }
+
 
 # Clone xap-open and xap.
 # Clean m2 from xap related directories.
