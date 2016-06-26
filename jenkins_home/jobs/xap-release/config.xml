@@ -4,6 +4,14 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>1</daysToKeep>
+        <numToKeep>5</numToKeep>
+        <artifactDaysToKeep>1</artifactDaysToKeep>
+        <artifactNumToKeep>5</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
     <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -15,32 +23,32 @@
         <hudson.model.TextParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m4</defaultValue>
+          <defaultValue>m5</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>15794</defaultValue>
+          <defaultValue>15795</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>The source branch for this xap-release</description>
-          <defaultValue>12.0.0-m4</defaultValue>
+          <defaultValue>master</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>TAG_NAME</name>
           <description></description>
-          <defaultValue>12.0.0-m4-MILESTONE</defaultValue>
+          <defaultValue>12.0.0-m5-NIGHTLY</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>OVERRIDE_EXISTING_TAG</name>
           <description></description>
-          <defaultValue>true</defaultValue>
+          <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>DEPLOY_ARTIFACTS</name>
           <description></description>
-          <defaultValue>true</defaultValue>
+          <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>PERFORM_FULL_M2_CLEAN</name>
@@ -62,8 +70,8 @@
           <description></description>
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
-              <string>MILESTONE</string>
               <string>NIGHTLY</string>
+              <string>MILESTONE</string>
               <string>GA</string>
               <string>PATCH</string>
             </a>
