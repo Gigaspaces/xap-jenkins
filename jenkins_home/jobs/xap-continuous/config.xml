@@ -107,12 +107,14 @@
 echo &quot;****************************************************************************************************&quot;
     echo &quot;Installing xap-open&quot;
 echo &quot;****************************************************************************************************&quot;
-mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-open/pom.xml -B -T 1C clean install -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dgs.branch=${BRANCH_NAME} -Dgs.buildsha=${GIT_COMMIT} -Dnewman.tags=${NEWMAN_TAGS} -P generate-zip -P release-zip
+cd xap-open &amp;&amp; SHA_OPEN=`git rev-parse HEAD` &amp;&amp; cd -
+mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-open/pom.xml -B -T 1C clean install -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dgs.branch=${BRANCH_NAME} -Dgs.buildsha=${SHA_OPEN} -Dnewman.tags=${NEWMAN_TAGS} -P generate-zip -P release-zip
 
 echo &quot;****************************************************************************************************&quot;
     echo &quot;Installing xap&quot;
 echo &quot;****************************************************************************************************&quot;
-mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap/pom.xml -B -T 1C clean install -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER}  -Dgs.buildshapremium=${GIT_COMMIT} -P quick_web_ui_build -P extract-xap-open-folder
+cd xap &amp;&amp; SHA_CLOSE=`git rev-parse HEAD` &amp;&amp; cd -
+mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap/pom.xml -B -T 1C clean install -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dgs.buildsha=${SHA_OPEN} -Dgs.buildshapremium=${SHA_CLOSE} -P quick_web_ui_build -P extract-xap-open-folder
 
 echo &quot;****************************************************************************************************&quot;
     echo &quot;publishing artifacts to newman&quot;
