@@ -1,6 +1,8 @@
 #!/bin/bash
 
 function release_xap {
+    local mode=$1
+
     local xap_open_url="git@github.com:Gigaspaces/xap-open.git"
     local xap_url="git@github.com:Gigaspaces/xap.git"
     local xap_open_folder="$(get_folder $xap_open_url)"
@@ -28,9 +30,9 @@ function release_xap {
     post_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
 
     #jenkins xap-release job
-    announce_step "updating xap-release mode to MILESTONE and BRANCH_NAME to $BRANCH_NAME and trigger to 0 16 * * *"
+    announce_step "updating xap-release mode to $mode and BRANCH_NAME to $BRANCH_NAME and trigger to 0 16 * * *"
     get_jenkins_job_config "xap-release" "xap_release_config.xml"
-    change_mode "MILESTONE" "xap_release_config.xml"
+    change_mode "$mode" "xap_release_config.xml"
     change_branch "$BRANCH_NAME" "xap_release_config.xml"
     start_jenkins_triggers "xap_release_config.xml" "0 16 * * *"
     post_jenkins_job_config "xap-release" "xap_release_config.xml"
@@ -256,3 +258,5 @@ function announce_step {
     (( step++ ))
     let start_time=$(date +'%s')
 }
+
+release_xap "MILESTONE"
