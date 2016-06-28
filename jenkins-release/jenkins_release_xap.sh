@@ -18,7 +18,7 @@ function release_xap {
     announce_step "creating branch xap"
     create_release_branch "$xap_folder"
 
-    //disable all jobs
+    #disable all jobs
     announce_step "disabling xap-release and xap-continuous jenkins jobs"
     get_jenkins_job_config "xap-release" "xap_release_config.xml"
     get_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
@@ -27,7 +27,7 @@ function release_xap {
     post_jenkins_job_config "xap-release" "xap_release_config.xml"
     post_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
 
-    //jenkins xap-release job
+    #jenkins xap-release job
     announce_step "updating xap-release mode to MILESTONE and BRANCH_NAME to $BRANCH_NAME and trigger to 0 16 * * *"
     get_jenkins_job_config "xap-release" "xap_release_config.xml"
     change_mode "MILESTONE" "xap_release_config.xml"
@@ -35,7 +35,7 @@ function release_xap {
     start_jenkins_triggers "xap_release_config.xml" "0 16 * * *"
     post_jenkins_job_config "xap-release" "xap_release_config.xml"
 
-    // jenkins xap-continuous job - xap-continuous is disabled do also xap-continuous-master is disabled
+    #jenkins xap-continuous job - xap-continuous is disabled do also xap-continuous-master is disabled
     announce_step "coping xap-continuous to xap-continuous-master"
     copy_jenkins_job "xap-continuous" "xap-continuous-master"
 
@@ -56,8 +56,8 @@ function release_xap {
 
 function back_to_nightly_release_xap {
 
-     //disable all jobs
-     announce_step "disabling xap-release,xap-continuous-master and xap-continuous jenkins jobs"
+    #disable all jobs
+    announce_step "disabling xap-release,xap-continuous-master and xap-continuous jenkins jobs"
     get_jenkins_job_config "xap-release" "xap_release_config.xml"
     get_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
     get_jenkins_job_config "xap-continuous-master" "xap_continuous_master_config.xml"
@@ -85,7 +85,7 @@ function back_to_nightly_release_xap {
     announce_step "deleting xap-continuous-master"
     delete_jenkins_job "xap-continuous-master"
 
-    nnounce_step "updating xap-continuous trigger to * * * * *"
+    announce_step "updating xap-continuous trigger to * * * * *"
     get_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
     start_jenkins_triggers "xap_continuous_config.xml" "* * * * *"
     post_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
