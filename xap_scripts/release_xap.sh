@@ -129,14 +129,10 @@ function clean_m2 {
 function mvn_install {
     local rep="$2"
     pushd "$1"
-    #cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests install"
-    local GIT_SHA=`git rev-parse HEAD`
-    local SHA_PROP="-Dgs.buildshapremium"    
     if [ "$rep" == "OPEN" ]; then
-	SHA_PROP="-Dgs.buildsha"
-	cmd="mvn -B -P release-zip -Dmaven.repo.local=$M2/repository -DskipTests install javadoc:jar -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} ${SHA_PROP}=${GIT_SHA}"
+	cmd="mvn -B -P release-zip -Dmaven.repo.local=$M2/repository -DskipTests install javadoc:jar -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} -Dgs.buildsha=${XAP_OPEN_SHA}"
     else
-	cmd="mvn -B -P extract-xap-open-folder -Dmaven.repo.local=$M2/repository -DskipTests install -P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} ${SHA_PROP}=${GIT_SHA}"
+	cmd="mvn -B -P extract-xap-open-folder -Dmaven.repo.local=$M2/repository -DskipTests install -P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} -Dgs.buildsha=${XAP_OPEN_SHA} -Dgs.buildshapremium=${XAP_CLOSED_SHA}"
     fi
     echo "****************************************************************************************************"
     echo "Installing $rep"
@@ -346,6 +342,13 @@ function release_xap {
     announce_step "clone xap"
     clone "$xap_url"
 
+    cd "$xap_open_folder" && export XAP_OPEN_SHA=`git rev-parse HEAD` && cd -
+    cd "$xap_folder" && export XAP_CLOSED_SHA=`git rev-parse HEAD` && cd -
+
+    echo "XAP_OPEN_SHA=${XAP_OPEN_SHA}"
+    echo "XAP_CLOSED_SHA=${XAP_CLOSED_SHA}"
+
+
     if [ "$OVERRIDE_EXISTING_TAG" != "true" ] 
     then
         announce_step "delete tag $TAG in xap open"
@@ -369,7 +372,7 @@ function release_xap {
 
     announce_step "Adding missing license headers on xap-open"
     add_missing_license_headers "$xap_open_folder"
-    
+   
     announce_step "executing maven install on xap-open"
     mvn_install "$xap_open_folder" "OPEN"
     echo "Done installing xap open"
