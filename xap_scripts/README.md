@@ -30,16 +30,18 @@ export WORKSPACE=/home/barakbo/tmp/workspace      # The location on the disk tha
 
 ## Workflow description.
 
-1. Clone xap-open and xap, this is done smartly to save time, indeed git **is** the information manager from hell.
-2. Clean m2 from xap related directories.
-3. Create temporary local git branch.
-4. Rename poms.
-5. Call maven install.
-6. Commit changes.
-7. Create tag.
-8. Delete the temporary local branch.
-9. Push the tag
-10. Call maven deploy.
+* Clone xap-open and xap, this is done smartly to save time, indeed git **is** the information manager from hell.
+* Clean m2 from xap related directories.
+* Create temporary local git branch.
+* Rename poms.
+* If `add_license.sh` script is found use it to add license header to java file in open core that are missing license header
+* Commit changes localy to have the sha ready for the maven install.
+* Call maven install.
+* Commit changes.
+* Create tag.
+* Delete the temporary local branch.
+* Push the tag
+* Call maven deploy.
 
 ## How to run locally
 
