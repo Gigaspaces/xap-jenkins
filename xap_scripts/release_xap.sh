@@ -92,6 +92,16 @@ function add_missing_license_headers {
     fi
 }
 
+
+# Clean all nightly tags older then 7 days.
+function clean_old_tags {
+    local dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    if [ -x "${dir}/add_license.sh" ]
+    then
+       (cd "$1"; ${dir}/clean_old_nightly_tags.sh)
+    fi
+}
+
 # Create a temporary branch for the pom changes commits.
 # If such branch already exists delete it (is it wise ?)
 # Do not push this branch.
@@ -341,6 +351,10 @@ function release_xap {
     clone "$xap_open_url" 
     announce_step "clone xap"
     clone "$xap_url"
+
+    clean_old_tags "$xap_open_folder"
+    clean_old_tags "$xap_folder"
+
 
     cd "$xap_open_folder" && export XAP_OPEN_SHA=`git rev-parse HEAD` && cd -
     cd "$xap_folder" && export XAP_CLOSED_SHA=`git rev-parse HEAD` && cd -
