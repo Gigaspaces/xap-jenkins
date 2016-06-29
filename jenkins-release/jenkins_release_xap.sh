@@ -192,11 +192,10 @@ function create_release_branch {
 
 	if [ -z "$commit_sh" ]
 	then
-	    git branch "$BRANCH_NAME" "$commit_sh"
+	    git checkout -b  "$BRANCH_NAME" "$commit_sh"
 	else
-	    git branch "$BRANCH_NAME"
+	    git branch "$BRANCH_NAME" master
 	fi
-	git checout "$BRANCH_NAME"
 	git push --set-upstream origin "$BRANCH_NAME"
     )
 }
