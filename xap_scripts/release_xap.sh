@@ -356,13 +356,6 @@ function release_xap {
     clean_old_tags "$xap_folder"
 
 
-    cd "$xap_open_folder" && export XAP_OPEN_SHA=`git rev-parse HEAD` && cd -
-    cd "$xap_folder" && export XAP_CLOSED_SHA=`git rev-parse HEAD` && cd -
-
-    echo "XAP_OPEN_SHA=${XAP_OPEN_SHA}"
-    echo "XAP_CLOSED_SHA=${XAP_CLOSED_SHA}"
-
-
     if [ "$OVERRIDE_EXISTING_TAG" != "true" ] 
     then
         announce_step "delete tag $TAG in xap open"
@@ -387,6 +380,12 @@ function release_xap {
     announce_step "Adding missing license headers on xap-open"
     add_missing_license_headers "$xap_open_folder"
    
+    
+    
+    export XAP_OPEN_SHA="$TAG_NAME"
+    export XAP_CLOSED_SHA="$TAG_NAME"
+
+
     announce_step "executing maven install on xap-open"
     mvn_install "$xap_open_folder" "OPEN"
     echo "Done installing xap open"
