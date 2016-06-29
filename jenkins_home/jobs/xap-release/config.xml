@@ -28,7 +28,7 @@
         <hudson.model.TextParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>15795</defaultValue>
+          <defaultValue>15796</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>BRANCH_NAME</name>
@@ -48,7 +48,7 @@
         <hudson.model.BooleanParameterDefinition>
           <name>DEPLOY_ARTIFACTS</name>
           <description></description>
-          <defaultValue>false</defaultValue>
+          <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>PERFORM_FULL_M2_CLEAN</name>

@@ -53,7 +53,7 @@
       <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call download.bat &quot;%JAVA_BUILD_URL%&quot; &quot;%JAVA_BUILD_FILE%&quot;</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call BuildPremium.bat &quot;%JAVA_BUILD_FILE%&quot; &quot;%BRANCH_NAME%&quot;</command>
+      <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call BuildAll.bat &quot;%JAVA_BUILD_FILE%&quot; &quot;%BRANCH_NAME%&quot;</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers/>
