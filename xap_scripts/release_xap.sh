@@ -282,14 +282,14 @@ function upload_zip {
 
 
     if [ "$2" = "xap-open" ]; then
-       zipFileName="gigaspaces-xap-open-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip"
-       targetPath="com/gigaspaces/xap-open/${XAP_VERSION}/${FINAL_VERSION}"
+       zipFileName="gigaspaces-xap-open-${XAP_VERSION}-${MILESTONE}-b${BUILD_NUMBER}.zip"
+       targetPath="com/gigaspaces/xap-open/${XAP_VERSION}/${RELEASE_VERSION}"
     elif [ "$2" = "xap-premium" ]; then
-       zipFileName="gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip"
-       targetPath="com/gigaspaces/xap/${XAP_VERSION}/${FINAL_VERSION}"
+       zipFileName="gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${BUILD_NUMBER}.zip"
+       targetPath="com/gigaspaces/xap/${XAP_VERSION}/${RELEASE_VERSION}"
     elif [ "$2" = "xap-enterprise" ]; then
-       zipFileName="gigaspaces-xap-enterprise-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip"
-       targetPath="com/gigaspaces/xap/${XAP_VERSION}/${FINAL_VERSION}"
+       zipFileName="gigaspaces-xap-enterprise-${XAP_VERSION}-${MILESTONE}-b${BUILD_NUMBER}.zip"
+       targetPath="com/gigaspaces/xap/${XAP_VERSION}/${RELEASE_VERSION}"
     else
         echo "[ERROR] Unknown zip type $2"
         exit 1
@@ -318,7 +318,7 @@ function upload_docs {
     local folder="$1"
     pushd "$folder"
 
-    cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=xap-dist/target/package/docs/xap-javadoc.jar -Dput.target=com/gigaspaces/xap/$XAP_VERSION/$FINAL_VERSION"
+    cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=xap-dist/target/package/docs/xap-javadoc.jar -Dput.target=com/gigaspaces/xap/$XAP_VERSION/$RELEASE_VERSION"
 
     echo "****************************************************************************************************"
     echo "uploading $2 javadoc"
