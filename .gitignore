@@ -77,3 +77,4 @@ workspaces
 
 m2_release_xap
 xap_scripts/release-xap-setenv.sh
+jenkins-release/setenv.sh
