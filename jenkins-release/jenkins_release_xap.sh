@@ -34,6 +34,12 @@ function release_xap {
     get_jenkins_job_config "xap-release" "xap_release_config.xml"
     change_mode "$mode" "xap_release_config.xml"
     change_branch "$BRANCH_NAME" "xap_release_config.xml"
+    if [ "$MILESTONE" -eq "ga" ]
+    then
+        change_tag "$VERSION-$MILESTONE-RELEASE" "xap_release_config.xml"
+    else
+        change_tag "$VERSION-$MILESTONE-MILESTONE" "xap_release_config.xml"
+    fi
     start_jenkins_triggers "xap_release_config.xml" "0 16 * * *"
     post_jenkins_job_config "xap-release" "xap_release_config.xml"
 
@@ -44,6 +50,7 @@ function release_xap {
     announce_step "incrementing XAP_BUILD_NUMBER at xap-continuous-master"
     get_jenkins_job_config "xap-continuous-master" "xap_continuous_master_config.xml"
     increment_build_number "xap_continuous_master_config.xml"
+    increment_milestone_number "xap_continuous_master_config.xml"
     post_jenkins_job_config "xxap-continuous-master" "xap_continuous_master_config.xml"
 
     announce_step "changing BRANCH_NAME to $BRANCH_NAME at xap-continuous job and trigger to * * * * *"
@@ -171,6 +178,14 @@ function increment_build_number{
     sed -i '/<name>XAP_BUILD_NUMBER<\/name>/{N; /.*/{N; s/<defaultValue>.*<\/defaultValue>/<defaultValue>'$version_number'<\/defaultValue>/}}' "$jenkins_config_file"
 }
 
+function increment_milestone_number{
+    local jenkins_config_file="$1"
+    local milestone=$(sed -n '/<name>MILESTONE<\/name>/{N; /.*/{N; /<defaultValue>.*<\/defaultValue>/p}}' "$jenkins_config_file" | grep defaultValue | sed -n '/defaultValue/{s/.*<defaultValue>\(.*\)<\/defaultValue>.*/\1/;p}')
+    milestone_number=${milestone:1:${#milestone}}
+    ((milestone_number++))
+    sed -i '/<name>MILESTONE<\/name>/{N; /.*/{N; s/<defaultValue>.*<\/defaultValue>/<defaultValue>m'$milestone_number'<\/defaultValue>/}}' "$jenkins_config_file"
+}
+
 function change_mode{
     local mode="$1"
     local jenkins_config_file="$2"
@@ -181,6 +196,12 @@ function change_branch{
     local branch="$1"
     local jenkins_config_file="$2"
     sed -i '/<name>BRANCH_NAME<\/name>/{N; /.*/{N; s/<defaultValue>.*<\/defaultValue>/<defaultValue>'"$branch"'<\/defaultValue>/}}' "$jenkins_config_file"
+}
+
+function change_tag{
+    local tag="$1"
+    local jenkins_config_file="$2"
+    sed -i '/<name>TAG_NAME<\/name>/{N; /.*/{N; s/<defaultValue>.*<\/defaultValue>/<defaultValue>'"$tag"'<\/defaultValue>/}}' "$jenkins_config_file"
 }
 
 function create_release_branch {
