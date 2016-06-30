@@ -96,7 +96,7 @@ function add_missing_license_headers {
 # Clean all nightly tags older then 7 days.
 function clean_old_tags {
     local dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-    if [ -x "${dir}/add_license.sh" ]
+    if [ -x "${dir}/clean_old_nightly_tags.sh" ]
     then
        (cd "$1"; ${dir}/clean_old_nightly_tags.sh)
     fi

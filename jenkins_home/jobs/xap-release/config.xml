@@ -23,12 +23,12 @@
         <hudson.model.TextParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m5</defaultValue>
+          <defaultValue>m6</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>15796</defaultValue>
+          <defaultValue>15798</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>BRANCH_NAME</name>
@@ -38,7 +38,7 @@
         <hudson.model.TextParameterDefinition>
           <name>TAG_NAME</name>
           <description></description>
-          <defaultValue>12.0.0-m5-NIGHTLY</defaultValue>
+          <defaultValue>12.0.0-m6-NIGHTLY</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>OVERRIDE_EXISTING_TAG</name>
@@ -90,7 +90,11 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers/>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>0 16 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -123,32 +127,13 @@ export TAG_NAME
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
               <properties>BRANCH_NAME=${BRANCH_NAME}
 JAVA_BUILD_URL=http://192.168.10.10:80/${XAP_VERSION}/${BRANCH_NAME}/${FINAL_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
-JAVA_BUILD_FILE=gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip</properties>
+JAVA_BUILD_FILE=gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
+DEPLOY_ARTIFACTS=${DEPLOY_ARTIFACTS}</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
           <projects>DotNet</projects>
           <condition>ALWAYS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
-          <block>
-            <buildStepFailureThreshold>
-              <name>FAILURE</name>
-              <ordinal>2</ordinal>
-              <color>RED</color>
-              <completeBuild>true</completeBuild>
-            </buildStepFailureThreshold>
-            <unstableThreshold>
-              <name>UNSTABLE</name>
-              <ordinal>1</ordinal>
-              <color>YELLOW</color>
-              <completeBuild>true</completeBuild>
-            </unstableThreshold>
-            <failureThreshold>
-              <name>FAILURE</name>
-              <ordinal>2</ordinal>
-              <color>RED</color>
-              <completeBuild>true</completeBuild>
-            </failureThreshold>
-          </block>
           <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
         </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
       </configs>
