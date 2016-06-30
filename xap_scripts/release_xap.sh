@@ -159,6 +159,22 @@ function mvn_install {
 }
 
 
+function create_zips_without_license {
+    pushd "$1"
+    cmd="mvn -B -Dmaven.repo.local=$M2/repository -o -pl xap-dist validate -P generate-zip -P empty-license -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} -Dgs.branch=${BRANCH}"
+    echo "****************************************************************************************************"
+    echo "Prepare zip files without license"
+    echo "Executing cmd: $cmd"
+    echo "****************************************************************************************************"
+    eval "$cmd"
+    local r="$?"
+    popd
+    if [ "$r" -ne 0 ]
+    then
+        echo "[ERROR] Failed While preparing zip files without license: $1, command is: $cmd, exit code is: $r"
+        exit "$r"
+    fi
+}
 
 function publish_to_newman {
     pushd "$1"
@@ -249,15 +265,41 @@ function exit_if_tag_exists {
 }
 
 function upload_zip {
+# $1 = folder
+# $2 = type "xap-open" , "xap-premium" , "xap-enterprise"
+# $3 = "with-license" or "without-license"
     echo "uploading zip $1 $2"
     local folder="$1"
     pushd "$folder"
-    if [ "$2" == "xap" ]
-    then
-        cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=xap-dist/target/gigaspaces-xap-premium-$XAP_VERSION-$MILESTONE-b$FINAL_BUILD_NUMBER.zip -Dput.target=com/gigaspaces/xap/$XAP_VERSION/$FINAL_VERSION"
-    else
-        cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=xap-dist/target/gigaspaces-xap-open-$XAP_VERSION-$MILESTONE-b$FINAL_BUILD_NUMBER.zip -Dput.target=com/gigaspaces/xap-open/$XAP_VERSION/$FINAL_VERSION"
+
+    local sourceZipFileName
+    local targetPath
+
+    local sourceZipFileLocation="xap-dist/target"
+    if [ "$3" = "without-license" ]; then
+        sourceZipFileLocation="${sourceZipFileLocation}/without-license"
     fi
+
+
+    if [ "$2" = "xap-open" ]; then
+       zipFileName="gigaspaces-xap-open-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip"
+       targetPath="com/gigaspaces/xap-open/${XAP_VERSION}/${FINAL_VERSION}"
+    elif [ "$2" = "xap-premium" ]; then
+       zipFileName="gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip"
+       targetPath="com/gigaspaces/xap/${XAP_VERSION}/${FINAL_VERSION}"
+    elif [ "$2" = "xap-enterprise" ]; then
+       zipFileName="gigaspaces-xap-enterprise-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip"
+       targetPath="com/gigaspaces/xap/${XAP_VERSION}/${FINAL_VERSION}"
+    else
+        echo "[ERROR] Unknown zip type $2"
+        exit 1
+    fi
+
+
+    sourceZipFileLocation="${sourceZipFileLocation}/${zipFileName}"
+
+    cmd="mvn -Dmaven.repo.local=$M2/repository com.gigaspaces:xap-build-plugin:deploy-native -Dput.source=${sourceZipFileLocation} -Dput.target=${targetPath} -Dput.container=gigaspaces-repository-eu"
+
     echo "****************************************************************************************************"
     echo "uploading $2 zip"
     echo "Executing cmd: $cmd"
@@ -418,10 +460,29 @@ function release_xap {
 	announce_step "deploying xap"
 	mvn_deploy "$xap_folder"
 
-	announce_step "uploading xap open zip"
-	upload_zip "$xap_folder" "xap-open"
-	announce_step "uploading xap zip"
-	upload_zip "$xap_folder" "xap"
+        if [ "${MILESTONE}" = "ga" ]; then
+            announce_step "preparing zip files without license"
+            create_zips_without_license "$xap_folder"
+
+            announce_step "uploading xap-open zip"
+            upload_zip "$xap_folder" "xap-open"
+
+            announce_step "uploading xap-premium without license"
+            upload_zip "$xap_folder" "xap-premium" "without-license"
+
+            announce_step "uploading xap-enterprise without license"
+            upload_zip "$xap_folder" "xap-enterprise" "without-license"
+        else
+            announce_step "uploading xap-open zip"
+            upload_zip "$xap_folder" "xap-open"
+
+            announce_step "uploading xap-premium zip with license"
+            upload_zip "$xap_folder" "xap-premium" "with-license"
+
+            announce_step "uploading xap-enterprise zip with license"
+            upload_zip "$xap_folder" "xap-enterprise" "with-license"
+        fi
+
 	announce_step "uploading xap docs"
 	upload_docs "$xap_folder" "xap"
     fi
