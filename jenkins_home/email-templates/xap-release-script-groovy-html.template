@@ -32,9 +32,11 @@ TD.console { font-family:Courier New; }
      xapBranchName = build.getEnvironment(listener).get("BRANCH_NAME")
      xapTagName = build.getEnvironment(listener).get("TAG_NAME")
      mavenVersion = build.getEnvironment(listener).get("FINAL_VERSION")
+     deployArtifacts = build.getEnvironment(listener).get("DEPLOY_ARTIFACTS")
    } catch(all){ 
    }
    def xapPremiumZipName = "gigaspaces-xap-premium-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
+   def xapEnterpriseZipName = "gigaspaces-xap-enterprise-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
    def xapZipName = "gigaspaces-xap-open-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
    def gitXAPChangesBaseURL = "https://github.com/Gigaspaces/xap/commit/"
    def gitXAPOpenChangesBaseURL = "https://github.com/Gigaspaces/xap-open/commit/"
@@ -51,10 +53,11 @@ TD.console { font-family:Courier New; }
   <TR><TD>XAP Open Tag:</TD><TD><A href="https://github.com/Gigaspaces/xap-open/tree/${xapTagName}">${xapTagName}</A></TD></TR>
   <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ${cause.shortDescription} <%  } %></TD></TR>
   <% 
-  	if(build.result.toString() == 'SUCCESS'){
+  	if(build.result.toString() == 'SUCCESS' && deployArtifacts == 'true'){
    %>
   		<TR><TD>XAP:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${xapVersion}/${mavenVersion}/${xapZipName}">${xapZipName}</A></TD></TR> 
-  		<TR><TD>XAP Premium:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR> 
+  		<TR><TD>XAP Premium:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR>
+  		<TR><TD>XAP Enterprise:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapEnterpriseZipName}">${xapEnterpriseZipName}</A></TD></TR>
   		<TR><TD>XAP Docs:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/xap-javadoc.jar">xap-docs</A></TD></TR> 
   		<TR><TD>Maven release version:</TD><TD>${mavenVersion}</TD></TR> 
    <%
