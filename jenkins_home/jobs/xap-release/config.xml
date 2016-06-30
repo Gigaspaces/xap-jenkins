@@ -128,7 +128,9 @@ export TAG_NAME
               <properties>BRANCH_NAME=${BRANCH_NAME}
 JAVA_BUILD_URL=http://192.168.10.10:80/${XAP_VERSION}/${BRANCH_NAME}/${FINAL_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
 JAVA_BUILD_FILE=gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
-DEPLOY_ARTIFACTS=${DEPLOY_ARTIFACTS}</properties>
+DEPLOY_ARTIFACTS=${DEPLOY_ARTIFACTS}
+TAG_NAME=${TAG_NAME}
+RELEASE=true</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
           <projects>DotNet</projects>

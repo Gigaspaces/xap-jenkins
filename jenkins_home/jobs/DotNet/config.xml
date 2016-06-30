@@ -27,6 +27,16 @@
           <description>Boolean indicator if to deploy artifacts to s3</description>
           <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>RELEASE</name>
+          <description></description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>TAG_NAME</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -61,7 +71,36 @@
       <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call BuildAll.bat &quot;%JAVA_BUILD_FILE%&quot; &quot;%BRANCH_NAME%&quot; &quot;%DEPLOY_ARTIFACTS%&quot;</command>
     </hudson.tasks.BatchFile>
   </builders>
-  <publishers/>
+  <publishers>
+    <org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher plugin="flexible-publish@0.15.2">
+      <publishers>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.core.BooleanCondition" plugin="run-condition@1.0">
+            <token>${ENV,var=&quot;RELEASE&quot;}</token>
+          </condition>
+          <publisherList>
+            <hudson.plugins.git.GitPublisher plugin="git@2.5.0">
+              <configVersion>2</configVersion>
+              <pushMerge>false</pushMerge>
+              <pushOnlyIfSuccess>true</pushOnlyIfSuccess>
+              <forcePush>true</forcePush>
+              <tagsToPush>
+                <hudson.plugins.git.GitPublisher_-TagToPush>
+                  <targetRepoName>origin</targetRepoName>
+                  <tagName>${TAG_NAME}</tagName>
+                  <tagMessage>XAP .NET release tag on top ${BRANCH_NAME}</tagMessage>
+                  <createTag>true</createTag>
+                  <updateTag>false</updateTag>
+                </hudson.plugins.git.GitPublisher_-TagToPush>
+              </tagsToPush>
+            </hudson.plugins.git.GitPublisher>
+          </publisherList>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+          <executionStrategy class="org.jenkins_ci.plugins.flexible_publish.strategy.FailAtEndExecutionStrategy"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+      </publishers>
+    </org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher>
+  </publishers>
   <buildWrappers>
     <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.29">
       <deleteDirs>false</deleteDirs>
