@@ -140,9 +140,9 @@ function mvn_install {
     local rep="$2"
     pushd "$1"
     if [ "$rep" == "OPEN" ]; then
-	cmd="mvn -B -P release-zip -Dmaven.repo.local=$M2/repository -DskipTests install javadoc:jar -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} -Dgs.buildsha=${XAP_OPEN_SHA}"
+	cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests install javadoc:jar -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} -Dgs.buildsha=${XAP_OPEN_SHA}"
     else
-	cmd="mvn -B -P extract-xap-open-folder -Dmaven.repo.local=$M2/repository -DskipTests install -P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} -Dgs.buildsha=${XAP_OPEN_SHA} -Dgs.buildshapremium=${XAP_CLOSED_SHA}"
+	cmd="mvn -B -Dmaven.repo.local=$M2/repository -DskipTests install -P aggregate-javadoc -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} -Dgs.buildsha=${XAP_OPEN_SHA} -Dgs.buildshapremium=${XAP_CLOSED_SHA}"
     fi
     echo "****************************************************************************************************"
     echo "Installing $rep"
@@ -178,7 +178,7 @@ function create_zips_without_license {
 
 function publish_to_newman {
     pushd "$1"
-    cmd="mvn -B -Dmaven.repo.local=$M2/repository -o -pl xap-dist process-sources -P generate-zip -P copy-artifact-and-submit-to-newman -P extract-xap-open-folder -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} -Dgs.branch=${BRANCH} -Dnewman.tags=${NEWMAN_TAGS}"
+    cmd="mvn -B -Dmaven.repo.local=$M2/repository -o -pl xap-dist process-sources -P generate-zip -P copy-artifact-and-submit-to-newman -Dgs.version=${XAP_VERSION} -Dgs.milestone=${MILESTONE} -Dgs.buildnumber=${BUILD_NUMBER} -Dgs.branch=${BRANCH} -Dnewman.tags=${NEWMAN_TAGS}"
     echo "****************************************************************************************************"
     echo "Publish to newman"
     echo "Executing cmd: $cmd"
