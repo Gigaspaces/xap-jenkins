@@ -81,7 +81,7 @@ function rename_poms {
     # Since grep return the whole line there are spaces that needed to trim.
     local trimmed_version="$(echo -e "${version}" | tr -d '[[:space:]]')"
     # Find each pom.xml under $1 and replace every $trimmed_version with $VERSION
-    find "$1" -name "pom.xml" -exec sed -i.bak "s/$trimmed_version/$RELEASE_VERSION/" \{\} \;
+    find "$1" -name "pom.xml" -exec sed -i "s/$trimmed_version/$RELEASE_VERSION/" \{\} \;
 }
 
 function add_missing_license_headers {
