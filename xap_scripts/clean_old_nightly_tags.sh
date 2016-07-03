@@ -1,7 +1,7 @@
 #/bin/bash
 read -d '' awkScript << 'EOF'
 /[0-9]+ days ago\\ +\\(tag:.*-NIGHTLY/ {
-  if ( 6 < $1 ){
+  if ( 4 < $1 ){
       sub(/\\)/, "", $5)
       print "delete tag " $5 " from " $1 " " $2 " " $3
       delete_local_tag_cmd="git tag --delete " $5
