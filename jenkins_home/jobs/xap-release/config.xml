@@ -38,7 +38,7 @@
         <hudson.model.TextParameterDefinition>
           <name>TAG_NAME</name>
           <description></description>
-          <defaultValue>12.0.0-m6-NIGHTLY</defaultValue>
+          <defaultValue>$XAP_VERSION-$MILESTONE-NIGHTLY</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>OVERRIDE_EXISTING_TAG</name>
