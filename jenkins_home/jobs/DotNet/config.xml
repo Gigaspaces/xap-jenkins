@@ -90,7 +90,7 @@
                   <tagName>${TAG_NAME}</tagName>
                   <tagMessage>XAP .NET release tag on top ${BRANCH_NAME}</tagMessage>
                   <createTag>true</createTag>
-                  <updateTag>false</updateTag>
+                  <updateTag>true</updateTag>
                 </hudson.plugins.git.GitPublisher_-TagToPush>
               </tagsToPush>
             </hudson.plugins.git.GitPublisher>
