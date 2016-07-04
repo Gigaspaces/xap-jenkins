@@ -36,7 +36,7 @@ function release_xap {
 
 
     #jenkins xap-release job
-    announce_step "updating xap-release mode to $mode and BRANCH_NAME to $BRANCH_NAME and trigger to 0 16 * * *"
+    announce_step "updating xap-release mode to $mode and BRANCH_NAME and triggers"
     get_jenkins_job_config "xap-release" "xap_release_config.xml"
     change_mode "$mode" "xap_release_config.xml"
     change_branch "\$XAP_VERSION-\$MILESTONE" "xap_release_config.xml"
@@ -60,7 +60,7 @@ function release_xap {
     increment_milestone_number "xap_continuous_master_config.xml"
     post_jenkins_job_config "xap-continuous-master" "xap_continuous_master_config.xml"
 
-    announce_step "changing BRANCH_NAME to $BRANCH_NAME at xap-continuous job and trigger to * * * * *"
+    announce_step "updating xap-continuous BRANCH_NAME and triggers"
     get_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
     change_branch "\$XAP_VERSION-\$MILESTONE" "xap_continuous_config.xml"
     start_jenkins_timer_trigger "xap_continuous_config.xml" "0 6 * * *"
@@ -85,7 +85,7 @@ function back_to_nightly_release_xap {
     post_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
     post_jenkins_job_config "xap-continuous-master" "xap_continuous_master_config.xml"
 
-    announce_step "updating xap-release mode to NIGHTLY and BRANCH_NAME to master and trigger to 0 16 * * *"
+    announce_step "updating xap-release mode to NIGHTLY and BRANCH_NAME to master and triggers"
     get_jenkins_job_config "xap-release" "xap_release_config.xml"
     change_mode "NIGHTLY" "xap_release_config.xml"
     change_branch "master" "xap_release_config.xml"
