@@ -2,7 +2,7 @@
 
 set -e
 
-. ./setenv.sh
+source "$1"
 
 function release_xap {
     local mode=$1
@@ -315,6 +315,6 @@ function announce_step {
     let start_time=$(date +'%s')
 }
 
-#release_xap "MILESTONE"
+release_xap "$2"
 
-back_to_nightly_release_xap
+#back_to_nightly_release_xap
