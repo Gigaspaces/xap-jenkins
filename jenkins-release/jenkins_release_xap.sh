@@ -2,7 +2,7 @@
 
 set -e
 
-. setenv.sh
+. ./setenv.sh
 
 function release_xap {
     local mode=$1
