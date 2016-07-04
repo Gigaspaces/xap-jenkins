@@ -68,7 +68,7 @@ function release_xap {
     post_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
 
     #announce_step "add branch $BRANCH_NAME to newman reporter cron"
-    #append_branch_to_newman_cron "$BRANCH_NAME"
+    append_branch_to_newman_cron "$VERSION"-"$MILESTONE"
 }
 
 function back_to_nightly_release_xap {
@@ -111,7 +111,7 @@ function back_to_nightly_release_xap {
     post_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
 
     #announce_step "return branch master to newman reporter cron"
-    #append_branch_to_newman_cron "master"
+    append_branch_to_newman_cron "master"
 }
 
 function copy_jenkins_job {
