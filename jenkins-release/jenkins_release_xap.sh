@@ -68,7 +68,7 @@ function release_xap {
     post_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
 
     #announce_step "add branch $BRANCH_NAME to newman reporter cron"
-    #append_branch_to_newman_cron "$VERSION"-"$MILESTONE"
+    append_branch_to_newman_cron "$VERSION"-"$MILESTONE"
 }
 
 function back_to_nightly_release_xap {
@@ -111,7 +111,7 @@ function back_to_nightly_release_xap {
     post_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
 
     #announce_step "return branch master to newman reporter cron"
-    #append_branch_to_newman_cron "master"
+    append_branch_to_newman_cron "master"
 }
 
 function copy_jenkins_job {
@@ -216,10 +216,15 @@ function increment_build_number {
 
 function increment_milestone_number {
     local jenkins_config_file="$1"
-    local milestone=$(sed -n '/<name>MILESTONE<\/name>/{N; /.*/{N; /<defaultValue>.*<\/defaultValue>/p}}' "$jenkins_config_file" | grep defaultValue | sed -n '/defaultValue/{s/.*<defaultValue>\(.*\)<\/defaultValue>.*/\1/;p}')
-    milestone_number=${milestone:1:${#milestone}}
-    ((milestone_number++))
-    sed -i '/<name>MILESTONE<\/name>/{N; /.*/{N; s/<defaultValue>.*<\/defaultValue>/<defaultValue>m'$milestone_number'<\/defaultValue>/}}' "$jenkins_config_file"
+    if [ "ga" == $NEXT_MILESTONE ]
+    then
+        sed -i '/<name>MILESTONE<\/name>/{N; /.*/{N; s/<defaultValue>.*<\/defaultValue>/<defaultValue>m'$NEXT_MILESTONE'<\/defaultValue>/}}' "$jenkins_config_file"
+    else
+        local milestone=$(sed -n '/<name>MILESTONE<\/name>/{N; /.*/{N; /<defaultValue>.*<\/defaultValue>/p}}' "$jenkins_config_file" | grep defaultValue | sed -n '/defaultValue/{s/.*<defaultValue>\(.*\)<\/defaultValue>.*/\1/;p}')
+        milestone_number=${milestone:1:${#milestone}}
+        ((milestone_number++))
+        sed -i '/<name>MILESTONE<\/name>/{N; /.*/{N; s/<defaultValue>.*<\/defaultValue>/<defaultValue>m'$milestone_number'<\/defaultValue>/}}' "$jenkins_config_file"
+    fi
 }
 
 function change_mode {
@@ -249,11 +254,11 @@ function create_release_branch {
 
 	if [ -z "$commit_sh" ]
 	then
-	    git checkout -b "$BRANCH_NAME" master
+	    git checkout -b "$VERSION"-"$MILESTONE" master
 	else
-	    git checkout -b "$BRANCH_NAME" "$commit_sh"
+	    git checkout -b "$VERSION"-"$MILESTONE" "$commit_sh"
 	fi
-	git push --set-upstream origin "$BRANCH_NAME"
+	git push --set-upstream origin "$VERSION"-"$MILESTONE"
     )
 }
 
