@@ -37,6 +37,11 @@
           <description></description>
           <defaultValue></defaultValue>
         </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>FINAL_VERSION</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -68,7 +73,7 @@
       <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call download.bat &quot;%JAVA_BUILD_URL%&quot; &quot;%JAVA_BUILD_FILE%&quot;</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call BuildAll.bat &quot;%JAVA_BUILD_FILE%&quot; &quot;%BRANCH_NAME%&quot; &quot;%DEPLOY_ARTIFACTS%&quot;</command>
+      <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call BuildAll.bat &quot;%JAVA_BUILD_FILE%&quot; &quot;%BRANCH_NAME%&quot; &quot;%DEPLOY_ARTIFACTS%&quot; &quot;%FINAL_VERSION%&quot;</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
