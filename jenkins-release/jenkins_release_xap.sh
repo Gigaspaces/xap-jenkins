@@ -104,7 +104,7 @@ function back_to_nightly_release_xap {
     append_branch_to_newman_cron "master"
 }
 
-function clone_repos{
+function clone_repos {
     local xap_open_url="git@github.com:Gigaspaces/xap-open.git"
     local xap_url="git@github.com:Gigaspaces/xap.git"
     local xap_dotnet_url="git@github.com:Gigaspaces/xap-dotnet.git"
