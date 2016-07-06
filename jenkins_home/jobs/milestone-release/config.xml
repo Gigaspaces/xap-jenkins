@@ -90,10 +90,36 @@
             </a>
           </choices>
         </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>THIS_SCRIPT_MODE</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>CLONE_REPOS_ONLY</string>
+              <string>RELEASE_XAP</string>
+              <string>BACK_TO_NIGHTLY_RELEASE_XAP</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.scm.NullSCM"/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.5.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>git@github.com:Gigaspaces/xap-jenkins.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -118,6 +144,7 @@ echo &quot;export XAP_NEWMAN_HOST=$XAP_NEWMAN_HOST&quot; &gt;&gt; $WORKSPACE/jen
 echo &quot;export XAP_NEWMAN_USER=$XAP_NEWMAN_USER&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
 echo &quot;export XAP_NEWMAN_PASSWORD=$XAP_NEWMAN_PASSWORD&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
 echo &quot;export SSHPASS=$XAP_NEWMAN_PASSWORD&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export THIS_SCRIPT_MODE=&quot;$THIS_SCRIPT_MODE &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
 
 chmod a+x $WORKSPACE/jenkins-release/setenv.sh
 
@@ -136,7 +163,6 @@ chmod a+x $WORKSPACE/jenkins-release/setenv.sh
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <recipientProviders>
               <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
-              <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
             </recipientProviders>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
@@ -150,10 +176,7 @@ chmod a+x $WORKSPACE/jenkins-release/setenv.sh
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <recipientProviders>
-              <hudson.plugins.emailext.plugins.recipients.DevelopersRecipientProvider/>
-              <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
               <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
-              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
             </recipientProviders>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
@@ -167,9 +190,6 @@ chmod a+x $WORKSPACE/jenkins-release/setenv.sh
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <recipientProviders>
-              <hudson.plugins.emailext.plugins.recipients.DevelopersRecipientProvider/>
-              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
-              <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
               <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
             </recipientProviders>
             <attachmentsPattern></attachmentsPattern>
