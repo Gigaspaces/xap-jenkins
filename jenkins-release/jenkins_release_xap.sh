@@ -7,13 +7,6 @@ source "$1"
 function release_xap {
     local mode=$1
 
-    announce_step "creating branch xap-open"
-    create_release_branch "$xap_open_folder"
-    announce_step "creating branch xap"
-    create_release_branch "$xap_folder"
-    announce_step "creating branch xap dotnet"
-    create_release_branch "$xap_dotnet_url"
-
     #disable all jobs
     announce_step "disabling xap-release and xap-continuous jenkins jobs"
     get_jenkins_job_config "xap-release" "xap_release_config.xml"
@@ -121,6 +114,10 @@ function clone_repos {
 }
 
 function create_branches {
+    local xap_open_url="git@github.com:Gigaspaces/xap-open.git"
+    local xap_url="git@github.com:Gigaspaces/xap.git"
+    local xap_dotnet_url="git@github.com:Gigaspaces/xap-dotnet.git"
+
     local xap_open_folder="$(get_folder $xap_open_url)"
     local xap_folder="$(get_folder $xap_url)"
     local xap_dotnet_folder="$(get_folder $xap_dotnet_url)"
