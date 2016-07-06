@@ -328,8 +328,15 @@ function announce_step {
 
 printenv
 
-clone_repos
 
-#release_xap "$2"
-
-#back_to_nightly_release_xap
+if [ "CLONE_REPOS_ONLY" == $THIS_SCRIPT_MODE ]; then
+        clone_repos
+    else
+        if [ "RELEASE_XAP" == $THIS_SCRIPT_MODE ]; then
+                release_xap "$2"
+        	else
+        		if [ "BACK_TO_NIGHTLY_RELEASE_XAP" == $THIS_SCRIPT_MODE ]; then
+                	back_to_nightly_release_xap
+            	fi
+        fi
+fi
