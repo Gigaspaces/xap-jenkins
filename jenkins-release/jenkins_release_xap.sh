@@ -127,7 +127,7 @@ function create_branches {
     announce_step "creating branch xap"
     create_release_branch "$xap_folder"
     announce_step "creating branch xap dotnet"
-    create_release_branch "$xap_dotnet_url"
+    create_release_branch "$xap_dotnet_folder"
 
 }
 function copy_jenkins_job {
