@@ -7,6 +7,7 @@ export NEXT_MILESTONE=
 
 export XAP_COMMIT_SHA=
 export XAP_OPEN_COMMIT_SHA=
+export XAP_DOTNET_COMMIT_SHA=
 
 export JENKINS_HOST=
 export JENKINS_PORT=
