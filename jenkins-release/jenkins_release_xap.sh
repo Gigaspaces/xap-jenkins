@@ -279,6 +279,7 @@ function clone {
         cd "$folder"
         git pull
         git rebase
+        return 0;
     fi
     rm -rf "$folder"
     git clone "$url" "$folder"
