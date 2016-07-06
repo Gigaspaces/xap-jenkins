@@ -120,6 +120,19 @@ function clone_repos {
     clone "$xap_dotnet_url"
 }
 
+function create_branches {
+    local xap_open_folder="$(get_folder $xap_open_url)"
+    local xap_folder="$(get_folder $xap_url)"
+    local xap_dotnet_folder="$(get_folder $xap_dotnet_url)"
+
+    announce_step "creating branch xap-open"
+    create_release_branch "$xap_open_folder"
+    announce_step "creating branch xap"
+    create_release_branch "$xap_folder"
+    announce_step "creating branch xap dotnet"
+    create_release_branch "$xap_dotnet_url"
+
+}
 function copy_jenkins_job {
     local from_job_name="$1"
     local to_job_name="$2"
@@ -335,10 +348,10 @@ if [ "CLONE_REPOS_ONLY" == $THIS_SCRIPT_MODE ]; then
     else
         if [ "RELEASE_XAP" == $THIS_SCRIPT_MODE ]; then
                 clone_repos
+                create_branches
                 release_xap "$2"
         	else
         		if [ "BACK_TO_NIGHTLY_RELEASE_XAP" == $THIS_SCRIPT_MODE ]; then
-        		    clone_repos
                 	back_to_nightly_release_xap
             	fi
         fi
