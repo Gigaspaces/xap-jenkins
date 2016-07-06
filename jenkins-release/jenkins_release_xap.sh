@@ -7,22 +7,6 @@ source "$1"
 function release_xap {
     local mode=$1
 
-    local xap_open_url="git@github.com:Gigaspaces/xap-open.git"
-    local xap_url="git@github.com:Gigaspaces/xap.git"
-    local xap_dotnet_url="git@github.com:Gigaspaces/xap-dotnet.git"
-    local xap_open_folder="$(get_folder $xap_open_url)"
-    local xap_folder="$(get_folder $xap_url)"
-    local xap_dotnet_folder="$(get_folder $xap_dotnet_url)"
-
-    printenv
-
-    announce_step "clone xap-open"
-    clone "$xap_open_url"
-    announce_step "clone xap"
-    clone "$xap_url"
-    announce_step "clone xap dotnet"
-    clone "$xap_dotnet_url"
-
     announce_step "creating branch xap-open"
     create_release_branch "$xap_open_folder"
     announce_step "creating branch xap"
@@ -118,6 +102,22 @@ function back_to_nightly_release_xap {
 
     #announce_step "return branch master to newman reporter cron"
     append_branch_to_newman_cron "master"
+}
+
+function clone_repos{
+    local xap_open_url="git@github.com:Gigaspaces/xap-open.git"
+    local xap_url="git@github.com:Gigaspaces/xap.git"
+    local xap_dotnet_url="git@github.com:Gigaspaces/xap-dotnet.git"
+    local xap_open_folder="$(get_folder $xap_open_url)"
+    local xap_folder="$(get_folder $xap_url)"
+    local xap_dotnet_folder="$(get_folder $xap_dotnet_url)"
+
+    announce_step "clone xap-open"
+    clone "$xap_open_url"
+    announce_step "clone xap"
+    clone "$xap_url"
+    announce_step "clone xap dotnet"
+    clone "$xap_dotnet_url"
 }
 
 function copy_jenkins_job {
@@ -326,6 +326,10 @@ function announce_step {
     let start_time=$(date +'%s')
 }
 
-release_xap "$2"
+printenv
 
-back_to_nightly_release_xap
+clone_repos
+
+#release_xap "$2"
+
+#back_to_nightly_release_xap
