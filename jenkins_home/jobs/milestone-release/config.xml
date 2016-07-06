@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>1</daysToKeep>
+        <numToKeep>5</numToKeep>
+        <artifactDaysToKeep>1</artifactDaysToKeep>
+        <artifactNumToKeep>5</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.TextParameterDefinition>
+          <name>VERSION</name>
+          <description></description>
+          <defaultValue>12.0.0</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>MILESTONE</name>
+          <description></description>
+          <defaultValue>m6</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>NEXT_MILESTONE</name>
+          <description></description>
+          <defaultValue>m7</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>XAP_COMMIT_SHA</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>XAP_OPEN_COMMIT-SHA</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>XAP_DOTNET_COMMIT-SHA</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>JENKINS_HOST</name>
+          <description></description>
+          <defaultValue>localhost</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>JENKINS_PORT</name>
+          <description></description>
+          <defaultValue>8080</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>JENKINS_USER</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>JENKINS_PASSWORD</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>XAP_NEWMAN_HOST</name>
+          <description></description>
+          <defaultValue>xap-newman</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>XAP_NEWMAN_USER</name>
+          <description></description>
+          <defaultValue>xap</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>XAP_NEWMAN_PASSWORD</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>MODE</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>MILESTONE</string>
+              <string>RELEASE</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>rm -f $WORKSPACE/jenkins-release/setenv.sh
+
+echo &quot;export VERSION=$VERSION&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export MILESTONE=$MILESTONE&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export NEXT_MILESTONE=$NEXT_MILESTONE&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export XAP_COMMIT_SHA=$XAP_COMMIT_SHA&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export XAP_OPEN_COMMIT_SHA=$XAP_OPEN_COMMIT_SHA&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export XAP_DOTNET_COMMIT_SHA=$XAP_DOTNET_COMMIT_SHA&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export JENKINS_HOST=$JENKINS_HOST&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export JENKINS_PORT=$JENKINS_PORT&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export JENKINS_USER=$JENKINS_USER&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export WORKSPACE=$WORKSPACE&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export XAP_NEWMAN_HOST=$XAP_NEWMAN_HOST&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export XAP_NEWMAN_USER=$XAP_NEWMAN_USER&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export XAP_NEWMAN_PASSWORD=$XAP_NEWMAN_PASSWORD&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+echo &quot;export SSHPASS=$XAP_NEWMAN_PASSWORD&quot; &gt;&gt; $WORKSPACE/jenkins-release/setenv.sh
+
+chmod a+x $WORKSPACE/jenkins-release/setenv.sh
+
+. $WORKSPACE/jenkins-release/jenkins_release_xap.sh $WORKSPACE/jenkins-release/setenv.sh $MODE
+
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.44">
+      <recipientList>$DEFAULT_RECIPIENTS</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.AlwaysTrigger>
+          <email>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <recipientProviders>
+              <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
+              <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
+            </recipientProviders>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.AlwaysTrigger>
+        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+          <email>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <recipientProviders>
+              <hudson.plugins.emailext.plugins.recipients.DevelopersRecipientProvider/>
+              <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
+              <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
+              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
+            </recipientProviders>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+        <hudson.plugins.emailext.plugins.trigger.FixedTrigger>
+          <email>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <recipientProviders>
+              <hudson.plugins.emailext.plugins.recipients.DevelopersRecipientProvider/>
+              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
+              <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
+              <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
+            </recipientProviders>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FixedTrigger>
+      </configuredTriggers>
+      <contentType>default</contentType>
+      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+      <defaultContent>${SCRIPT, template=&quot;xap-build-email.template&quot;}</defaultContent>
+      <attachmentsPattern></attachmentsPattern>
+      <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
+      <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
+      <attachBuildLog>false</attachBuildLog>
+      <compressBuildLog>false</compressBuildLog>
+      <replyTo>$DEFAULT_REPLYTO</replyTo>
+      <saveOutput>false</saveOutput>
+      <disabled>false</disabled>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+    <jenkins.plugins.slack.SlackNotifier plugin="slack@2.0.1">
+      <teamDomain></teamDomain>
+      <authToken></authToken>
+      <buildServerUrl>http://xap-lab1002:8080/</buildServerUrl>
+      <room></room>
+      <startNotification>false</startNotification>
+      <notifySuccess>true</notifySuccess>
+      <notifyAborted>false</notifyAborted>
+      <notifyNotBuilt>false</notifyNotBuilt>
+      <notifyUnstable>false</notifyUnstable>
+      <notifyFailure>true</notifyFailure>
+      <notifyBackToNormal>false</notifyBackToNormal>
+      <notifyRepeatedFailure>false</notifyRepeatedFailure>
+      <includeTestSummary>false</includeTestSummary>
+      <commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
+      <includeCustomMessage>true</includeCustomMessage>
+      <customMessage>Version:${XAP_VERSION} &#xd;
+Milestone:${MILESTONE} &#xd;
+Build Number: ${XAP_BUILD_NUMBER}-${BUILD_NUMBER}&#xd;
+Branch: ${BRANCH_NAME} &#xd;
+SHA:${GIT_COMMIT} &#xd;
+Newman Tag: ${NEWMAN_TAGS}</customMessage>
+    </jenkins.plugins.slack.SlackNotifier>
+  </publishers>
+  <buildWrappers/>
+</project>
