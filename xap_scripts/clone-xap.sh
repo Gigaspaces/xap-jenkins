@@ -112,6 +112,7 @@ function clone_xap {
     clone "$xap_open_url" 
     announce_step "clone xap"
     clone "$xap_url"
+    announce_step "XAP Clone DONE !"
 
 }
 
