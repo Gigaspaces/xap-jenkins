@@ -14,13 +14,18 @@
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>JAVA_BUILD_URL</name>
-          <description></description>
-          <defaultValue>http://192.168.10.10:80/12.0.0/master/15794-696/gigaspaces-xap-premium-12.0.0-m4-b15794-696.zip</defaultValue>
+          <description>URL to XAP java zip </description>
+          <defaultValue>#http://192.168.10.10:80/12.0.0/master/157990-36/gigaspaces-xap-premium-12.0.0-rc-b157990-36.zip</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>JAVA_BUILD_FILE</name>
-          <description></description>
-          <defaultValue>gigaspaces-xap-premium-12.0.0-m4-b15794-696.zip</defaultValue>
+          <description>Path of the XAP java zip file that will be downloaded</description>
+          <defaultValue>#gigaspaces-xap-premium-12.0.0-rc-b157990-36.zip</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>JAVA_S3_BUILD_URL</name>
+          <description>URL to XAP java zip from s3</description>
+          <defaultValue></defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>DEPLOY_ARTIFACTS</name>
@@ -29,16 +34,21 @@
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>RELEASE</name>
-          <description></description>
+          <description>Boolean indicator if the current job execution was triggered from xap-release job</description>
           <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>TAG_NAME</name>
-          <description></description>
+          <description>The name of the git tag that will be created/updated - only if RELEASE parameter is true</description>
           <defaultValue></defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>FINAL_VERSION</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>MILESTONE</name>
           <description></description>
           <defaultValue></defaultValue>
         </hudson.model.TextParameterDefinition>
@@ -70,7 +80,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call download.bat &quot;%JAVA_BUILD_URL%&quot; &quot;%JAVA_BUILD_FILE%&quot;</command>
+      <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call download.bat &quot;%JAVA_BUILD_URL_FINAL%&quot; &quot;%JAVA_BUILD_FILE%&quot;</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call BuildAll.bat &quot;%JAVA_BUILD_FILE%&quot; &quot;%BRANCH_NAME%&quot; &quot;%DEPLOY_ARTIFACTS%&quot; &quot;%FINAL_VERSION%&quot;</command>
@@ -112,5 +122,13 @@
       <cleanupParameter></cleanupParameter>
       <externalDelete></externalDelete>
     </hudson.plugins.ws__cleanup.PreBuildCleanup>
+    <EnvInjectBuildWrapper plugin="envinject@1.92.1">
+      <info>
+        <groovyScriptContent>if (RELEASE.equals(&apos;true&apos;) &amp;&amp; DEPLOY_ARTIFACTS.equals(&apos;true&apos;) &amp;&amp; (MILESTONE.equals(&apos;rc&apos;) || MILESTONE.equals(&apos;ga&apos;)))
+{def map = [JAVA_BUILD_URL_FINAL:&quot;$JAVA_S3_BUILD_URL&quot;]; return map}
+def map = [JAVA_BUILD_URL_FINAL:&quot;$JAVA_BUILD_URL&quot;]; return map</groovyScriptContent>
+        <loadFilesFromMaster>false</loadFilesFromMaster>
+      </info>
+    </EnvInjectBuildWrapper>
   </buildWrappers>
 </project>

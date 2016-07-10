@@ -35,11 +35,6 @@
           <description>The source branch for this xap-release</description>
           <defaultValue>master</defaultValue>
         </hudson.model.TextParameterDefinition>
-        <hudson.model.TextParameterDefinition>
-          <name>TAG_NAME</name>
-          <description></description>
-          <defaultValue>$XAP_VERSION-$MILESTONE-MILESTONE</defaultValue>
-        </hudson.model.TextParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>OVERRIDE_EXISTING_TAG</name>
           <description></description>
@@ -77,6 +72,11 @@
             </a>
           </choices>
         </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>TAG_NAME</name>
+          <description></description>
+          <defaultValue>$XAP_VERSION-$MILESTONE-$MODE</defaultValue>
+        </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>NEWMAN_TAGS</name>
           <description></description>
@@ -127,16 +127,38 @@ echo &quot;export BUILD_CAUSE=$BUILD_CAUSE&quot; &gt;&gt; /home/jenkins/xap_scri
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
               <properties>BRANCH_NAME=${BRANCH_NAME}
 JAVA_BUILD_URL=http://192.168.10.10:80/${XAP_VERSION}/${BRANCH_NAME}/${FINAL_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
+JAVA_S3_BUILD_URL=https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${XAP_VERSION}/${FINAL_VERSION}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
 JAVA_BUILD_FILE=gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
 DEPLOY_ARTIFACTS=${DEPLOY_ARTIFACTS}
 TAG_NAME=${TAG_NAME}
 RELEASE=true
-FINAL_VERSION=${FINAL_VERSION}</properties>
+FINAL_VERSION=${FINAL_VERSION}
+MILESTONE=${MILESTONE}</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
           <projects>DotNet</projects>
           <condition>ALWAYS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
+          <block>
+            <buildStepFailureThreshold>
+              <name>FAILURE</name>
+              <ordinal>2</ordinal>
+              <color>RED</color>
+              <completeBuild>true</completeBuild>
+            </buildStepFailureThreshold>
+            <unstableThreshold>
+              <name>UNSTABLE</name>
+              <ordinal>1</ordinal>
+              <color>YELLOW</color>
+              <completeBuild>true</completeBuild>
+            </unstableThreshold>
+            <failureThreshold>
+              <name>FAILURE</name>
+              <ordinal>2</ordinal>
+              <color>RED</color>
+              <completeBuild>true</completeBuild>
+            </failureThreshold>
+          </block>
           <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
         </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
       </configs>
