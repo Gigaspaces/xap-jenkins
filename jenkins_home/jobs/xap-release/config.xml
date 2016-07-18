@@ -18,17 +18,17 @@
         <hudson.model.TextParameterDefinition>
           <name>XAP_VERSION</name>
           <description>The maven version of this xap release</description>
-          <defaultValue>12.0.0</defaultValue>
+          <defaultValue>12.0.1</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>rc</defaultValue>
+          <defaultValue>m1</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>15799</defaultValue>
+          <defaultValue>16500</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>BRANCH_NAME</name>
@@ -92,7 +92,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec></spec>
+      <spec>0 17 * * *</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>

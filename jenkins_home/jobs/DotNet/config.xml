@@ -9,47 +9,47 @@
       <parameterDefinitions>
         <hudson.model.TextParameterDefinition>
           <name>BRANCH_NAME</name>
-          <description></description>
-          <defaultValue>master</defaultValue>
+          <description>[REQUIRED PARAMETER] The name of the branch</description>
+          <defaultValue>12.0.0-ga</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>JAVA_BUILD_URL</name>
-          <description>URL to XAP java zip </description>
+          <description>[REQUIRED PARAMETER] URL to XAP java zip </description>
           <defaultValue>#http://192.168.10.10:80/12.0.0/master/157990-36/gigaspaces-xap-premium-12.0.0-rc-b157990-36.zip</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>JAVA_BUILD_FILE</name>
-          <description>Path of the XAP java zip file that will be downloaded</description>
+          <description>[REQUIRED PARAMETER] Path of the XAP java zip file that will be downloaded</description>
           <defaultValue>#gigaspaces-xap-premium-12.0.0-rc-b157990-36.zip</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>JAVA_S3_BUILD_URL</name>
-          <description>URL to XAP java zip from s3</description>
+          <description>[OPTIONAL PARAMETER] URL to XAP java zip from s3</description>
           <defaultValue></defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>DEPLOY_ARTIFACTS</name>
-          <description>Boolean indicator if to deploy artifacts to s3</description>
+          <description>[REQUIRED PARAMETER] Boolean indicator if to deploy artifacts to s3</description>
           <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>RELEASE</name>
-          <description>Boolean indicator if the current job execution was triggered from xap-release job</description>
+          <description>[REQUIRED PARAMETER] Boolean indicator if the current job execution was triggered from xap-release job</description>
           <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>TAG_NAME</name>
-          <description>The name of the git tag that will be created/updated - only if RELEASE parameter is true</description>
+          <description>[OPTIONAL PARAMETER] The name of the git tag that will be created/updated - only if RELEASE parameter is true </description>
           <defaultValue></defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>FINAL_VERSION</name>
-          <description></description>
+          <description>[OPTIONAL PARAMETER] The final version name which is used as the inner folder name in s3 bucket</description>
           <defaultValue></defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>MILESTONE</name>
-          <description></description>
+          <description>[OPTIONAL PARAMETER] The current milestone label</description>
           <defaultValue></defaultValue>
         </hudson.model.TextParameterDefinition>
       </parameterDefinitions>
@@ -124,7 +124,7 @@
     </hudson.plugins.ws__cleanup.PreBuildCleanup>
     <EnvInjectBuildWrapper plugin="envinject@1.92.1">
       <info>
-        <groovyScriptContent>if (RELEASE.equals(&apos;true&apos;) &amp;&amp; DEPLOY_ARTIFACTS.equals(&apos;true&apos;) &amp;&amp; (MILESTONE.equals(&apos;rc&apos;) || MILESTONE.equals(&apos;ga&apos;)))
+        <groovyScriptContent>if (RELEASE.equals(&apos;true&apos;) &amp;&amp; DEPLOY_ARTIFACTS.equals(&apos;true&apos;) &amp;&amp; MILESTONE.equals(&apos;ga&apos;))
 {def map = [JAVA_BUILD_URL_FINAL:&quot;$JAVA_S3_BUILD_URL&quot;]; return map}
 def map = [JAVA_BUILD_URL_FINAL:&quot;$JAVA_BUILD_URL&quot;]; return map</groovyScriptContent>
         <loadFilesFromMaster>false</loadFilesFromMaster>
