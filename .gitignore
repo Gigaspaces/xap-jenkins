@@ -37,6 +37,7 @@ jenkins_home/hudson.plugins.copyartifact.TriggeredBuildSelector.xml
 jenkins_home/hudson.plugins.s3.S3BucketPublisher.xml
 jenkins_home/jenkins.plugins.displayupstreamchanges.DisplayUpstreamChangesRecorder.xml
 jenkins_home/jenkins.plugins.http_request.HttpRequest.xml
+jenkins_home/org.jenkins_ci.plugins.flexible_publish.FlexiblePublisher.xml
 
 hudson.maven.MavenModuleSet.xml
 hudson.scm.CVSSCM.xml
