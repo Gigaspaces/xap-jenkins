@@ -118,7 +118,7 @@ echo &quot;export BUILD_CAUSE=$BUILD_CAUSE&quot; &gt;&gt; /home/jenkins/xap_scri
       <command>/home/jenkins/xap_scripts/clone-xap.sh /home/jenkins/xap_scripts/release-xap-setenv.sh</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>${XAP_WORKSPACE}/xap/build/release_xap.sh /home/jenkins/xap_scripts/release-xap-setenv.sh</command>
+      <command>${XAP_WORKSPACE}/xap-premium/build/release_xap.sh /home/jenkins/xap_scripts/release-xap-setenv.sh</command>
     </hudson.tasks.Shell>
     <hudson.plugins.parameterizedtrigger.TriggerBuilder plugin="parameterized-trigger@2.30">
       <configs>
