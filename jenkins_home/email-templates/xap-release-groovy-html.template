@@ -27,6 +27,7 @@ TD.console { font-family:Courier New; }
    def version = ""
    def finalBuildNumber = "unknown"
    def finalVersion = "unknown"
+   def buildNumber = "unknown"
 
 
    try{
@@ -40,14 +41,14 @@ TD.console { font-family:Courier New; }
      version = build.getEnvironment(listener).get("XAP_VERSION") 
      finalBuildNumber = build.getEnvironment(listener).get("FINAL_BUILD_NUMBER")
      finalVersion = build.getEnvironment(listener).get("FINAL_VERSION")
-     buildNumber = build.getEnvironment(listener).get("BUILD_NUMBER")
+     buildNumber = build.getEnvironment(listener).get("XAP_BUILD_NUMBER")
    } catch(all){ 
    }
 
    def xapPremiumZipName = "gigaspaces-xap-premium-" + version + "-" +  milestone + "-b" + finalBuildNumber + ".zip"
    def xapZipName = "gigaspaces-xap-open-" + version + "-" +  milestone + "-b" + finalBuildNumber + ".zip"
-   def xap.Net64ZipName ="GigaSpaces-XAP.NET-premium-" + version + "." + buildNumber + "-" + milestone.toUpperCase() + "x64.msi"
-   def xap.Net86ZipName ="GigaSpaces-XAP.NET-premium-" + version + "." + buildNumber + "-" + milestone.toUpperCase() + "x86.msi"
+   def xapDotNet64ZipName ="GigaSpaces-XAP.NET-premium-" + version + "." + buildNumber + "-" + milestone.toUpperCase() + "x64.msi"
+   def xapDotNet86ZipName ="GigaSpaces-XAP.NET-premium-" + version + "." + buildNumber + "-" + milestone.toUpperCase() + "x86.msi"
 %>
 
 
@@ -65,8 +66,8 @@ TD.console { font-family:Courier New; }
   <TR><TD>Maven Version:</TD><TD>${mavenVersion}</TD></TR>
   <TR><TD>XAP:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${version}/${mavenVersion}/${xapZipName}">${xapZipName}</A></TD></TR> 
   <TR><TD>XAP Permium:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR>
-  <TR><TD>XAP.NET x64:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xap.Net64ZipName}">${xap.Net64ZipName }</A></TD></TR>
-  <TR><TD>XAP.NET X86:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xap.Net86ZipName}">${xap.Net86ZipName }</A></TD></TR>
+  <TR><TD>XAP.NET x64:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xap.Net64ZipName}">${xapDotNet64ZipName }</A></TD></TR>
+  <TR><TD>XAP.NET X86:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xap.Net86ZipName}">${xapDotNet86ZipName }</A></TD></TR>
 </TABLE>
 <BR/>
 
@@ -76,6 +77,7 @@ TD.console { font-family:Courier New; }
 <TABLE width="100%" cellpadding="0" cellspacing="0">
 <TR><TD class="bg1"><B>CONSOLE OUTPUT</B></TD></TR>
 <% 	build.getLog(100).each() { line -> %>
+
 	<TR><TD class="console">${org.apache.commons.lang.StringEscapeUtils.escapeHtml(line)}</TD></TR>
 <% 	} %>
 </TABLE>
