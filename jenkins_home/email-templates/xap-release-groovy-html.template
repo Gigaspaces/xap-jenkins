@@ -40,12 +40,14 @@ TD.console { font-family:Courier New; }
      version = build.getEnvironment(listener).get("XAP_VERSION") 
      finalBuildNumber = build.getEnvironment(listener).get("FINAL_BUILD_NUMBER")
      finalVersion = build.getEnvironment(listener).get("FINAL_VERSION")
+     buildNumber = build.getEnvironment(listener).get("BUILD_NUMBER")
    } catch(all){ 
    }
 
    def xapPremiumZipName = "gigaspaces-xap-premium-" + version + "-" +  milestone + "-b" + finalBuildNumber + ".zip"
    def xapZipName = "gigaspaces-xap-open-" + version + "-" +  milestone + "-b" + finalBuildNumber + ".zip"
-
+   def xap.Net64ZipName ="GigaSpaces-XAP.NET-premium-" + version + "." + buildNumber + "-" + milestone.toUpperCase() + "x64.msi"
+   def xap.Net86ZipName ="GigaSpaces-XAP.NET-premium-" + version + "." + buildNumber + "-" + milestone.toUpperCase() + "x86.msi"
 %>
 
 
@@ -62,7 +64,9 @@ TD.console { font-family:Courier New; }
   <TR><TD>Git Tag:</TD><TD>${gitTag}</TD></TR>
   <TR><TD>Maven Version:</TD><TD>${mavenVersion}</TD></TR>
   <TR><TD>XAP:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${version}/${mavenVersion}/${xapZipName}">${xapZipName}</A></TD></TR> 
-  <TR><TD>XAP Permium:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR> 
+  <TR><TD>XAP Permium:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR>
+  <TR><TD>XAP.NET x64:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xap.Net64ZipName}">${xap.Net64ZipName }</A></TD></TR>
+  <TR><TD>XAP.NET X86:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xap.Net86ZipName}">${xap.Net86ZipName }</A></TD></TR>
 </TABLE>
 <BR/>
 
