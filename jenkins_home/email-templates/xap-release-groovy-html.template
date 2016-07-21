@@ -41,14 +41,13 @@ TD.console { font-family:Courier New; }
      version = build.getEnvironment(listener).get("XAP_VERSION") 
      finalBuildNumber = build.getEnvironment(listener).get("FINAL_BUILD_NUMBER")
      finalVersion = build.getEnvironment(listener).get("FINAL_VERSION")
-     buildNumber = build.getEnvironment(listener).get("XAP_BUILD_NUMBER")
    } catch(all){ 
    }
 
    def xapPremiumZipName = "gigaspaces-xap-premium-" + version + "-" +  milestone + "-b" + finalBuildNumber + ".zip"
    def xapZipName = "gigaspaces-xap-open-" + version + "-" +  milestone + "-b" + finalBuildNumber + ".zip"
-   def xapDotNet64ZipName ="GigaSpaces-XAP.NET-premium-" + version + "." + buildNumber + "-" + milestone.toUpperCase() + "x64.msi"
-   def xapDotNet86ZipName ="GigaSpaces-XAP.NET-premium-" + version + "." + buildNumber + "-" + milestone.toUpperCase() + "x86.msi"
+   def xapDotNet64ZipName ="GigaSpaces-XAP.NET-premium-" + version + "." + finalBuildNumber + "-" + milestone.toUpperCase() + "x64.msi"
+   def xapDotNet86ZipName ="GigaSpaces-XAP.NET-premium-" + version + "." + finalBuildNumber + "-" + milestone.toUpperCase() + "x86.msi"
 %>
 
 
