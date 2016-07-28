@@ -75,7 +75,9 @@ function back_to_nightly_release_xap {
     start_jenkins_scm_trigger "xap_release_config.xml" "0 17 * * *"
     increment_milestone_number "xap_release_config.xml"
     increment_build_number "xap_release_config.xml" "1"
+    change_tag "\$XAP_VERSION-\$MILESTONE-\$MODE" "xap_release_config.xml"
     post_jenkins_job_config "xap-release" "xap_release_config.xml"
+
 
     announce_step "delete xap-continuous job"
     delete_jenkins_job "xap-continuous"
