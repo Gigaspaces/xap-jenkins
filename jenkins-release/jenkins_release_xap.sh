@@ -29,7 +29,7 @@ function release_xap {
     else
         change_tag "\$XAP_VERSION-\$MILESTONE-MILESTONE" "xap_release_config.xml"
     fi
-    start_jenkins_timer_trigger "xap_release_config.xml" "0 16 * * *"
+    start_jenkins_timer_trigger "xap_release_config.xml" "0 17 * * *"
     post_jenkins_job_config "xap-release" "xap_release_config.xml"
 
     #jenkins xap-continuous job - xap-continuous is disabled do also xap-continuous-master is disabled
@@ -72,10 +72,12 @@ function back_to_nightly_release_xap {
     get_jenkins_job_config "xap-release" "xap_release_config.xml"
     change_mode "NIGHTLY" "xap_release_config.xml"
     change_branch "master" "xap_release_config.xml"
-    start_jenkins_scm_trigger "xap_release_config.xml" "0 16 * * *"
+    start_jenkins_scm_trigger "xap_release_config.xml" "0 17 * * *"
     increment_milestone_number "xap_release_config.xml"
     increment_build_number "xap_release_config.xml" "1"
+    change_tag "\$XAP_VERSION-\$MILESTONE-\$MODE" "xap_release_config.xml"
     post_jenkins_job_config "xap-release" "xap_release_config.xml"
+
 
     announce_step "delete xap-continuous job"
     delete_jenkins_job "xap-continuous"
@@ -99,7 +101,7 @@ function back_to_nightly_release_xap {
 
 function clone_repos {
     local xap_open_url="git@github.com:Gigaspaces/xap-open.git"
-    local xap_url="git@github.com:Gigaspaces/xap.git"
+    local xap_url="git@github.com:Gigaspaces/xap-premium.git"
     local xap_dotnet_url="git@github.com:Gigaspaces/xap-dotnet.git"
     local xap_open_folder="$(get_folder $xap_open_url)"
     local xap_folder="$(get_folder $xap_url)"
@@ -115,7 +117,7 @@ function clone_repos {
 
 function create_branches {
     local xap_open_url="git@github.com:Gigaspaces/xap-open.git"
-    local xap_url="git@github.com:Gigaspaces/xap.git"
+    local xap_url="git@github.com:Gigaspaces/xap-premium.git"
     local xap_dotnet_url="git@github.com:Gigaspaces/xap-dotnet.git"
 
     local xap_open_folder="$(get_folder $xap_open_url)"
