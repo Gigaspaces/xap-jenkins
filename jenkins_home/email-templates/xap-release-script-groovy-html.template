@@ -38,6 +38,11 @@ TD.console { font-family:Courier New; }
    def xapPremiumZipName = "gigaspaces-xap-premium-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
    def xapEnterpriseZipName = "gigaspaces-xap-enterprise-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
    def xapZipName = "gigaspaces-xap-open-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
+
+   def xapDotNetPremium64ZipName = "GigaSpaces-XAP.NET-Premium-" + xapVersion + "." + xapBuildNumber + "-" + xapMilestone.toUpperCase() + "-x64.msi"
+   def xapDotNetPremium86ZipName = "GigaSpaces-XAP.NET-Premium-" + xapVersion + "." + xapBuildNumber + "-" + xapMilestone.toUpperCase() + "-x86.msi"
+   def xapDotNetEnterprise64ZipName = "GigaSpaces-XAP.NET-Enterprise-" + xapVersion + "." + xapBuildNumber + "-" + xapMilestone.toUpperCase() + "-x64.msi"
+   def xapDotNetEnterprise86ZipName = "GigaSpaces-XAP.NET-Enterprise-" + xapVersion + "." + xapBuildNumber + "-" + xapMilestone.toUpperCase() + "-x86.msi"
    def gitXAPChangesBaseURL = "https://github.com/Gigaspaces/xap/commit/"
    def gitXAPOpenChangesBaseURL = "https://github.com/Gigaspaces/xap-open/commit/"
 %>
@@ -58,6 +63,10 @@ TD.console { font-family:Courier New; }
   		<TR><TD>XAP:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${xapVersion}/${mavenVersion}/${xapZipName}">${xapZipName}</A></TD></TR> 
   		<TR><TD>XAP Premium:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR>
   		<TR><TD>XAP Enterprise:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapEnterpriseZipName}">${xapEnterpriseZipName}</A></TD></TR>
+      <TR><TD>XAP.NET Premium x64:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapDotNetPremium64ZipName}">${xapDotNetPremium64ZipName}</A><TD></TR>
+      <TR><TD>XAP.NET Premium x86:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapDotNetPremium86ZipName}">${xapDotNetPremium86ZipName}</A><TD></TR>
+      <TR><TD>XAP.NET Enterprise x64:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapDotNetEnterprise64ZipName}">${xapDotNetEnterprise64ZipName}</A><TD></TR>
+      <TR><TD>XAP.NET Enterprise x86:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapDotNetEnterprise86ZipName}">${xapDotNetEnterprise86ZipName}</A><TD></TR>
   		<TR><TD>XAP Docs:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/xap-javadoc.jar">xap-docs</A></TD></TR> 
   		<TR><TD>Maven release version:</TD><TD>${mavenVersion}</TD></TR> 
    <%
