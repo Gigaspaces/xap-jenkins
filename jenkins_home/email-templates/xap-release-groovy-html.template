@@ -16,44 +16,36 @@ TD.console { font-family:Courier New; }
 </STYLE>
 <BODY>
 
-<% 
-   def fromBranch = "unknown"
-   def mavenVersion = "unknown"
-   def milestone = "unknown"
-   def gitTag = "unknown"
-   def newmanTags = ""
-   def overrideExistingTag = false
-   def deployArtifacts = true
-   def version = ""
-   def finalBuildNumber = "unknown"
-   def finalVersion = "unknown"
 
+<% 
+   def xapVersion = "unknown"
+   def xapMilestone = "unknown"
+   def xapBuildNumber = "unknown"
+   def xapBranchName = "unknown"
+   def xapTagName = "unknown"
+   def mavenVersion = "unknown"
 
    try{
-     fromBranch = build.getEnvironment(listener).get("BRANCH_NAME") 
+     xapVersion = build.getEnvironment(listener).get("XAP_VERSION") 
+     xapMilestone = build.getEnvironment(listener).get("MILESTONE")
+     xapBuildNumber = build.getEnvironment(listener).get("FINAL_BUILD_NUMBER")
+     xapBranchName = build.getEnvironment(listener).get("BRANCH_NAME")
+     xapTagName = build.getEnvironment(listener).get("TAG_NAME")
      mavenVersion = build.getEnvironment(listener).get("FINAL_VERSION")
-     milestone = build.getEnvironment(listener).get("MILESTONE")
-     gitTag = build.getEnvironment(listener).get("TAG_NAME")
-     newmanTags = build.getEnvironment(listener).get("NEWMAN_TAGS")
-     overrideExistingTag = build.getEnvironment(listener).get("OVERRIDE_EXISTING_TAG")
      deployArtifacts = build.getEnvironment(listener).get("DEPLOY_ARTIFACTS")
-     version = build.getEnvironment(listener).get("XAP_VERSION") 
-     finalBuildNumber = build.getEnvironment(listener).get("FINAL_BUILD_NUMBER")
-     finalVersion = build.getEnvironment(listener).get("FINAL_VERSION")
    } catch(all){ 
    }
+   def xapPremiumZipName = "gigaspaces-xap-premium-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
+   def xapEnterpriseZipName = "gigaspaces-xap-enterprise-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
+   def xapZipName = "gigaspaces-xap-open-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
 
-   def xapPremiumZipName = "gigaspaces-xap-premium-" + version + "-" +  milestone + "-b" + finalBuildNumber + ".zip"
-   def xapZipName = "gigaspaces-xap-open-" + version + "-" +  milestone + "-b" + finalBuildNumber + ".zip"
-   def xapDotNetPremium64ZipName = "GigaSpaces-XAP.NET-Premium-" + version + "." + finalBuildNumber + "-" + milestone.toUpperCase() + "-x64.msi"
-   def xapDotNetPremium86ZipName = "GigaSpaces-XAP.NET-Premium-" + version + "." + finalBuildNumber + "-" + milestone.toUpperCase() + "-x86.msi"
-   def xapDotNetEnterprise64ZipName = "GigaSpaces-XAP.NET-Enterprise-" + version + "." + finalBuildNumber + "-" + milestone.toUpperCase() + "-x64.msi"
-   def xapDotNetEnterprise86ZipName = "GigaSpaces-XAP.NET-Enterprise-" + version + "." + finalBuildNumber + "-" + milestone.toUpperCase() + "-x86.msi"
-  
-
+   def xapDotNetPremium64ZipName = "GigaSpaces-XAP.NET-Premium-" + xapVersion + "." + xapBuildNumber + "-" + xapMilestone.toUpperCase() + "-x64.msi"
+   def xapDotNetPremium86ZipName = "GigaSpaces-XAP.NET-Premium-" + xapVersion + "." + xapBuildNumber + "-" + xapMilestone.toUpperCase() + "-x86.msi"
+   def xapDotNetEnterprise64ZipName = "GigaSpaces-XAP.NET-Enterprise-" + xapVersion + "." + xapBuildNumber + "-" + xapMilestone.toUpperCase() + "-x64.msi"
+   def xapDotNetEnterprise86ZipName = "GigaSpaces-XAP.NET-Enterprise-" + xapVersion + "." + xapBuildNumber + "-" + xapMilestone.toUpperCase() + "-x86.msi"
+   def gitXAPChangesBaseURL = "https://github.com/Gigaspaces/xap/commit/"
+   def gitXAPOpenChangesBaseURL = "https://github.com/Gigaspaces/xap-open/commit/"
 %>
-
-
 
 <TABLE>
   <TR><TD align="right"><IMG SRC="https://raw.githubusercontent.com/jenkinsci/jenkins/master/war/src/main/webapp/images/32x32/<%= build.result.toString() == 'SUCCESS' ? "blue.gif" : build.result.toString() == 'FAILURE' ? 'red.gif' : 'yellow.gif' %>" />
@@ -62,18 +54,27 @@ TD.console { font-family:Courier New; }
   <TR><TD>Project:</TD><TD>${project.name}</TD></TR>
   <TR><TD>Date:</TD><TD>${it.timestampString}</TD></TR>
   <TR><TD>Duration:</TD><TD>${build.durationString}</TD></TR>
+  <TR><TD>XAP Premium Tag:</TD><TD><A href="https://github.com/Gigaspaces/xap/tree/${xapTagName}">${xapTagName}</A></TD></TR>
+  <TR><TD>XAP Open Tag:</TD><TD><A href="https://github.com/Gigaspaces/xap-open/tree/${xapTagName}">${xapTagName}</A></TD></TR>
   <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ${cause.shortDescription} <%  } %></TD></TR>
-  <TR><TD>Built on top of:</TD><TD>${fromBranch}</TD></TR>
-  <TR><TD>Git Tag:</TD><TD>${gitTag}</TD></TR>
-  <TR><TD>Maven Version:</TD><TD>${mavenVersion}</TD></TR>
-  <TR><TD>XAP:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${version}/${mavenVersion}/${xapZipName}">${xapZipName}</A></TD></TR> 
-  <TR><TD>XAP Permium:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR> 
-  <TR><TD>XAP.NET Premium x64:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xapDotNetPremium64ZipName}">${xapDotNetPremium64ZipName}</A><TD></TR>
-  <TR><TD>XAP.NET Premium x86:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xapDotNetPremium86ZipName}">${xapDotNetPremium86ZipName}</A><TD></TR>
-  <TR><TD>XAP.NET Enterprise x64:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xapDotNetEnterprise64ZipName}">${xapDotNetEnterprise64ZipName}</A><TD></TR>
-  <TR><TD>XAP.NET Enterprise x86:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xapDotNetEnterprise86ZipName}">${xapDotNetEnterprise86ZipName}</A><TD></TR>
+  <% 
+  	if(build.result.toString() == 'SUCCESS' && deployArtifacts == 'true'){
+   %>
+  		<TR><TD>XAP:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${xapVersion}/${mavenVersion}/${xapZipName}">${xapZipName}</A></TD></TR> 
+  		<TR><TD>XAP Premium:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR>
+  		<TR><TD>XAP Enterprise:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapEnterpriseZipName}">${xapEnterpriseZipName}</A></TD></TR>
+      <TR><TD>XAP.NET Premium x64:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xapDotNetPremium64ZipName}">${xapDotNetPremium64ZipName}</A><TD></TR>
+      <TR><TD>XAP.NET Premium x86:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xapDotNetPremium86ZipName}">${xapDotNetPremium86ZipName}</A><TD></TR>
+      <TR><TD>XAP.NET Enterprise x64:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xapDotNetEnterprise64ZipName}">${xapDotNetEnterprise64ZipName}</A><TD></TR>
+      <TR><TD>XAP.NET Enterprise x86:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${version}/${mavenVersion}/${xapDotNetEnterprise86ZipName}">${xapDotNetEnterprise86ZipName}</A><TD></TR>
+  		<TR><TD>XAP Docs:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/xap-javadoc.jar">xap-docs</A></TD></TR> 
+  		<TR><TD>Maven release version:</TD><TD>${mavenVersion}</TD></TR> 
+   <%
+  	}
+  %>
 </TABLE>
 <BR/>
+
 
 
 <!-- CONSOLE OUTPUT -->

@@ -23,12 +23,12 @@
         <hudson.model.TextParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m1</defaultValue>
+          <defaultValue>m4</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>16500</defaultValue>
+          <defaultValue>16503</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>BRANCH_NAME</name>
@@ -92,7 +92,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>0 17 * * *</spec>
+      <spec>0 16 * * 0-2,4-7</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
@@ -120,7 +120,7 @@ echo &quot;export BUILD_CAUSE=$BUILD_CAUSE&quot; &gt;&gt; /home/jenkins/xap_scri
     <hudson.tasks.Shell>
       <command>${XAP_WORKSPACE}/xap-premium/build/release_xap.sh /home/jenkins/xap_scripts/release-xap-setenv.sh</command>
     </hudson.tasks.Shell>
-    <hudson.plugins.parameterizedtrigger.TriggerBuilder plugin="parameterized-trigger@2.30">
+    <hudson.plugins.parameterizedtrigger.TriggerBuilder plugin="parameterized-trigger@2.31">
       <configs>
         <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
           <configs>

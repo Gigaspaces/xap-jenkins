@@ -29,7 +29,7 @@ function release_xap {
     else
         change_tag "\$XAP_VERSION-\$MILESTONE-MILESTONE" "xap_release_config.xml"
     fi
-    start_jenkins_timer_trigger "xap_release_config.xml" "0 17 * * *"
+    start_jenkins_timer_trigger "xap_release_config.xml" "0 16 * * 0-2,4-7"
     post_jenkins_job_config "xap-release" "xap_release_config.xml"
 
     #jenkins xap-continuous job - xap-continuous is disabled do also xap-continuous-master is disabled
