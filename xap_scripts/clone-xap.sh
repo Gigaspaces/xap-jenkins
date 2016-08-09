@@ -101,7 +101,7 @@ function announce_step {
 # Clone xap-open and xap.
 function clone_xap {
 
-    local xap_open_url="git@github.com:Gigaspaces/xap-open.git"
+    local xap_open_url="git@github.com:xap/xap-open.git"
     local xap_url="git@github.com:Gigaspaces/xap-premium.git"
     local temp_branch_name="$BRANCH-$RELEASE_VERSION"    
     local xap_open_folder="$(get_folder $xap_open_url)"
