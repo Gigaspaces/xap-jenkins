@@ -18,17 +18,17 @@
         <hudson.model.TextParameterDefinition>
           <name>VERSION</name>
           <description></description>
-          <defaultValue>12.0.0</defaultValue>
+          <defaultValue>12.0.1</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m6</defaultValue>
+          <defaultValue>m2</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>NEXT_MILESTONE</name>
           <description></description>
-          <defaultValue>m7</defaultValue>
+          <defaultValue>m3</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>XAP_COMMIT_SHA</name>
@@ -68,7 +68,7 @@
         <hudson.model.TextParameterDefinition>
           <name>XAP_NEWMAN_HOST</name>
           <description></description>
-          <defaultValue>xap-newman</defaultValue>
+          <defaultValue>192.168.50.66</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>XAP_NEWMAN_USER</name>
@@ -104,7 +104,7 @@
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.5.0">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.5.2">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
