@@ -100,7 +100,7 @@ function back_to_nightly_release_xap {
 }
 
 function clone_repos {
-    local xap_open_url="git@github.com:Gigaspaces/xap-open.git"
+    local xap_open_url="git@github.com:xap/xap.git"
     local xap_url="git@github.com:Gigaspaces/xap-premium.git"
     local xap_dotnet_url="git@github.com:Gigaspaces/xap-dotnet.git"
     local xap_open_folder="$(get_folder $xap_open_url)"
@@ -116,7 +116,7 @@ function clone_repos {
 }
 
 function create_branches {
-    local xap_open_url="git@github.com:Gigaspaces/xap-open.git"
+    local xap_open_url="git@github.com:xap/xap.git"
     local xap_url="git@github.com:Gigaspaces/xap-premium.git"
     local xap_dotnet_url="git@github.com:Gigaspaces/xap-dotnet.git"
 
