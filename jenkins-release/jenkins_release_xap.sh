@@ -29,7 +29,7 @@ function release_xap {
     else
         change_tag "\$XAP_VERSION-\$MILESTONE-MILESTONE" "xap_release_config.xml"
     fi
-    start_jenkins_timer_trigger "xap_release_config.xml" "0 16 * * 0-2,4-7"
+    start_jenkins_timer_trigger "xap_release_config.xml" "0 17 * * *"
     post_jenkins_job_config "xap-release" "xap_release_config.xml"
 
     #jenkins xap-continuous job - xap-continuous is disabled do also xap-continuous-master is disabled
@@ -100,34 +100,34 @@ function back_to_nightly_release_xap {
 }
 
 function clone_repos {
-    local xap_open_url="git@github.com:xap/xap.git"
-    local xap_url="git@github.com:Gigaspaces/xap-premium.git"
+    local xap_url="git@github.com:xap/xap.git"
+    local xap_premium_url="git@github.com:Gigaspaces/xap-premium.git"
     local xap_dotnet_url="git@github.com:Gigaspaces/xap-dotnet.git"
-    local xap_open_folder="$(get_folder $xap_open_url)"
     local xap_folder="$(get_folder $xap_url)"
+    local xap_premium_folder="$(get_folder $xap_premium_url)"
     local xap_dotnet_folder="$(get_folder $xap_dotnet_url)"
 
-    announce_step "clone xap-open"
-    clone "$xap_open_url"
     announce_step "clone xap"
     clone "$xap_url"
+    announce_step "clone xap-premium"
+    clone "$xap_premium_url"
     announce_step "clone xap dotnet"
     clone "$xap_dotnet_url"
 }
 
 function create_branches {
-    local xap_open_url="git@github.com:xap/xap.git"
-    local xap_url="git@github.com:Gigaspaces/xap-premium.git"
+    local xap_url="git@github.com:xap/xap.git"
+    local xap_premium_url="git@github.com:Gigaspaces/xap-premium.git"
     local xap_dotnet_url="git@github.com:Gigaspaces/xap-dotnet.git"
 
-    local xap_open_folder="$(get_folder $xap_open_url)"
     local xap_folder="$(get_folder $xap_url)"
+    local xap_premium_folder="$(get_folder $xap_premium_url)"
     local xap_dotnet_folder="$(get_folder $xap_dotnet_url)"
 
-    announce_step "creating branch xap-open"
-    create_release_branch "$xap_open_folder"
     announce_step "creating branch xap"
     create_release_branch "$xap_folder"
+    announce_step "creating branch xap premium"
+    create_release_branch "$xap_premium_folder"
     announce_step "creating branch xap dotnet"
     create_release_branch "$xap_dotnet_folder"
 
@@ -298,8 +298,8 @@ function clone {
 }
 
 # Get the folder from git url
-# $1 is a git url of the form git@github.com:Gigaspaces/xap-open.git
-# The function will return a folder in the $WORKSPACE that match this git url (for example $WORKSPACE/xap-open)
+# $1 is a git url of the form git@github.com:Gigaspaces/xap-premium.git
+# The function will return a folder in the $WORKSPACE that match this git url (for example $WORKSPACE/xap-premium)
 function get_folder {
     echo -n "$WORKSPACE/$(echo -e $1 | sed 's/.*\/\(.*\)\.git/\1/')"
 }
