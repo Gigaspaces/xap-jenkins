@@ -40,7 +40,7 @@ function checkout_branch {
         fi
 	git rebase --no-stat
 	popd
-	return 3
+	return 0
 }
 
 # Try to checkout branch $BRANCH in git folder $1.
