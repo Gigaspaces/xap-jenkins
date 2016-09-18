@@ -21,8 +21,7 @@ function get_folder {
 # It return nonezero status in case of error, to signal that new clone is needed.
 function checkout_branch {
     local folder="$1"
-    (
-	cd "$folder"
+	pushd "$folder"
 	git reset --hard HEAD
 	git checkout -- .
 	git clean -d -x --force --quiet .
@@ -36,11 +35,12 @@ function checkout_branch {
         if [ "$r" -ne 0 ]
         then
             echo "[ERROR] Failed While checking out branch: $BRANCH, exit code is: $r"
-            exit "$r"
+            popd
+            return 2
         fi
 	git rebase --no-stat
-	return "$?"
-    ) 
+	popd
+	return 3
 }
 
 # Try to checkout branch $BRANCH in git folder $1.
@@ -52,14 +52,22 @@ function clone {
     if [ -d "$folder" ]
     then
         checkout_branch "$folder" "$branch"
-        if [ $? -eq 0 ]
+        local r=$?
+        if [ $r -eq 0 ]
         then
     	    return 0;
+    	elif [ $r -eq 2 ]
+        then
+            exit 1
         fi
     fi
     rm -rf "$folder"
     git clone "$url" "$folder" 
     checkout_branch "$folder"
+    if [ $? -ne 0 ]
+    then
+        exit 1;
+    fi
 }
 
 let step=1
