@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<scriptApproval plugin="script-security@1.22">
+  <approvedScriptHashes/>
+  <approvedSignatures/>
+  <aclApprovedSignatures/>
+  <approvedClasspathEntries/>
+  <pendingScripts/>
+  <pendingSignatures>
+    <pendingSignature>
+      <context/>
+      <signature>method java.lang.String isEmpty</signature>
+      <dangerous>false</dangerous>
+    </pendingSignature>
+    <pendingSignature>
+      <context/>
+      <signature>method groovy.lang.Binding hasVariable java.lang.String</signature>
+      <dangerous>false</dangerous>
+    </pendingSignature>
+    <pendingSignature>
+      <context/>
+      <signature>staticMethod java.lang.Boolean parseBoolean java.lang.String</signature>
+      <dangerous>false</dangerous>
+    </pendingSignature>
+    <pendingSignature>
+      <context/>
+      <signature>method java.lang.String equalsIgnoreCase java.lang.String</signature>
+      <dangerous>false</dangerous>
+    </pendingSignature>
+  </pendingSignatures>
+  <pendingClasspathEntries/>
+</scriptApproval>

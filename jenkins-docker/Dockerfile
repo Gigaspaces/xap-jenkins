@@ -22,6 +22,8 @@ RUN apt-get install -y oracle-java8-installer ca-certificates
 
 RUN apt-get install -y sshpass
 
+RUN apt-get install -y bzip2
+
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle 
 
 # && rm -rf /var/lib/apt/lists/*
@@ -104,6 +106,19 @@ RUN wget --no-verbose -O /tmp/apache-maven-3.3.9.tar.gz \
 # stop building if md5sum does not match
 RUN echo "516923b3955b6035ba6b0a5b031fbd8b  /tmp/apache-maven-3.3.9.tar.gz" | \
     md5sum -c
+
+# Install sbt
+ENV SBT_VERSION 0.13.11
+RUN \
+  curl -L -o sbt-$SBT_VERSION.deb http://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && \
+  dpkg -i sbt-$SBT_VERSION.deb && \
+  rm sbt-$SBT_VERSION.deb && \
+  apt-get update && \
+  apt-get install sbt && \
+  sbt sbtVersion && \
+  echo >> /home/${user}/.bashrc && \
+  echo 'export PATH=/usr/share/sbt-launcher-packaging/bin:$PATH' >> /home/${user}/.bashrc
+
 
 # install in /opt/maven
 RUN mkdir -p /opt/maven
