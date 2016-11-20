@@ -1,7 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
   <actions/>
-  <description></description>
+  <description/>
   <keepDependencies>false</keepDependencies>
   <properties>
     <jenkins.model.BuildDiscarderProperty>
@@ -17,29 +16,34 @@
       <parameterDefinitions>
         <hudson.model.TextParameterDefinition>
           <name>XAP_VERSION</name>
-          <description></description>
-          <defaultValue>12.0.1</defaultValue>
+          <description/>
+          <defaultValue>12.1.0</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>MILESTONE</name>
-          <description></description>
-          <defaultValue>m4</defaultValue>
+          <description/>
+          <defaultValue>m6</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
-          <description></description>
-          <defaultValue>165030</defaultValue>
+          <description/>
+          <defaultValue>167050</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>BRANCH_NAME</name>
-          <description></description>
+          <description/>
           <defaultValue>master</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>NEWMAN_TAGS</name>
-          <description></description>
-          <defaultValue></defaultValue>
+          <description/>
+          <defaultValue>XAP</defaultValue>
         </hudson.model.TextParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>NEWMAN_SUITES</name>
+          <description>comma separated list of suite ids to submit future jobs</description>
+          <defaultValue/>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -61,7 +65,7 @@
         <submoduleCfg class="list"/>
         <extensions>
           <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-            <relativeTargetDir>xap-open</relativeTargetDir>
+            <relativeTargetDir>xap</relativeTargetDir>
           </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
         </extensions>
       </hudson.plugins.git.GitSCM>
@@ -104,22 +108,23 @@
   <builders>
     <hudson.tasks.Shell>
       <command>
-echo &quot;****************************************************************************************************&quot;
-    echo &quot;Installing xap-open&quot;
-echo &quot;****************************************************************************************************&quot;
-cd xap-open &amp;&amp; SHA_OPEN=`git rev-parse HEAD` &amp;&amp; cd -
-mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-open/pom.xml -B -T 1C clean install -Dxap.version=${XAP_VERSION} -Dxap.milestone=${MILESTONE} -Dxap.build.number=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dxap.git.branch=${BRANCH_NAME} -Dxap.git.sha=${SHA_OPEN} -Dnewman.tags=${NEWMAN_TAGS}
+echo "****************************************************************************************************"
+    echo "Installing xap"
+echo "****************************************************************************************************"
+cd xap &amp;&amp; SHA_OPEN=`git rev-parse HEAD` &amp;&amp; cd -
+mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap/pom.xml -B -T 1C clean install -Dxap.version=${XAP_VERSION} -Dxap.milestone=${MILESTONE} -Dxap.build.number=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dxap.git.branch=${BRANCH_NAME} -Dxap.git.sha=${SHA_OPEN} -Dnewman.tags=${NEWMAN_TAGS}
 
-echo &quot;****************************************************************************************************&quot;
-    echo &quot;Installing xap&quot;
-echo &quot;****************************************************************************************************&quot;
+echo "****************************************************************************************************"
+    echo "Installing xap"
+echo "****************************************************************************************************"
 cd xap-premium &amp;&amp; SHA_CLOSE=`git rev-parse HEAD` &amp;&amp; cd -
 mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-premium/pom.xml -B -T 1C clean install -Dxap.version=${XAP_VERSION} -Dxap.milestone=${MILESTONE} -Dxap.build.number=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dxap.git.sha=${SHA_OPEN} -Dxap.git.sha.premium=${SHA_CLOSE} -P quick_web_ui_build 
 
-echo &quot;****************************************************************************************************&quot;
-    echo &quot;publishing artifacts to newman&quot;
-echo &quot;****************************************************************************************************&quot;
-mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-premium/xap-dist/pom.xml process-sources -Dxap.version=${XAP_VERSION} -Dxap.milestone=${MILESTONE} -Dxap.build.number=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dxap.git.branch=${BRANCH_NAME} -Dnewman.tags=${NEWMAN_TAGS} -P generate-zip -P copy-artifact-and-submit-to-newman</command>
+echo "****************************************************************************************************"
+    echo "publishing artifacts to newman"
+echo "****************************************************************************************************"
+echo "STORAGE HOST=${storageHost}"
+mvn -Dnewman.suites=${NEWMAN_SUITES} -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-premium/xap-dist/pom.xml process-sources -Dxap.version=${XAP_VERSION} -Dxap.milestone=${MILESTONE} -Dxap.build.number=${XAP_BUILD_NUMBER}-${BUILD_NUMBER} -Dxap.git.branch=${BRANCH_NAME} -Dnewman.tags=${NEWMAN_TAGS} -P generate-zip -P copy-artifact-and-submit-to-newman</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -134,7 +139,7 @@ mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-premium/xap-dist/pom.xml
               <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
               <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
             </recipientProviders>
-            <attachmentsPattern></attachmentsPattern>
+            <attachmentsPattern/>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
@@ -151,7 +156,7 @@ mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-premium/xap-dist/pom.xml
               <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
               <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
             </recipientProviders>
-            <attachmentsPattern></attachmentsPattern>
+            <attachmentsPattern/>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
@@ -168,7 +173,7 @@ mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-premium/xap-dist/pom.xml
               <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
               <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
             </recipientProviders>
-            <attachmentsPattern></attachmentsPattern>
+            <attachmentsPattern/>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
@@ -178,8 +183,8 @@ mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-premium/xap-dist/pom.xml
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>${SCRIPT, template=&quot;xap-build-email.template&quot;}</defaultContent>
-      <attachmentsPattern></attachmentsPattern>
+      <defaultContent>${SCRIPT, template="xap-build-email.template"}</defaultContent>
+      <attachmentsPattern/>
       <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
       <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
       <attachBuildLog>false</attachBuildLog>
@@ -189,10 +194,10 @@ mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-premium/xap-dist/pom.xml
       <disabled>false</disabled>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
     <jenkins.plugins.slack.SlackNotifier plugin="slack@2.0.1">
-      <teamDomain></teamDomain>
-      <authToken></authToken>
+      <teamDomain/>
+      <authToken/>
       <buildServerUrl>http://xap-lab1002:8080/</buildServerUrl>
-      <room></room>
+      <room/>
       <startNotification>false</startNotification>
       <notifySuccess>true</notifySuccess>
       <notifyAborted>false</notifyAborted>
@@ -204,11 +209,11 @@ mvn -Dmaven.repo.local=/home/jenkins/.m2_one_xap -f xap-premium/xap-dist/pom.xml
       <includeTestSummary>false</includeTestSummary>
       <commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
       <includeCustomMessage>true</includeCustomMessage>
-      <customMessage>Version:${XAP_VERSION} &#xd;
-Milestone:${MILESTONE} &#xd;
-Build Number: ${XAP_BUILD_NUMBER}-${BUILD_NUMBER}&#xd;
-Branch: ${BRANCH_NAME} &#xd;
-SHA:${GIT_COMMIT} &#xd;
+      <customMessage>Version:${XAP_VERSION} &#13;
+Milestone:${MILESTONE} &#13;
+Build Number: ${XAP_BUILD_NUMBER}-${BUILD_NUMBER}&#13;
+Branch: ${BRANCH_NAME} &#13;
+SHA:${GIT_COMMIT} &#13;
 Newman Tag: ${NEWMAN_TAGS}</customMessage>
     </jenkins.plugins.slack.SlackNotifier>
   </publishers>

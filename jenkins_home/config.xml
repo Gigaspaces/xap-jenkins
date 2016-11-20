@@ -57,12 +57,15 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:barak</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:boaz</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:boris</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:danylo</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:evgeny</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:fe2s</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:kobi</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:moran</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:niv</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:tamirs</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:tamirt</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:vitaliy.zinchenko</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:yael</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:yechiel</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:yohana</permission>
@@ -165,31 +168,36 @@
     <permission>hudson.model.Hudson.Read:barak</permission>
     <permission>hudson.model.Hudson.Read:boaz</permission>
     <permission>hudson.model.Hudson.Read:boris</permission>
+    <permission>hudson.model.Hudson.Read:danylo</permission>
     <permission>hudson.model.Hudson.Read:evgeny</permission>
+    <permission>hudson.model.Hudson.Read:fe2s</permission>
     <permission>hudson.model.Hudson.Read:kobi</permission>
     <permission>hudson.model.Hudson.Read:moran</permission>
     <permission>hudson.model.Hudson.Read:niv</permission>
     <permission>hudson.model.Hudson.Read:tamirs</permission>
     <permission>hudson.model.Hudson.Read:tamirt</permission>
+    <permission>hudson.model.Hudson.Read:vitaliy.zinchenko</permission>
     <permission>hudson.model.Hudson.Read:yael</permission>
     <permission>hudson.model.Hudson.Read:yechiel</permission>
     <permission>hudson.model.Hudson.Read:yohana</permission>
     <permission>hudson.model.Hudson.RunScripts:barak</permission>
     <permission>hudson.model.Hudson.RunScripts:boaz</permission>
     <permission>hudson.model.Hudson.RunScripts:boris</permission>
+    <permission>hudson.model.Hudson.RunScripts:danylo</permission>
     <permission>hudson.model.Hudson.RunScripts:evgeny</permission>
+    <permission>hudson.model.Hudson.RunScripts:fe2s</permission>
     <permission>hudson.model.Hudson.RunScripts:kobi</permission>
     <permission>hudson.model.Hudson.RunScripts:moran</permission>
     <permission>hudson.model.Hudson.RunScripts:niv</permission>
     <permission>hudson.model.Hudson.RunScripts:tamirs</permission>
     <permission>hudson.model.Hudson.RunScripts:tamirt</permission>
+    <permission>hudson.model.Hudson.RunScripts:vitaliy.zinchenko</permission>
     <permission>hudson.model.Hudson.RunScripts:yael</permission>
     <permission>hudson.model.Hudson.RunScripts:yechiel</permission>
     <permission>hudson.model.Hudson.RunScripts:yohana</permission>
     <permission>hudson.model.Hudson.UploadPlugins:barak</permission>
     <permission>hudson.model.Hudson.UploadPlugins:boaz</permission>
     <permission>hudson.model.Hudson.UploadPlugins:boris</permission>
-    <permission>hudson.model.Hudson.UploadPlugins:evgeny</permission>
     <permission>hudson.model.Hudson.UploadPlugins:kobi</permission>
     <permission>hudson.model.Hudson.UploadPlugins:moran</permission>
     <permission>hudson.model.Hudson.UploadPlugins:niv</permission>
@@ -201,48 +209,60 @@
     <permission>hudson.model.Item.Build:barak</permission>
     <permission>hudson.model.Item.Build:boaz</permission>
     <permission>hudson.model.Item.Build:boris</permission>
+    <permission>hudson.model.Item.Build:danylo</permission>
     <permission>hudson.model.Item.Build:evgeny</permission>
+    <permission>hudson.model.Item.Build:fe2s</permission>
     <permission>hudson.model.Item.Build:kobi</permission>
     <permission>hudson.model.Item.Build:moran</permission>
     <permission>hudson.model.Item.Build:niv</permission>
     <permission>hudson.model.Item.Build:tamirs</permission>
     <permission>hudson.model.Item.Build:tamirt</permission>
+    <permission>hudson.model.Item.Build:vitaliy.zinchenko</permission>
     <permission>hudson.model.Item.Build:yael</permission>
     <permission>hudson.model.Item.Build:yechiel</permission>
     <permission>hudson.model.Item.Build:yohana</permission>
     <permission>hudson.model.Item.Cancel:barak</permission>
     <permission>hudson.model.Item.Cancel:boaz</permission>
     <permission>hudson.model.Item.Cancel:boris</permission>
+    <permission>hudson.model.Item.Cancel:danylo</permission>
     <permission>hudson.model.Item.Cancel:evgeny</permission>
+    <permission>hudson.model.Item.Cancel:fe2s</permission>
     <permission>hudson.model.Item.Cancel:kobi</permission>
     <permission>hudson.model.Item.Cancel:moran</permission>
     <permission>hudson.model.Item.Cancel:niv</permission>
     <permission>hudson.model.Item.Cancel:tamirs</permission>
     <permission>hudson.model.Item.Cancel:tamirt</permission>
+    <permission>hudson.model.Item.Cancel:vitaliy.zinchenko</permission>
     <permission>hudson.model.Item.Cancel:yael</permission>
     <permission>hudson.model.Item.Cancel:yechiel</permission>
     <permission>hudson.model.Item.Cancel:yohana</permission>
     <permission>hudson.model.Item.Configure:barak</permission>
     <permission>hudson.model.Item.Configure:boaz</permission>
     <permission>hudson.model.Item.Configure:boris</permission>
+    <permission>hudson.model.Item.Configure:danylo</permission>
     <permission>hudson.model.Item.Configure:evgeny</permission>
+    <permission>hudson.model.Item.Configure:fe2s</permission>
     <permission>hudson.model.Item.Configure:kobi</permission>
     <permission>hudson.model.Item.Configure:moran</permission>
     <permission>hudson.model.Item.Configure:niv</permission>
     <permission>hudson.model.Item.Configure:tamirs</permission>
     <permission>hudson.model.Item.Configure:tamirt</permission>
+    <permission>hudson.model.Item.Configure:vitaliy.zinchenko</permission>
     <permission>hudson.model.Item.Configure:yael</permission>
     <permission>hudson.model.Item.Configure:yechiel</permission>
     <permission>hudson.model.Item.Configure:yohana</permission>
     <permission>hudson.model.Item.Create:barak</permission>
     <permission>hudson.model.Item.Create:boaz</permission>
     <permission>hudson.model.Item.Create:boris</permission>
+    <permission>hudson.model.Item.Create:danylo</permission>
     <permission>hudson.model.Item.Create:evgeny</permission>
+    <permission>hudson.model.Item.Create:fe2s</permission>
     <permission>hudson.model.Item.Create:kobi</permission>
     <permission>hudson.model.Item.Create:moran</permission>
     <permission>hudson.model.Item.Create:niv</permission>
     <permission>hudson.model.Item.Create:tamirs</permission>
     <permission>hudson.model.Item.Create:tamirt</permission>
+    <permission>hudson.model.Item.Create:vitaliy.zinchenko</permission>
     <permission>hudson.model.Item.Create:yael</permission>
     <permission>hudson.model.Item.Create:yechiel</permission>
     <permission>hudson.model.Item.Create:yohana</permission>
@@ -255,103 +275,129 @@
     <permission>hudson.model.Item.Discover:barak</permission>
     <permission>hudson.model.Item.Discover:boaz</permission>
     <permission>hudson.model.Item.Discover:boris</permission>
+    <permission>hudson.model.Item.Discover:danylo</permission>
     <permission>hudson.model.Item.Discover:evgeny</permission>
+    <permission>hudson.model.Item.Discover:fe2s</permission>
     <permission>hudson.model.Item.Discover:kobi</permission>
     <permission>hudson.model.Item.Discover:moran</permission>
     <permission>hudson.model.Item.Discover:niv</permission>
     <permission>hudson.model.Item.Discover:tamirs</permission>
     <permission>hudson.model.Item.Discover:tamirt</permission>
+    <permission>hudson.model.Item.Discover:vitaliy.zinchenko</permission>
     <permission>hudson.model.Item.Discover:yael</permission>
     <permission>hudson.model.Item.Discover:yechiel</permission>
     <permission>hudson.model.Item.Discover:yohana</permission>
     <permission>hudson.model.Item.Read:barak</permission>
     <permission>hudson.model.Item.Read:boaz</permission>
     <permission>hudson.model.Item.Read:boris</permission>
+    <permission>hudson.model.Item.Read:danylo</permission>
     <permission>hudson.model.Item.Read:evgeny</permission>
+    <permission>hudson.model.Item.Read:fe2s</permission>
     <permission>hudson.model.Item.Read:kobi</permission>
     <permission>hudson.model.Item.Read:moran</permission>
     <permission>hudson.model.Item.Read:niv</permission>
     <permission>hudson.model.Item.Read:tamirs</permission>
     <permission>hudson.model.Item.Read:tamirt</permission>
+    <permission>hudson.model.Item.Read:vitaliy.zinchenko</permission>
     <permission>hudson.model.Item.Read:yael</permission>
     <permission>hudson.model.Item.Read:yechiel</permission>
     <permission>hudson.model.Item.Read:yohana</permission>
     <permission>hudson.model.Item.Workspace:barak</permission>
     <permission>hudson.model.Item.Workspace:boaz</permission>
     <permission>hudson.model.Item.Workspace:boris</permission>
+    <permission>hudson.model.Item.Workspace:danylo</permission>
     <permission>hudson.model.Item.Workspace:evgeny</permission>
+    <permission>hudson.model.Item.Workspace:fe2s</permission>
     <permission>hudson.model.Item.Workspace:kobi</permission>
     <permission>hudson.model.Item.Workspace:moran</permission>
     <permission>hudson.model.Item.Workspace:niv</permission>
     <permission>hudson.model.Item.Workspace:tamirs</permission>
     <permission>hudson.model.Item.Workspace:tamirt</permission>
+    <permission>hudson.model.Item.Workspace:vitaliy.zinchenko</permission>
     <permission>hudson.model.Item.Workspace:yael</permission>
     <permission>hudson.model.Item.Workspace:yechiel</permission>
     <permission>hudson.model.Item.Workspace:yohana</permission>
     <permission>hudson.model.Run.Delete:barak</permission>
     <permission>hudson.model.Run.Delete:boaz</permission>
     <permission>hudson.model.Run.Delete:boris</permission>
+    <permission>hudson.model.Run.Delete:danylo</permission>
     <permission>hudson.model.Run.Delete:evgeny</permission>
+    <permission>hudson.model.Run.Delete:fe2s</permission>
     <permission>hudson.model.Run.Delete:kobi</permission>
     <permission>hudson.model.Run.Delete:moran</permission>
     <permission>hudson.model.Run.Delete:niv</permission>
     <permission>hudson.model.Run.Delete:tamirs</permission>
     <permission>hudson.model.Run.Delete:tamirt</permission>
+    <permission>hudson.model.Run.Delete:vitaliy.zinchenko</permission>
     <permission>hudson.model.Run.Delete:yael</permission>
     <permission>hudson.model.Run.Delete:yechiel</permission>
     <permission>hudson.model.Run.Delete:yohana</permission>
     <permission>hudson.model.Run.Update:barak</permission>
     <permission>hudson.model.Run.Update:boaz</permission>
     <permission>hudson.model.Run.Update:boris</permission>
+    <permission>hudson.model.Run.Update:danylo</permission>
     <permission>hudson.model.Run.Update:evgeny</permission>
+    <permission>hudson.model.Run.Update:fe2s</permission>
     <permission>hudson.model.Run.Update:kobi</permission>
     <permission>hudson.model.Run.Update:moran</permission>
     <permission>hudson.model.Run.Update:niv</permission>
     <permission>hudson.model.Run.Update:tamirs</permission>
     <permission>hudson.model.Run.Update:tamirt</permission>
+    <permission>hudson.model.Run.Update:vitaliy.zinchenko</permission>
     <permission>hudson.model.Run.Update:yael</permission>
     <permission>hudson.model.Run.Update:yechiel</permission>
     <permission>hudson.model.Run.Update:yohana</permission>
     <permission>hudson.model.View.Configure:barak</permission>
     <permission>hudson.model.View.Configure:boaz</permission>
     <permission>hudson.model.View.Configure:boris</permission>
+    <permission>hudson.model.View.Configure:danylo</permission>
     <permission>hudson.model.View.Configure:evgeny</permission>
+    <permission>hudson.model.View.Configure:fe2s</permission>
     <permission>hudson.model.View.Configure:kobi</permission>
     <permission>hudson.model.View.Configure:moran</permission>
     <permission>hudson.model.View.Configure:niv</permission>
     <permission>hudson.model.View.Configure:tamirs</permission>
     <permission>hudson.model.View.Configure:tamirt</permission>
+    <permission>hudson.model.View.Configure:vitaliy.zinchenko</permission>
     <permission>hudson.model.View.Configure:yael</permission>
     <permission>hudson.model.View.Configure:yechiel</permission>
     <permission>hudson.model.View.Configure:yohana</permission>
     <permission>hudson.model.View.Create:barak</permission>
     <permission>hudson.model.View.Create:boaz</permission>
     <permission>hudson.model.View.Create:boris</permission>
+    <permission>hudson.model.View.Create:danylo</permission>
     <permission>hudson.model.View.Create:evgeny</permission>
+    <permission>hudson.model.View.Create:fe2s</permission>
     <permission>hudson.model.View.Create:kobi</permission>
     <permission>hudson.model.View.Create:moran</permission>
     <permission>hudson.model.View.Create:niv</permission>
     <permission>hudson.model.View.Create:tamirs</permission>
     <permission>hudson.model.View.Create:tamirt</permission>
+    <permission>hudson.model.View.Create:vitaliy.zinchenko</permission>
     <permission>hudson.model.View.Create:yael</permission>
     <permission>hudson.model.View.Create:yechiel</permission>
     <permission>hudson.model.View.Create:yohana</permission>
     <permission>hudson.model.View.Delete:barak</permission>
     <permission>hudson.model.View.Delete:boaz</permission>
     <permission>hudson.model.View.Delete:boris</permission>
+    <permission>hudson.model.View.Delete:danylo</permission>
     <permission>hudson.model.View.Delete:evgeny</permission>
+    <permission>hudson.model.View.Delete:fe2s</permission>
     <permission>hudson.model.View.Delete:kobi</permission>
     <permission>hudson.model.View.Delete:moran</permission>
     <permission>hudson.model.View.Delete:niv</permission>
     <permission>hudson.model.View.Delete:tamirs</permission>
     <permission>hudson.model.View.Delete:tamirt</permission>
+    <permission>hudson.model.View.Delete:vitaliy.zinchenko</permission>
     <permission>hudson.model.View.Delete:yael</permission>
     <permission>hudson.model.View.Delete:yechiel</permission>
     <permission>hudson.model.View.Delete:yohana</permission>
     <permission>hudson.model.View.Read:barak</permission>
     <permission>hudson.model.View.Read:boaz</permission>
     <permission>hudson.model.View.Read:boris</permission>
+    <permission>hudson.model.View.Read:danylo</permission>
     <permission>hudson.model.View.Read:evgeny</permission>
+    <permission>hudson.model.View.Read:fe2s</permission>
     <permission>hudson.model.View.Read:kobi</permission>
     <permission>hudson.model.View.Read:moran</permission>
     <permission>hudson.model.View.Read:niv</permission>
@@ -362,12 +408,15 @@
     <permission>hudson.model.View.Read:yohana</permission>
     <permission>hudson.scm.SCM.Tag:boaz</permission>
     <permission>hudson.scm.SCM.Tag:boris</permission>
+    <permission>hudson.scm.SCM.Tag:danylo</permission>
     <permission>hudson.scm.SCM.Tag:evgeny</permission>
+    <permission>hudson.scm.SCM.Tag:fe2s</permission>
     <permission>hudson.scm.SCM.Tag:kobi</permission>
     <permission>hudson.scm.SCM.Tag:moran</permission>
     <permission>hudson.scm.SCM.Tag:niv</permission>
     <permission>hudson.scm.SCM.Tag:tamirs</permission>
     <permission>hudson.scm.SCM.Tag:tamirt</permission>
+    <permission>hudson.scm.SCM.Tag:vitaliy.zinchenko</permission>
     <permission>hudson.scm.SCM.Tag:yael</permission>
     <permission>hudson.scm.SCM.Tag:yechiel</permission>
     <permission>hudson.scm.SCM.Tag:yohana</permission>

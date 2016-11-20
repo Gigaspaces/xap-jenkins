@@ -10,7 +10,7 @@
         <hudson.model.TextParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>[REQUIRED PARAMETER] The name of the branch</description>
-          <defaultValue>12.0.0-ga</defaultValue>
+          <defaultValue>master</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>JAVA_BUILD_URL</name>
@@ -55,7 +55,7 @@
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.5.0">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.5.2">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -94,7 +94,7 @@
             <token>${ENV,var=&quot;RELEASE&quot;}</token>
           </condition>
           <publisherList>
-            <hudson.plugins.git.GitPublisher plugin="git@2.5.0">
+            <hudson.plugins.git.GitPublisher plugin="git@2.5.2">
               <configVersion>2</configVersion>
               <pushMerge>false</pushMerge>
               <pushOnlyIfSuccess>true</pushOnlyIfSuccess>

@@ -18,17 +18,17 @@
         <hudson.model.TextParameterDefinition>
           <name>XAP_VERSION</name>
           <description>The maven version of this xap release</description>
-          <defaultValue>12.0.1</defaultValue>
+          <defaultValue>12.1.0</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m4</defaultValue>
+          <defaultValue>m6</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>16503</defaultValue>
+          <defaultValue>16705</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>BRANCH_NAME</name>
@@ -38,7 +38,7 @@
         <hudson.model.BooleanParameterDefinition>
           <name>OVERRIDE_EXISTING_TAG</name>
           <description></description>
-          <defaultValue>false</defaultValue>
+          <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>DEPLOY_ARTIFACTS</name>
@@ -66,8 +66,8 @@
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
               <string>NIGHTLY</string>
-              <string>MILESTONE</string>
               <string>GA</string>
+              <string>MILESTONE</string>
               <string>PATCH</string>
             </a>
           </choices>
@@ -80,7 +80,7 @@
         <hudson.model.TextParameterDefinition>
           <name>NEWMAN_TAGS</name>
           <description></description>
-          <defaultValue>RELEASE</defaultValue>
+          <defaultValue>XAP,NIGHTLY,RELEASE</defaultValue>
         </hudson.model.TextParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -92,7 +92,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>0 16 * * 0-2,4-7</spec>
+      <spec>0 17 * * *</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
@@ -126,7 +126,7 @@ echo &quot;export BUILD_CAUSE=$BUILD_CAUSE&quot; &gt;&gt; /home/jenkins/xap_scri
           <configs>
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
               <properties>BRANCH_NAME=${BRANCH_NAME}
-JAVA_BUILD_URL=http://192.168.10.10:80/${XAP_VERSION}/${BRANCH_NAME}/${FINAL_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
+JAVA_BUILD_URL=http://hercules:80/${XAP_VERSION}/${BRANCH_NAME}/${FINAL_BUILD_NUMBER}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
 JAVA_S3_BUILD_URL=https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/xap/${XAP_VERSION}/${FINAL_VERSION}/gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
 JAVA_BUILD_FILE=gigaspaces-xap-premium-${XAP_VERSION}-${MILESTONE}-b${FINAL_BUILD_NUMBER}.zip
 DEPLOY_ARTIFACTS=${DEPLOY_ARTIFACTS}

@@ -192,6 +192,7 @@ function start_jenkins_scm_trigger {
 
 function append_branch_to_newman_cron {
     local branch="$1"
+    export SSHPASS=password
     sshpass -e ssh "$XAP_NEWMAN_USER"@"$XAP_NEWMAN_HOST" -C "sed -ri 's/crons.suitediff.branch = .*/crons.suitediff.branch = '$branch'/'g /home/xap/newman-analytics/resources/crons/suitediff/suitediff.properties"
 }
 

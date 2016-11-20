@@ -1,35 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<jenkins.branch.OrganizationFolder plugin="branch-api@1.10">
+<jenkins.branch.OrganizationFolder plugin="branch-api@1.11">
   <actions>
-    <org.jenkinsci.plugins.orgfolder.github.GitHubOrgAction plugin="github-organization-folder@1.4">
-      <url>https://github.com/giga-dev</url>
-      <avatar>https://avatars.githubusercontent.com/u/11980784?v=3</avatar>
+    <org.jenkinsci.plugins.orgfolder.github.GitHubOrgAction plugin="github-organization-folder@1.5">
+      <url>https://github.com/InsightEdge</url>
+      <name>GigaSpaces InsightEdge</name>
+      <avatar>https://avatars.githubusercontent.com/u/17599846?v=3</avatar>
     </org.jenkinsci.plugins.orgfolder.github.GitHubOrgAction>
-    <org.jenkinsci.plugins.orgfolder.github.GitHubLink plugin="github-organization-folder@1.4">
+    <org.jenkinsci.plugins.orgfolder.github.GitHubLink plugin="github-organization-folder@1.5">
       <image>logo</image>
-      <url>https://github.com/giga-dev</url>
+      <url>https://github.com/InsightEdge</url>
     </org.jenkinsci.plugins.orgfolder.github.GitHubLink>
   </actions>
   <description></description>
+  <displayName>InsightEdge</displayName>
   <properties>
-    <com.cloudbees.hudson.plugins.folder.properties.FolderCredentialsProvider_-FolderCredentialsProperty plugin="cloudbees-folder@5.12">
-      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
-        <entry>
-          <com.cloudbees.plugins.credentials.domains.Domain plugin="credentials@2.1.4">
-            <specifications/>
-          </com.cloudbees.plugins.credentials.domains.Domain>
-          <java.util.concurrent.CopyOnWriteArrayList>
-            <com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey plugin="ssh-credentials@1.12">
-              <id>9ef287f2-750a-4bb9-926f-78a2b762909d</id>
-              <description></description>
-              <username>xap-builder</username>
-              <passphrase>aHFMNfhuqOo7dFLY09pU9Q==</passphrase>
-              <privateKeySource class="com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey$UsersPrivateKeySource"/>
-            </com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey>
-          </java.util.concurrent.CopyOnWriteArrayList>
-        </entry>
-      </domainCredentialsMap>
-    </com.cloudbees.hudson.plugins.folder.properties.FolderCredentialsProvider_-FolderCredentialsProperty>
     <jenkins.branch.NoTriggerOrganizationFolderProperty>
       <branches>.*</branches>
     </jenkins.branch.NoTriggerOrganizationFolderProperty>
@@ -48,38 +32,36 @@
       <columns>
         <hudson.views.StatusColumn/>
         <hudson.views.WeatherColumn/>
-        <org.jenkinsci.plugins.orgfolder.github.CustomNameJobColumn plugin="github-organization-folder@1.4">
+        <org.jenkinsci.plugins.orgfolder.github.CustomNameJobColumn plugin="github-organization-folder@1.5">
           <bundle>org.jenkinsci.plugins.orgfolder.github.Messages</bundle>
           <key>ListViewColumn.Repository</key>
         </org.jenkinsci.plugins.orgfolder.github.CustomNameJobColumn>
-        <org.jenkinsci.plugins.orgfolder.github.RepositoryDescriptionColumn plugin="github-organization-folder@1.4"/>
-        <hudson.views.BuildButtonColumn/>
-        <hudson.views.LastDurationColumn/>
+        <org.jenkinsci.plugins.orgfolder.github.RepositoryDescriptionColumn plugin="github-organization-folder@1.5"/>
       </columns>
       <includeRegex>.*</includeRegex>
-      <recurse>true</recurse>
+      <recurse>false</recurse>
     </hudson.model.ListView>
   </views>
   <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
   <primaryView>Repositories</primaryView>
   <healthMetrics>
-    <com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric plugin="cloudbees-folder@5.12"/>
+    <com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric plugin="cloudbees-folder@5.13"/>
   </healthMetrics>
-  <icon class="org.jenkinsci.plugins.orgfolder.github.GitHubOrgIcon" plugin="github-organization-folder@1.4">
+  <icon class="org.jenkinsci.plugins.orgfolder.github.GitHubOrgIcon" plugin="github-organization-folder@1.5">
     <folder class="jenkins.branch.OrganizationFolder" reference="../.."/>
   </icon>
-  <orphanedItemStrategy class="com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy" plugin="cloudbees-folder@5.12">
+  <orphanedItemStrategy class="com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy" plugin="cloudbees-folder@5.13">
     <pruneDeadBranches>true</pruneDeadBranches>
     <daysToKeep>0</daysToKeep>
     <numToKeep>0</numToKeep>
   </orphanedItemStrategy>
   <triggers/>
   <navigators>
-    <org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator plugin="github-branch-source@1.8.1">
-      <repoOwner>giga-dev</repoOwner>
-      <checkoutCredentialsId>9ef287f2-750a-4bb9-926f-78a2b762909d</checkoutCredentialsId>
+    <org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator plugin="github-branch-source@1.10">
+      <repoOwner>insightedge</repoOwner>
+      <scanCredentialsId>insightedge-dev</scanCredentialsId>
+      <checkoutCredentialsId>SAME</checkoutCredentialsId>
       <pattern>.*</pattern>
-      <excludes>refs/pull/*</excludes>
       <buildOriginBranch>true</buildOriginBranch>
       <buildOriginBranchWithPR>true</buildOriginBranchWithPR>
       <buildOriginPRMerge>false</buildOriginPRMerge>
@@ -89,6 +71,6 @@
     </org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator>
   </navigators>
   <projectFactories>
-    <org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProjectFactory plugin="workflow-multibranch@2.8"/>
+    <org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProjectFactory plugin="workflow-multibranch@2.9"/>
   </projectFactories>
 </jenkins.branch.OrganizationFolder>

@@ -18,17 +18,17 @@
         <hudson.model.TextParameterDefinition>
           <name>VERSION</name>
           <description></description>
-          <defaultValue>12.0.1</defaultValue>
+          <defaultValue>12.1.0</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m2</defaultValue>
+          <defaultValue>m5</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>NEXT_MILESTONE</name>
           <description></description>
-          <defaultValue>m3</defaultValue>
+          <defaultValue>m6</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>XAP_COMMIT_SHA</name>
@@ -68,7 +68,7 @@
         <hudson.model.TextParameterDefinition>
           <name>XAP_NEWMAN_HOST</name>
           <description></description>
-          <defaultValue>192.168.50.66</defaultValue>
+          <defaultValue>192.168.10.2</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>XAP_NEWMAN_USER</name>
@@ -78,7 +78,7 @@
         <hudson.model.TextParameterDefinition>
           <name>XAP_NEWMAN_PASSWORD</name>
           <description></description>
-          <defaultValue></defaultValue>
+          <defaultValue>password</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>MODE</name>
