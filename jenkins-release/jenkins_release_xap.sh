@@ -22,7 +22,7 @@ function release_xap {
     announce_step "updating xap-release mode to $mode and BRANCH_NAME and triggers"
     get_jenkins_job_config "xap-release" "xap_release_config.xml"
     change_mode "$mode" "xap_release_config.xml"
-    change_branch "\$XAP_VERSION-\$MILESTONE" "xap_release_config.xml"
+    change_branch "\$XAP_VERSION-\$MILESTONE-build" "xap_release_config.xml"
     if [ "$MILESTONE" -eq "ga" ]
     then
         change_tag "\$XAP_VERSION-\$MILESTONE-RELEASE" "xap_release_config.xml"
@@ -45,13 +45,13 @@ function release_xap {
 
     announce_step "updating xap-continuous BRANCH_NAME and triggers"
     get_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
-    change_branch "\$XAP_VERSION-\$MILESTONE" "xap_continuous_config.xml"
+    change_branch "\$XAP_VERSION-\$MILESTONE-build" "xap_continuous_config.xml"
     start_jenkins_timer_trigger "xap_continuous_config.xml" "0 6 * * *"
     start_jenkins_scm_trigger "xap_continuous_config.xml" "* * * * *"
     post_jenkins_job_config "xap-continuous" "xap_continuous_config.xml"
 
     #announce_step "add branch $BRANCH_NAME to newman reporter cron"
-    append_branch_to_newman_cron "$VERSION"-"$MILESTONE"
+    append_branch_to_newman_cron "$VERSION"-"$MILESTONE"-build
 }
 
 function back_to_nightly_release_xap {
