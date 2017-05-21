@@ -1,16 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<jenkins.branch.OrganizationFolder plugin="branch-api@1.11">
-  <actions>
-    <org.jenkinsci.plugins.orgfolder.github.GitHubOrgAction plugin="github-organization-folder@1.5">
-      <url>https://github.com/InsightEdge</url>
-      <name>GigaSpaces InsightEdge</name>
-      <avatar>https://avatars.githubusercontent.com/u/17599846?v=3</avatar>
-    </org.jenkinsci.plugins.orgfolder.github.GitHubOrgAction>
-    <org.jenkinsci.plugins.orgfolder.github.GitHubLink plugin="github-organization-folder@1.5">
-      <image>logo</image>
-      <url>https://github.com/InsightEdge</url>
-    </org.jenkinsci.plugins.orgfolder.github.GitHubLink>
-  </actions>
+<jenkins.branch.OrganizationFolder plugin="branch-api@2.0.2">
+  <actions/>
   <description></description>
   <displayName>InsightEdge</displayName>
   <properties>
@@ -18,46 +8,25 @@
       <branches>.*</branches>
     </jenkins.branch.NoTriggerOrganizationFolderProperty>
   </properties>
-  <views>
-    <hudson.model.ListView>
-      <owner class="jenkins.branch.OrganizationFolder" reference="../../.."/>
-      <name>Repositories</name>
-      <filterExecutors>false</filterExecutors>
-      <filterQueue>false</filterQueue>
-      <properties class="hudson.model.View$PropertyList"/>
-      <jobNames>
-        <comparator class="hudson.util.CaseInsensitiveComparator"/>
-      </jobNames>
-      <jobFilters/>
-      <columns>
-        <hudson.views.StatusColumn/>
-        <hudson.views.WeatherColumn/>
-        <org.jenkinsci.plugins.orgfolder.github.CustomNameJobColumn plugin="github-organization-folder@1.5">
-          <bundle>org.jenkinsci.plugins.orgfolder.github.Messages</bundle>
-          <key>ListViewColumn.Repository</key>
-        </org.jenkinsci.plugins.orgfolder.github.CustomNameJobColumn>
-        <org.jenkinsci.plugins.orgfolder.github.RepositoryDescriptionColumn plugin="github-organization-folder@1.5"/>
-      </columns>
-      <includeRegex>.*</includeRegex>
-      <recurse>false</recurse>
-    </hudson.model.ListView>
-  </views>
-  <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
-  <primaryView>Repositories</primaryView>
+  <folderViews class="jenkins.branch.OrganizationFolderViewHolder">
+    <owner reference="../.."/>
+  </folderViews>
   <healthMetrics>
-    <com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric plugin="cloudbees-folder@5.13"/>
+    <com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric plugin="cloudbees-folder@5.17">
+      <nonRecursive>false</nonRecursive>
+    </com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric>
   </healthMetrics>
-  <icon class="org.jenkinsci.plugins.orgfolder.github.GitHubOrgIcon" plugin="github-organization-folder@1.5">
-    <folder class="jenkins.branch.OrganizationFolder" reference="../.."/>
+  <icon class="jenkins.branch.MetadataActionFolderIcon">
+    <owner class="jenkins.branch.OrganizationFolder" reference="../.."/>
   </icon>
-  <orphanedItemStrategy class="com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy" plugin="cloudbees-folder@5.13">
+  <orphanedItemStrategy class="com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy" plugin="cloudbees-folder@5.17">
     <pruneDeadBranches>true</pruneDeadBranches>
     <daysToKeep>0</daysToKeep>
     <numToKeep>0</numToKeep>
   </orphanedItemStrategy>
   <triggers/>
   <navigators>
-    <org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator plugin="github-branch-source@1.10">
+    <org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator plugin="github-branch-source@2.0.1">
       <repoOwner>insightedge</repoOwner>
       <scanCredentialsId>insightedge-dev</scanCredentialsId>
       <checkoutCredentialsId>SAME</checkoutCredentialsId>
@@ -71,6 +40,6 @@
     </org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator>
   </navigators>
   <projectFactories>
-    <org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProjectFactory plugin="workflow-multibranch@2.9"/>
+    <org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProjectFactory plugin="workflow-multibranch@2.12"/>
   </projectFactories>
 </jenkins.branch.OrganizationFolder>

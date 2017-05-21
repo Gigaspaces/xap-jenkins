@@ -17,7 +17,7 @@
         <hudson.model.TextParameterDefinition>
           <name>XAP_VERSION</name>
           <description/>
-          <defaultValue>12.1.0</defaultValue>
+          <defaultValue>12.1.1</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>MILESTONE</name>
@@ -27,7 +27,7 @@
         <hudson.model.TextParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
           <description/>
-          <defaultValue>167050</defaultValue>
+          <defaultValue>170060</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>BRANCH_NAME</name>
@@ -41,7 +41,14 @@
         </hudson.model.TextParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_SUITES</name>
-          <description>comma separated list of suite ids to submit future jobs</description>
+          <description>comma separated list of suite ids to submit future jobs
+
+manager        588620c929f67f0c0af39985
+xap-core       55acfec729f67f34809b62d8
+service-grid   58872c5329f67f0c0af44113
+disconnect     55e5632d29f67f1d1f094198
+web-ui         55effbf329f67f0322d26c0e
+</description>
           <defaultValue/>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -49,11 +56,12 @@
   </properties>
   <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM" plugin="multiple-scms@0.6">
     <scms>
-      <hudson.plugins.git.GitSCM plugin="git@2.5.2">
+      <hudson.plugins.git.GitSCM plugin="git@3.0.4">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
             <url>git@github.com:xap/xap.git</url>
+            <credentialsId>insightedge-dev</credentialsId>
           </hudson.plugins.git.UserRemoteConfig>
         </userRemoteConfigs>
         <branches>
@@ -69,11 +77,12 @@
           </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
         </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM plugin="git@2.5.2">
+      <hudson.plugins.git.GitSCM plugin="git@3.0.4">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
             <url>git@github.com:Gigaspaces/xap-premium.git</url>
+            <credentialsId>insightedge-dev</credentialsId>
           </hudson.plugins.git.UserRemoteConfig>
         </userRemoteConfigs>
         <branches>
@@ -96,9 +105,6 @@
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
-    <hudson.triggers.TimerTrigger>
-      <spec>0 6 * * *</spec>
-    </hudson.triggers.TimerTrigger>
     <hudson.triggers.SCMTrigger>
       <spec>* * * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
@@ -217,5 +223,12 @@ SHA:${GIT_COMMIT} &#13;
 Newman Tag: ${NEWMAN_TAGS}</customMessage>
     </jenkins.plugins.slack.SlackNotifier>
   </publishers>
-  <buildWrappers/>
+  <buildWrappers>
+    <EnvInjectBuildWrapper plugin="envinject@1.93.1">
+      <info>
+        <loadFilesFromMaster>false</loadFilesFromMaster>
+      </info>
+    </EnvInjectBuildWrapper>
+    <org.jenkinsci.plugins.builduser.BuildUser plugin="build-user-vars-plugin@1.5"/>
+  </buildWrappers>
 </project>
