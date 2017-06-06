@@ -1,11 +1,11 @@
 #!/bin/bash
 set -x
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 ie-release-params.sh"
-    exit 1
-fi
+# if [ $# -ne 1 ]; then
+#     echo "Usage: $0 ie-release-params.sh"
+#     exit 1
+# fi
 
-source "$1"
+# source "$1"
 
 
 
