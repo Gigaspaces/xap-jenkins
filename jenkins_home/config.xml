@@ -4,7 +4,7 @@
     <string>jenkins.security.s2m.MasterKillSwitchWarning</string>
   </disabledAdministrativeMonitors>
   <version>2.32.1</version>
-  <numExecutors>2</numExecutors>
+  <numExecutors>4</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.GlobalMatrixAuthorizationStrategy">
@@ -122,6 +122,7 @@
     <permission>hudson.model.Hudson.Read:ester</permission>
     <permission>hudson.model.Hudson.Read:evgeny</permission>
     <permission>hudson.model.Hudson.Read:fe2s</permission>
+    <permission>hudson.model.Hudson.Read:inbar</permission>
     <permission>hudson.model.Hudson.Read:livnats</permission>
     <permission>hudson.model.Hudson.Read:moran</permission>
     <permission>hudson.model.Hudson.Read:niv</permission>
@@ -132,6 +133,7 @@
     <permission>hudson.model.Hudson.Read:yael</permission>
     <permission>hudson.model.Hudson.Read:yechiel</permission>
     <permission>hudson.model.Hudson.Read:yohana</permission>
+    <permission>hudson.model.Hudson.Read:yuval</permission>
     <permission>hudson.model.Hudson.RunScripts:alons</permission>
     <permission>hudson.model.Hudson.RunScripts:barak</permission>
     <permission>hudson.model.Hudson.RunScripts:danylo</permission>
@@ -158,8 +160,10 @@
     <permission>hudson.model.Item.Build:alons</permission>
     <permission>hudson.model.Item.Build:barak</permission>
     <permission>hudson.model.Item.Build:danylo</permission>
+    <permission>hudson.model.Item.Build:ester</permission>
     <permission>hudson.model.Item.Build:evgeny</permission>
     <permission>hudson.model.Item.Build:fe2s</permission>
+    <permission>hudson.model.Item.Build:inbar</permission>
     <permission>hudson.model.Item.Build:livnats</permission>
     <permission>hudson.model.Item.Build:moran</permission>
     <permission>hudson.model.Item.Build:niv</permission>
@@ -170,11 +174,14 @@
     <permission>hudson.model.Item.Build:yael</permission>
     <permission>hudson.model.Item.Build:yechiel</permission>
     <permission>hudson.model.Item.Build:yohana</permission>
+    <permission>hudson.model.Item.Build:yuval</permission>
     <permission>hudson.model.Item.Cancel:alons</permission>
     <permission>hudson.model.Item.Cancel:barak</permission>
     <permission>hudson.model.Item.Cancel:danylo</permission>
+    <permission>hudson.model.Item.Cancel:ester</permission>
     <permission>hudson.model.Item.Cancel:evgeny</permission>
     <permission>hudson.model.Item.Cancel:fe2s</permission>
+    <permission>hudson.model.Item.Cancel:inbar</permission>
     <permission>hudson.model.Item.Cancel:livnats</permission>
     <permission>hudson.model.Item.Cancel:moran</permission>
     <permission>hudson.model.Item.Cancel:niv</permission>
@@ -185,11 +192,14 @@
     <permission>hudson.model.Item.Cancel:yael</permission>
     <permission>hudson.model.Item.Cancel:yechiel</permission>
     <permission>hudson.model.Item.Cancel:yohana</permission>
+    <permission>hudson.model.Item.Cancel:yuval</permission>
     <permission>hudson.model.Item.Configure:alons</permission>
     <permission>hudson.model.Item.Configure:barak</permission>
     <permission>hudson.model.Item.Configure:danylo</permission>
+    <permission>hudson.model.Item.Configure:ester</permission>
     <permission>hudson.model.Item.Configure:evgeny</permission>
     <permission>hudson.model.Item.Configure:fe2s</permission>
+    <permission>hudson.model.Item.Configure:inbar</permission>
     <permission>hudson.model.Item.Configure:livnats</permission>
     <permission>hudson.model.Item.Configure:moran</permission>
     <permission>hudson.model.Item.Configure:niv</permission>
@@ -200,11 +210,13 @@
     <permission>hudson.model.Item.Configure:yael</permission>
     <permission>hudson.model.Item.Configure:yechiel</permission>
     <permission>hudson.model.Item.Configure:yohana</permission>
+    <permission>hudson.model.Item.Configure:yuval</permission>
     <permission>hudson.model.Item.Create:alons</permission>
     <permission>hudson.model.Item.Create:barak</permission>
-    <permission>hudson.model.Item.Create:danylo</permission>
+    <permission>hudson.model.Item.Create:ester</permission>
     <permission>hudson.model.Item.Create:evgeny</permission>
     <permission>hudson.model.Item.Create:fe2s</permission>
+    <permission>hudson.model.Item.Create:inbar</permission>
     <permission>hudson.model.Item.Create:livnats</permission>
     <permission>hudson.model.Item.Create:moran</permission>
     <permission>hudson.model.Item.Create:niv</permission>
@@ -226,6 +238,7 @@
     <permission>hudson.model.Item.Discover:ester</permission>
     <permission>hudson.model.Item.Discover:evgeny</permission>
     <permission>hudson.model.Item.Discover:fe2s</permission>
+    <permission>hudson.model.Item.Discover:inbar</permission>
     <permission>hudson.model.Item.Discover:livnats</permission>
     <permission>hudson.model.Item.Discover:moran</permission>
     <permission>hudson.model.Item.Discover:niv</permission>
@@ -236,12 +249,14 @@
     <permission>hudson.model.Item.Discover:yael</permission>
     <permission>hudson.model.Item.Discover:yechiel</permission>
     <permission>hudson.model.Item.Discover:yohana</permission>
+    <permission>hudson.model.Item.Discover:yuval</permission>
     <permission>hudson.model.Item.Read:alons</permission>
     <permission>hudson.model.Item.Read:barak</permission>
     <permission>hudson.model.Item.Read:danylo</permission>
     <permission>hudson.model.Item.Read:ester</permission>
     <permission>hudson.model.Item.Read:evgeny</permission>
     <permission>hudson.model.Item.Read:fe2s</permission>
+    <permission>hudson.model.Item.Read:inbar</permission>
     <permission>hudson.model.Item.Read:livnats</permission>
     <permission>hudson.model.Item.Read:moran</permission>
     <permission>hudson.model.Item.Read:niv</permission>
@@ -252,11 +267,14 @@
     <permission>hudson.model.Item.Read:yael</permission>
     <permission>hudson.model.Item.Read:yechiel</permission>
     <permission>hudson.model.Item.Read:yohana</permission>
+    <permission>hudson.model.Item.Read:yuval</permission>
     <permission>hudson.model.Item.Workspace:alons</permission>
     <permission>hudson.model.Item.Workspace:barak</permission>
     <permission>hudson.model.Item.Workspace:danylo</permission>
+    <permission>hudson.model.Item.Workspace:ester</permission>
     <permission>hudson.model.Item.Workspace:evgeny</permission>
     <permission>hudson.model.Item.Workspace:fe2s</permission>
+    <permission>hudson.model.Item.Workspace:inbar</permission>
     <permission>hudson.model.Item.Workspace:livnats</permission>
     <permission>hudson.model.Item.Workspace:moran</permission>
     <permission>hudson.model.Item.Workspace:niv</permission>
@@ -267,11 +285,14 @@
     <permission>hudson.model.Item.Workspace:yael</permission>
     <permission>hudson.model.Item.Workspace:yechiel</permission>
     <permission>hudson.model.Item.Workspace:yohana</permission>
+    <permission>hudson.model.Item.Workspace:yuval</permission>
     <permission>hudson.model.Run.Delete:alons</permission>
     <permission>hudson.model.Run.Delete:barak</permission>
     <permission>hudson.model.Run.Delete:danylo</permission>
+    <permission>hudson.model.Run.Delete:ester</permission>
     <permission>hudson.model.Run.Delete:evgeny</permission>
     <permission>hudson.model.Run.Delete:fe2s</permission>
+    <permission>hudson.model.Run.Delete:inbar</permission>
     <permission>hudson.model.Run.Delete:livnats</permission>
     <permission>hudson.model.Run.Delete:moran</permission>
     <permission>hudson.model.Run.Delete:niv</permission>
@@ -282,11 +303,16 @@
     <permission>hudson.model.Run.Delete:yael</permission>
     <permission>hudson.model.Run.Delete:yechiel</permission>
     <permission>hudson.model.Run.Delete:yohana</permission>
+    <permission>hudson.model.Run.Delete:yuval</permission>
+    <permission>hudson.model.Run.Replay:inbar</permission>
+    <permission>hudson.model.Run.Replay:yuval</permission>
     <permission>hudson.model.Run.Update:alons</permission>
     <permission>hudson.model.Run.Update:barak</permission>
     <permission>hudson.model.Run.Update:danylo</permission>
+    <permission>hudson.model.Run.Update:ester</permission>
     <permission>hudson.model.Run.Update:evgeny</permission>
     <permission>hudson.model.Run.Update:fe2s</permission>
+    <permission>hudson.model.Run.Update:inbar</permission>
     <permission>hudson.model.Run.Update:livnats</permission>
     <permission>hudson.model.Run.Update:moran</permission>
     <permission>hudson.model.Run.Update:niv</permission>
@@ -297,11 +323,13 @@
     <permission>hudson.model.Run.Update:yael</permission>
     <permission>hudson.model.Run.Update:yechiel</permission>
     <permission>hudson.model.Run.Update:yohana</permission>
+    <permission>hudson.model.Run.Update:yuval</permission>
     <permission>hudson.model.View.Configure:alons</permission>
     <permission>hudson.model.View.Configure:barak</permission>
     <permission>hudson.model.View.Configure:danylo</permission>
     <permission>hudson.model.View.Configure:evgeny</permission>
     <permission>hudson.model.View.Configure:fe2s</permission>
+    <permission>hudson.model.View.Configure:inbar</permission>
     <permission>hudson.model.View.Configure:livnats</permission>
     <permission>hudson.model.View.Configure:moran</permission>
     <permission>hudson.model.View.Configure:niv</permission>
@@ -312,11 +340,13 @@
     <permission>hudson.model.View.Configure:yael</permission>
     <permission>hudson.model.View.Configure:yechiel</permission>
     <permission>hudson.model.View.Configure:yohana</permission>
+    <permission>hudson.model.View.Configure:yuval</permission>
     <permission>hudson.model.View.Create:alons</permission>
     <permission>hudson.model.View.Create:barak</permission>
     <permission>hudson.model.View.Create:danylo</permission>
     <permission>hudson.model.View.Create:evgeny</permission>
     <permission>hudson.model.View.Create:fe2s</permission>
+    <permission>hudson.model.View.Create:inbar</permission>
     <permission>hudson.model.View.Create:livnats</permission>
     <permission>hudson.model.View.Create:moran</permission>
     <permission>hudson.model.View.Create:niv</permission>
@@ -327,6 +357,7 @@
     <permission>hudson.model.View.Create:yael</permission>
     <permission>hudson.model.View.Create:yechiel</permission>
     <permission>hudson.model.View.Create:yohana</permission>
+    <permission>hudson.model.View.Create:yuval</permission>
     <permission>hudson.model.View.Delete:alons</permission>
     <permission>hudson.model.View.Delete:barak</permission>
     <permission>hudson.model.View.Delete:danylo</permission>
@@ -347,6 +378,7 @@
     <permission>hudson.model.View.Read:danylo</permission>
     <permission>hudson.model.View.Read:evgeny</permission>
     <permission>hudson.model.View.Read:fe2s</permission>
+    <permission>hudson.model.View.Read:inbar</permission>
     <permission>hudson.model.View.Read:livnats</permission>
     <permission>hudson.model.View.Read:moran</permission>
     <permission>hudson.model.View.Read:niv</permission>
@@ -356,6 +388,7 @@
     <permission>hudson.model.View.Read:yael</permission>
     <permission>hudson.model.View.Read:yechiel</permission>
     <permission>hudson.model.View.Read:yohana</permission>
+    <permission>hudson.model.View.Read:yuval</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
     <disableSignup>false</disableSignup>

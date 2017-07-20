@@ -1,0 +1,79 @@
+<STYLE>
+BODY, TABLE, TD, TH, P {
+  font-family:Verdana,Helvetica,sans serif;
+  font-size:11px;
+  color:black;
+}
+h1 { color:black; }
+h2 { color:black; }
+h3 { color:black; }
+TD.bg1 { color:white; background-color:#0000C0; font-size:120% }
+TD.bg2 { color:white; background-color:#4040FF; font-size:110% }
+TD.bg3 { color:white; background-color:#8080FF; }
+TD.test_passed { color:blue; }
+TD.test_failed { color:red; }
+TD.console { font-family:Courier New; }
+</STYLE>
+<BODY>
+ 
+
+<% 
+   def ieVersion = "unknown"
+   def xapVersion = "unknown"
+   def ieMilestone = "unknown"
+   def ieBuildNumber = "unknown"
+   def ieBranchName = "unknown"
+   def ieTagName = "unknown"
+   def mavenVersion = "unknown"
+
+   try{
+     xapVersion = build.getEnvironment(listener).get("XAP_RELEASE_VERSION") 
+     ieVersion = build.getEnvironment(listener).get("IE_VERSION") 
+     ieMilestone = build.getEnvironment(listener).get("MILESTONE")
+     ieBuildNumber = build.getEnvironment(listener).get("IE_FINAL_BUILD_NUMBER")
+     ieBranchName = build.getEnvironment(listener).get("BRANCH_NAME")
+     ieTagName = build.getEnvironment(listener).get("TAG_NAME")
+     mavenVersion = build.getEnvironment(listener).get("IE_MAVEN_VERSION")
+   } catch(all){ 
+   }
+   def ieCommunityZipName = "gigaspaces-insightedge-" + ieVersion + "-" +  ieMilestone + "-" + ieBuildNumber + "-community.zip"
+   def iePremiumZipName = "gigaspaces-insightedge-" + ieVersion + "-" +  ieMilestone + "-" + ieBuildNumber + "-premium.zip"
+%>
+
+<TABLE>
+  <TR><TD align="right"><IMG SRC="https://raw.githubusercontent.com/jenkinsci/jenkins/master/war/src/main/webapp/images/32x32/<%= build.result.toString() == 'SUCCESS' ? "blue.gif" : build.result.toString() == 'FAILURE' ? 'red.gif' : 'yellow.gif' %>" />
+  </TD><TD valign="center"><B style="font-size: 200%;">BUILD ${build.result}</B></TD></TR>
+  <TR><TD>URL</TD><TD><A href="${rooturl}${build.url}">${rooturl}${build.url}</A></TD></TR>
+  <TR><TD>Project:</TD><TD>${project.name}</TD></TR>
+  <TR><TD>Date:</TD><TD>${it.timestampString}</TD></TR>
+  <TR><TD>Duration:</TD><TD>${build.durationString}</TD></TR>
+  <TR><TD>InsightEdge Tag:</TD><TD><A href="https://github.com/InsightEdge/insightedge/tree/${ieTagName}">${ieTagName}</A></TD></TR>
+  <TR><TD>InsightEdge Examples Tag:</TD><TD><A href="https://github.com/InsightEdge/insightedge-examples/tree/${ieTagName}">${ieTagName}</A></TD></TR>
+  <TR><TD>InsightEdge Zeppelin Tag:</TD><TD><A href="https://github.com/InsightEdge/insightedge-zeppelin/tree/${ieTagName}">${ieTagName}</A></TD></TR>
+  <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ${cause.shortDescription} <%  } %></TD></TR>
+  <% 
+  	if(build.result.toString() == 'SUCCESS'){
+   %>
+  		<TR><TD>InsightEdge:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/insightedge/${ieVersion}/${mavenVersion}/${iePremiumZipName}">${iePremiumZipName}</A></TD></TR>
+  	
+	<TR><TD>Maven release version:</TD><TD>${mavenVersion}</TD></TR> 
+   <%
+  	}
+  %>
+</TABLE>
+<BR/>
+
+
+
+<!-- CONSOLE OUTPUT -->
+<% if(build.result==hudson.model.Result.FAILURE) { %>
+<TABLE width="100%" cellpadding="0" cellspacing="0">
+<TR><TD class="bg1"><B>CONSOLE OUTPUT</B></TD></TR>
+<% 	build.getLog(100).each() { line -> %>
+	<TR><TD class="console">${org.apache.commons.lang.StringEscapeUtils.escapeHtml(line)}</TD></TR>
+<% 	} %>
+</TABLE>
+<BR/>
+<% } %>
+
+</BODY>
