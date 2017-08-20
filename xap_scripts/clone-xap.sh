@@ -25,6 +25,8 @@ function checkout_branch {
 	git reset --hard HEAD
 	git checkout -- .
 	git clean -d -x --force --quiet .
+        rm -f .git/gc.log
+        git prune
 	git gc --auto
 	# Delete all local tags since git fetch --tags --prune does not realy prune tags.
 	git tag -l | xargs git tag -d &> /dev/null   
