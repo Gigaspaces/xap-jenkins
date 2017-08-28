@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 read -d '' awkScript << 'EOF'
 /[0-9]+ days ago\\ +\\(tag:.*-NIGHTLY/ {
