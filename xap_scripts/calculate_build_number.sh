@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-BUILDS_FILENAME="builds.txt"
+BUILDS_FILENAME=${BUILDS_FILENAME="builds.txt"}
 
 
 function set_next_build_num {
