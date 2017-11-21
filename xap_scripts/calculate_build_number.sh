@@ -1,7 +1,7 @@
 #!/bin/bash
 
-
-BUILDS_FILENAME=${BUILDS_FILENAME="builds.txt"}
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BUILDS_FILENAME="${DIR}/builds.txt"
 
 
 function set_next_build_num {
@@ -37,15 +37,22 @@ if [ "${FILENAME}" == "" ]; then
     exit 1
 fi
 
-if [ "$1" == "" ]; then
+BUILD_NUMBER_KEY="$1"
+
+if [ "${BUILD_NUMBER_KEY}" == "" ]; then
     echo "Error: missing build number. Usage: ./calculate_build_number.sh <build number>"
     exit 1
 fi
 
 
-set_next_build_num $1
+set_next_build_num ${BUILD_NUMBER_KEY}
 if [ "$?" != "0" ]; then
     echo "Failed to calculate build number"
     exit 1
 fi
 echo "BUILD_NUMBER=${CUSTOM_BUILD_NUMBER}" > ${FILENAME}
+
+
+git add ${BUILDS_FILENAME}
+git commit -m "updating ${BUILDS_FILENAME}. Setting latest build of ${BUILD_NUMBER_KEY} to be ${CUSTOM_BUILD_NUMBER}"
+git push --set-upstream origin master
