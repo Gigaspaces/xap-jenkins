@@ -54,5 +54,5 @@ echo "BUILD_NUMBER=${CUSTOM_BUILD_NUMBER}" > ${FILENAME}
 
 
 git add ${BUILDS_FILENAME}
-git commit -m "updating ${BUILDS_FILENAME}. Setting latest build of ${BUILD_NUMBER_KEY} to be ${CUSTOM_BUILD_NUMBER}"
+git commit -m "updating builds.txt, setting latest build of ${BUILD_NUMBER_KEY} to be ${CUSTOM_BUILD_NUMBER}"
 git push --set-upstream origin master
