@@ -1,0 +1,339 @@
+#!/bin/bash
+
+function log {
+    echo "[INFO] $@"
+}
+
+function error_and_exit {
+    echo "[ERROR] $@"
+    exit 1
+}
+function to_job_url {
+    local job="$1"
+    echo job/${job//\//\/job\/}
+}
+
+function check_jenkins_job_exists {
+    local jenkins_job=$(to_job_url "$1")
+    #Get the current configuration and save it locally
+    curl -f -s -X GET ${JENKINS_URL}/${jenkins_job}/config.xml >> /dev/null
+    return $?
+}
+
+function get_jenkins_job_config {
+    local jenkins_job=$(to_job_url "$1")
+    local jenkins_config_file="$2"
+    #Get the current configuration and save it locally
+    curl -f -s -X GET ${JENKINS_URL}/${jenkins_job}/config.xml -o ${jenkins_config_file}
+    local r="$?"
+    if [ "$r" -ne 0 ]
+    then
+        echo "[ERROR] Failed to get job config of ${jenkins_job}, exit code is: $r"
+        exit "$r"
+    fi
+}
+
+function copy_jenkins_job {
+    local from_job_name="$1"
+    local to_job_name="$2"
+
+    local origin_job_path=$(to_job_url $(get_job_parent ${from_job_name}))
+    local origin_job_name=$(get_job_name ${from_job_name})
+    local new_job_url="${origin_job_path}/job/${to_job_name}"
+
+    curl -f -s --data ' ' "${JENKINS_URL}/${origin_job_path}/createItem?name="${to_job_name}"&mode=copy&from="${origin_job_name}
+    local r="$?"
+    if [ "$r" -ne 0 ]
+    then
+        echo "[ERROR] Failed to copy job ${from_job_name} to ${to_job_name}, exit code is: $r"
+        exit "$r"
+    fi
+
+    curl -s --data disable "${JENKINS_URL}/${new_job_url}/disable"
+	curl -s --data enable "${JENKINS_URL}/${new_job_url}/enable"
+
+}
+
+function post_jenkins_job_config {
+    local jenkins_job=$(to_job_url "$1")
+    local jenkins_config_file="$2"
+    #Update the configuration via posting a local configuration file
+    curl -f -X POST ${JENKINS_URL}/${jenkins_job}/config.xml --data-binary "@"$jenkins_config_file""
+    local r="$?"
+    if [ "$r" -ne 0 ]
+    then
+        echo "[ERROR] Failed to update job ${jenkins_job}, exit code is: $r"
+        exit "$r"
+    fi
+}
+
+function delete_jenkins_job {
+    local jenkins_job=$(to_job_url "$1")
+    curl -f -X POST ${JENKINS_URL}/${jenkins_job}/doDelete
+    local r="$?"
+    if [ "$r" -ne 0 ]
+    then
+        echo "[ERROR] Failed to delete job ${jenkins_job}, exit code is: $r"
+        exit "$r"
+    fi
+}
+
+function rename_job {
+    local old_name=$(to_job_url "$1")
+    local new_name="$2"
+
+    curl -f -X POST ${JENKINS_URL}/${old_name}/doRename?newName=${new_name}
+    local r="$?"
+    if [ "$r" -ne 0 ]
+    then
+        echo "[ERROR] Failed to rename job ${old_name} to ${new_name}, exit code is: $r"
+        exit "$r"
+    fi
+}
+
+function get_default_value {
+    local key="$1"
+    local config_file="$2"
+    local version_number=$(sed -n "/<name>${key}<\/name>/{N; /.*/{N; /<defaultValue>.*<\/defaultValue>/p}}" "$config_file" | grep defaultValue | sed -n '/defaultValue/{s/.*<defaultValue>\(.*\)<\/defaultValue>.*/\1/;p}')
+    echo ${version_number}
+}
+
+
+function get_job_parent {
+    local jobname="$1"
+    local temp=$(echo $jobname | rev)
+
+    if [ "$(expr index "$temp" '/')" == 0 ]; then
+        echo ""
+    else
+        echo ${jobname:0:$(( ${#jobname} - $(expr index "$temp" '/') ))}
+    fi
+
+
+}
+
+function get_job_name {
+    local jobname="$1"
+    local temp=$(echo $jobname | rev)
+
+    if [ "$(expr index "$temp" '/')" == 0 ]; then
+        echo "${jobname}"
+    else
+        echo ${jobname:$(( ${#jobname} - $(expr index "$temp" '/') + 1 ))}
+    fi
+}
+
+
+function update_parameter {
+    local jenkins_config_file="$1"
+    local key="$2"
+    local new_value="$3"
+
+    sed -i "/<name>${key}<\/name>/{N; /.*/{N; s/<defaultValue>.*<\/defaultValue>/<defaultValue>"${new_value}"<\/defaultValue>/}}" "$jenkins_config_file"
+
+    local current_value=$(sed -n "/<name>${key}<\/name>/{N; /.*/{N; /<defaultValue>.*<\/defaultValue>/p}}" "$jenkins_config_file" | grep defaultValue | sed -n '/defaultValue/{s/.*<defaultValue>\(.*\)<\/defaultValue>.*/\1/;p}')
+
+    if [ "${current_value}" == "" ]; then
+        echo "[ERROR] no such parameter [${key}] in ${jenkins_config_file}"
+        exit 1
+    fi
+
+    local r="$?"
+    if [ "$r" -ne 0 ]
+    then
+        echo "[ERROR] Failed to update parameter ${key} to ${new_value} in ${jenkins_config_file}, exit code is: $r"
+        exit "$r"
+    fi
+}
+
+function update_mode {
+    local jenkins_config_file="$1"
+    local mode="$2"
+    sed -i '/<a class="string-array">/{N; s/<string>.*<\/string>/<string>'"$mode"'<\/string>/}' "$jenkins_config_file"
+
+    local r="$?"
+    if [ "$r" -ne 0 ]
+    then
+        echo "[ERROR] Failed to update mode to ${mode} in ${jenkins_config_file}, exit code is: $r"
+        exit "$r"
+    fi
+}
+
+function start_jenkins_timer_trigger {
+    local jenkins_config_file="$1"
+    local cron_pattern="$2"
+
+    sed -i '/<hudson.triggers.TimerTrigger>/{N; s/<spec>.*<\/spec>/<spec>'"$cron_pattern"'<\/spec>/g;s/<spec\/>/<spec>'"$cron_pattern"'<\/spec>/g}' "$jenkins_config_file"
+    local r="$?"
+    if [ "$r" -ne 0 ]
+    then
+        echo "[ERROR] Failed to start_timer_trigger [${cron_pattern}] in ${jenkins_config_file}, exit code is: $r"
+        exit "$r"
+    fi
+}
+
+function stop_timer_trigger {
+    local jenkins_config_file="$1"
+    sed -i '/<hudson.triggers.TimerTrigger>/{N; s/<spec>.*<\/spec>/<spec><\/spec>/}' "$jenkins_config_file"
+    local r="$?"
+    if [ "$r" -ne 0 ]
+    then
+        echo "[ERROR] Failed to stop_timer_trigger in ${jenkins_config_file}, exit code is: $r"
+        exit "$r"
+    fi
+}
+
+
+function move_to_release_mode {
+    local DIR="12.3.0/master"
+    local CONTINUOUS_JOB="12.3.0/master/continuous"
+    local CONTINUOUS_MILESTONE="continuous-milestone"
+    local RELEASE_JOB="12.3.0/master/release"
+    local RELEASE_MILESTONE="release-milestone"
+
+    log "Checking existence of ${CONTINOUS_JOB}"
+    check_jenkins_job_exists "${CONTINUOUS_JOB}"
+    if [ "$?" != "0" ]; then
+        echo "[ERROR] ${CONTINUOUS_JOB} does not exist"
+        exit 1
+    fi
+
+    log "Checking existence of ${RELEASE_JOB}"
+    check_jenkins_job_exists "${RELEASE_JOB}"
+    if [ "$?" != "0" ]; then
+        echo "[ERROR] ${RELEASE_JOB} does not exist"
+        exit 1
+    fi
+
+    log "Checking existence of ${DIR}/${CONTINUOUS_MILESTONE}"
+    check_jenkins_job_exists "${DIR}/${CONTINUOUS_MILESTONE}"
+    if [ "$?" == "0" ]; then
+        echo "[ERROR] ${DIR}/${CONTINUOUS_MILESTONE} job already exists"
+        exit 1
+    fi
+
+    log "Checking existence of "${DIR}/${RELEASE_MILESTONE}""
+    check_jenkins_job_exists "${DIR}/${RELEASE_MILESTONE}"
+    if [ "$?" == "0" ]; then
+        echo "[ERROR] ${DIR}/${RELEASE_MILESTONE} job already exists"
+        exit 1
+    fi
+
+    log "Getting configuration files of ${CONTINUOUS_JOB} and ${RELEASE_JOB}"
+    get_jenkins_job_config "${CONTINUOUS_JOB}" "continuous.xml"
+    get_jenkins_job_config "${RELEASE_JOB}" "release.xml"
+    cp continuous.xml continuous-milestone.xml
+    cp release.xml release-milestone.xml
+
+    CURRENT_MILESTONE=$(get_default_value "MILESTONE" "continuous-milestone.xml")
+    log "Current milestone is: ${CURRENT_MILESTONE}"
+
+    #Prev cont
+    log "[CONTINUOUS-MILESTONE] Updating BRANCH_NAME to ${MILESTONE_BRANCH_NAME}"
+    update_parameter "continuous-milestone.xml" "BRANCH_NAME" "${MILESTONE_BRANCH_NAME}"
+
+    #New Cont
+    log "[CONTINUOUS] Updating XAP_VERSION to ${NEXT_XAP_VERSION}"
+    update_parameter "continuous.xml" "XAP_VERSION" "${NEXT_XAP_VERSION}"
+    log "[CONTINUOUS] Updating MILESTONE to ${NEXT_MILESTONE}"
+    update_parameter "continuous.xml" "MILESTONE" "${NEXT_MILESTONE}"
+    log "[CONTINUOUS] Updating XAP_BUILD_NUMBER to ${NEXT_XAP_BUILD_NUMBER}"
+    update_parameter "continuous.xml" "XAP_BUILD_NUMBER" "${NEXT_XAP_BUILD_NUMBER}"
+
+    #Old release
+    log "[RELEASE-MILESTONE] Stopping timer trigger"
+    stop_timer_trigger "release-milestone.xml"
+    log "[RELEASE-MILESTONE] Updating BRANCH_NAME ${MILESTONE_BRANCH_NAME}"
+    update_parameter "release-milestone.xml" "BRANCH_NAME" "${MILESTONE_BRANCH_NAME}"
+    update_parameter "release-milestone.xml" "TAG_NAME" "\$XAP_VERSION-\$MILESTONE"
+    update_mode "release-milestone.xml" "MILESTONE"
+
+    #New release
+    stop_timer_trigger "release.xml"
+    update_parameter "release.xml" "XAP_VERSION" "${NEXT_XAP_VERSION}"
+    update_parameter "release.xml" "MILESTONE" "${NEXT_MILESTONE}"
+    update_parameter "release.xml" "XAP_BUILD_NUMBER" "${NEXT_XAP_BUILD_NUMBER}"
+
+    rename_job "${CONTINUOUS_JOB}" "continuous-milestone"
+    copy_jenkins_job "${DIR}/continuous-milestone" "continuous"
+
+    rename_job "${RELEASE_JOB}" "release-milestone"
+    copy_jenkins_job "${DIR}/release-milestone" "release"
+
+
+    post_jenkins_job_config "${CONTINUOUS_JOB}" "continuous.xml"
+    post_jenkins_job_config "${DIR}/continuous-milestone" "continuous-milestone.xml"
+    post_jenkins_job_config "${RELEASE_JOB}" "release.xml"
+    post_jenkins_job_config "${DIR}/release-milestone" "release-milestone.xml"
+
+}
+
+function move_to_nightly {
+    local DIR="12.3.0/master"
+    local CONTINUOUS_JOB="12.3.0/master/continuous"
+    local CONTINUOUS_MILESTONE_JOB="12.3.0/master/continuous-milestone"
+    local RELEASE_JOB="12.3.0/master/release"
+    local RELEASE_MILESTONE_JOB="12.3.0/master/release-milestone"
+
+
+    check_jenkins_job_exists "${RELEASE_JOB}"
+    if [ "$?" != "0" ]; then
+        echo "[ERROR] ${RELEASE_JOB} job does not exist"
+        exit 1
+    fi
+
+    check_jenkins_job_exists "${CONTINUOUS_MILESTONE_JOB}"
+    if [ "$?" != "0" ]; then
+        echo "[ERROR] ${CONTINUOUS_MILESTONE_JOB} job does not exist"
+        exit 1
+    fi
+
+    check_jenkins_job_exists "${RELEASE_MILESTONE_JOB}"
+    if [ "$?" != "0" ]; then
+        echo "[ERROR] ${RELEASE_MILESTONE_JOB} job does not exist"
+        exit 1
+    fi
+
+    get_jenkins_job_config "${RELEASE_JOB}" "release.xml"
+    start_jenkins_timer_trigger "release.xml" "H 17 * * *"
+    post_jenkins_job_config "${RELEASE_JOB}" "release.xml"
+
+
+    delete_jenkins_job "${CONTINUOUS_MILESTONE_JOB}"
+    delete_jenkins_job "${RELEASE_MILESTONE_JOB}"
+}
+
+
+function assert_env_vars {
+
+    if [ "${JENKINS_URL}" == "" ]; then
+        error_and_exit "JENKINS_URL is not set"
+    fi
+
+    if [ "${MILESTONE_BRANCH_NAME}" == "" ]; then
+        error_and_exit "MILESTONE_BRANCH_NAME is not set"
+    fi
+
+    if [ "${NEXT_XAP_VERSION}" == "" ]; then
+        error_and_exit "NEXT_XAP_VERSION is not set"
+    fi
+
+    if [ "${NEXT_MILESTONE}" == "" ]; then
+        error_and_exit "NEXT_MILESTONE is not set"
+    fi
+
+    if [ "${NEXT_XAP_BUILD_NUMBER}" == "" ]; then
+        error_and_exit "NEXT_XAP_BUILD_NUMBER is not set"
+    fi
+}
+
+assert_env_vars
+
+if [ "${MODE}" == "CREATE_MILESTONE_JOBS" ]; then
+    move_to_release_mode
+elif [ "${MODE}" == "DELETE_MILESTONE_JOBS" ]; then
+    move_to_nightly
+else
+    echo "[ERROR] unknown mode ${MODE}"
+    exit 1
+fi
