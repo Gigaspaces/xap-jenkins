@@ -259,9 +259,9 @@ function move_to_release_mode {
 
 
     post_jenkins_job_config "${CONTINUOUS_JOB}" "continuous.xml"
-    post_jenkins_job_config "${CONTINUOUS_MILESTONE_JOB_NAME}" "continuous-milestone.xml"
+    post_jenkins_job_config "${CONTINUOUS_MILESTONE_JOB}" "continuous-milestone.xml"
     post_jenkins_job_config "${RELEASE_JOB}" "release.xml"
-    post_jenkins_job_config "${RELEASE_MILESTONE_JOB_NAME}" "release-milestone.xml"
+    post_jenkins_job_config "${RELEASE_MILESTONE_JOB}" "release-milestone.xml"
 
 }
 
