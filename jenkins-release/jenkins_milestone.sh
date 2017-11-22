@@ -183,10 +183,13 @@ function stop_timer_trigger {
     fi
 }
 
+function append_branch_to_newman_cron {
+    local branch="$1"
+    export SSHPASS=password
+    sshpass -e ssh "$XAP_NEWMAN_USER"@"$XAP_NEWMAN_HOST" -C "sed -ri 's/crons.suitediff.branch = .*/crons.suitediff.branch = '$branch'/'g /home/xap/newman-analytics/resources/crons/suitediff/suitediff.properties"
+}
 
 function move_to_release_mode {
-
-
 
     log "Checking existence of ${CONTINUOUS_JOB}"
     check_jenkins_job_exists "${CONTINUOUS_JOB}"
@@ -263,6 +266,7 @@ function move_to_release_mode {
     post_jenkins_job_config "${RELEASE_JOB}" "release.xml"
     post_jenkins_job_config "${RELEASE_MILESTONE_JOB}" "release-milestone.xml"
 
+    append_branch_to_newman_cron "${MILESTONE_BRANCH_NAME}"
 }
 
 function move_to_nightly {
@@ -292,6 +296,8 @@ function move_to_nightly {
 
     delete_jenkins_job "${CONTINUOUS_MILESTONE_JOB}"
     delete_jenkins_job "${RELEASE_MILESTONE_JOB}"
+
+    append_branch_to_newman_cron "master"
 }
 
 function stop_nightly_trigger {
@@ -344,6 +350,14 @@ function set_env_vars {
 
     if [ "${RELEASE_MILESTONE_JOB_NAME}" == "" ]; then
         error_and_exit "RELEASE_MILESTONE_JOB_NAME is not set"
+    fi
+
+    if [ "${XAP_NEWMAN_USER}" == "" ]; then
+        error_and_exit "XAP_NEWMAN_USER is not set"
+    fi
+
+    if [ "${XAP_NEWMAN_HOST}" == "" ]; then
+        error_and_exit "XAP_NEWMAN_HOST is not set"
     fi
 
 
