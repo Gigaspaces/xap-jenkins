@@ -185,13 +185,10 @@ function stop_timer_trigger {
 
 
 function move_to_release_mode {
-    local DIR="12.3.0/master"
-    local CONTINUOUS_JOB="12.3.0/master/continuous"
-    local CONTINUOUS_MILESTONE="continuous-milestone"
-    local RELEASE_JOB="12.3.0/master/release"
-    local RELEASE_MILESTONE="release-milestone"
 
-    log "Checking existence of ${CONTINOUS_JOB}"
+
+
+    log "Checking existence of ${CONTINUOUS_JOB}"
     check_jenkins_job_exists "${CONTINUOUS_JOB}"
     if [ "$?" != "0" ]; then
         echo "[ERROR] ${CONTINUOUS_JOB} does not exist"
@@ -205,17 +202,17 @@ function move_to_release_mode {
         exit 1
     fi
 
-    log "Checking existence of ${DIR}/${CONTINUOUS_MILESTONE}"
-    check_jenkins_job_exists "${DIR}/${CONTINUOUS_MILESTONE}"
+    log "Checking existence of ${CONTINUOUS_MILESTONE_JOB}"
+    check_jenkins_job_exists "${CONTINUOUS_MILESTONE_JOB}"
     if [ "$?" == "0" ]; then
-        echo "[ERROR] ${DIR}/${CONTINUOUS_MILESTONE} job already exists"
+        echo "[ERROR] ${CONTINUOUS_MILESTONE_JOB} job already exists"
         exit 1
     fi
 
-    log "Checking existence of "${DIR}/${RELEASE_MILESTONE}""
-    check_jenkins_job_exists "${DIR}/${RELEASE_MILESTONE}"
+    log "Checking existence of ${RELEASE_MILESTONE_JOB}"
+    check_jenkins_job_exists "${RELEASE_MILESTONE_JOB}"
     if [ "$?" == "0" ]; then
-        echo "[ERROR] ${DIR}/${RELEASE_MILESTONE} job already exists"
+        echo "[ERROR] ${RELEASE_MILESTONE_JOB} job already exists"
         exit 1
     fi
 
@@ -254,27 +251,21 @@ function move_to_release_mode {
     update_parameter "release.xml" "MILESTONE" "${NEXT_MILESTONE}"
     update_parameter "release.xml" "XAP_BUILD_NUMBER" "${NEXT_XAP_BUILD_NUMBER}"
 
-    rename_job "${CONTINUOUS_JOB}" "continuous-milestone"
-    copy_jenkins_job "${DIR}/continuous-milestone" "continuous"
+    rename_job "${CONTINUOUS_JOB}" "${CONTINUOUS_MILESTONE_JOB_NAME}"
+    copy_jenkins_job "${CONTINUOUS_MILESTONE_JOB}" "${CONTINUOUS_JOB_NAME}"
 
-    rename_job "${RELEASE_JOB}" "release-milestone"
-    copy_jenkins_job "${DIR}/release-milestone" "release"
+    rename_job "${RELEASE_JOB}" "${RELEASE_MILESTONE_JOB_NAME}"
+    copy_jenkins_job "${CONTINUOUS_MILESTONE_JOB}" "${RELEASE_JOB_NAME}"
 
 
     post_jenkins_job_config "${CONTINUOUS_JOB}" "continuous.xml"
-    post_jenkins_job_config "${DIR}/continuous-milestone" "continuous-milestone.xml"
+    post_jenkins_job_config "${CONTINUOUS_MILESTONE_JOB_NAME}" "continuous-milestone.xml"
     post_jenkins_job_config "${RELEASE_JOB}" "release.xml"
-    post_jenkins_job_config "${DIR}/release-milestone" "release-milestone.xml"
+    post_jenkins_job_config "${RELEASE_MILESTONE_JOB_NAME}" "release-milestone.xml"
 
 }
 
 function move_to_nightly {
-    local DIR="12.3.0/master"
-    local CONTINUOUS_JOB="12.3.0/master/continuous"
-    local CONTINUOUS_MILESTONE_JOB="12.3.0/master/continuous-milestone"
-    local RELEASE_JOB="12.3.0/master/release"
-    local RELEASE_MILESTONE_JOB="12.3.0/master/release-milestone"
-
 
     check_jenkins_job_exists "${RELEASE_JOB}"
     if [ "$?" != "0" ]; then
@@ -304,7 +295,7 @@ function move_to_nightly {
 }
 
 
-function assert_env_vars {
+function set_env_vars {
 
     if [ "${JENKINS_URL}" == "" ]; then
         error_and_exit "JENKINS_URL is not set"
@@ -325,9 +316,54 @@ function assert_env_vars {
     if [ "${NEXT_XAP_BUILD_NUMBER}" == "" ]; then
         error_and_exit "NEXT_XAP_BUILD_NUMBER is not set"
     fi
+
+
+    if [ "${CONTINUOUS_JOB_NAME}" == "" ]; then
+        error_and_exit "CONTINUOUS_JOB_NAME is not set"
+    fi
+
+    if [ "${CONTINUOUS_MILESTONE_JOB_NAME}" == "" ]; then
+        error_and_exit "CONTINUOUS_MILESTONE_JOB_NAME is not set"
+    fi
+
+    if [ "${RELEASE_JOB_NAME}" == "" ]; then
+        error_and_exit "RELEASE_JOB_NAME is not set"
+    fi
+
+    if [ "${RELEASE_MILESTONE_JOB_NAME}" == "" ]; then
+        error_and_exit "RELEASE_MILESTONE_JOB_NAME is not set"
+    fi
+
+
+    CONTINUOUS_JOB="${CONTINUOUS_JOB_NAME}"
+    CONTINUOUS_MILESTONE_JOB="${CONTINUOUS_MILESTONE_JOB_NAME}"
+    RELEASE_JOB="${RELEASE_JOB_NAME}"
+    RELEASE_MILESTONE_JOB="${RELEASE_MILESTONE_JOB_NAME}"
+    if [ "${FOLDER}" != "" ]; then
+        CONTINUOUS_JOB="${FOLDER}/${CONTINUOUS_JOB}"
+        CONTINUOUS_MILESTONE_JOB="${FOLDER}/${CONTINUOUS_MILESTONE_JOB}"
+        RELEASE_JOB="${FOLDER}/${RELEASE_JOB}"
+        RELEASE_MILESTONE_JOB="${FOLDER}/${RELEASE_MILESTONE_JOB}"
+    fi
 }
 
-assert_env_vars
+
+# Example of env vars setup
+#    FOLDER="12.3.0/master"
+#    CONTINUOUS_JOB_NAME="continuous"
+#    CONTINUOUS_MILESTONE_JOB_NAME="continuous-milestone"
+#    RELEASE_JOB_NAME="release"
+#    RELEASE_MILESTONE_JOB_NAME="release-milestone"
+
+#    JENKINS_URL="http://${JENKINS_USER}:${JENKINS_PASSWORD}@${JENKINS_HOST}:${JENKINS_PORT}"
+#    NEXT_XAP_VERSION="12.3.0"
+#    CURRENT_MILESTONE="m6"
+#    NEXT_MILESTONE="m7"
+#    NEXT_XAP_BUILD_NUMBER="18906"
+#    MILESTONE_BRANCH_NAME="12.3.0-${CURRENT_BRANCH}-branch"
+#    MODE="CREATE_MILESTONE_JOBS"
+
+set_env_vars
 
 if [ "${MODE}" == "CREATE_MILESTONE_JOBS" ]; then
     move_to_release_mode
