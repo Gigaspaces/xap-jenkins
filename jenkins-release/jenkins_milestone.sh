@@ -294,6 +294,18 @@ function move_to_nightly {
     delete_jenkins_job "${RELEASE_MILESTONE_JOB}"
 }
 
+function stop_nightly_trigger {
+    check_jenkins_job_exists "${RELEASE_JOB}"
+    if [ "$?" != "0" ]; then
+        echo "[ERROR] ${RELEASE_JOB} job does not exist"
+        exit 1
+    fi
+    get_jenkins_job_config "${RELEASE_JOB}" "release.xml"
+    stop_timer_trigger "release.xml"
+    post_jenkins_job_config "${RELEASE_JOB}" "release.xml"
+
+
+}
 
 function set_env_vars {
 
@@ -369,6 +381,8 @@ if [ "${MODE}" == "CREATE_MILESTONE_JOBS" ]; then
     move_to_release_mode
 elif [ "${MODE}" == "DELETE_MILESTONE_JOBS" ]; then
     move_to_nightly
+elif [ "${MODE}" == "STOP_NIGHTLY_TRIGGER" ]; then
+    stop_nightly_trigger
 else
     echo "[ERROR] unknown mode ${MODE}"
     exit 1
