@@ -255,7 +255,7 @@ function move_to_release_mode {
     copy_jenkins_job "${CONTINUOUS_MILESTONE_JOB}" "${CONTINUOUS_JOB_NAME}"
 
     rename_job "${RELEASE_JOB}" "${RELEASE_MILESTONE_JOB_NAME}"
-    copy_jenkins_job "${RELEASE_MILESTONE_JOB_NAME}" "${RELEASE_JOB_NAME}"
+    copy_jenkins_job "${RELEASE_MILESTONE_JOB}" "${RELEASE_JOB_NAME}"
 
 
     post_jenkins_job_config "${CONTINUOUS_JOB}" "continuous.xml"
