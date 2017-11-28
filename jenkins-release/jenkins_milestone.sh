@@ -290,7 +290,7 @@ function move_to_nightly {
     fi
 
     get_jenkins_job_config "${RELEASE_JOB}" "release.xml"
-    start_jenkins_timer_trigger "release.xml" "H 17 * * *"
+    start_jenkins_timer_trigger "release.xml" "0 17 * * *"
     post_jenkins_job_config "${RELEASE_JOB}" "release.xml"
 
 
