@@ -245,7 +245,7 @@ function move_to_release_mode {
     stop_timer_trigger "release-milestone.xml"
     log "[RELEASE-MILESTONE] Updating BRANCH_NAME ${MILESTONE_BRANCH_NAME}"
     update_parameter "release-milestone.xml" "BRANCH_NAME" "${MILESTONE_BRANCH_NAME}"
-    update_parameter "release-milestone.xml" "TAG_NAME" "\$XAP_VERSION-\$MILESTONE"
+    update_parameter "release-milestone.xml" "TAG_NAME" "\$XAP_VERSION-\$MILESTONE-MILESTONE"
     update_mode "release-milestone.xml" "MILESTONE"
 
     #New release
