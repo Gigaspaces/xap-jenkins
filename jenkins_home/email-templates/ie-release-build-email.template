@@ -36,8 +36,7 @@ TD.console { font-family:Courier New; }
      mavenVersion = build.getEnvironment(listener).get("IE_MAVEN_VERSION")
    } catch(all){ 
    }
-   def ieCommunityZipName = "gigaspaces-insightedge-" + ieVersion + "-" +  ieMilestone + "-" + ieBuildNumber + "-community.zip"
-   def iePremiumZipName = "gigaspaces-insightedge-" + ieVersion + "-" +  ieMilestone + "-" + ieBuildNumber + "-premium.zip"
+   def iePremiumZipName = "gigaspaces-insightedge-" + ieVersion + "-" +  ieMilestone + "-b" + ieBuildNumber + ".zip"
 %>
 
 <TABLE>
@@ -54,7 +53,7 @@ TD.console { font-family:Courier New; }
   <% 
   	if(build.result.toString() == 'SUCCESS'){
    %>
-  		<TR><TD>InsightEdge:</TD><TD><A href="https://gigaspaces-repository-eu.s3.amazonaws.com/com/gigaspaces/insightedge/${ieVersion}/${mavenVersion}/${iePremiumZipName}">${iePremiumZipName}</A></TD></TR>
+  		<TR><TD>InsightEdge:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/insightedge/${ieVersion}/${mavenVersion}/${iePremiumZipName}">${iePremiumZipName}</A></TD></TR>
   	
 	<TR><TD>Maven release version:</TD><TD>${mavenVersion}</TD></TR> 
    <%

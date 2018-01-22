@@ -1,0 +1,85 @@
+<STYLE>
+BODY, TABLE, TD, TH, P {
+  font-family:Verdana,Helvetica,sans serif;
+  font-size:11px;
+  color:black;
+}
+h1 { color:black; }
+h2 { color:black; }
+h3 { color:black; }
+TD.bg1 { color:white; background-color:#0000C0; font-size:120% }
+TD.bg2 { color:white; background-color:#4040FF; font-size:110% }
+TD.bg3 { color:white; background-color:#8080FF; }
+TD.test_passed { color:blue; }
+TD.test_failed { color:red; }
+TD.console { font-family:Courier New; }
+</STYLE>
+<BODY>
+
+
+
+
+<TABLE>
+  <TR><TD align="right"><IMG SRC="https://raw.githubusercontent.com/jenkinsci/jenkins/master/war/src/main/webapp/images/32x32/<%= build.result.toString() == 'SUCCESS' ? "blue.gif" : build.result.toString() == 'FAILURE' ? 'red.gif' : 'yellow.gif' %>" />
+  </TD><TD valign="center"><B style="font-size: 200%;">BUILD ${build.result}</B></TD></TR>
+  <TR><TD>URL</TD><TD><A href="${rooturl}${build.url}">${rooturl}${build.url}</A></TD></TR>
+  <TR><TD>Project:</TD><TD>${project.name}</TD></TR>
+  <TR><TD>Date:</TD><TD>${it.timestampString}</TD></TR>
+  <TR><TD>Duration:</TD><TD>${build.durationString}</TD></TR>
+  <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ${cause.shortDescription} <%  } %></TD></TR>
+  <TR><TD>SCM</TD><TD><% project.getSCMs()%></TD></TR>
+</TABLE>
+
+<BR/>
+
+<BR/>
+
+<!-- CHANGE SET -->
+<% def changeSet = build.changeSet
+if(changeSet != null && !changeSet.isEmptySet()) {
+	def hadChanges = false
+        def index=0
+        %>
+	<TABLE width="100%">
+    <TR><TD class="bg1" colspan="2"><B>CHANGES-TEST</B></TD></TR>
+<% 
+changeSet.changes.each() { cc -> 
+def repoName = cc.key.split(":")[1];
+repoName = repoName.substring(0, repoName.indexOf(".git"))
+if (repoName.contains("github.com/")) {
+    repoName = repoName.substring(repoName.indexOf("github.com/")+"github.com/".length())
+}
+  cc.value.getLogs().each() { cs -> 
+
+		hadChanges = true
+                                println(repoName)
+		def changeURL="https://github.com/${repoName}/commit/" + cs.commitId
+		%>
+                  <TR>
+                    <TD colspan="2" class="bg2"><B style="color:rgb(0, 128, 0);">$cs.author: </B>&nbsp;&nbsp;
+                      <A href="$changeURL">view</A>&nbsp;&nbsp;
+                      <SPAN> - <%= cs.msgAnnotated.replaceAll(/(GS-[0-9]+)/,  { all,  g -> "<A href=\"https://insightedge.atlassian.net/browse/$g\">$g</A>"}) %></SPAN>
+                     </TD>
+                  </TR>
+  <%
+	}
+   }
+	if(!hadChanges) { %>
+        <TR><TD colspan="2">No Changes</TD></TR>
+<%	} %>
+  </TABLE>
+<BR/>
+<% } %>
+
+<!-- CONSOLE OUTPUT -->
+<% if(build.result==hudson.model.Result.FAILURE) { %>
+<TABLE width="100%" cellpadding="0" cellspacing="0">
+<TR><TD class="bg1"><B>CONSOLE OUTPUT</B></TD></TR>
+<% 	build.getLog(100).each() { line -> %>
+	<TR><TD class="console">${org.apache.commons.lang.StringEscapeUtils.escapeHtml(line)}</TD></TR>
+<% 	} %>
+</TABLE>
+<BR/>
+<% } %>
+
+</BODY>

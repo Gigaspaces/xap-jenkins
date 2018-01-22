@@ -31,12 +31,13 @@ TD.console { font-family:Courier New; }
      xapBuildNumber = build.getEnvironment(listener).get("FINAL_BUILD_NUMBER")
      xapBranchName = build.getEnvironment(listener).get("BRANCH_NAME")
      xapTagName = build.getEnvironment(listener).get("TAG_NAME")
-     mavenVersion = build.getEnvironment(listener).get("FINAL_VERSION")
+     mavenVersion = build.getEnvironment(listener).get("FINAL_MAVEN_VERSION")
      deployArtifacts = build.getEnvironment(listener).get("DEPLOY_ARTIFACTS")
    } catch(all){ 
    }
    def xapPremiumZipName = "gigaspaces-xap-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
    def xapZipName = "gigaspaces-xap-open-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
+   def iePremiumZipName = "gigaspaces-insightedge-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
 
    def xapDotNetPremium64ZipName = "gigaspaces-xap.net-" + xapVersion + "-" + xapMilestone +"-b" + xapBuildNumber + ".msi"
    def xapDotNetDocs = "gigaspaces-xap.net-" + xapVersion + "-" + xapMilestone + "-b" + xapBuildNumber + "-doc.zip"
@@ -51,21 +52,29 @@ TD.console { font-family:Courier New; }
   <TR><TD>Project:</TD><TD>${project.name}</TD></TR>
   <TR><TD>Date:</TD><TD>${it.timestampString}</TD></TR>
   <TR><TD>Duration:</TD><TD>${build.durationString}</TD></TR>
+  <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ${cause.shortDescription} <%  } %></TD></TR>
+
+<% if(build.result.toString() == 'SUCCESS') { %>
+  
   <TR><TD>XAP Premium Tag:</TD><TD><A href="https://github.com/Gigaspaces/xap-premium/tree/${xapTagName}">${xapTagName}</A></TD></TR>
   <TR><TD>XAP Tag:</TD><TD><A href="https://github.com/xap/xap/tree/${xapTagName}">${xapTagName}</A></TD></TR>
-  <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ${cause.shortDescription} <%  } %></TD></TR>
+  <TR><TD>InsightEdge Tag:</TD><TD><A href="https://github.com/InsightEdge/insightedge/tree/${xapTagName}">${xapTagName}</A></TD></TR>
+  <TR><TD>InsightEdge Examples Tag:</TD><TD><A href="https://github.com/InsightEdge/insightedge-examples/tree/${xapTagName}">${xapTagName}</A></TD></TR>
+  <TR><TD>InsightEdge Zeppelin Tag:</TD><TD><A href="https://github.com/InsightEdge/insightedge-zeppelin/tree/${xapTagName}">${xapTagName}</A></TD></TR>
   <% 
-  	if(build.result.toString() == 'SUCCESS' && deployArtifacts == 'true'){
+  	if (deployArtifacts == 'true'){
    %>
 	<TR><TD>XAP Open:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/xap-open/${xapVersion}/${mavenVersion}/${xapZipName}">${xapZipName}</A></TD></TR> 
 	<TR><TD>XAP:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapPremiumZipName}">${xapPremiumZipName}</A></TD></TR>
         <TR><TD>XAP Docs:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/xap-javadoc.jar">xap-docs</A></TD></TR> 
         <TR><TD>XAP.NET:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapDotNetPremium64ZipName}">${xapDotNetPremium64ZipName}</A><TD></TR>
   	<TR><TD>XAP.NET Docs:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapDotNetDocs}">xap.net-docs</A></TD></TR> 
-  	
+  	<TR><TD>InsightEdge:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/insightedge/${xapVersion}/${mavenVersion}/${iePremiumZipName}">${iePremiumZipName}</A></TD></TR>
 	<TR><TD>Maven release version:</TD><TD>${mavenVersion}</TD></TR> 
    <%
   	}
+
+    }
   %>
 </TABLE>
 <BR/>
