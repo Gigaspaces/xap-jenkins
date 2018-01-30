@@ -39,7 +39,7 @@ TD.console { font-family:Courier New; }
    def xapPremiumZipName = "gigaspaces-xap-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
    def xapZipName = "gigaspaces-xap-open-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
    def iePremiumZipName = "gigaspaces-insightedge-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
-   def ieOpenZipName = "gigaspaces-insightedge-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + "-open.zip"
+   def ieOpenZipName = "gigaspaces-insightedge-open-" + xapVersion + "-" +  xapMilestone + "-b" + xapBuildNumber + ".zip"
 
    def xapDotNetPremium64ZipName = "gigaspaces-xap.net-" + xapVersion + "-" + xapMilestone +"-b" + xapBuildNumber + ".msi"
    def xapDotNetDocs = "gigaspaces-xap.net-" + xapVersion + "-" + xapMilestone + "-b" + xapBuildNumber + "-doc.zip"
