@@ -72,9 +72,8 @@ TD.console { font-family:Courier New; }
         <TR><TD>XAP.NET:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapDotNetPremium64ZipName}">${xapDotNetPremium64ZipName}</A><TD></TR>
   	<TR><TD>XAP.NET Docs:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/xap/${xapVersion}/${mavenVersion}/${xapDotNetDocs}">xap.net-docs</A></TD></TR> 
   	<TR><TD>InsightEdge:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/insightedge/${xapVersion}/${mavenVersion}/${iePremiumZipName}">${iePremiumZipName}</A></TD></TR>
+	<TR><TD>InsightEdge-open:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/insightedge/${xapVersion}/${mavenVersion}/${ieOpenZipName}">${ieOpenZipName}</A></TD></TR>
 	<TR><TD>Maven release version:</TD><TD>${mavenVersion}</TD></TR> 
-  <TR><TD>InsightEdge-open:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/insightedge/${xapVersion}/${mavenVersion}/${ieOpenZipName}">${ieOpenZipName}</A></TD></TR>
-
    <%
   	}
 
