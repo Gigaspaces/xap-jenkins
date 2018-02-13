@@ -15,6 +15,10 @@ TD.test_failed { color:red; }
 TD.console { font-family:Courier New; }
 </STYLE>
 <BODY>
+<%
+    def branchName = build.getEnvironment(listener).get("BRANCH_NAME")
+%>
+
 
 
 
@@ -24,6 +28,7 @@ TD.console { font-family:Courier New; }
   </TD><TD valign="center"><B style="font-size: 200%;">BUILD ${build.result}</B></TD></TR>
   <TR><TD>URL</TD><TD><A href="${rooturl}${build.url}">${rooturl}${build.url}</A></TD></TR>
   <TR><TD>Project:</TD><TD>${project.name}</TD></TR>
+  <TR><TD>Branch:</TD><TD>${branchName}</TD></TR>
   <TR><TD>Date:</TD><TD>${it.timestampString}</TD></TR>
   <TR><TD>Duration:</TD><TD>${build.durationString}</TD></TR>
   <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ${cause.shortDescription} <%  } %></TD></TR>
