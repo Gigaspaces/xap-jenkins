@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>1</daysToKeep>
+        <numToKeep>5</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.25">
+      <autoRebuild>false</autoRebuild>
+      <rebuildDisabled>false</rebuildDisabled>
+    </com.sonyericsson.rebuild.RebuildSettings>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>BRANCH</name>
+          <description></description>
+          <defaultValue>master</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>IE_BUILD_NUMBER</name>
+          <description></description>
+          <defaultValue>18906</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>XAP_RELEASE_VERSION</name>
+          <description>Must be XAP Maven Version (e.g. 12.1.1, 12.1.1-m5, 12.1.1-m5-17006) and aligned with XAP_PREMIUM_URL</description>
+          <defaultValue>12.3.0-m6</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>XAP_PREMIUM_URL</name>
+          <description></description>
+          <defaultValue>http://hercules.gspaces.com/12.3.0/12.3.0-m6-build/18906/gigaspaces-xap-12.3.0-m6-b18906.zip</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SPARK_URL</name>
+          <description></description>
+          <defaultValue>https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0-bin-hadoop2.7.tgz</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>NEWMAN_TAGS</name>
+          <description></description>
+          <defaultValue>INSIGHTEDGE</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>MILESTONE</name>
+          <description></description>
+          <defaultValue>m7</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>IE_VERSION</name>
+          <description></description>
+          <defaultValue>12.3.0</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>NEWMAN_SUITES</name>
+          <description>comma separated list of suite ids to submit future jobs
+
+insightedge-premium      57bbf0e329f67f0ee76e9900</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>XAP_JDBC_EXTENSION_URL</name>
+          <description>xap-jdbc.zip url in hercules (can be empty for backwards - before 12.2.0)</description>
+          <defaultValue>http://hercules.gspaces.com/12.3.0/12.3.0-m6-build/18906/xap-jdbc.zip</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM" plugin="multiple-scms@0.6">
+    <scms>
+      <hudson.plugins.git.GitSCM plugin="git@3.0.4">
+        <configVersion>2</configVersion>
+        <userRemoteConfigs>
+          <hudson.plugins.git.UserRemoteConfig>
+            <url>https://github.com/InsightEdge/insightedge.git</url>
+            <credentialsId>insightedge-dev</credentialsId>
+          </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+          <hudson.plugins.git.BranchSpec>
+            <name>*/$BRANCH</name>
+          </hudson.plugins.git.BranchSpec>
+        </branches>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <submoduleCfg class="list"/>
+        <extensions>
+          <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+            <relativeTargetDir>insightedge</relativeTargetDir>
+          </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+        </extensions>
+      </hudson.plugins.git.GitSCM>
+      <hudson.plugins.git.GitSCM plugin="git@3.0.4">
+        <configVersion>2</configVersion>
+        <userRemoteConfigs>
+          <hudson.plugins.git.UserRemoteConfig>
+            <url>https://github.com/InsightEdge/insightedge-examples.git</url>
+            <credentialsId>insightedge-dev</credentialsId>
+          </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+          <hudson.plugins.git.BranchSpec>
+            <name>*/$BRANCH</name>
+          </hudson.plugins.git.BranchSpec>
+        </branches>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <submoduleCfg class="list"/>
+        <extensions>
+          <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+            <relativeTargetDir>insightedge-examples</relativeTargetDir>
+          </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+        </extensions>
+      </hudson.plugins.git.GitSCM>
+      <hudson.plugins.git.GitSCM plugin="git@3.0.4">
+        <configVersion>2</configVersion>
+        <userRemoteConfigs>
+          <hudson.plugins.git.UserRemoteConfig>
+            <url>https://github.com/InsightEdge/insightedge-zeppelin.git</url>
+            <credentialsId>insightedge-dev</credentialsId>
+          </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+          <hudson.plugins.git.BranchSpec>
+            <name>*/$BRANCH</name>
+          </hudson.plugins.git.BranchSpec>
+        </branches>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <submoduleCfg class="list"/>
+        <extensions>
+          <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+            <relativeTargetDir>insightedge-zeppelin</relativeTargetDir>
+          </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+        </extensions>
+      </hudson.plugins.git.GitSCM>
+    </scms>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.plugins.parameterizedtrigger.TriggerBuilder plugin="parameterized-trigger@2.31">
+      <configs>
+        <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+          <configs class="empty-list"/>
+          <projects>IE-BuildNumber</projects>
+          <condition>ALWAYS</condition>
+          <triggerWithNoParameters>false</triggerWithNoParameters>
+          <block>
+            <buildStepFailureThreshold>
+              <name>FAILURE</name>
+              <ordinal>2</ordinal>
+              <color>RED</color>
+              <completeBuild>true</completeBuild>
+            </buildStepFailureThreshold>
+            <unstableThreshold>
+              <name>UNSTABLE</name>
+              <ordinal>1</ordinal>
+              <color>YELLOW</color>
+              <completeBuild>true</completeBuild>
+            </unstableThreshold>
+            <failureThreshold>
+              <name>FAILURE</name>
+              <ordinal>2</ordinal>
+              <color>RED</color>
+              <completeBuild>true</completeBuild>
+            </failureThreshold>
+          </block>
+          <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+        </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+      </configs>
+    </hudson.plugins.parameterizedtrigger.TriggerBuilder>
+    <hudson.tasks.Shell>
+      <command>echo &quot;IE_FINAL_BUILD_NUMBER=${IE_BUILD_NUMBER}-${TRIGGERED_BUILD_NUMBER_insightedge_IE_BuildNumber}&quot; &gt; vars.properties
+echo &quot;M2_PATH=/home/jenkins/.m2_ie_continuous&quot; &gt;&gt; vars.properties
+</command>
+    </hudson.tasks.Shell>
+    <EnvInjectBuilder plugin="envinject@1.93.1">
+      <info>
+        <propertiesFilePath>vars.properties</propertiesFilePath>
+      </info>
+    </EnvInjectBuilder>
+    <org.jenkinsci.plugins.buildnameupdater.BuildNameUpdater plugin="build-name-setter@1.6.5">
+      <buildName>version.txt</buildName>
+      <macroTemplate>${IE_FINAL_BUILD_NUMBER}</macroTemplate>
+      <fromFile>false</fromFile>
+      <fromMacro>true</fromMacro>
+      <macroFirst>false</macroFirst>
+    </org.jenkinsci.plugins.buildnameupdater.BuildNameUpdater>
+    <hudson.tasks.Shell>
+      <command>echo &quot;Final build number: $IE_FINAL_BUILD_NUMBER&quot;
+echo &quot;M2: ${M2_PATH}&quot;
+SPARK_FILENAME=`pwd`/$(basename $SPARK_URL)
+XAP_PREMIUM_FILENAME=`pwd`/$(basename $XAP_PREMIUM_URL)
+
+if [ ! -e &quot;$SPARK_FILENAME&quot; ]; then
+    echo &quot;Removing old versions of Spark&quot;
+    rm -rf `pwd`/spark*
+    wget $SPARK_URL -O $SPARK_FILENAME
+else 
+    echo &quot;**** Skipping download of Spark&quot;
+fi
+
+
+if [ ! -e &quot;$XAP_PREMIUM_FILENAME&quot; ]; then
+	echo &quot;Removing old versions of XAP&quot;
+    rm -rf `pwd`/gigaspaces-xap-*
+	wget $XAP_PREMIUM_URL -O $XAP_PREMIUM_FILENAME
+else
+    echo &quot;**** Skipping download of XAP Premium&quot;
+fi
+
+
+
+echo &quot;Compiling InsightEdge&quot;
+cd insightedge
+IE_SHA=`git rev-parse HEAD`
+mvn clean install -Dmaven.repo.local=$M2_PATH -Dxap.version=${XAP_RELEASE_VERSION}
+cd -
+
+echo &quot;Compiling InsightEdge Examples&quot;
+cd insightedge-examples
+mvn clean install -Dmaven.repo.local=$M2_PATH
+cd -
+
+echo &quot;Compiling InsightEdge Zeppelin&quot;
+cd insightedge-zeppelin
+#mvn clean install -DskipTests -P spark-1.6 -P build-distr -Dmaven.repo.local=$M2_PATH
+mvn clean package -DskipTests -Drat.skip=true -Pspark-2.2 -Pscala-2.11 -Dspark.version=2.2.0 -Pbuild-distr -Dmaven.repo.local=$M2_PATH
+cd -
+
+ZEPPELIN_TARGZ=&quot;`pwd`/$(find insightedge-zeppelin -name &apos;zeppelin*.tar.gz&apos;)&quot;
+DISTS_VAR=&quot;-Dinsightedge.version=${IE_VERSION} -Dinsightedge.build.number=${IE_FINAL_BUILD_NUMBER} -Dinsightedge.milestone=${MILESTONE} -Dlast.commit.hash=${IE_SHA} -Ddist.spark=${SPARK_FILENAME} -Ddist.zeppelin=${ZEPPELIN_TARGZ} -Ddist.examples.target=`pwd`/insightedge-examples/target&quot;
+
+cd insightedge
+
+echo &quot;Packaging InsightEdge Premium&quot;
+mvn package -pl insightedge-packager -P package-premium -Dxap.extension.jdbc=${XAP_JDBC_EXTENSION_URL} -Ddist.xap=file://${XAP_PREMIUM_FILENAME} ${DISTS_VAR} -Dmaven.repo.local=$M2_PATH
+
+
+echo &quot;Submitting artifacts&quot;
+mvn package -pl insightedge-packager -P publish-artifacts -P build-resources -DskipTests=true -Dinsightedge.version=${IE_VERSION} -Dinsightedge.branch=$BRANCH -Dinsightedge.build.number=${IE_FINAL_BUILD_NUMBER} -Dinsightedge.milestone=${MILESTONE} -Dnewman.tags=$NEWMAN_TAGS -Dmaven.repo.local=$M2_PATH -Dnewman.suites=${NEWMAN_SUITES}</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.44">
+      <recipientList>$DEFAULT_RECIPIENTS</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+          <email>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <recipientProviders>
+              <hudson.plugins.emailext.plugins.recipients.DevelopersRecipientProvider/>
+            </recipientProviders>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+        <hudson.plugins.emailext.plugins.trigger.AlwaysTrigger>
+          <email>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <recipientProviders>
+              <hudson.plugins.emailext.plugins.recipients.CulpritsRecipientProvider/>
+              <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
+            </recipientProviders>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.AlwaysTrigger>
+      </configuredTriggers>
+      <contentType>default</contentType>
+      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+      <defaultContent>${SCRIPT, template=&quot;ie-build-email.template&quot;}</defaultContent>
+      <attachmentsPattern></attachmentsPattern>
+      <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
+      <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
+      <attachBuildLog>false</attachBuildLog>
+      <compressBuildLog>false</compressBuildLog>
+      <replyTo>$DEFAULT_REPLYTO</replyTo>
+      <saveOutput>false</saveOutput>
+      <disabled>false</disabled>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
+  <buildWrappers>
+    <org.jenkinsci.plugins.builduser.BuildUser plugin="build-user-vars-plugin@1.5"/>
+  </buildWrappers>
+</project>
