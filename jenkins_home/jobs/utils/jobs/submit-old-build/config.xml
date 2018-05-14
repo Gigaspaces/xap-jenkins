@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>1</daysToKeep>
+        <numToKeep>5</numToKeep>
+        <artifactDaysToKeep>1</artifactDaysToKeep>
+        <artifactNumToKeep>5</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.25">
+      <autoRebuild>false</autoRebuild>
+      <rebuildDisabled>false</rebuildDisabled>
+    </com.sonyericsson.rebuild.RebuildSettings>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>XAP_MAJOR_VERSION</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>11</string>
+              <string>10</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>XAP_ZIP_PATH</name>
+          <description></description>
+          <defaultValue>http://hercules:80/archives/${XAP_MAJOR_VERSION}/gigaspaces-xap-premium-${XAP_MAJOR_VERSION}.0.0-ga.zip</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>TGRID_TEST_SUITE</name>
+          <description></description>
+          <defaultValue>http://hercules:80/archives/${XAP_MAJOR_VERSION}/testsuite-1.5.zip</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>SGTEST_SOURCES</name>
+          <description></description>
+          <defaultValue>http://hercules:80/archives/${XAP_MAJOR_VERSION}/SGTest-sources.zip</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>NEWMAN_SUBMITTER</name>
+          <description></description>
+          <defaultValue>http://xap-test.s3.amazonaws.com/qa/newman/newman-submitter-1.0.jar</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>XAP_BUILD_NUMBER</name>
+          <description></description>
+          <defaultValue>9100</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+set -e
+
+host=hercules
+echo &quot;host=${host}&quot;
+
+port=80
+echo &quot;port=${port}&quot;
+
+branch=old-build-${XAP_MAJOR_VERSION}
+echo &quot;branch=${branch}&quot;
+
+echo &quot;XAP_MAJOR_VERSION=${XAP_MAJOR_VERSION}&quot;
+echo &quot;XAP_ZIP_PATH=${XAP_ZIP_PATH}&quot;
+echo &quot;TGRID_TEST_SUITE=${TGRID_TEST_SUITE}&quot;
+
+buildNumber=${XAP_BUILD_NUMBER}
+echo &quot;buildNumber=${buildNumber}&quot;
+
+
+echo &quot;starting newman submitter process...&quot;
+java -version
+
+
+BASE_WEB_URI=http://${host}:${port}
+WEB_PATH_TO_BUILD=${BASE_WEB_URI}/archives/${XAP_MAJOR_VERSION}
+
+
+echo &quot;web url for build resources: [$WEB_PATH_TO_BUILD]&quot;
+
+export NEWMAN_HOST=${newmanHost=&quot;192.168.10.2&quot;}
+export NEWMAN_PORT=${newmanPort=&quot;8443&quot;}
+export NEWMAN_USER_NAME=${newmanUsername=&quot;root&quot;}
+export NEWMAN_PASSWORD=${newmanPassword=&quot;root&quot;}
+
+export NEWMAN_BUILD_BRANCH=${branch}
+export NEWMAN_BUILD_NUMBER=${buildNumber}-${BUILD_NUMBER}
+export NEWMAN_BUILD_TAGS=${newmanTags}
+export NEWMAN_BUILD_TESTS_METADATA=jar:${TGRID_TEST_SUITE}!/QA/metadata/tgrid-tests-metadata.json,${WEB_PATH_TO_BUILD}/sgtest-tests.json
+export NEWMAN_BUILD_SHAS_FILE=${WEB_PATH_TO_BUILD}/metadata.txt
+export NEWMAN_BUILD_RESOURCES=${TGRID_TEST_SUITE},${XAP_ZIP_PATH},${WEB_PATH_TO_BUILD}/newman-artifacts.zip,${WEB_PATH_TO_BUILD}/SGTest-sources.zip
+
+echo &quot;NEWMAN_BUILD_BRANCH=${NEWMAN_BUILD_BRANCH}&quot;
+echo &quot;NEWMAN_BUILD_NUMBER=${NEWMAN_BUILD_NUMBER}&quot;
+echo &quot;NEWMAN_HOST=${NEWMAN_HOST}&quot;
+echo &quot;NEWMAN_USER_NAME=${NEWMAN_USER_NAME}&quot;
+echo &quot;NEWMAN_USER_NAME=${NEWMAN_PASSWORD}&quot;
+echo &quot;NEWMAN_BUILD_TESTS_METADATA=${NEWMAN_BUILD_TESTS_METADATA}&quot;
+echo &quot;NEWMAN_BUILD_SHAS_FILE=${NEWMAN_BUILD_SHAS_FILE}&quot;
+echo &quot;NEWMAN_BUILD_RESOURCES=${NEWMAN_BUILD_RESOURCES}&quot;
+
+
+wget &quot;${NEWMAN_SUBMITTER}&quot; -nv -O newman-submitter-1.0.jar
+
+java -cp newman-submitter-1.0.jar com.gigaspaces.newman.NewmanBuildSubmitter </command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <jenkins.plugins.slack.SlackNotifier plugin="slack@2.0.1">
+      <teamDomain></teamDomain>
+      <authToken></authToken>
+      <buildServerUrl>http://xap-lab1002:8080/</buildServerUrl>
+      <room></room>
+      <startNotification>false</startNotification>
+      <notifySuccess>false</notifySuccess>
+      <notifyAborted>false</notifyAborted>
+      <notifyNotBuilt>false</notifyNotBuilt>
+      <notifyUnstable>false</notifyUnstable>
+      <notifyFailure>false</notifyFailure>
+      <notifyBackToNormal>false</notifyBackToNormal>
+      <notifyRepeatedFailure>false</notifyRepeatedFailure>
+      <includeTestSummary>false</includeTestSummary>
+      <commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
+      <includeCustomMessage>true</includeCustomMessage>
+      <customMessage>Version:${XAP_VERSION} &#xd;
+Milestone:${MILESTONE} &#xd;
+Build Number: ${XAP_BUILD_NUMBER}-${BUILD_NUMBER}&#xd;
+Branch: ${BRANCH_NAME} &#xd;
+SHA:${GIT_COMMIT} &#xd;
+Newman Tag: ${NEWMAN_TAGS}</customMessage>
+    </jenkins.plugins.slack.SlackNotifier>
+  </publishers>
+  <buildWrappers/>
+</project>

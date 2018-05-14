@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>10</daysToKeep>
+        <numToKeep>10</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.25">
+      <autoRebuild>false</autoRebuild>
+      <rebuildDisabled>false</rebuildDisabled>
+    </com.sonyericsson.rebuild.RebuildSettings>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.TextParameterDefinition>
+          <name>BRANCH_NAME</name>
+          <description>[REQUIRED PARAMETER] The name of the branch</description>
+          <defaultValue>master</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>JAVA_BUILD_URL</name>
+          <description>[REQUIRED PARAMETER] URL to XAP java zip </description>
+          <defaultValue>#http://192.168.10.10:80/12.0.0/master/157990-36/gigaspaces-xap-premium-12.0.0-rc-b157990-36.zip</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>JAVA_BUILD_FILE</name>
+          <description>[REQUIRED PARAMETER] Path of the XAP java zip file that will be downloaded</description>
+          <defaultValue>#gigaspaces-xap-premium-12.0.0-rc-b157990-36.zip</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>JAVA_S3_BUILD_URL</name>
+          <description>[OPTIONAL PARAMETER] URL to XAP java zip from s3</description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>DEPLOY_ARTIFACTS</name>
+          <description>[REQUIRED PARAMETER] Boolean indicator if to deploy artifacts to s3</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>RELEASE</name>
+          <description>[REQUIRED PARAMETER] Boolean indicator if the current job execution was triggered from xap-release job</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>TAG_NAME</name>
+          <description>[OPTIONAL PARAMETER] The name of the git tag that will be created/updated - only if RELEASE parameter is true </description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>FINAL_VERSION</name>
+          <description>[OPTIONAL PARAMETER] The final version name which is used as the inner folder name in s3 bucket</description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>MILESTONE</name>
+          <description>[OPTIONAL PARAMETER] The current milestone label</description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@3.0.4">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>git@github.com:Gigaspaces/xap-dotnet.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/${BRANCH_NAME}</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <assignedNode>DotNet</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call download.bat &quot;%JAVA_BUILD_URL_FINAL%&quot; &quot;%JAVA_BUILD_FILE%&quot;</command>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call BuildAll.bat &quot;%JAVA_BUILD_FILE%&quot; &quot;%BRANCH_NAME%&quot; &quot;%DEPLOY_ARTIFACTS%&quot; &quot;%FINAL_VERSION%&quot;</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers>
+    <org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher plugin="flexible-publish@0.15.2">
+      <publishers>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.core.BooleanCondition" plugin="run-condition@1.0">
+            <token>${ENV,var=&quot;RELEASE&quot;}</token>
+          </condition>
+          <publisherList>
+            <hudson.plugins.git.GitPublisher plugin="git@3.0.4">
+              <configVersion>2</configVersion>
+              <pushMerge>false</pushMerge>
+              <pushOnlyIfSuccess>true</pushOnlyIfSuccess>
+              <forcePush>true</forcePush>
+              <tagsToPush>
+                <hudson.plugins.git.GitPublisher_-TagToPush>
+                  <targetRepoName>origin</targetRepoName>
+                  <tagName>${TAG_NAME}</tagName>
+                  <tagMessage>XAP .NET release tag on top ${BRANCH_NAME}</tagMessage>
+                  <createTag>true</createTag>
+                  <updateTag>true</updateTag>
+                </hudson.plugins.git.GitPublisher_-TagToPush>
+              </tagsToPush>
+            </hudson.plugins.git.GitPublisher>
+          </publisherList>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+          <executionStrategy class="org.jenkins_ci.plugins.flexible_publish.strategy.FailAtEndExecutionStrategy"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+      </publishers>
+    </org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.29">
+      <deleteDirs>false</deleteDirs>
+      <cleanupParameter></cleanupParameter>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.PreBuildCleanup>
+    <EnvInjectBuildWrapper plugin="envinject@1.93.1">
+      <info>
+        <groovyScriptContent>if (RELEASE.equals(&apos;true&apos;) &amp;&amp; DEPLOY_ARTIFACTS.equals(&apos;true&apos;) &amp;&amp; MILESTONE.equals(&apos;ga&apos;))
+{def map = [JAVA_BUILD_URL_FINAL:&quot;$JAVA_S3_BUILD_URL&quot;]; return map}
+def map = [JAVA_BUILD_URL_FINAL:&quot;$JAVA_BUILD_URL&quot;]; return map</groovyScriptContent>
+        <loadFilesFromMaster>false</loadFilesFromMaster>
+      </info>
+    </EnvInjectBuildWrapper>
+  </buildWrappers>
+</project>
