@@ -129,12 +129,10 @@ function remove_branch_groovy_script {
     local begin="^\s*<org.biouno.unochoice.CascadeChoiceParameter"
     local end="org.biouno.unochoice.CascadeChoiceParameter>$"
 
-    # sed -i '/^\s*<org.biouno.unochoice.CascadeChoiceParameter/,/org.biouno.unochoice.CascadeChoiceParameter>$/ c <hudson.model.StringParameterDefinition>\n<name>BRANCH_NAME</name>\n<description></description>\n<defaultValue>master</defaultValue>\n</hudson.model.StringParameterDefinition>' continuous-milestone.xml
-    # sed -i "/${begin}/,/${end}/ c ${replacement}" continuous-milestone.xml
     local name=$(sed -n "/${begin}/,/${end}/ p" continuous-milestone.xml | grep BRANCH_NAME)
 
     if [[ "${name}" == "" ]]; then
-        echo "HELLO"
+        echo "Did not find tag of groovy branch name script"
     else
 	    sed -i "/${begin}/,/${end}/ c ${replacement}" ${jenkins_config_file}
     fi
