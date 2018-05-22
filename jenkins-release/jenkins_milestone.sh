@@ -123,6 +123,22 @@ function get_job_name {
     fi
 }
 
+function remove_branch_groovy_script {
+    local jenkins_config_file="$1"
+    local replacement="<hudson.model.StringParameterDefinition>\n<name>BRANCH_NAME</name>\n<description></description>\n<defaultValue>master</defaultValue>\n</hudson.model.StringParameterDefinition>"
+    local begin="^\s*<org.biouno.unochoice.CascadeChoiceParameter"
+    local end="org.biouno.unochoice.CascadeChoiceParameter>$"
+
+    # sed -i '/^\s*<org.biouno.unochoice.CascadeChoiceParameter/,/org.biouno.unochoice.CascadeChoiceParameter>$/ c <hudson.model.StringParameterDefinition>\n<name>BRANCH_NAME</name>\n<description></description>\n<defaultValue>master</defaultValue>\n</hudson.model.StringParameterDefinition>' continuous-milestone.xml
+    # sed -i "/${begin}/,/${end}/ c ${replacement}" continuous-milestone.xml
+    local name=$(sed -n "/${begin}/,/${end}/ p" continuous-milestone.xml | grep BRANCH_NAME)
+
+    if [[ ${name} =="" ]]; then
+        echo "HELLO"
+    else
+	    sed -i "/${begin}/,/${end}/ c ${replacement}" ${jenkins_config_file}
+    fi
+}
 
 function update_parameter {
     local jenkins_config_file="$1"
@@ -227,6 +243,10 @@ function move_to_release_mode {
 
     CURRENT_MILESTONE=$(get_default_value "MILESTONE" "continuous-milestone.xml")
     log "Current milestone is: ${CURRENT_MILESTONE}"
+
+    #removing groovy script
+    log "[CONTINUOUS-MILESTONE] Removing BRANCH_NAME groovy script from configuration"
+    remove_branch_groovy_script "continuous-milestone.xml"
 
     #Prev cont
     log "[CONTINUOUS-MILESTONE] Updating BRANCH_NAME to ${MILESTONE_BRANCH_NAME}"
