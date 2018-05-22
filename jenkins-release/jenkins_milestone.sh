@@ -133,7 +133,7 @@ function remove_branch_groovy_script {
     # sed -i "/${begin}/,/${end}/ c ${replacement}" continuous-milestone.xml
     local name=$(sed -n "/${begin}/,/${end}/ p" continuous-milestone.xml | grep BRANCH_NAME)
 
-    if [[ ${name} =="" ]]; then
+    if [[ "${name}" == "" ]]; then
         echo "HELLO"
     else
 	    sed -i "/${begin}/,/${end}/ c ${replacement}" ${jenkins_config_file}
