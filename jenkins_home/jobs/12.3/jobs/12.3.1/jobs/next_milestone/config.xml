@@ -14,27 +14,27 @@
         <hudson.model.StringParameterDefinition>
           <name>NEXT_XAP_VERSION</name>
           <description></description>
-          <defaultValue>12.3.1</defaultValue>
+          <defaultValue>14.0.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CURRENT_MILESTONE</name>
           <description></description>
-          <defaultValue>m4</defaultValue>
+          <defaultValue>ga</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEXT_MILESTONE</name>
           <description></description>
-          <defaultValue>m5</defaultValue>
+          <defaultValue>m1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEXT_XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>19204</defaultValue>
+          <defaultValue>19901</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE_BRANCH_NAME</name>
           <description></description>
-          <defaultValue>12.3.1-m4-build</defaultValue>
+          <defaultValue>12.3.1-ga-build</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>JENKINS_USER</name>
@@ -82,7 +82,7 @@
     <extensions/>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
