@@ -19,6 +19,16 @@ For the first run you will have to create empty folders that will contains the b
 3. Create a keypair for this user `ssh-keygen -t rsa -b 4096 -C "xap-builder@gigaspaces.com"` and upload the public key to github as xap-dev (https://github.com/settings/keys) the folder ~/.ssh will be mounted in the container to /home/jenkins/.ssh
 4. Run the script `run.sh` from the `jenkins-docker` folder.
 5. login to jenkins with barak:barak and update the users remove the users you do not need.
+6.
+
+## Commit changes to github
+1. login to pc-lab1002.
+2. cd /home/xap/automation/xap-jenkins
+3. run git status and verified the branch is master, aslo exmine the updated changes on the local disk.
+4. run git add <file name/golder name> which you would like to add to repository.
+5. run git commit -m "write the commit message here"
+6. run git push.
+
 
 ## Configuration
 
