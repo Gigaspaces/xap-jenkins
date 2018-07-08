@@ -15,7 +15,7 @@
           <name>BRANCH_NAME</name>
           <description></description>
           <randomName>choice-parameter-621990271931441</randomName>
-          <visibleItemCount>1</visibleItemCount>
+          <visibleItemCount>191</visibleItemCount>
           <script class="org.biouno.unochoice.model.GroovyScript">
             <secureScript plugin="script-security@1.35">
               <script>def folder = new File( &apos;//var//workspaces//12.3//12.3.1//continuous_elad//xap&apos; )
@@ -49,17 +49,17 @@ return proc1.text.split(&quot;\n&quot;).toList()
         <hudson.model.StringParameterDefinition>
           <name>XAP_VERSION</name>
           <description></description>
-          <defaultValue>12.3.1</defaultValue>
+          <defaultValue>14.0.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m5</defaultValue>
+          <defaultValue>m1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>19204</defaultValue>
+          <defaultValue>19901</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>InsightEdge</name>
@@ -84,6 +84,8 @@ return proc1.text.split(&quot;\n&quot;).toList()
 59f25d5ab3859424cac590c1  - rocksdb           
 59f25d5bb3859424cac590c2  - off-heap
 5a96b14268c479caafb1162f   - mx-off-heap  
+59f59592b3859424cac690fa   - i9e-sgtest
+59f25af6b3859424cac590b0   - insightedge-premium
 </description>
           <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
@@ -210,15 +212,10 @@ return proc1.text.split(&quot;\n&quot;).toList()
     </scms>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <hudson.triggers.SCMTrigger>
-      <spec>* * * * *</spec>
-      <ignorePostCommitHooks>false</ignorePostCommitHooks>
-    </hudson.triggers.SCMTrigger>
-  </triggers>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <com.tikal.jenkins.plugins.multijob.MultiJobBuilder>

@@ -85,7 +85,7 @@
   </scm>
   <assignedNode>DotNet</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
@@ -127,8 +127,6 @@
                   <updateTag>true</updateTag>
                 </hudson.plugins.git.GitPublisher_-TagToPush>
               </tagsToPush>
-              <branchesToPush/>
-              <notesToPush/>
             </hudson.plugins.git.GitPublisher>
           </publisherList>
           <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>

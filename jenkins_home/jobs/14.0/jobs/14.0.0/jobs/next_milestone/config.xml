@@ -14,27 +14,27 @@
         <hudson.model.StringParameterDefinition>
           <name>NEXT_XAP_VERSION</name>
           <description></description>
-          <defaultValue>12.3.1</defaultValue>
+          <defaultValue>14.0.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CURRENT_MILESTONE</name>
           <description></description>
-          <defaultValue>rc2</defaultValue>
+          <defaultValue>m1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEXT_MILESTONE</name>
           <description></description>
-          <defaultValue>ga</defaultValue>
+          <defaultValue>m2</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEXT_XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>19212</defaultValue>
+          <defaultValue>19902</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE_BRANCH_NAME</name>
           <description></description>
-          <defaultValue>12.3.1-rc2-build</defaultValue>
+          <defaultValue>14.0.0-m1-build</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>JENKINS_USER</name>
@@ -82,14 +82,14 @@
     <extensions/>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>export FOLDER=&quot;12.3/12.3.0&quot;
+      <command>export FOLDER=&quot;14.0/14.0.0&quot;
 export CONTINUOUS_JOB_NAME=&quot;continuous&quot;
 export CONTINUOUS_MILESTONE_JOB_NAME=&quot;continuous-milestone&quot;
 export RELEASE_JOB_NAME=&quot;release&quot;
