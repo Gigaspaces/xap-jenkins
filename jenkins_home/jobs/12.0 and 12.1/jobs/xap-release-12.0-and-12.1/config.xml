@@ -302,7 +302,7 @@ APPEND_TO_XAP_BUILD_NUMBER=${FINAL_BUILD_NUMBER}</properties>
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>${SCRIPT, template=&quot;xap-release-script-groovy-html.template&quot;}</defaultContent>
+      <defaultContent>${SCRIPT, template=&quot;xap-release-12_0-12_1-script-groovy-html.template&quot;}</defaultContent>
       <attachmentsPattern></attachmentsPattern>
       <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
       <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>

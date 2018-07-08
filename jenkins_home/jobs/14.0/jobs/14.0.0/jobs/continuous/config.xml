@@ -1,7 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<com.tikal.jenkins.plugins.multijob.MultiJobProject plugin="jenkins-multijob-plugin@1.21">
+<?xml version="1.0" encoding="UTF-8"?><com.tikal.jenkins.plugins.multijob.MultiJobProject plugin="jenkins-multijob-plugin@1.21">
   <actions/>
-  <description></description>
+  <description/>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
@@ -13,57 +12,57 @@
       <parameterDefinitions>
         <org.biouno.unochoice.CascadeChoiceParameter plugin="uno-choice@2.0">
           <name>BRANCH_NAME</name>
-          <description></description>
-          <randomName>choice-parameter-47859297893637735</randomName>
+          <description/>
+          <randomName>choice-parameter-621990271931441</randomName>
           <visibleItemCount>1</visibleItemCount>
           <script class="org.biouno.unochoice.model.GroovyScript">
             <secureScript plugin="script-security@1.35">
-              <script>def folder = new File( &apos;//var//workspaces//12.3//12.3.1//continuous_elad//xap&apos; )
+              <script>def folder = new File( '//var//workspaces//12.3//12.3.1//continuous_elad//xap' )
 if( folder.exists() ) {
-def cmd = &apos;cd //var//workspaces//12.3//12.3.1//continuous_elad//xap &amp;&amp; git fetch --all -pq  &amp;&amp; for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format=&quot;%ci&quot; $branch | head -n 1`  $branch; done | sort -r&apos;
-proc1 = [&apos;/bin/bash&apos;, &apos;-c&apos;,cmd].execute()
-lines = proc1.text.split(&quot;\n&quot;).toList()
+def cmd = 'cd //var//workspaces//12.3//12.3.1//continuous_elad//xap &amp;&amp; git fetch --all -pq  &amp;&amp; for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format="%ci" $branch | head -n 1`  $branch; done | sort -r'
+proc1 = ['/bin/bash', '-c',cmd].execute()
+lines = proc1.text.split("\n").toList()
 lines = lines*.substring(33)
-lines.remove(&quot;master&quot;)
-lines.add(0,&quot;master:selected&quot;);
+lines.remove("master")
+lines.add(0,"master");
 return lines;
 } else{
-def cmd = &quot;git ls-remote --heads https://github.com/xap/xap.git | awk &apos; { gsub(/refs\\/heads\\//, \&quot;\&quot;); print \$2 }&apos; &quot;
-proc1 = [&apos;/bin/bash&apos;, &apos;-c&apos;,cmd].execute()
-return proc1.text.split(&quot;\n&quot;).toList()
+def cmd = "git ls-remote --heads https://github.com/xap/xap.git | awk ' { gsub(/refs\\/heads\\//, \"\"); print \$2 }' "
+proc1 = ['/bin/bash', '-c',cmd].execute()
+return proc1.text.split("\n").toList()
 }</script>
               <sandbox>false</sandbox>
             </secureScript>
             <secureFallbackScript plugin="script-security@1.35">
-              <script></script>
+              <script/>
               <sandbox>false</sandbox>
             </secureFallbackScript>
           </script>
-          <projectName>continuous_elad</projectName>
+          <projectName>continuous</projectName>
           <parameters class="linked-hash-map"/>
-          <referencedParameters></referencedParameters>
+          <referencedParameters/>
           <choiceType>PT_RADIO</choiceType>
           <filterable>true</filterable>
           <filterLength>1</filterLength>
         </org.biouno.unochoice.CascadeChoiceParameter>
         <hudson.model.StringParameterDefinition>
           <name>XAP_VERSION</name>
-          <description></description>
-          <defaultValue>12.3.1</defaultValue>
+          <description/>
+          <defaultValue>14.0.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
-          <description></description>
+          <description/>
           <defaultValue>m2</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
-          <description></description>
-          <defaultValue>19201</defaultValue>
+          <description/>
+          <defaultValue>19902</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>InsightEdge</name>
-          <description></description>
+          <description/>
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.StringParameterDefinition>
@@ -84,8 +83,10 @@ return proc1.text.split(&quot;\n&quot;).toList()
 59f25d5ab3859424cac590c1  - rocksdb           
 59f25d5bb3859424cac590c2  - off-heap
 5a96b14268c479caafb1162f   - mx-off-heap  
+59f59592b3859424cac690fa   - i9e-sgtest
+59f25af6b3859424cac590b0   - insightedge-premium
 </description>
-          <defaultValue></defaultValue>
+          <defaultValue/>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -119,8 +120,7 @@ return proc1.text.split(&quot;\n&quot;).toList()
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
-            <url>https://github.com/Gigaspaces/xap-premium.git</url>
-            <credentialsId>insightedge-dev</credentialsId>
+            <url>git@github.com:Gigaspaces/xap-premium.git</url>
           </hudson.plugins.git.UserRemoteConfig>
         </userRemoteConfigs>
         <branches>
@@ -214,7 +214,12 @@ return proc1.text.split(&quot;\n&quot;).toList()
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers/>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>* * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
@@ -225,12 +230,12 @@ return proc1.text.split(&quot;\n&quot;).toList()
           <currParams>true</currParams>
           <exposedSCM>false</exposedSCM>
           <disableJob>false</disableJob>
-          <parsingRulesPath></parsingRulesPath>
+          <parsingRulesPath/>
           <maxRetries>0</maxRetries>
           <enableRetryStrategy>false</enableRetryStrategy>
           <enableCondition>false</enableCondition>
           <abortAllJob>true</abortAllJob>
-          <condition></condition>
+          <condition/>
           <configs>
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters plugin="parameterized-trigger@2.35.2">
               <properties>FILENAME=${WORKSPACE}/envs.properties
@@ -251,9 +256,9 @@ XAP_BUILD_NUMBER=${XAP_BUILD_NUMBER}</properties>
       </info>
     </EnvInjectBuilder>
     <hudson.tasks.Shell>
-      <command>#export M2=&quot;${WORKSPACE//\/var\/workspaces/\/var\/m2s}&quot;
-export M2=&quot;/home/jenkins/.m2_xap_ie_continuous&quot;
-export MODE=&quot;CONTINUOUS&quot;
+      <command>#export M2="${WORKSPACE//\/var\/workspaces/\/var\/m2s}"
+export M2="/home/jenkins/.m2_xap_ie_continuous"
+export MODE="CONTINUOUS"
 ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
     </hudson.tasks.Shell>
     <EnvInjectBuilder plugin="envinject@1.93.1">
@@ -283,7 +288,7 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
             <recipientProviders>
               <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
             </recipientProviders>
-            <attachmentsPattern></attachmentsPattern>
+            <attachmentsPattern/>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
@@ -297,7 +302,7 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
             <recipientProviders>
               <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
             </recipientProviders>
-            <attachmentsPattern></attachmentsPattern>
+            <attachmentsPattern/>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
@@ -311,7 +316,7 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
             <recipientProviders>
               <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
             </recipientProviders>
-            <attachmentsPattern></attachmentsPattern>
+            <attachmentsPattern/>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
@@ -321,8 +326,8 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>${SCRIPT, template=&quot;generic.template&quot;}</defaultContent>
-      <attachmentsPattern></attachmentsPattern>
+      <defaultContent>${SCRIPT, template="generic.template"}</defaultContent>
+      <attachmentsPattern/>
       <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
       <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
       <attachBuildLog>false</attachBuildLog>
@@ -333,6 +338,7 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
   </publishers>
   <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.8.8"/>
     <org.jenkinsci.plugins.builduser.BuildUser plugin="build-user-vars-plugin@1.5"/>
   </buildWrappers>
   <pollSubjobs>false</pollSubjobs>

@@ -41,8 +41,9 @@
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent1_xapUrl</name>
-          <description></description>
-          <defaultValue>https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/xap/12.3.1/12.3.1-m1/gigaspaces-xap-12.3.1-m1-b19201.zip</defaultValue>
+          <description>link to build zip in hercules 
+(Important: don&apos;t use &apos;hercules.gspace.com&apos; in link address)</description>
+          <defaultValue>http://hercules/12.3.1/12.3.1-ga-build/19300/gigaspaces-xap-enterprise-12.3.1-ga-b19300.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent1_licenseKey</name>
@@ -61,8 +62,9 @@
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent2_xapUrl</name>
-          <description>Required</description>
-          <defaultValue>https://gigaspaces-releases-eu.s3.amazonaws.com/com/gigaspaces/xap/12.3.1/12.3.1-m1/gigaspaces-xap-12.3.1-m1-b19201.zip</defaultValue>
+          <description>link to build zip in hercules 
+(Important: don&apos;t use &apos;hercules.gspace.com&apos; in link address)</description>
+          <defaultValue>http://hercules/12.3.1/12.3.1-ga-build/19300/gigaspaces-xap-enterprise-12.3.1-ga-b19300.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent2_licenseKey</name>
@@ -97,7 +99,7 @@
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@3.0.4">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@3.7.0">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -107,7 +109,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/master</name>
+        <name>*/yael-branch-for-backwards</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
