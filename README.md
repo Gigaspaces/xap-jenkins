@@ -21,14 +21,6 @@ For the first run you will have to create empty folders that will contains the b
 5. login to jenkins with barak:barak and update the users remove the users you do not need.
 6.
 
-## Commit changes to github
-1. login to pc-lab1002.
-2. cd /home/xap/automation/xap-jenkins
-3. run git status and verified the branch is master, aslo exmine the updated changes on the local disk.
-4. run git add <file name/golder name> which you would like to add to repository.
-5. run git commit -m "write the commit message here"
-6. run git push.
-
 
 ## Configuration
 
