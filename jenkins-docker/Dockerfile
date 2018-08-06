@@ -129,8 +129,33 @@ RUN tar xzf /tmp/apache-maven-3.3.9.tar.gz --strip-components=1 \
 RUN ln -s /opt/maven/bin/mvn /usr/local/bin
 RUN rm -f /tmp/apache-maven-3.3.9.tar.gz
 
+# get node
+RUN echo 'get node tar.gz'
+RUN wget --no-verbose -O /tmp/node-v8.9.3-linux-x64.tar.gz \
+    https://nodejs.org/dist/v8.9.3/node-v8.9.3-linux-x64.tar.gz
+
+RUN mkdir /opt/node
+
+# unpack node tar.gz
+RUN echo 'unpacking node tar.gz' && \
+    tar zxvf /tmp/node-v8.9.3-linux-x64.tar.gz --strip-components=1 \
+    -C /opt/node && \
+    rm -f /tmp/node-v8.9.3-linux-x64.tar.gz
+
+RUN ln -s /opt/node/bin/node /usr/local/bin && ln -s /opt/node/bin/npm /usr/local/bin
+
+RUN node --version && \
+     npm --version
 
 USER ${user}
+
+RUN echo 'installing elm' && \
+    mkdir /home/${user}/.npm-global && \
+     npm config set prefix "/home/${user}/.npm-global"
+
+ENV PATH=/home/${user}/.npm-global/bin:$PATH
+
+RUN npm install -g elm
 
 #RUN mkdir -p /var/jenkins_home/build/ssh
 COPY plugins.txt /usr/share/jenkins/plugins.txt

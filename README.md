@@ -19,6 +19,8 @@ For the first run you will have to create empty folders that will contains the b
 3. Create a keypair for this user `ssh-keygen -t rsa -b 4096 -C "xap-builder@gigaspaces.com"` and upload the public key to github as xap-dev (https://github.com/settings/keys) the folder ~/.ssh will be mounted in the container to /home/jenkins/.ssh
 4. Run the script `run.sh` from the `jenkins-docker` folder.
 5. login to jenkins with barak:barak and update the users remove the users you do not need.
+6.
+
 
 ## Configuration
 
