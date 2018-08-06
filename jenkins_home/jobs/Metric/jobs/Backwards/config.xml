@@ -27,7 +27,7 @@
         <hudson.model.StringParameterDefinition>
           <name>client_xapUrl</name>
           <description></description>
-          <defaultValue>http://hercules/12.3.0/12.3.0-ga-build/19000/gigaspaces-xap-12.3.0-ga-b19000.zip</defaultValue>
+          <defaultValue>http://hercules/12.3.1/12.3.1-ga-build/19300/gigaspaces-xap-enterprise-12.3.1-ga-b19300.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent_lookupLocators</name>
@@ -89,12 +89,12 @@
         <hudson.model.StringParameterDefinition>
           <name>mail_title</name>
           <description></description>
-          <defaultValue>Backwards results - 12.3.0-ga-19000 vs 12.3.1-m1-19201</defaultValue>
+          <defaultValue>Backwards results - 12.3.1-ga-19300 vs 14.0.0-m?-????</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>xapVersion</name>
           <description>XAP Maven Version to compile with</description>
-          <defaultValue>12.3.0</defaultValue>
+          <defaultValue>12.3.1</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -109,7 +109,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/yael-branch-for-backwards</name>
+        <name>*/master</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>

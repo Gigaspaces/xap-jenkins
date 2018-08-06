@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<com.tikal.jenkins.plugins.multijob.MultiJobProject plugin="jenkins-multijob-plugin@1.21">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.25">
+      <autoRebuild>false</autoRebuild>
+      <rebuildDisabled>false</rebuildDisabled>
+    </com.sonyericsson.rebuild.RebuildSettings>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>XAP_VERSION</name>
+          <description></description>
+          <defaultValue>14.0.0</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>MILESTONE</name>
+          <description></description>
+          <defaultValue>m2</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>XAP_BUILD_NUMBER</name>
+          <description></description>
+          <defaultValue>19903</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>FINAL_BUILD_NUMBER</name>
+          <description></description>
+          <defaultValue>19903-01</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM" plugin="multiple-scms@0.6">
+    <scms>
+      <hudson.plugins.git.GitSCM plugin="git@3.7.0">
+        <configVersion>2</configVersion>
+        <userRemoteConfigs>
+          <hudson.plugins.git.UserRemoteConfig>
+            <url>git@github.com:Gigaspaces/docker.git</url>
+          </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+          <hudson.plugins.git.BranchSpec>
+            <name>*/master</name>
+          </hudson.plugins.git.BranchSpec>
+        </branches>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <submoduleCfg class="list"/>
+        <extensions>
+          <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+            <relativeTargetDir>docker</relativeTargetDir>
+          </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+          <hudson.plugins.git.extensions.impl.LocalBranch>
+            <localBranch>master</localBranch>
+          </hudson.plugins.git.extensions.impl.LocalBranch>
+        </extensions>
+      </hudson.plugins.git.GitSCM>
+    </scms>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>cd docker/insightedge-enterprise
+sed -i &quot;s/ARG GS_VERSION=.*/ARG GS_VERSION=$XAP_VERSION/g&quot; Dockerfile 
+sed -i &quot;s/ARG GS_MILESTONE=.*/ARG GS_MILESTONE=$MILESTONE/g&quot; Dockerfile 
+sed -i &quot;s/ARG GS_BUILD=.*/ARG GS_BUILD=$FINAL_BUILD_NUMBER/g&quot; Dockerfile 
+cd ../insightedge
+sed -i &quot;s/ARG GS_VERSION=.*/ARG GS_VERSION=$XAP_VERSION/g&quot; Dockerfile 
+sed -i &quot;s/ARG GS_MILESTONE=.*/ARG GS_MILESTONE=$MILESTONE/g&quot; Dockerfile 
+sed -i &quot;s/ARG GS_BUILD=.*/ARG GS_BUILD=$FINAL_BUILD_NUMBER/g&quot; Dockerfile 
+cd ../xap-enterprise
+sed -i &quot;s/ARG GS_VERSION=.*/ARG GS_VERSION=$XAP_VERSION/g&quot; Dockerfile 
+sed -i &quot;s/ARG GS_MILESTONE=.*/ARG GS_MILESTONE=$MILESTONE/g&quot; Dockerfile 
+sed -i &quot;s/ARG GS_BUILD=.*/ARG GS_BUILD=$FINAL_BUILD_NUMBER/g&quot; Dockerfile 
+cd ../xap
+sed -i &quot;s/ARG GS_VERSION=.*/ARG GS_VERSION=$XAP_VERSION/g&quot; Dockerfile 
+sed -i &quot;s/ARG GS_MILESTONE=.*/ARG GS_MILESTONE=$MILESTONE/g&quot; Dockerfile 
+sed -i &quot;s/ARG GS_BUILD=.*/ARG GS_BUILD=$FINAL_BUILD_NUMBER/g&quot; Dockerfile 
+cd ../
+git add .
+git commit -am &quot;Update Dockerfiles automatically to version $XAP_VERSION-$MILESTONE-$FINAL_BUILD_NUMBER&quot;
+git status
+git push origin master
+git status
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers>
+    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.29">
+      <deleteDirs>false</deleteDirs>
+      <cleanupParameter></cleanupParameter>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.PreBuildCleanup>
+  </buildWrappers>
+  <pollSubjobs>false</pollSubjobs>
+</com.tikal.jenkins.plugins.multijob.MultiJobProject>
