@@ -155,7 +155,7 @@ RUN echo 'installing elm' && \
 
 ENV PATH=/home/${user}/.npm-global/bin:$PATH
 
-RUN npm install -g elm
+RUN npm install -g elm@0.18.0
 
 #RUN mkdir -p /var/jenkins_home/build/ssh
 COPY plugins.txt /usr/share/jenkins/plugins.txt
