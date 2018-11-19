@@ -22,7 +22,7 @@
         <hudson.model.TextParameterDefinition>
           <name>XAP_VERSION</name>
           <description></description>
-          <defaultValue>12.3.0</defaultValue>
+          <defaultValue>12.2.0</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>MILESTONE</name>
@@ -64,7 +64,7 @@
   </properties>
   <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM" plugin="multiple-scms@0.6">
     <scms>
-      <hudson.plugins.git.GitSCM plugin="git@3.0.4">
+      <hudson.plugins.git.GitSCM plugin="git@3.7.0">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
@@ -85,7 +85,7 @@
           </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
         </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM plugin="git@3.0.4">
+      <hudson.plugins.git.GitSCM plugin="git@3.7.0">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>

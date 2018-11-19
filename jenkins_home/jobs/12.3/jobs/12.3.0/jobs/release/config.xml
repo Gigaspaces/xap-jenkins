@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><com.tikal.jenkins.plugins.multijob.MultiJobProject plugin="jenkins-multijob-plugin@1.21">
+<?xml version='1.0' encoding='UTF-8'?>
+<com.tikal.jenkins.plugins.multijob.MultiJobProject plugin="jenkins-multijob-plugin@1.21">
   <actions/>
-  <description/>
+  <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
@@ -12,35 +13,35 @@
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
-          <description/>
-          <defaultValue>master</defaultValue>
+          <description></description>
+          <defaultValue>12.3.0-ga-build</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>XAP_VERSION</name>
-          <description/>
-          <defaultValue>12.3.1</defaultValue>
+          <description></description>
+          <defaultValue>12.3.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
-          <description/>
-          <defaultValue>m1</defaultValue>
+          <description></description>
+          <defaultValue>ga</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
-          <description/>
-          <defaultValue>19200</defaultValue>
+          <description></description>
+          <defaultValue>19000</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_TAGS</name>
-          <description/>
+          <description></description>
           <defaultValue>XAP,INSIGHTEDGE,RELEASE</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>MODE</name>
-          <description/>
+          <description></description>
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
-              <string>NIGHTLY</string>
+              <string>MILESTONE</string>
               <string>MILESTONE</string>
               <string>GA</string>
               <string>PATCH</string>
@@ -49,45 +50,40 @@
         </hudson.model.ChoiceParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>InsightEdge</name>
-          <description/>
+          <description></description>
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>DotNet</name>
-          <description/>
+          <description></description>
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>PERFORM_FULL_M2_CLEAN</name>
-          <description/>
+          <description></description>
           <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>OVERRIDE_EXISTING_TAG</name>
-          <description/>
+          <description></description>
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>DEPLOY_ARTIFACTS</name>
-          <description/>
+          <description></description>
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>TAG_NAME</name>
-          <description/>
-          <defaultValue>$XAP_VERSION-$MILESTONE-$MODE</defaultValue>
+          <description></description>
+          <defaultValue>$XAP_VERSION-$MILESTONE-MILESTONE</defaultValue>
         </hudson.model.StringParameterDefinition>
-        <hudson.model.BooleanParameterDefinition>
-          <name>PACKAGE_WITHOUT_LICENSE</name>
-          <description>Mark this when releasing RC/GA/PATCH build</description>
-          <defaultValue>false</defaultValue>
-        </hudson.model.BooleanParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
   <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM" plugin="multiple-scms@0.6">
     <scms>
-      <hudson.plugins.git.GitSCM plugin="git@3.0.4">
+      <hudson.plugins.git.GitSCM plugin="git@3.7.0">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
@@ -110,7 +106,7 @@
           </hudson.plugins.git.extensions.impl.LocalBranch>
         </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM plugin="git@3.0.4">
+      <hudson.plugins.git.GitSCM plugin="git@3.7.0">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
@@ -134,7 +130,7 @@
           </hudson.plugins.git.extensions.impl.LocalBranch>
         </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM plugin="git@3.0.4">
+      <hudson.plugins.git.GitSCM plugin="git@3.7.0">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
@@ -157,7 +153,7 @@
           </hudson.plugins.git.extensions.impl.LocalBranch>
         </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM plugin="git@3.0.4">
+      <hudson.plugins.git.GitSCM plugin="git@3.7.0">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
@@ -180,7 +176,7 @@
           </hudson.plugins.git.extensions.impl.LocalBranch>
         </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM plugin="git@3.0.4">
+      <hudson.plugins.git.GitSCM plugin="git@3.7.0">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
@@ -206,12 +202,12 @@
     </scms>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec/>
+      <spec></spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
@@ -224,16 +220,17 @@
           <currParams>true</currParams>
           <exposedSCM>false</exposedSCM>
           <disableJob>false</disableJob>
-          <parsingRulesPath/>
+          <parsingRulesPath></parsingRulesPath>
           <maxRetries>0</maxRetries>
           <enableRetryStrategy>false</enableRetryStrategy>
           <enableCondition>false</enableCondition>
           <abortAllJob>true</abortAllJob>
-          <condition/>
+          <condition></condition>
           <configs>
-            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters plugin="parameterized-trigger@2.31">
+            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters plugin="parameterized-trigger@2.35.2">
               <properties>FILENAME=${WORKSPACE}/envs.properties
 XAP_BUILD_NUMBER=${XAP_BUILD_NUMBER}</properties>
+              <textParamValueOnNewLine>false</textParamValueOnNewLine>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
           <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
@@ -249,8 +246,8 @@ XAP_BUILD_NUMBER=${XAP_BUILD_NUMBER}</properties>
       </info>
     </EnvInjectBuilder>
     <hudson.tasks.Shell>
-      <command>#export M2="${WORKSPACE//\/var\/workspaces/\/var\/m2s}"
-export M2="/home/jenkins/.m2_xap_ie_release"
+      <command>#export M2=&quot;${WORKSPACE//\/var\/workspaces/\/var\/m2s}&quot;
+export M2=&quot;/home/jenkins/.m2_xap_ie_release&quot;
 ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
     </hudson.tasks.Shell>
     <EnvInjectBuilder plugin="envinject@1.93.1">
@@ -270,15 +267,16 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.5">
       <condition class="org.jenkins_ci.plugins.run_condition.core.BooleanCondition" plugin="run-condition@1.0">
-        <token>${ENV,var="DotNet"}</token>
+        <token>${ENV,var=&quot;DotNet&quot;}</token>
       </condition>
-      <buildStep class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.31">
+      <buildStep class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.35.2">
         <configs>
           <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
             <configs>
               <hudson.plugins.parameterizedtrigger.FileBuildParameters>
                 <propertiesFile>setenv_dotnet.sh</propertiesFile>
                 <failTriggerOnMissing>false</failTriggerOnMissing>
+                <textParamValueOnNewLine>false</textParamValueOnNewLine>
                 <useMatrixChild>false</useMatrixChild>
                 <onlyExactRuns>false</onlyExactRuns>
               </hudson.plugins.parameterizedtrigger.FileBuildParameters>
@@ -286,6 +284,7 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
             <projects>DotNet</projects>
             <condition>ALWAYS</condition>
             <triggerWithNoParameters>false</triggerWithNoParameters>
+            <triggerFromChildProjects>false</triggerFromChildProjects>
             <block>
               <buildStepFailureThreshold>
                 <name>FAILURE</name>
@@ -324,7 +323,7 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
             <recipientProviders>
               <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
             </recipientProviders>
-            <attachmentsPattern/>
+            <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
@@ -338,7 +337,7 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
             <recipientProviders>
               <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
             </recipientProviders>
-            <attachmentsPattern/>
+            <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
@@ -352,7 +351,7 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
             <recipientProviders>
               <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
             </recipientProviders>
-            <attachmentsPattern/>
+            <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
@@ -362,8 +361,8 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>${SCRIPT, template="xap-i9e-release-open.template"}</defaultContent>
-      <attachmentsPattern/>
+      <defaultContent>${SCRIPT, template=&quot;xap-i9e-release-open.template&quot;}</defaultContent>
+      <attachmentsPattern></attachmentsPattern>
       <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
       <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
       <attachBuildLog>true</attachBuildLog>

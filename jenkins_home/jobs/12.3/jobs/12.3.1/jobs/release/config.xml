@@ -19,7 +19,7 @@
         <hudson.model.StringParameterDefinition>
           <name>XAP_VERSION</name>
           <description></description>
-          <defaultValue>14.0.0</defaultValue>
+          <defaultValue>12.3.1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
@@ -78,11 +78,6 @@
           <description></description>
           <defaultValue>$XAP_VERSION-$MILESTONE-$MODE</defaultValue>
         </hudson.model.StringParameterDefinition>
-        <hudson.model.BooleanParameterDefinition>
-          <name>PACKAGE_WITHOUT_LICENSE</name>
-          <description>Mark this when releasing RC/GA/PATCH build</description>
-          <defaultValue>false</defaultValue>
-        </hudson.model.BooleanParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>

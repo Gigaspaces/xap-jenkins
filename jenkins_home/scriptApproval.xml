@@ -2,21 +2,49 @@
 <scriptApproval plugin="script-security@1.35">
   <approvedScriptHashes>
     <string>017d0db438428731cd600b6ebda805065433520f</string>
+    <string>02bff24334896ee71fc391a80b747a1702c9fb31</string>
+    <string>04f5dea7743f869bcc077a1399db55ba0dfb41a3</string>
     <string>05c485a2fb56098d32612c9d04a126c4d8c66e80</string>
+    <string>068eae7111325737cd1255ebefa4d9999a52b085</string>
+    <string>084ca5f90159ceebb8b385b8f091cf4ec232bdfc</string>
+    <string>0ca25236f790a0a4ea64359b8d892dfbd8c4ffac</string>
+    <string>21e77b4a0c6e24114c06e90296e18f84cbc1f219</string>
     <string>2ccc5848bab9069b6d2d996b287fc634bb93df8d</string>
+    <string>3075060c31db88c4a3aa86eb41975e4bf36e7a3e</string>
     <string>389c568c3320978e58dc536ff4f8e871f5cb9686</string>
     <string>3ff9bd17d9174c0c463122dbe5f688bfc975f2f1</string>
+    <string>40182c86ef0138e170ca6d1bf08abfd301066a0f</string>
+    <string>419725ab52d13fa06a0a92aed487873cb7fb7dcf</string>
     <string>4ffd2447cb5c5d64d5be05858259ce37d8b071f3</string>
+    <string>6e00c8a6c286e7e8cf961b38c9bec72eba83391a</string>
     <string>7341ae78446b5624286ad934095938d12e657694</string>
     <string>7376064a460571e62208b2c794a9a89216652504</string>
+    <string>75464c0d443e3f6f5fe555464481abfa3e12ded3</string>
+    <string>77b3e401c90db94258dd85d14e4f0e4c83310cdc</string>
+    <string>79416244e6160d56fae0d6d40e69f1ce77291a8b</string>
     <string>852bfb8abf62d83b889b60136828bfafc0bba75f</string>
+    <string>8df3d63b6ebe86b30988dbcae8b5c853f36fe6cd</string>
+    <string>90c8cc0c9a974e3ed13767f1cbcd5cb631e1ee5a</string>
     <string>948dbfccb833133d00cbf4a17f5e951b2342e8f8</string>
+    <string>970e92781e5200a3bcf1f417c41d58120f201e99</string>
+    <string>9910241fc89b7cdb9c20364970a13a200d0fb958</string>
     <string>a33eb9d8c00ae4d6d19125db83016bfdb4e44d0c</string>
     <string>ac6847ead91417ee79b14dd5e7b33e08a5311676</string>
+    <string>ae81d611190eb5b07263568c096da54c09c4f37b</string>
     <string>b554276446eb02e75b4c7a1d376cabf9fa13c52d</string>
+    <string>bb2661930e4f93926f5b4bf488dd52a67fd981bd</string>
     <string>bcae54fc8cbcde90e6af46631a543f2fec2dd0fb</string>
+    <string>c4caac0cde3b4788600939a9578f0eb8ea889eab</string>
+    <string>c50e2ba677092efe5f21c89b8c1eed0a5b3e115b</string>
+    <string>cf337bd10378db84aac48cf7571bd5c1f6e0782b</string>
+    <string>db08cb64451558ad0cfcc360868beab74b8e27ff</string>
+    <string>ddeadff88f9da264deb905ed82e5ae38fcf689fc</string>
     <string>df3f993272f05c30b0890aec4312755f01bb34cd</string>
     <string>dfadbea3f5b73fa2d43c2bff0e1d88a86be54b3b</string>
+    <string>f027f158525788d673c1d222e6d42b6e89c3b819</string>
+    <string>f139f27087ffe54b2dbfc2a8b8ab1043126f08c0</string>
+    <string>f3dc3d5622d4bdb8be0bfb9446761c5fafb51bc5</string>
+    <string>f8f8587f85a9b59f1d6f6745656890678a1416af</string>
   </approvedScriptHashes>
   <approvedSignatures>
     <string>method groovy.lang.Binding hasVariable java.lang.String</string>

@@ -24,12 +24,12 @@
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m7</defaultValue>
+          <defaultValue>m12</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>19906</defaultValue>
+          <defaultValue>19911</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_TAGS</name>
@@ -225,14 +225,10 @@
     </scms>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <hudson.triggers.TimerTrigger>
-      <spec>0 17 * * *</spec>
-    </hudson.triggers.TimerTrigger>
-  </triggers>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
@@ -286,8 +282,7 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
       <macroFirst>false</macroFirst>
     </org.jenkinsci.plugins.buildnameupdater.BuildNameUpdater>
     <hudson.tasks.Shell>
-      <command>export PATH=/home/jenkins/.npm-global/bin:$PATH
-logFilename=${JENKINS_HOME}/${JOB_URL:${#JENKINS_URL}}
+      <command>logFilename=${JENKINS_HOME}/${JOB_URL:${#JENKINS_URL}}
 export logFilename=${logFilename//job\//jobs\/}builds/${BUILD_ID}/log
 ${WORKSPACE}/xap-premium/build/build.sh</command>
     </hudson.tasks.Shell>
@@ -337,24 +332,6 @@ ${WORKSPACE}/xap-premium/build/build.sh</command>
       </buildStep>
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
     </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>
-    <hudson.plugins.parameterizedtrigger.TriggerBuilder plugin="parameterized-trigger@2.35.2">
-      <configs>
-        <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-          <configs>
-            <hudson.plugins.parameterizedtrigger.CurrentBuildParameters/>
-            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-              <properties>FINAL_BUILD_NUMBER= ${FINAL_BUILD_NUMBER}</properties>
-              <textParamValueOnNewLine>false</textParamValueOnNewLine>
-            </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-          </configs>
-          <projects>14.0/14.0.0/create-docker-for-milestone-release</projects>
-          <condition>ALWAYS</condition>
-          <triggerWithNoParameters>false</triggerWithNoParameters>
-          <triggerFromChildProjects>false</triggerFromChildProjects>
-          <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
-        </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-      </configs>
-    </hudson.plugins.parameterizedtrigger.TriggerBuilder>
   </builders>
   <publishers>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.44">
