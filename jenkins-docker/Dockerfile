@@ -107,6 +107,9 @@ RUN wget --no-verbose -O /tmp/apache-maven-3.3.9.tar.gz \
 RUN echo "516923b3955b6035ba6b0a5b031fbd8b  /tmp/apache-maven-3.3.9.tar.gz" | \
     md5sum -c
 
+# add gspaces.com to resolv.conf
+RUN echo "search gspaces.com" >> /etc/resolv.conf
+
 # Install sbt
 ENV SBT_VERSION 0.13.11
 RUN \
