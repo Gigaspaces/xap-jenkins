@@ -134,6 +134,9 @@ RUN add-apt-repository ppa:ubuntu-toolchain-r/test
 RUN apt-get update
 RUN apt-get install gcc-7 g++-7 -y
 
+#install make
+RUN apt-get install build-essential -y
+
 # get node
 RUN echo 'get node tar.gz'
 RUN wget --no-verbose -O /tmp/node-v8.9.3-linux-x64.tar.gz \
