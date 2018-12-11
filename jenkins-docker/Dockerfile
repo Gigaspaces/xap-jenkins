@@ -129,6 +129,11 @@ RUN tar xzf /tmp/apache-maven-3.3.9.tar.gz --strip-components=1 \
 RUN ln -s /opt/maven/bin/mvn /usr/local/bin
 RUN rm -f /tmp/apache-maven-3.3.9.tar.gz
 
+#install gcc 7
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test
+RUN apt-get update
+RUN apt-get install gcc-7 g++-7 -y
+
 # get node
 RUN echo 'get node tar.gz'
 RUN wget --no-verbose -O /tmp/node-v8.9.3-linux-x64.tar.gz \
