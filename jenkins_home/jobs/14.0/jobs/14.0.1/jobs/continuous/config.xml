@@ -11,63 +11,11 @@
     </com.sonyericsson.rebuild.RebuildSettings>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
-        <org.biouno.unochoice.CascadeChoiceParameter plugin="uno-choice@2.0">
+        <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description></description>
-          <randomName>choice-parameter-621990271931441</randomName>
-          <visibleItemCount>1</visibleItemCount>
-          <script class="org.biouno.unochoice.model.GroovyScript">
-            <secureScript plugin="script-security@1.35">
-              <script>def folder = new File( &apos;//var//workspaces//12.3//12.3.1//continuous_elad//xap&apos; )
-if( folder.exists() ) {
-def file = new File(folder, &quot;lastTouch&quot;);
-def fetchTime = 60000;
-if (!file.exists()) {
-file.createNewFile();
-}
-
-def cmd= &apos;cd //var//workspaces//12.3//12.3.1//continuous_elad//xap &apos;;
-
-def duration = groovy.time.TimeCategory.minus(new Date(), new Date(file.lastModified())).toMilliseconds();
-if (duration &gt; fetchTime) {
-cmd += &apos; &amp;&amp; git fetch --all -pq &apos;
-}
-
-cmd += &apos; &amp;&amp; git for-each-ref --count=50 --sort=-committerdate refs/remotes/ --format=&quot;%(refname:strip=3)&quot; &apos;
-
-//def cmd = &apos;cd //var//workspaces//12.3//12.3.1//continuous_elad//xap &amp;&amp; git fetch --all -pq  &amp;&amp; for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format=&quot;%ci&quot; $branch | head -n 1`  $branch; done | sort -r&apos;
-
-proc1 = [&apos;/bin/bash&apos;, &apos;-c&apos;,cmd].execute()
-lines = proc1.text.split(&quot;\n&quot;).toList()
-//lines = lines*.substring(33)
-lines.remove(&quot;master&quot;)
-lines.add(0,&quot;master&quot;);
-
-if (duration &gt; fetchTime) {
-file.delete();
-file.createNewFile();
-}
-
-return lines;
-} else{
-def cmd = &quot;git ls-remote --heads https://github.com/xap/xap.git | awk &apos; { gsub(/refs\\/heads\\//, \&quot;\&quot;); print \$2 }&apos; &quot;
-proc1 = [&apos;/bin/bash&apos;, &apos;-c&apos;,cmd].execute()
-return proc1.text.split(&quot;\n&quot;).toList()
-}</script>
-              <sandbox>false</sandbox>
-            </secureScript>
-            <secureFallbackScript plugin="script-security@1.35">
-              <script></script>
-              <sandbox>false</sandbox>
-            </secureFallbackScript>
-          </script>
-          <projectName>continuous</projectName>
-          <parameters class="linked-hash-map"/>
-          <referencedParameters></referencedParameters>
-          <choiceType>PT_RADIO</choiceType>
-          <filterable>true</filterable>
-          <filterLength>1</filterLength>
-        </org.biouno.unochoice.CascadeChoiceParameter>
+          <defaultValue>master</defaultValue>
+        </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>XAP_VERSION</name>
           <description></description>
@@ -76,12 +24,12 @@ return proc1.text.split(&quot;\n&quot;).toList()
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m1</defaultValue>
+          <defaultValue>rc1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>20200</defaultValue>
+          <defaultValue>20204</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>InsightEdge</name>
