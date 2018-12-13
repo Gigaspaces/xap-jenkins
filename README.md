@@ -16,6 +16,7 @@ For the first run you will have to create empty folders that will contains the b
 
 1. Create an`m2` directory in the `xap-jenkins` folder, this folder will be mount in the container to /home/jenkins/.m2
 2. Create a `workspaces`  directory in the `xap-jenkins` folder, this folder will be mount in the container to /var/workspaces and will be used as directory where all the jobs workspaces will be created.
+I you don't do this, the folders will be created with root user. In this case, just chown them to the host's user.
 3. Create a keypair for this user `ssh-keygen -t rsa -b 4096 -C "xap-builder@gigaspaces.com"` and upload the public key to github as xap-dev (https://github.com/settings/keys) the folder ~/.ssh will be mounted in the container to /home/jenkins/.ssh
 4. Run the script `run.sh` from the `jenkins-docker` folder.
 5. login to jenkins with barak:barak and update the users remove the users you do not need.
@@ -24,12 +25,25 @@ For the first run you will have to create empty folders that will contains the b
 
 ## Configuration
 
-### Email 
+### SSH to hercules and imc-srv server(s)
 
-smpt:server:smtp.gmail.com
-username:newman@gigaspaces.com
-password:***
-port:465
+run `ssh-copy-id user@host` on each host/server that you want to ssh without password.
+This will copy the ssh public key to the remote machine.
+
+### Maven files
+
+create settings.xml file in xap-jenkins/m2/ folder
+
+
+### Email
+
+Under "E-mail Notification" and "Extended E-mail Notification" sections (also click advanced)
+
+smpt server: smtp.gmail.com
+port: 465
+Use SSL: checked
+username: newman@gigaspaces.com
+password: ***
 
 
 		
