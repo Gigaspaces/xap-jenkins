@@ -24,7 +24,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m1</defaultValue>
+          <defaultValue>rc1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
