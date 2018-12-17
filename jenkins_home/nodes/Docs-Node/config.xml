@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<slave>
+  <name>Docs-Node</name>
+  <description>Node for building product documentation. Contains MadCap Flare installation with license key.</description>
+  <remoteFS>c:\jenkins</remoteFS>
+  <numExecutors>1</numExecutors>
+  <mode>EXCLUSIVE</mode>
+  <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+  <launcher class="hudson.slaves.JNLPLauncher"/>
+  <label>docs</label>
+  <nodeProperties/>
+</slave>
