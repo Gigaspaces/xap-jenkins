@@ -243,7 +243,7 @@ XAP_BUILD_NUMBER=${XAP_BUILD_NUMBER}</properties>
     </EnvInjectBuilder>
     <hudson.tasks.Shell>
       <command>#export M2=&quot;${WORKSPACE//\/var\/workspaces/\/var\/m2s}&quot;
-export M2=&quot;/home/jenkins/.m2_xap_ie_release&quot;
+export M2=&quot;/home/jenkins/.m2_xap_ie_release-12.3.1-patch4&quot;
 ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
     </hudson.tasks.Shell>
     <EnvInjectBuilder plugin="envinject@1.93.1">

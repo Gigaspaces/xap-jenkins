@@ -14,7 +14,7 @@
         <hudson.model.StringParameterDefinition>
           <name>NEXT_XAP_VERSION</name>
           <description></description>
-          <defaultValue>14.0.1</defaultValue>
+          <defaultValue>14.2.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CURRENT_MILESTONE</name>
@@ -29,22 +29,22 @@
         <hudson.model.StringParameterDefinition>
           <name>NEXT_XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>20200</defaultValue>
+          <defaultValue>20400</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE_BRANCH_NAME</name>
           <description></description>
-          <defaultValue>14.0.0-ga-build</defaultValue>
+          <defaultValue>14.0.1-ga-build</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>JENKINS_USER</name>
           <description></description>
-          <defaultValue>alons</defaultValue>
+          <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.PasswordParameterDefinition>
           <name>JENKINS_PASSWORD</name>
           <description></description>
-          <defaultValue>LZ5cU1bsJ6JfFqEYKR7jkHR5es+hfdXerPt4X0XEDBA=</defaultValue>
+          <defaultValue>fxdck6F4mmjOygcxKgXaSt8hwuNC0u5lPsdfOHlTfeuKj9GUdAWSuQ7KonpI3OCOQUQ/y/7hUVJoLINl/cMeHw==</defaultValue>
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>MODE</name>
@@ -60,7 +60,7 @@
         <hudson.model.StringParameterDefinition>
           <name>JENKINS_URL</name>
           <description></description>
-          <defaultValue>http://${JENKINS_USER}:${JENKINS_PASSWORD}@xap-lab1002:8080</defaultValue>
+          <defaultValue>http://${JENKINS_USER}:${JENKINS_PASSWORD}@xap-lab1003:8080</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>

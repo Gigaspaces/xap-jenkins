@@ -56,8 +56,7 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>https://github.com/Gigaspaces/xap-premium.git</url>
-        <credentialsId>insightedge-dev</credentialsId>
+        <url>git@github.com:Gigaspaces/xap-premium.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
