@@ -19,22 +19,22 @@
         <hudson.model.StringParameterDefinition>
           <name>CURRENT_MILESTONE</name>
           <description></description>
-          <defaultValue>ga</defaultValue>
+          <defaultValue>m1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEXT_MILESTONE</name>
           <description></description>
-          <defaultValue>m1</defaultValue>
+          <defaultValue>m2</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEXT_XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>20400</defaultValue>
+          <defaultValue>20401</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE_BRANCH_NAME</name>
           <description></description>
-          <defaultValue>14.0.1-ga-build</defaultValue>
+          <defaultValue>14.2.0-m1-build</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>JENKINS_USER</name>
@@ -89,7 +89,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>export FOLDER=&quot;14.0/14.0.1&quot;
+      <command>export FOLDER=&quot;14.2/14.2.0&quot;
 export CONTINUOUS_JOB_NAME=&quot;continuous&quot;
 export CONTINUOUS_MILESTONE_JOB_NAME=&quot;continuous-milestone&quot;
 export RELEASE_JOB_NAME=&quot;release&quot;
