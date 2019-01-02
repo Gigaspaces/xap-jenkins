@@ -140,6 +140,15 @@ RUN apt-get install gcc-7 g++-7 -y
 #install make
 RUN apt-get install build-essential -y
 
+RUN apt-get install net-tools
+
+RUN apt-get install python2.7 python-pip -y
+
+RUN pip2 install -I ansible==2.2.1.0
+
+RUN pip install requests
+RUN pip install spotinst
+
 # get node
 RUN echo 'get node tar.gz'
 RUN wget --no-verbose -O /tmp/node-v8.9.3-linux-x64.tar.gz \

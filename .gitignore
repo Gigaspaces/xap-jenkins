@@ -24,6 +24,10 @@ jenkins_home/identity.key.enc
 jenkins_home/hudson.tasks.Mailer.xml
 jenkins_home/config-history/
 jenkins_home/credentials.xml
+jenkins_home/aws-credentials.sh
+jenkins_home/yardstick-key.pem
+jenkins_home/credentials.xml
+
 
 hudson.plugins.disk_usage.DiskUsageProjectActionFactory.xml
 hudson.plugins.disk_usage.DiskUsageProperty.xml

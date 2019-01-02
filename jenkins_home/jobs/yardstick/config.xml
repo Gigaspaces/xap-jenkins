@@ -19,7 +19,7 @@
         <hudson.model.StringParameterDefinition>
           <name>INSTANCES_COUNT</name>
           <description>how many spotinst instances requires (servers + drivers)</description>
-          <defaultValue>2</defaultValue>
+          <defaultValue>3</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>XAP_VERSION</name>
@@ -31,6 +31,11 @@
           <description></description>
           <defaultValue>-b 1 -w 60 -d 300 -t 8 -sm async -dn GigaspacesPutBenchmark -sn GigaspacesNode -ds atomic-put-1-backup -spn atomic-put-1-backup-space</defaultValue>
         </hudson.model.TextParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>USER</name>
+          <description>user name used for identifying machine owner in ec2</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>DEPLOY</name>
           <description>include deploy machine stage</description>
@@ -79,69 +84,11 @@
   <builders>
     <hudson.tasks.Shell>
       <command>cd spotinst
-./run-yardstick.sh $(./calculate-steps.sh)</command>
+export AWS_CRED_LOCATION=&quot;/var/jenkins_home/aws-credentials.sh&quot;
+./yardstick.sh &quot;$(./calculate-steps.sh)&quot;</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.44">
-      <recipientList>$DEFAULT_RECIPIENTS</recipientList>
-      <configuredTriggers>
-        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-          <email>
-            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
-            <body>$PROJECT_DEFAULT_CONTENT</body>
-            <recipientProviders>
-              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
-            </recipientProviders>
-            <attachmentsPattern></attachmentsPattern>
-            <attachBuildLog>false</attachBuildLog>
-            <compressBuildLog>false</compressBuildLog>
-            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
-            <contentType>project</contentType>
-          </email>
-        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-        <hudson.plugins.emailext.plugins.trigger.AlwaysTrigger>
-          <email>
-            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
-            <body>$PROJECT_DEFAULT_CONTENT</body>
-            <recipientProviders>
-              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
-            </recipientProviders>
-            <attachmentsPattern></attachmentsPattern>
-            <attachBuildLog>false</attachBuildLog>
-            <compressBuildLog>false</compressBuildLog>
-            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
-            <contentType>project</contentType>
-          </email>
-        </hudson.plugins.emailext.plugins.trigger.AlwaysTrigger>
-        <hudson.plugins.emailext.plugins.trigger.FixedTrigger>
-          <email>
-            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
-            <body>$PROJECT_DEFAULT_CONTENT</body>
-            <recipientProviders>
-              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
-            </recipientProviders>
-            <attachmentsPattern></attachmentsPattern>
-            <attachBuildLog>false</attachBuildLog>
-            <compressBuildLog>false</compressBuildLog>
-            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
-            <contentType>project</contentType>
-          </email>
-        </hudson.plugins.emailext.plugins.trigger.FixedTrigger>
-      </configuredTriggers>
-      <contentType>default</contentType>
-      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>${SCRIPT, template=&quot;generic.template&quot;}</defaultContent>
-      <attachmentsPattern></attachmentsPattern>
-      <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
-      <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
-      <attachBuildLog>false</attachBuildLog>
-      <compressBuildLog>false</compressBuildLog>
-      <replyTo>$DEFAULT_REPLYTO</replyTo>
-      <saveOutput>false</saveOutput>
-      <disabled>false</disabled>
-    </hudson.plugins.emailext.ExtendedEmailPublisher>
-  </publishers>
+  <publishers/>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.8.8"/>
     <org.jenkinsci.plugins.builduser.BuildUser plugin="build-user-vars-plugin@1.5"/>
