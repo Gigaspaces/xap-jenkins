@@ -2,7 +2,7 @@ FROM ubuntu
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-RUN apt-get update && apt-get install -y curl zip
+RUN apt-get update && apt-get install -y curl zip nano vi sudo
 
 # Install Java.
 
@@ -93,8 +93,6 @@ USER ${user}
 
 COPY jenkins.sh /usr/local/bin/jenkins.sh
 
-ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
-
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
 COPY plugins.sh /usr/local/bin/plugins.sh
 
@@ -175,6 +173,8 @@ RUN echo 'installing helm' && \
  mv linux-amd64/helm /usr/local/bin/helm && \
  rm -rf linux-amd64 helm-v2.11.0-linux-amd64.tar.gz
 
+RUN echo '    StrictHostKeyChecking no' >> /etc/ssh/ssh_config
+
 USER ${user}
 
 RUN helm init --client-only
@@ -193,3 +193,7 @@ RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
 
 COPY gitconfig /home/${user}/.gitconfig
 
+
+
+
+ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
