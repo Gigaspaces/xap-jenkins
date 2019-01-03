@@ -2,7 +2,7 @@ FROM ubuntu
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-RUN apt-get update && apt-get install -y curl zip nano vi sudo
+RUN apt-get update && apt-get install -y curl zip nano vim sudo
 
 # Install Java.
 
