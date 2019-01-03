@@ -145,29 +145,6 @@
           </hudson.plugins.git.extensions.impl.LocalBranch>
         </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM plugin="git@3.7.0">
-        <configVersion>2</configVersion>
-        <userRemoteConfigs>
-          <hudson.plugins.git.UserRemoteConfig>
-            <url>https://github.com/InsightEdge/insightedge-examples.git</url>
-          </hudson.plugins.git.UserRemoteConfig>
-        </userRemoteConfigs>
-        <branches>
-          <hudson.plugins.git.BranchSpec>
-            <name>*/$BRANCH_NAME</name>
-          </hudson.plugins.git.BranchSpec>
-        </branches>
-        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-        <submoduleCfg class="list"/>
-        <extensions>
-          <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-            <relativeTargetDir>insightedge-examples</relativeTargetDir>
-          </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-          <hudson.plugins.git.extensions.impl.LocalBranch>
-            <localBranch>$BRANCH_NAME</localBranch>
-          </hudson.plugins.git.extensions.impl.LocalBranch>
-        </extensions>
-      </hudson.plugins.git.GitSCM>
     </scms>
   </scm>
   <canRoam>true</canRoam>
