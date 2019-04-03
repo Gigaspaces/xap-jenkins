@@ -56,8 +56,9 @@
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>M2</name>
-          <description></description>
-          <defaultValue>/home/jenkins/.m2_xap-release-pre-12</defaultValue>
+          <description>old:
+/home/jenkins/.m2_xap-release-pre-12</description>
+          <defaultValue>/home/jenkins/.m2_one_xap</defaultValue>
         </hudson.model.TextParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>XAP_WORKSPACE</name>
@@ -315,7 +316,7 @@ APPEND_TO_XAP_BUILD_NUMBER=${FINAL_BUILD_NUMBER}</properties>
     <jenkins.plugins.slack.SlackNotifier plugin="slack@2.0.1">
       <teamDomain></teamDomain>
       <authToken></authToken>
-      <buildServerUrl>http://xap-lab1002:8080/</buildServerUrl>
+      <buildServerUrl>http://192.168.33.118:8080/</buildServerUrl>
       <room></room>
       <startNotification>false</startNotification>
       <notifySuccess>true</notifySuccess>

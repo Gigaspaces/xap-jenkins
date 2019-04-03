@@ -212,7 +212,7 @@ return proc1.text.split(&quot;\n&quot;).toList()
     </scms>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>

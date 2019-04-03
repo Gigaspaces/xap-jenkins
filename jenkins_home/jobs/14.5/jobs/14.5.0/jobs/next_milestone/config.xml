@@ -14,7 +14,7 @@
         <hudson.model.StringParameterDefinition>
           <name>NEXT_XAP_VERSION</name>
           <description></description>
-          <defaultValue>14.2.0</defaultValue>
+          <defaultValue>14.5.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CURRENT_MILESTONE</name>
@@ -29,12 +29,12 @@
         <hudson.model.StringParameterDefinition>
           <name>NEXT_XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>20401</defaultValue>
+          <defaultValue>20701</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE_BRANCH_NAME</name>
           <description></description>
-          <defaultValue>14.2.0-m1-build</defaultValue>
+          <defaultValue>14.5.0-m1-build</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>JENKINS_USER</name>
@@ -44,7 +44,7 @@
         <hudson.model.PasswordParameterDefinition>
           <name>JENKINS_PASSWORD</name>
           <description></description>
-          <defaultValue>fxdck6F4mmjOygcxKgXaSt8hwuNC0u5lPsdfOHlTfeuKj9GUdAWSuQ7KonpI3OCOQUQ/y/7hUVJoLINl/cMeHw==</defaultValue>
+          <defaultValue>vEfWJQtHmvQmJ8FFKc65wA==</defaultValue>
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>MODE</name>

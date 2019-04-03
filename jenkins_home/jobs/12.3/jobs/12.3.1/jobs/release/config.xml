@@ -34,7 +34,7 @@
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_TAGS</name>
           <description>**Please make sure this is empty in case you don&apos;t want the nightly tests to run on this build**</description>
-          <defaultValue>XAP,INSIGHTEDGE,RELEASE</defaultValue>
+          <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>MODE</name>

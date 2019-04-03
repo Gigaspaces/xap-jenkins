@@ -14,7 +14,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description></description>
-          <defaultValue>master</defaultValue>
+          <defaultValue>14.2.0-ga-build</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>XAP_VERSION</name>
@@ -24,12 +24,12 @@
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m2</defaultValue>
+          <defaultValue>ga</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>XAP_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>20401</defaultValue>
+          <defaultValue>20416</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_TAGS</name>
@@ -41,7 +41,7 @@
           <description></description>
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
-              <string>NIGHTLY</string>
+              <string>MILESTONE</string>
               <string>MILESTONE</string>
               <string>GA</string>
               <string>PATCH</string>
@@ -76,7 +76,7 @@
         <hudson.model.StringParameterDefinition>
           <name>TAG_NAME</name>
           <description></description>
-          <defaultValue>$XAP_VERSION-$MILESTONE-$MODE</defaultValue>
+          <defaultValue>$XAP_VERSION-$MILESTONE-MILESTONE</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -184,7 +184,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>0 17 * * *</spec>
+      <spec></spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>

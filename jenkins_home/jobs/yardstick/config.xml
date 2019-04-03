@@ -26,6 +26,16 @@
           <description>which xap version to run the benchmark on</description>
           <defaultValue>14.0.1</defaultValue>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>SEND_EMAIL</name>
+          <description></description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>CLEAR_WORKSPACE</name>
+          <description>delete all untracked files</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>CONFIGS</name>
           <description></description>
@@ -52,8 +62,18 @@
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
+          <name>UPLOAD_RESULTS</name>
+          <description>include upload results to s3</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
           <name>UNDEPLOY</name>
           <description>include undeploy yardstick benchmark stage</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>MILESTONE_RUN</name>
+          <description>is part of yardstick-milestone-test</description>
           <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
       </parameterDefinitions>
@@ -68,7 +88,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/master</name>
+        <name>*/${BRANCH_NAME}</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -83,9 +103,23 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cd spotinst
+      <command>if [[ &quot;$CLEAR_WORKSPACE&quot; = &quot;true&quot; ]]; then
+	git clean -fdx
+fi
+
+export M2=/home/jenkins/.m2_pmem
 export AWS_CRED_LOCATION=&quot;/var/jenkins_home/aws-credentials.sh&quot;
-./yardstick.sh &quot;$(./calculate-steps.sh)&quot;</command>
+
+cd spotinst
+
+./yardstick.sh &quot;$(./calculate-steps.sh)&quot;
+
+if [[ &quot;$MILESTONE_RUN&quot; = &quot;true&quot; ]]; then
+	cd ..
+	mvn -B -Dmaven.repo.local=$M2/repository clean package
+    cd spotinst
+	./generate-milestone-grapsh.sh
+fi</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -93,7 +127,7 @@ export AWS_CRED_LOCATION=&quot;/var/jenkins_home/aws-credentials.sh&quot;
       <publishers>
         <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
           <condition class="org.jenkins_ci.plugins.run_condition.core.BooleanCondition" plugin="run-condition@1.0">
-            <token>${ENV,var=&quot;RUN&quot;}</token>
+            <token>${ENV,var=&quot;SEND_EMAIL&quot;} And Not ${ENV,var=&quot;MILESTONE_RUN&quot;}</token>
           </condition>
           <publisherList>
             <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.44">
@@ -130,38 +164,61 @@ export AWS_CRED_LOCATION=&quot;/var/jenkins_home/aws-credentials.sh&quot;
           <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
           <executionStrategy class="org.jenkins_ci.plugins.flexible_publish.strategy.FailAtEndExecutionStrategy"/>
         </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.core.BooleanCondition" plugin="run-condition@1.0">
+            <token>${ENV,var=&quot;MILESTONE_RUN&quot;}</token>
+          </condition>
+          <publisherList>
+            <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.44">
+              <recipientList>$DEFAULT_RECIPIENTS</recipientList>
+              <configuredTriggers>
+                <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+                  <email>
+                    <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+                    <body>$PROJECT_DEFAULT_CONTENT</body>
+                    <recipientProviders>
+                      <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
+                    </recipientProviders>
+                    <attachmentsPattern></attachmentsPattern>
+                    <attachBuildLog>false</attachBuildLog>
+                    <compressBuildLog>false</compressBuildLog>
+                    <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+                    <contentType>project</contentType>
+                  </email>
+                </hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+                <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+                  <email>
+                    <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+                    <body>$PROJECT_DEFAULT_CONTENT</body>
+                    <recipientProviders>
+                      <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
+                    </recipientProviders>
+                    <attachmentsPattern></attachmentsPattern>
+                    <attachBuildLog>false</attachBuildLog>
+                    <compressBuildLog>false</compressBuildLog>
+                    <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+                    <contentType>project</contentType>
+                  </email>
+                </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+              </configuredTriggers>
+              <contentType>default</contentType>
+              <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+              <defaultContent>${SCRIPT, template=&quot;yardstick.template&quot;}</defaultContent>
+              <attachmentsPattern>spotinst/output*.zip</attachmentsPattern>
+              <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
+              <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
+              <attachBuildLog>false</attachBuildLog>
+              <compressBuildLog>false</compressBuildLog>
+              <replyTo>$DEFAULT_REPLYTO</replyTo>
+              <saveOutput>false</saveOutput>
+              <disabled>false</disabled>
+            </hudson.plugins.emailext.ExtendedEmailPublisher>
+          </publisherList>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+          <executionStrategy class="org.jenkins_ci.plugins.flexible_publish.strategy.FailAtEndExecutionStrategy"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
       </publishers>
     </org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.44">
-      <recipientList>$DEFAULT_RECIPIENTS</recipientList>
-      <configuredTriggers>
-        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-          <email>
-            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
-            <body>$PROJECT_DEFAULT_CONTENT</body>
-            <recipientProviders>
-              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
-            </recipientProviders>
-            <attachmentsPattern></attachmentsPattern>
-            <attachBuildLog>false</attachBuildLog>
-            <compressBuildLog>false</compressBuildLog>
-            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
-            <contentType>project</contentType>
-          </email>
-        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-      </configuredTriggers>
-      <contentType>default</contentType>
-      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>$DEFAULT_CONTENT</defaultContent>
-      <attachmentsPattern></attachmentsPattern>
-      <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
-      <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
-      <attachBuildLog>false</attachBuildLog>
-      <compressBuildLog>false</compressBuildLog>
-      <replyTo>$DEFAULT_REPLYTO</replyTo>
-      <saveOutput>false</saveOutput>
-      <disabled>false</disabled>
-    </hudson.plugins.emailext.ExtendedEmailPublisher>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.8.8"/>
