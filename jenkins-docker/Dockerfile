@@ -1,14 +1,21 @@
 FROM ubuntu 
 
+ARG STORAGE_SERVER="imc-srv01"
+RUN echo "Using STORAGE_SERVER=${STORAGE_SERVER}"
+RUN if [[ "${STORAGE_SERVER}" == "" ]]; then echo "STORAGE_SERVER can't be empty"; exit 1; fi
+
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-RUN apt-get update && apt-get install -y curl zip nano vim sudo
+RUN apt-get update && apt-get install -y curl zip nano vim sudo wget
 
 # Install Java.
 
+RUN wget http://${STORAGE_SERVER}/javas/jdk-8u191-linux-x64.tar.gz -O /tmp/jdk-8u191-linux-x64.tar.gz && cd /tmp && tar -zxvf jdk-8u191-linux-x64.tar.gz && mkdir -p /usr/lib/jvm/ && mv jdk1.8.0_191 /usr/lib/jvm/java-8-oracle
+
+
+
 RUN apt-get update
 RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:webupd8team/java -y
 RUN add-apt-repository ppa:git-core/ppa -y
 
 RUN apt-get update --fix-missing
@@ -16,15 +23,13 @@ RUN apt-get update --fix-missing
 
 RUN apt-get install  -y git
 
-RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-
-RUN apt-get install -y oracle-java8-installer ca-certificates
 
 RUN apt-get install -y sshpass
 
 RUN apt-get install -y bzip2
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle 
+ENV PATH=$JAVA_HOME/bin:$PATH
 
 # && rm -rf /var/lib/apt/lists/*
 
@@ -108,18 +113,6 @@ RUN echo "516923b3955b6035ba6b0a5b031fbd8b  /tmp/apache-maven-3.3.9.tar.gz" | \
 # add gspaces.com to resolv.conf
 RUN echo "search gspaces.com" >> /etc/resolv.conf
 
-# Install sbt
-ENV SBT_VERSION 0.13.11
-RUN \
-  curl -L -o sbt-$SBT_VERSION.deb http://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && \
-  dpkg -i sbt-$SBT_VERSION.deb && \
-  rm sbt-$SBT_VERSION.deb && \
-  apt-get update && \
-  apt-get install sbt && \
-  sbt sbtVersion && \
-  echo >> /home/${user}/.bashrc && \
-  echo 'export PATH=/usr/share/sbt-launcher-packaging/bin:$PATH' >> /home/${user}/.bashrc
-
 
 # install in /opt/maven
 RUN mkdir -p /opt/maven
@@ -192,8 +185,6 @@ COPY plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
 
 COPY gitconfig /home/${user}/.gitconfig
-
-
 
 
 ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
