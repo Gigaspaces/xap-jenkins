@@ -76,6 +76,7 @@ m2
 m2_release
 workspaces
 *~
+ssh
 
 .idea
 *.iml
