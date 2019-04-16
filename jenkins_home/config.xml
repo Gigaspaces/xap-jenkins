@@ -137,7 +137,6 @@
     <permission>hudson.model.Computer.Disconnect:yael</permission>
     <permission>hudson.model.Computer.Disconnect:yechiel</permission>
     <permission>hudson.model.Computer.Disconnect:yohana</permission>
-    <permission>hudson.model.Computer.Provision:meshi</permission>
     <permission>hudson.model.Hudson.Administer:alons</permission>
     <permission>hudson.model.Hudson.Administer:ayeletm</permission>
     <permission>hudson.model.Hudson.Administer:barak</permission>
@@ -431,13 +430,13 @@
     </hudson.model.AllView>
     <listView>
       <owner class="hudson" reference="../../.."/>
-      <name>14.0.0</name>
+      <name>latest</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>14.0/14.0.0</string>
+        <string>xap-insightedge/latest</string>
       </jobNames>
       <jobFilters/>
       <columns>

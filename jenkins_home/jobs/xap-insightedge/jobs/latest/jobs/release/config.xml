@@ -11,31 +11,6 @@
     </com.sonyericsson.rebuild.RebuildSettings>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
-        <hudson.model.StringParameterDefinition>
-          <name>BRANCH_NAME</name>
-          <description></description>
-          <defaultValue>master</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>XAP_VERSION</name>
-          <description></description>
-          <defaultValue>14.5.0</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>MILESTONE</name>
-          <description></description>
-          <defaultValue>m1</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>XAP_BUILD_NUMBER</name>
-          <description></description>
-          <defaultValue>20700</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>NEWMAN_TAGS</name>
-          <description>**Please make sure this is empty in case you don&apos;t want the nightly tests to run on this build**</description>
-          <defaultValue>XAP,INSIGHTEDGE,RELEASE</defaultValue>
-        </hudson.model.StringParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>MODE</name>
           <description></description>
@@ -48,14 +23,34 @@
             </a>
           </choices>
         </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>BRANCH_NAME</name>
+          <description></description>
+          <defaultValue>master</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>XAP_VERSION</name>
+          <description></description>
+          <defaultValue>14.5.0</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>MILESTONE</name>
+          <description>Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH</description>
+          <defaultValue>m2</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>NEWMAN_TAGS</name>
+          <description>**Please make sure this is empty in case you don&apos;t want the nightly tests to run on this build**</description>
+          <defaultValue>XAP,INSIGHTEDGE,RELEASE</defaultValue>
+        </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>InsightEdge</name>
-          <description></description>
+          <description>Enable/Disable InsightEdge build</description>
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>DotNet</name>
-          <description></description>
+          <description>Enable/Disable XAP.NET build</description>
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
@@ -65,18 +60,28 @@
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>OVERRIDE_EXISTING_TAG</name>
-          <description></description>
-          <defaultValue>true</defaultValue>
+          <description>Override git tag if exists</description>
+          <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>DEPLOY_ARTIFACTS</name>
-          <description></description>
+          <description>Deploy build artifacts to S3</description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>PUBLISH_DOCKER</name>
+          <description>Trigger automated docker build in Docker Hub</description>
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>TAG_NAME</name>
-          <description></description>
-          <defaultValue>$XAP_VERSION-$MILESTONE-$MODE</defaultValue>
+          <name>GS_PATCH_ID</name>
+          <description>Patch identifier (usually a letter: a, b, c).</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>GS_PATCH_NUMBER</name>
+          <description>Patch number (integer which increases for each release of the same version+patchId).</description>
+          <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -184,44 +189,11 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec></spec>
+      <spec>0 17 * * *</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
-      <phaseName>Settings</phaseName>
-      <phaseJobs>
-        <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-          <jobName>12.3/BuildNumber</jobName>
-          <currParams>true</currParams>
-          <exposedSCM>false</exposedSCM>
-          <disableJob>false</disableJob>
-          <parsingRulesPath></parsingRulesPath>
-          <maxRetries>0</maxRetries>
-          <enableRetryStrategy>false</enableRetryStrategy>
-          <enableCondition>false</enableCondition>
-          <abortAllJob>true</abortAllJob>
-          <condition></condition>
-          <configs>
-            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters plugin="parameterized-trigger@2.35.2">
-              <properties>FILENAME=${WORKSPACE}/envs.properties
-XAP_BUILD_NUMBER=${XAP_BUILD_NUMBER}</properties>
-              <textParamValueOnNewLine>false</textParamValueOnNewLine>
-            </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-          </configs>
-          <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-          <buildOnlyIfSCMChanges>false</buildOnlyIfSCMChanges>
-          <applyConditionOnlyIfNoSCMChanges>false</applyConditionOnlyIfNoSCMChanges>
-        </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-      </phaseJobs>
-      <continuationCondition>ALWAYS</continuationCondition>
-    </com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
-    <EnvInjectBuilder plugin="envinject@1.93.1">
-      <info>
-        <propertiesFilePath>${WORKSPACE}/envs.properties</propertiesFilePath>
-      </info>
-    </EnvInjectBuilder>
     <hudson.tasks.Shell>
       <command>#export M2=&quot;${WORKSPACE//\/var\/workspaces/\/var\/m2s}&quot;
 export M2=&quot;/home/jenkins/.m2_xap_ie_release&quot;
@@ -234,7 +206,7 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
     </EnvInjectBuilder>
     <org.jenkinsci.plugins.buildnameupdater.BuildNameUpdater plugin="build-name-setter@1.6.5">
       <buildName>version.txt</buildName>
-      <macroTemplate>${FINAL_BUILD_NUMBER}</macroTemplate>
+      <macroTemplate>${GS_BUILD_NAME}</macroTemplate>
       <fromFile>false</fromFile>
       <fromMacro>true</fromMacro>
       <macroFirst>false</macroFirst>
@@ -253,7 +225,7 @@ ${WORKSPACE}/xap-premium/build/build.sh</command>
           <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
             <configs>
               <hudson.plugins.parameterizedtrigger.FileBuildParameters>
-                <propertiesFile>setenv_dotnet.sh</propertiesFile>
+                <propertiesFile>dotnet_env.properties</propertiesFile>
                 <failTriggerOnMissing>false</failTriggerOnMissing>
                 <textParamValueOnNewLine>false</textParamValueOnNewLine>
                 <useMatrixChild>false</useMatrixChild>

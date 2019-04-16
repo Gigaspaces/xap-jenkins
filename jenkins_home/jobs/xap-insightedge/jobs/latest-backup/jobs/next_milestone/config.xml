@@ -82,14 +82,14 @@
     <extensions/>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>export FOLDER=&quot;14.2/14.2.0&quot;
+      <command>export FOLDER=&quot;xap-insightedge/latest&quot;
 export CONTINUOUS_JOB_NAME=&quot;continuous&quot;
 export CONTINUOUS_MILESTONE_JOB_NAME=&quot;continuous-milestone&quot;
 export RELEASE_JOB_NAME=&quot;release&quot;
