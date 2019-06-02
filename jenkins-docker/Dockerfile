@@ -2,7 +2,7 @@ FROM ubuntu
 
 ARG STORAGE_SERVER="imc-srv01"
 RUN echo "Using STORAGE_SERVER=${STORAGE_SERVER}"
-RUN if [[ "${STORAGE_SERVER}" == "" ]]; then echo "STORAGE_SERVER can't be empty"; exit 1; fi
+RUN bash -c 'if [[ "${STORAGE_SERVER}" == "" ]]; then echo "STORAGE_SERVER can not be empty"; exit 1; fi'
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
