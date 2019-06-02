@@ -1,12 +1,16 @@
 FROM ubuntu 
 
+ARG STORAGE_SERVER="imc-srv01"
+RUN echo "Using STORAGE_SERVER=${STORAGE_SERVER}"
+RUN if [[ "${STORAGE_SERVER}" == "" ]]; then echo "STORAGE_SERVER can't be empty"; exit 1; fi
+
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 RUN apt-get update && apt-get install -y curl zip nano vim sudo wget
 
 # Install Java.
 
-RUN wget http://hercules.gspaces.com/javas/jdk-8u191-linux-x64.tar.gz -O /tmp/jdk-8u191-linux-x64.tar.gz && cd /tmp && tar -zxvf jdk-8u191-linux-x64.tar.gz && mkdir -p /usr/lib/jvm/ && mv jdk1.8.0_191 /usr/lib/jvm/java-8-oracle
+RUN wget http://${STORAGE_SERVER}/javas/jdk-8u191-linux-x64.tar.gz -O /tmp/jdk-8u191-linux-x64.tar.gz && cd /tmp && tar -zxvf jdk-8u191-linux-x64.tar.gz && mkdir -p /usr/lib/jvm/ && mv jdk1.8.0_191 /usr/lib/jvm/java-8-oracle
 
 
 
