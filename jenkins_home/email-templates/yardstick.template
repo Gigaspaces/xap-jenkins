@@ -36,7 +36,6 @@ def branchName = build.getEnvironment(listener).get("BRANCH_NAME")
 
 <BR/>
 
-
 <TABLE>
     <TR><TD valign="center"><B style="font-size: 150%;">2,1 remote</B></TD></TR>
     <TR><TD>read</TD><TD><A href="https://s3-eu-west-1.amazonaws.com/yardstick-results/results/${xapVersion}/results-files/cluster-remote-read/result-compound-cluster-remote-read/Results.html">${xapVersion}/cluster-remote-read</A></TD></TR>

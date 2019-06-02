@@ -20,6 +20,11 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
+          <name>branch</name>
+          <description></description>
+          <defaultValue>14.2.0-ga-backwards-test</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
           <name>client_host</name>
           <description>Hostname or IP address of the client machine that will run the metrics</description>
           <defaultValue>pc-lab62</defaultValue>
@@ -27,7 +32,7 @@
         <hudson.model.StringParameterDefinition>
           <name>client_xapUrl</name>
           <description></description>
-          <defaultValue>http://hercules/14.0.0/14.0.0-ga-build/20000/gigaspaces-xap-enterprise-14.0.0-ga-b20000.zip</defaultValue>
+          <defaultValue>http://hercules/14.2.0/14.2.0-ga-build/20400/gigaspaces-xap-enterprise-14.2.0-ga-b20400.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent_lookupLocators</name>
@@ -43,12 +48,12 @@
           <name>agent1_xapUrl</name>
           <description>link to build zip in hercules 
 (Important: don&apos;t use &apos;hercules.gspace.com&apos; in link address)</description>
-          <defaultValue>http://hercules/14.0.1/14.0.1-m1-build/20201/gigaspaces-xap-enterprise-14.0.1-m1-b20201.zip</defaultValue>
+          <defaultValue>http://hercules/14.5.0/14.5.0-m2-build/14.5.0-m2/gigaspaces-xap-enterprise-14.5.0-m2.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent1_licenseKey</name>
           <description>License key to be used in the first agent. Leave empty to use the license that is packaged with the product.</description>
-          <defaultValue></defaultValue>
+          <defaultValue>tryme</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent1_nicAddress</name>
@@ -64,12 +69,12 @@
           <name>agent2_xapUrl</name>
           <description>link to build zip in hercules 
 (Important: don&apos;t use &apos;hercules.gspace.com&apos; in link address)</description>
-          <defaultValue>http://hercules/14.0.1/14.0.1-m1-build/20201/gigaspaces-xap-enterprise-14.0.1-m1-b20201.zip</defaultValue>
+          <defaultValue>http://hercules/14.5.0/14.5.0-m2-build/14.5.0-m2/gigaspaces-xap-enterprise-14.5.0-m2.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent2_licenseKey</name>
           <description>License key to be used in the second agent. Leave empty to use the license that is packaged with the product.</description>
-          <defaultValue></defaultValue>
+          <defaultValue>tryme</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent2_nicAddress</name>
@@ -89,12 +94,12 @@
         <hudson.model.StringParameterDefinition>
           <name>mail_title</name>
           <description></description>
-          <defaultValue>Backwards results - 14.0.0-ga-20000 vs 14.0.1-m?-????</defaultValue>
+          <defaultValue>Backwards results - 14.2.0-ga vs 14.5.0-m?</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>xapVersion</name>
           <description>XAP Maven Version to compile with</description>
-          <defaultValue>14.0.0</defaultValue>
+          <defaultValue>14.2.0</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -108,7 +113,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/master</name>
+        <name>*/${branch}</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>

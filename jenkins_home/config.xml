@@ -159,6 +159,7 @@
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:yael</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:yechiel</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:yohana</permission>
+    <permission>hudson.model.Hudson.Read:alani</permission>
     <permission>hudson.model.Hudson.Read:alons</permission>
     <permission>hudson.model.Hudson.Read:ayeletm</permission>
     <permission>hudson.model.Hudson.Read:barak</permission>
@@ -197,6 +198,7 @@
     <permission>hudson.model.Hudson.UploadPlugins:yael</permission>
     <permission>hudson.model.Hudson.UploadPlugins:yechiel</permission>
     <permission>hudson.model.Hudson.UploadPlugins:yohana</permission>
+    <permission>hudson.model.Item.Build:alani</permission>
     <permission>hudson.model.Item.Build:alons</permission>
     <permission>hudson.model.Item.Build:ayeletm</permission>
     <permission>hudson.model.Item.Build:barak</permission>
@@ -286,6 +288,7 @@
     <permission>hudson.model.Item.Move:alons</permission>
     <permission>hudson.model.Item.Move:ayeletm</permission>
     <permission>hudson.model.Item.Move:meshi</permission>
+    <permission>hudson.model.Item.Read:alani</permission>
     <permission>hudson.model.Item.Read:alons</permission>
     <permission>hudson.model.Item.Read:ayeletm</permission>
     <permission>hudson.model.Item.Read:barak</permission>
@@ -304,6 +307,7 @@
     <permission>hudson.model.Item.Release:alons</permission>
     <permission>hudson.model.Item.Release:ayeletm</permission>
     <permission>hudson.model.Item.Release:meshi</permission>
+    <permission>hudson.model.Item.Workspace:alani</permission>
     <permission>hudson.model.Item.Workspace:alons</permission>
     <permission>hudson.model.Item.Workspace:ayeletm</permission>
     <permission>hudson.model.Item.Workspace:barak</permission>
@@ -389,6 +393,7 @@
     <permission>hudson.model.View.Delete:yael</permission>
     <permission>hudson.model.View.Delete:yechiel</permission>
     <permission>hudson.model.View.Delete:yohana</permission>
+    <permission>hudson.model.View.Read:alani</permission>
     <permission>hudson.model.View.Read:alons</permission>
     <permission>hudson.model.View.Read:anonymous</permission>
     <permission>hudson.model.View.Read:ayeletm</permission>
