@@ -27,7 +27,7 @@
         <hudson.model.StringParameterDefinition>
           <name>xapUrl</name>
           <description></description>
-          <defaultValue>http://hercules/12.1.1/12.1.1-ga-build/17100/gigaspaces-xap-premium-12.1.1-ga-b17100.zip</defaultValue>
+          <defaultValue>https://gigaspaces-releases-eu.s3-eu-west-1.amazonaws.com/xap/14.2.0/gigaspaces-xap-enterprise-14.2.0-ga-b20400.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>xlsFilename</name>
@@ -37,17 +37,17 @@
         <hudson.model.StringParameterDefinition>
           <name>mail_title</name>
           <description></description>
-          <defaultValue>Embedded results - 12.2.0 ga build 18000</defaultValue>
+          <defaultValue>Embedded results - 14.2.0 ga build 20400</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>xapVersion</name>
           <description>XAP Maven version to compile with</description>
-          <defaultValue>12.2.0</defaultValue>
+          <defaultValue>14.2.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>METRICS_BRANCH_NAME</name>
           <description></description>
-          <defaultValue>master</defaultValue>
+          <defaultValue>14.2.0-ga-build</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>

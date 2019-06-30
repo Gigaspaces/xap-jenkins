@@ -22,47 +22,47 @@
         <hudson.model.StringParameterDefinition>
           <name>client_host</name>
           <description>Hostname or IP address of the client machine that will run the metrics</description>
-          <defaultValue>35.178.181.59</defaultValue>
+          <defaultValue>pc-lab39.gspaces.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>xapUrl</name>
           <description></description>
-          <defaultValue>http://hercules/12.2.0/12.2.0-ga-build/18000/gigaspaces-xap-12.2.0-ga-b18000.zip</defaultValue>
+          <defaultValue>https://gigaspaces-releases-eu.s3-eu-west-1.amazonaws.com/xap/14.2.0/gigaspaces-xap-enterprise-14.2.0-ga-b20400.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent_lookupLocators</name>
           <description></description>
-          <defaultValue>172.31.12.105,172.31.6.17</defaultValue>
+          <defaultValue>192.168.10.40,192.168.10.47</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent1_host</name>
           <description>Hostname or IP address of the first agent machine</description>
-          <defaultValue>3.8.120.1</defaultValue>
+          <defaultValue>192.168.10.40</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent_licenseKey</name>
           <description>License key to be used in the first agent. Leave empty to use the license that is packaged with the product.</description>
-          <defaultValue></defaultValue>
+          <defaultValue>tryme</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent1_nicAddress</name>
           <description></description>
-          <defaultValue>172.31.12.105</defaultValue>
+          <defaultValue>192.168.10.40</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent2_host</name>
           <description>Hostname or IP address of the second agent machine</description>
-          <defaultValue>3.9.13.212</defaultValue>
+          <defaultValue>192.168.10.47</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent2_nicAddress</name>
           <description></description>
-          <defaultValue>172.31.6.17</defaultValue>
+          <defaultValue>192.168.10.47</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>xlsFilename</name>
           <description></description>
-          <defaultValue>remote.xls</defaultValue>
+          <defaultValue>remote_2_1.xls</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>remote_agentMachines</name>
@@ -77,12 +77,12 @@
         <hudson.model.StringParameterDefinition>
           <name>mail_title</name>
           <description></description>
-          <defaultValue>Remote results - 12.2.0 ga build 18000</defaultValue>
+          <defaultValue>Remote results -14.2.0 ga build 20400</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>xapVersion</name>
           <description>XAP Maven version to compile with</description>
-          <defaultValue>12.2.0</defaultValue>
+          <defaultValue>14.2.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>client_sampler_file</name>
@@ -97,7 +97,7 @@
         <hudson.model.StringParameterDefinition>
           <name>METRICS_BRANCH_NAME</name>
           <description>The branch to build the metrics module </description>
-          <defaultValue>master</defaultValue>
+          <defaultValue>14.2.0-ga-build</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -132,7 +132,7 @@
     <hudson.tasks.Shell>
       <command>cd xap-premium/xap-tests/metric
 
-./jenkins/run-remote.sh -DworkspacePath=/home/ubuntu/metric-automation/ -Dusername=ubuntu</command>
+./jenkins/run-remote.sh -DworkspacePath=/home/xap/metric-automation/ -Dusername=xap</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

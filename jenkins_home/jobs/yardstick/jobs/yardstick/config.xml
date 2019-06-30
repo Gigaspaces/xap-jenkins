@@ -1,17 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project>
+<com.tikal.jenkins.plugins.multijob.MultiJobProject plugin="jenkins-multijob-plugin@1.21">
   <actions/>
-  <description></description>
+  <description>running Gigaspaces/yardstick on spotinst instances</description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <jenkins.model.BuildDiscarderProperty>
-      <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>1</daysToKeep>
-        <numToKeep>5</numToKeep>
-        <artifactDaysToKeep>-1</artifactDaysToKeep>
-        <artifactNumToKeep>-1</artifactNumToKeep>
-      </strategy>
-    </jenkins.model.BuildDiscarderProperty>
     <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
     <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.25">
       <autoRebuild>false</autoRebuild>
@@ -20,75 +12,70 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
-          <name>client_host</name>
-          <description>Hostname or IP address of the client machine that will run the metrics</description>
-          <defaultValue>pc-lab62.gspaces.com</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>xapUrl</name>
+          <name>BRANCH_NAME</name>
           <description></description>
-          <defaultValue>https://gigaspaces-releases-eu.s3-eu-west-1.amazonaws.com/xap/14.2.0/gigaspaces-xap-enterprise-14.2.0-ga-b20400.zip</defaultValue>
+          <defaultValue>master</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>agent_lookupLocators</name>
+          <name>INSTANCES_COUNT</name>
+          <description>how many spotinst instances requires (servers + drivers)</description>
+          <defaultValue>3</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>XAP_VERSION</name>
+          <description>which xap version to run the benchmark on</description>
+          <defaultValue>14.0.1</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>SEND_EMAIL</name>
           <description></description>
-          <defaultValue>192.168.10.47</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>agent1_host</name>
-          <description>Hostname or IP address of the first agent machine</description>
-          <defaultValue>192.168.10.47</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>agent_licenseKey</name>
-          <description>License key to be used in the first agent. Leave empty to use the license that is packaged with the product.</description>
-          <defaultValue>tryme</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>agent1_nicAddress</name>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>CLEAR_WORKSPACE</name>
+          <description>delete all untracked files</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>CONFIGS</name>
           <description></description>
-          <defaultValue>192.168.10.47</defaultValue>
-        </hudson.model.StringParameterDefinition>
+          <defaultValue>-b 1 -w 60 -d 300 -t 8 -sm async -dn GigaspacesPutBenchmark -sn GigaspacesNode -ds atomic-put-1-backup -spn atomic-put-1-backup-space</defaultValue>
+        </hudson.model.TextParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>xlsFilename</name>
-          <description></description>
-          <defaultValue>remote.xls</defaultValue>
+          <name>MACHINE_PREFIX</name>
+          <description>user name used for identifying machine owner in ec2</description>
+          <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>remote_agentMachines</name>
-          <description>Must be set to 0 in embedded mode</description>
-          <defaultValue>1</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>remote_spaceTotalMembers</name>
-          <description>Ignored in embedded mode</description>
-          <defaultValue>1,0</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>mail_title</name>
-          <description></description>
-          <defaultValue>Remote results - 14.2.0 ga build 20400</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>xapVersion</name>
-          <description>XAP Maven version to compile with</description>
-          <defaultValue>14.2.0</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.ChoiceParameterDefinition>
-          <name>client_sampler_file</name>
-          <description></description>
-          <choices class="java.util.Arrays$ArrayList">
-            <a class="string-array">
-              <string>permutations-gigasampler/remote.txt</string>
-              <string>permutations-gigasampler/remote_sanity.txt</string>
-            </a>
-          </choices>
-        </hudson.model.ChoiceParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>METRICS_BRANCH_NAME</name>
-          <description>The branch to build the metrics module </description>
-          <defaultValue>14.2.0-ga-build</defaultValue>
-        </hudson.model.StringParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>DEPLOY</name>
+          <description>include deploy machine stage</description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>INSTALL</name>
+          <description>include install prerequisites stage</description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>RUN</name>
+          <description>include run yardstick benchmark stage</description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>UPLOAD_RESULTS</name>
+          <description>include upload results to s3</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>UNDEPLOY</name>
+          <description>include undeploy yardstick benchmark stage</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>MILESTONE_RUN</name>
+          <description>is part of yardstick-milestone-test</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -96,21 +83,17 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>git@github.com:Gigaspaces/xap-premium.git</url>
+        <url>git@github.com:gigaspaces/yardstick.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/${METRICS_BRANCH_NAME}</name>
+        <name>*/${BRANCH_NAME}</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
     <submoduleCfg class="list"/>
-    <extensions>
-      <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>xap-premium</relativeTargetDir>
-      </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-    </extensions>
+    <extensions/>
   </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
@@ -120,34 +103,37 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cd xap-premium/xap-tests/metric
+      <command>if [[ &quot;$CLEAR_WORKSPACE&quot; = &quot;true&quot; ]]; then
+	git clean -fdx
+fi
 
-./jenkins/run-remote.sh</command>
+export M2=/home/jenkins/.m2_pmem
+export AWS_CRED_LOCATION=&quot;/var/jenkins_home/aws-credentials.sh&quot;
+
+cd spotinst
+
+./yardstick.sh &quot;$(./calculate-steps.sh)&quot;
+
+if [[ &quot;$MILESTONE_RUN&quot; = &quot;true&quot; ]]; then
+	cd ..
+	mvn -B -Dmaven.repo.local=$M2/repository clean package
+    cd spotinst
+	./generate-milestone-grapsh.sh
+fi</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher plugin="flexible-publish@0.15.2">
       <publishers>
         <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
-          <condition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition" plugin="run-condition@1.0">
-            <worstResult>
-              <name>SUCCESS</name>
-              <ordinal>0</ordinal>
-              <color>BLUE</color>
-              <completeBuild>true</completeBuild>
-            </worstResult>
-            <bestResult>
-              <name>SUCCESS</name>
-              <ordinal>0</ordinal>
-              <color>BLUE</color>
-              <completeBuild>true</completeBuild>
-            </bestResult>
+          <condition class="org.jenkins_ci.plugins.run_condition.core.BooleanCondition" plugin="run-condition@1.0">
+            <token>${ENV,var=&quot;SEND_EMAIL&quot;} And Not ${ENV,var=&quot;MILESTONE_RUN&quot;}</token>
           </condition>
           <publisherList>
             <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.44">
               <recipientList>$DEFAULT_RECIPIENTS</recipientList>
               <configuredTriggers>
-                <hudson.plugins.emailext.plugins.trigger.AlwaysTrigger>
+                <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
                   <email>
                     <subject>$PROJECT_DEFAULT_SUBJECT</subject>
                     <body>$PROJECT_DEFAULT_CONTENT</body>
@@ -160,16 +146,12 @@
                     <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
                     <contentType>project</contentType>
                   </email>
-                </hudson.plugins.emailext.plugins.trigger.AlwaysTrigger>
+                </hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
               </configuredTriggers>
               <contentType>default</contentType>
-              <defaultSubject>$DEFAULT_SUBJECT ($mail_title)</defaultSubject>
-              <defaultContent>$DEFAULT_CONTENT
-&lt;br/&gt;
-${mail_title}
-&lt;br/&gt;
-See attached file</defaultContent>
-              <attachmentsPattern>xap-premium/xap-tests/metric/${xlsFilename}</attachmentsPattern>
+              <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+              <defaultContent>$DEFAULT_CONTENT</defaultContent>
+              <attachmentsPattern>spotinst/output*.zip</attachmentsPattern>
               <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
               <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
               <attachBuildLog>false</attachBuildLog>
@@ -183,27 +165,14 @@ See attached file</defaultContent>
           <executionStrategy class="org.jenkins_ci.plugins.flexible_publish.strategy.FailAtEndExecutionStrategy"/>
         </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
         <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
-          <condition class="org.jenkins_ci.plugins.run_condition.logic.Not" plugin="run-condition@1.0">
-            <condition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition">
-              <worstResult>
-                <name>SUCCESS</name>
-                <ordinal>0</ordinal>
-                <color>BLUE</color>
-                <completeBuild>true</completeBuild>
-              </worstResult>
-              <bestResult>
-                <name>SUCCESS</name>
-                <ordinal>0</ordinal>
-                <color>BLUE</color>
-                <completeBuild>true</completeBuild>
-              </bestResult>
-            </condition>
+          <condition class="org.jenkins_ci.plugins.run_condition.core.BooleanCondition" plugin="run-condition@1.0">
+            <token>${ENV,var=&quot;MILESTONE_RUN&quot;}</token>
           </condition>
           <publisherList>
             <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.44">
               <recipientList>$DEFAULT_RECIPIENTS</recipientList>
               <configuredTriggers>
-                <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+                <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
                   <email>
                     <subject>$PROJECT_DEFAULT_SUBJECT</subject>
                     <body>$PROJECT_DEFAULT_CONTENT</body>
@@ -216,12 +185,26 @@ See attached file</defaultContent>
                     <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
                     <contentType>project</contentType>
                   </email>
+                </hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+                <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+                  <email>
+                    <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+                    <body>$PROJECT_DEFAULT_CONTENT</body>
+                    <recipientProviders>
+                      <hudson.plugins.emailext.plugins.recipients.RequesterRecipientProvider/>
+                    </recipientProviders>
+                    <attachmentsPattern></attachmentsPattern>
+                    <attachBuildLog>false</attachBuildLog>
+                    <compressBuildLog>false</compressBuildLog>
+                    <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+                    <contentType>project</contentType>
+                  </email>
                 </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
               </configuredTriggers>
               <contentType>default</contentType>
               <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-              <defaultContent>$DEFAULT_CONTENT</defaultContent>
-              <attachmentsPattern></attachmentsPattern>
+              <defaultContent>${SCRIPT, template=&quot;yardstick.template&quot;}</defaultContent>
+              <attachmentsPattern>spotinst/output*.zip</attachmentsPattern>
               <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
               <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
               <attachBuildLog>false</attachBuildLog>
@@ -238,10 +221,8 @@ See attached file</defaultContent>
     </org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher>
   </publishers>
   <buildWrappers>
-    <EnvInjectBuildWrapper plugin="envinject@1.93.1">
-      <info>
-        <loadFilesFromMaster>false</loadFilesFromMaster>
-      </info>
-    </EnvInjectBuildWrapper>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.8.8"/>
+    <org.jenkinsci.plugins.builduser.BuildUser plugin="build-user-vars-plugin@1.5"/>
   </buildWrappers>
-</project>
+  <pollSubjobs>false</pollSubjobs>
+</com.tikal.jenkins.plugins.multijob.MultiJobProject>

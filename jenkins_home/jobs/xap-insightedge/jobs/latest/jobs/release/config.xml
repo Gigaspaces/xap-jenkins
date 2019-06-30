@@ -31,12 +31,12 @@
         <hudson.model.StringParameterDefinition>
           <name>XAP_VERSION</name>
           <description></description>
-          <defaultValue>14.5.0</defaultValue>
+          <defaultValue>15.0.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description>Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH</description>
-          <defaultValue>m8</defaultValue>
+          <defaultValue>m1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_TAGS</name>
@@ -189,14 +189,13 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>0 17 * * * </spec>
+      <spec>0 17 * * *</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>#export M2=&quot;${WORKSPACE//\/var\/workspaces/\/var\/m2s}&quot;
-export M2=&quot;/home/jenkins/.m2_xap_ie_release&quot;
+      <command>export M2=&quot;${WORKSPACE//\/var\/workspaces/\/var\/m2s}&quot;
 ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
     </hudson.tasks.Shell>
     <EnvInjectBuilder plugin="envinject@1.93.1">
