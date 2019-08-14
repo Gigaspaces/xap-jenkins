@@ -19,6 +19,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:meshi</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:moran</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:niv</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:nizar</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:yael</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:yechiel</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:yohana</permission>
@@ -31,6 +32,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:meshi</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:moran</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:niv</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:nizar</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:yael</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:yechiel</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:yohana</permission>
@@ -43,6 +45,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:meshi</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:moran</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:niv</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:nizar</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:yael</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:yechiel</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:yohana</permission>
@@ -55,6 +58,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:meshi</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:moran</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:niv</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:nizar</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:yael</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:yechiel</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:yohana</permission>
@@ -67,6 +71,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:meshi</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:moran</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:niv</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:nizar</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:yael</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:yechiel</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:yohana</permission>
@@ -80,6 +85,7 @@
     <permission>hudson.model.Computer.Build:meshi</permission>
     <permission>hudson.model.Computer.Build:moran</permission>
     <permission>hudson.model.Computer.Build:niv</permission>
+    <permission>hudson.model.Computer.Build:nizar</permission>
     <permission>hudson.model.Computer.Build:yael</permission>
     <permission>hudson.model.Computer.Build:yechiel</permission>
     <permission>hudson.model.Computer.Build:yohana</permission>
@@ -93,6 +99,7 @@
     <permission>hudson.model.Computer.Configure:meshi</permission>
     <permission>hudson.model.Computer.Configure:moran</permission>
     <permission>hudson.model.Computer.Configure:niv</permission>
+    <permission>hudson.model.Computer.Configure:nizar</permission>
     <permission>hudson.model.Computer.Configure:yael</permission>
     <permission>hudson.model.Computer.Configure:yechiel</permission>
     <permission>hudson.model.Computer.Configure:yohana</permission>
@@ -106,6 +113,7 @@
     <permission>hudson.model.Computer.Connect:meshi</permission>
     <permission>hudson.model.Computer.Connect:moran</permission>
     <permission>hudson.model.Computer.Connect:niv</permission>
+    <permission>hudson.model.Computer.Connect:nizar</permission>
     <permission>hudson.model.Computer.Connect:yael</permission>
     <permission>hudson.model.Computer.Connect:yechiel</permission>
     <permission>hudson.model.Computer.Connect:yohana</permission>
@@ -119,6 +127,7 @@
     <permission>hudson.model.Computer.Create:meshi</permission>
     <permission>hudson.model.Computer.Create:moran</permission>
     <permission>hudson.model.Computer.Create:niv</permission>
+    <permission>hudson.model.Computer.Create:nizar</permission>
     <permission>hudson.model.Computer.Create:yael</permission>
     <permission>hudson.model.Computer.Create:yechiel</permission>
     <permission>hudson.model.Computer.Create:yohana</permission>
@@ -132,6 +141,7 @@
     <permission>hudson.model.Computer.Delete:meshi</permission>
     <permission>hudson.model.Computer.Delete:moran</permission>
     <permission>hudson.model.Computer.Delete:niv</permission>
+    <permission>hudson.model.Computer.Delete:nizar</permission>
     <permission>hudson.model.Computer.Delete:yael</permission>
     <permission>hudson.model.Computer.Delete:yechiel</permission>
     <permission>hudson.model.Computer.Delete:yohana</permission>
@@ -145,6 +155,7 @@
     <permission>hudson.model.Computer.Disconnect:meshi</permission>
     <permission>hudson.model.Computer.Disconnect:moran</permission>
     <permission>hudson.model.Computer.Disconnect:niv</permission>
+    <permission>hudson.model.Computer.Disconnect:nizar</permission>
     <permission>hudson.model.Computer.Disconnect:yael</permission>
     <permission>hudson.model.Computer.Disconnect:yechiel</permission>
     <permission>hudson.model.Computer.Disconnect:yohana</permission>
@@ -157,6 +168,7 @@
     <permission>hudson.model.Hudson.Administer:meshi</permission>
     <permission>hudson.model.Hudson.Administer:moran</permission>
     <permission>hudson.model.Hudson.Administer:niv</permission>
+    <permission>hudson.model.Hudson.Administer:nizar</permission>
     <permission>hudson.model.Hudson.Administer:yael</permission>
     <permission>hudson.model.Hudson.Administer:yechiel</permission>
     <permission>hudson.model.Hudson.Administer:yohana</permission>
@@ -169,6 +181,7 @@
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:meshi</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:moran</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:niv</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:nizar</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:yael</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:yechiel</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:yohana</permission>
@@ -185,6 +198,7 @@
     <permission>hudson.model.Hudson.Read:meshi</permission>
     <permission>hudson.model.Hudson.Read:moran</permission>
     <permission>hudson.model.Hudson.Read:niv</permission>
+    <permission>hudson.model.Hudson.Read:nizar</permission>
     <permission>hudson.model.Hudson.Read:penina</permission>
     <permission>hudson.model.Hudson.Read:yael</permission>
     <permission>hudson.model.Hudson.Read:yechiel</permission>
@@ -199,6 +213,7 @@
     <permission>hudson.model.Hudson.RunScripts:meshi</permission>
     <permission>hudson.model.Hudson.RunScripts:moran</permission>
     <permission>hudson.model.Hudson.RunScripts:niv</permission>
+    <permission>hudson.model.Hudson.RunScripts:nizar</permission>
     <permission>hudson.model.Hudson.RunScripts:yael</permission>
     <permission>hudson.model.Hudson.RunScripts:yechiel</permission>
     <permission>hudson.model.Hudson.RunScripts:yohana</permission>
@@ -211,6 +226,7 @@
     <permission>hudson.model.Hudson.UploadPlugins:meshi</permission>
     <permission>hudson.model.Hudson.UploadPlugins:moran</permission>
     <permission>hudson.model.Hudson.UploadPlugins:niv</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:nizar</permission>
     <permission>hudson.model.Hudson.UploadPlugins:yael</permission>
     <permission>hudson.model.Hudson.UploadPlugins:yechiel</permission>
     <permission>hudson.model.Hudson.UploadPlugins:yohana</permission>
@@ -226,6 +242,7 @@
     <permission>hudson.model.Item.Build:meshi</permission>
     <permission>hudson.model.Item.Build:moran</permission>
     <permission>hudson.model.Item.Build:niv</permission>
+    <permission>hudson.model.Item.Build:nizar</permission>
     <permission>hudson.model.Item.Build:penina</permission>
     <permission>hudson.model.Item.Build:yael</permission>
     <permission>hudson.model.Item.Build:yechiel</permission>
@@ -242,6 +259,7 @@
     <permission>hudson.model.Item.Cancel:meshi</permission>
     <permission>hudson.model.Item.Cancel:moran</permission>
     <permission>hudson.model.Item.Cancel:niv</permission>
+    <permission>hudson.model.Item.Cancel:nizar</permission>
     <permission>hudson.model.Item.Cancel:yael</permission>
     <permission>hudson.model.Item.Cancel:yechiel</permission>
     <permission>hudson.model.Item.Cancel:yohana</permission>
@@ -257,6 +275,7 @@
     <permission>hudson.model.Item.Configure:meshi</permission>
     <permission>hudson.model.Item.Configure:moran</permission>
     <permission>hudson.model.Item.Configure:niv</permission>
+    <permission>hudson.model.Item.Configure:nizar</permission>
     <permission>hudson.model.Item.Configure:yael</permission>
     <permission>hudson.model.Item.Configure:yechiel</permission>
     <permission>hudson.model.Item.Configure:yohana</permission>
@@ -276,6 +295,7 @@
     <permission>hudson.model.Item.Create:meshi</permission>
     <permission>hudson.model.Item.Create:moran</permission>
     <permission>hudson.model.Item.Create:niv</permission>
+    <permission>hudson.model.Item.Create:nizar</permission>
     <permission>hudson.model.Item.Create:yael</permission>
     <permission>hudson.model.Item.Create:yechiel</permission>
     <permission>hudson.model.Item.Create:yohana</permission>
@@ -290,6 +310,7 @@
     <permission>hudson.model.Item.Delete:meshi</permission>
     <permission>hudson.model.Item.Delete:moran</permission>
     <permission>hudson.model.Item.Delete:niv</permission>
+    <permission>hudson.model.Item.Delete:nizar</permission>
     <permission>hudson.model.Item.Delete:yael</permission>
     <permission>hudson.model.Item.Delete:yechiel</permission>
     <permission>hudson.model.Item.Delete:yohana</permission>
@@ -304,6 +325,7 @@
     <permission>hudson.model.Item.Discover:meshi</permission>
     <permission>hudson.model.Item.Discover:moran</permission>
     <permission>hudson.model.Item.Discover:niv</permission>
+    <permission>hudson.model.Item.Discover:nizar</permission>
     <permission>hudson.model.Item.Discover:yael</permission>
     <permission>hudson.model.Item.Discover:yechiel</permission>
     <permission>hudson.model.Item.Discover:yohana</permission>
@@ -312,6 +334,9 @@
     <permission>hudson.model.Item.Move:ayeletm</permission>
     <permission>hudson.model.Item.Move:efrat</permission>
     <permission>hudson.model.Item.Move:meshi</permission>
+    <permission>hudson.model.Item.Move:nizar</permission>
+    <permission>hudson.model.Item.Move:yael</permission>
+    <permission>hudson.model.Item.Move:yohana</permission>
     <permission>hudson.model.Item.Read:alani</permission>
     <permission>hudson.model.Item.Read:alons</permission>
     <permission>hudson.model.Item.Read:ayeletm</permission>
@@ -324,6 +349,7 @@
     <permission>hudson.model.Item.Read:meshi</permission>
     <permission>hudson.model.Item.Read:moran</permission>
     <permission>hudson.model.Item.Read:niv</permission>
+    <permission>hudson.model.Item.Read:nizar</permission>
     <permission>hudson.model.Item.Read:penina</permission>
     <permission>hudson.model.Item.Read:yael</permission>
     <permission>hudson.model.Item.Read:yechiel</permission>
@@ -345,6 +371,7 @@
     <permission>hudson.model.Item.Workspace:meshi</permission>
     <permission>hudson.model.Item.Workspace:moran</permission>
     <permission>hudson.model.Item.Workspace:niv</permission>
+    <permission>hudson.model.Item.Workspace:nizar</permission>
     <permission>hudson.model.Item.Workspace:penina</permission>
     <permission>hudson.model.Item.Workspace:yael</permission>
     <permission>hudson.model.Item.Workspace:yechiel</permission>
@@ -361,6 +388,7 @@
     <permission>hudson.model.Run.Delete:meshi</permission>
     <permission>hudson.model.Run.Delete:moran</permission>
     <permission>hudson.model.Run.Delete:niv</permission>
+    <permission>hudson.model.Run.Delete:nizar</permission>
     <permission>hudson.model.Run.Delete:yael</permission>
     <permission>hudson.model.Run.Delete:yechiel</permission>
     <permission>hudson.model.Run.Delete:yohana</permission>
@@ -370,6 +398,7 @@
     <permission>hudson.model.Run.Replay:efrat</permission>
     <permission>hudson.model.Run.Replay:inbar</permission>
     <permission>hudson.model.Run.Replay:meshi</permission>
+    <permission>hudson.model.Run.Replay:nizar</permission>
     <permission>hudson.model.Run.Replay:yuval</permission>
     <permission>hudson.model.Run.Update:alons</permission>
     <permission>hudson.model.Run.Update:ayeletm</permission>
@@ -382,6 +411,7 @@
     <permission>hudson.model.Run.Update:meshi</permission>
     <permission>hudson.model.Run.Update:moran</permission>
     <permission>hudson.model.Run.Update:niv</permission>
+    <permission>hudson.model.Run.Update:nizar</permission>
     <permission>hudson.model.Run.Update:yael</permission>
     <permission>hudson.model.Run.Update:yechiel</permission>
     <permission>hudson.model.Run.Update:yohana</permission>
@@ -396,6 +426,7 @@
     <permission>hudson.model.View.Configure:meshi</permission>
     <permission>hudson.model.View.Configure:moran</permission>
     <permission>hudson.model.View.Configure:niv</permission>
+    <permission>hudson.model.View.Configure:nizar</permission>
     <permission>hudson.model.View.Configure:yael</permission>
     <permission>hudson.model.View.Configure:yechiel</permission>
     <permission>hudson.model.View.Configure:yohana</permission>
@@ -410,6 +441,7 @@
     <permission>hudson.model.View.Create:meshi</permission>
     <permission>hudson.model.View.Create:moran</permission>
     <permission>hudson.model.View.Create:niv</permission>
+    <permission>hudson.model.View.Create:nizar</permission>
     <permission>hudson.model.View.Create:yael</permission>
     <permission>hudson.model.View.Create:yechiel</permission>
     <permission>hudson.model.View.Create:yohana</permission>
@@ -423,6 +455,7 @@
     <permission>hudson.model.View.Delete:meshi</permission>
     <permission>hudson.model.View.Delete:moran</permission>
     <permission>hudson.model.View.Delete:niv</permission>
+    <permission>hudson.model.View.Delete:nizar</permission>
     <permission>hudson.model.View.Delete:yael</permission>
     <permission>hudson.model.View.Delete:yechiel</permission>
     <permission>hudson.model.View.Delete:yohana</permission>
@@ -438,6 +471,7 @@
     <permission>hudson.model.View.Read:meshi</permission>
     <permission>hudson.model.View.Read:moran</permission>
     <permission>hudson.model.View.Read:niv</permission>
+    <permission>hudson.model.View.Read:nizar</permission>
     <permission>hudson.model.View.Read:penina</permission>
     <permission>hudson.model.View.Read:yael</permission>
     <permission>hudson.model.View.Read:yechiel</permission>

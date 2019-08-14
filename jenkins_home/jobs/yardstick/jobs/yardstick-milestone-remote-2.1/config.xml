@@ -90,9 +90,9 @@ CONFIGS=</properties>
         <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
           <configs>
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-              <properties>BRANCH_NAME=base-version-yardstick
+              <properties>BRANCH_NAME=master
 INSTANCES_COUNT=5
-XAP_VERSION=${CURRENT_VERSION}
+XAP_VERSION=${BASE_VERSION}
 MACHINE_PREFIX=milestone
 SEND_EMAIL=true
 CLEAR_WORKSPACE=false
@@ -100,12 +100,12 @@ DEPLOY=false
 INSTALL=false
 RUN=true
 UPLOAD_RESULTS=true
-UNDELPOY=true
+UNDELPOY=false
 MILESTONE_RUN=true
 CONFIGS=\
--r 10000 -b 1 -w 60 -d 300 -t 4 -dn GSWriteBenchmark -sn GigaspacesNode -ds base-cluster-remote-write -spn atomic-space,\
--r 10000 -b 1 -w 60 -d 300 -t 4 -dn GSReadByIdBenchmark -sn GigaspacesNode -ds base-cluster-remote-read -spn atomic-space,\
--r 10000 -b 1 -w 60 -d 300 -t 4 -dn GSTakeByIdBenchmark -sn GigaspacesNode -ds base-cluster-remote-take -spn atomic-space</properties>
+-r 10000 -b 1 -w 6 -d 30 -t 4 -dn GSWriteBenchmark -sn GigaspacesNode -ds base-cluster-remote-write -spn atomic-space,\
+-r 10000 -b 1 -w 6 -d 30 -t 4 -dn GSReadByIdBenchmark -sn GigaspacesNode -ds base-cluster-remote-read -spn atomic-space,\
+-r 10000 -b 1 -w 6 -d 30 -t 4 -dn GSTakeByIdBenchmark -sn GigaspacesNode -ds base-cluster-remote-take -spn atomic-space</properties>
               <textParamValueOnNewLine>false</textParamValueOnNewLine>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
@@ -142,7 +142,7 @@ CONFIGS=\
         <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
           <configs>
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-              <properties>BRANCH_NAME=yardstick-for-tests
+              <properties>BRANCH_NAME=${YARDSTICK_BRANCH}
 INSTANCES_COUNT=5
 XAP_VERSION=${CURRENT_VERSION}
 MACHINE_PREFIX=milestone
@@ -155,9 +155,9 @@ UPLOAD_RESULTS=true
 UNDELPOY=true
 MILESTONE_RUN=true
 CONFIGS=\
--r 10000 -b 1 -w 60 -d 300 -t 4 -dn GSWriteBenchmark -sn GigaspacesNode -ds current-cluster-remote-write -spn atomic-space,\
--r 10000 -b 1 -w 60 -d 300 -t 4 -dn GSReadByIdBenchmark -sn GigaspacesNode -ds current-cluster-remote-read -spn atomic-space,\
--r 10000 -b 1 -w 60 -d 300 -t 4 -dn GSTakeByIdBenchmark -sn GigaspacesNode -ds current-cluster-remote-take -spn atomic-space</properties>
+-r 10000 -b 1 -w 6 -d 30 -t 4 -dn GSWriteBenchmark -sn GigaspacesNode -ds current-cluster-remote-write -spn atomic-space,\
+-r 10000 -b 1 -w 6 -d 30 -t 4 -dn GSReadByIdBenchmark -sn GigaspacesNode -ds current-cluster-remote-read -spn atomic-space,\
+-r 10000 -b 1 -w 6 -d 30 -t 4 -dn GSTakeByIdBenchmark -sn GigaspacesNode -ds current-cluster-remote-take -spn atomic-space</properties>
               <textParamValueOnNewLine>false</textParamValueOnNewLine>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>

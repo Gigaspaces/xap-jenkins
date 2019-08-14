@@ -14,12 +14,12 @@
         <hudson.model.StringParameterDefinition>
           <name>BASE_VERSION</name>
           <description></description>
-          <defaultValue>14.2.0</defaultValue>
+          <defaultValue>14.5.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CURRENT_VERSION</name>
           <description></description>
-          <defaultValue>14.5.0-m4</defaultValue>
+          <defaultValue>14.5.0-ga-build</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>YARDSTICK_BRANCH</name>
@@ -90,7 +90,7 @@ CONFIGS=</properties>
         <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
           <configs>
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-              <properties>BRANCH_NAME=base-version-yardstick
+              <properties>BRANCH_NAME=${YARDSTICK_BRANCH}
 INSTANCES_COUNT=2
 XAP_VERSION=${BASE_VERSION}
 MACHINE_PREFIX=milestone

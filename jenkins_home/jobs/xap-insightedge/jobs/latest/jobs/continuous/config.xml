@@ -4,6 +4,13 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.7.3">
+      <useBuildBlocker>true</useBuildBlocker>
+      <blockLevel>GLOBAL</blockLevel>
+      <scanQueueFor>DISABLED</scanQueueFor>
+      <blockingJobs>.*continuous
+.*release</blockingJobs>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
     <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.25">
       <autoRebuild>false</autoRebuild>
@@ -24,7 +31,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m1</defaultValue>
+          <defaultValue>m9</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>InsightEdge</name>
@@ -65,6 +72,11 @@
 5b4c9825b3859411ee82c2f3  - ORACLE_9
 5bf160bb1f31eb789fc0fa65 - OPENJDK_11</description>
           <defaultValue>5b4c9342b3859411ee82c265</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>NEWMAN_AGENT_GROUPS</name>
+          <description></description>
+          <defaultValue>imc-srv01,imc-srv02,DotNet</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
