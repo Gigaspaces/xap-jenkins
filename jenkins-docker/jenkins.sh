@@ -1,6 +1,8 @@
 #!/bin/bash
 
 set -e
+source /opt/elm-env.sh
+use_elm_version 0.18.0
 
 # Copy files from /usr/share/jenkins/ref into $JENKINS_HOME
 # So the initial JENKINS-HOME is set with expected content.

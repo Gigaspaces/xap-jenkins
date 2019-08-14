@@ -168,17 +168,13 @@ RUN echo 'installing helm' && \
 
 RUN echo '    StrictHostKeyChecking no' >> /etc/ssh/ssh_config
 
+ADD elm-env.sh /opt/elm-env.sh
+RUN chmod 777 /opt/elm-env.sh
 USER ${user}
 
 RUN helm init --client-only
 
-RUN echo 'installing elm' && \
-    mkdir /home/${user}/.npm-global && \
-     npm config set prefix "/home/${user}/.npm-global"
-
-ENV PATH=/home/${user}/.npm-global/bin:$PATH
-
-RUN npm install -g elm@0.18.0
+RUN /opt/elm-env.sh install_elm 0.18.0 && /opt/elm-env.sh install_elm 0.19.0
 
 #RUN mkdir -p /var/jenkins_home/build/ssh
 COPY plugins.txt /usr/share/jenkins/plugins.txt
