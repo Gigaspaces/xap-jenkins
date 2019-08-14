@@ -218,7 +218,9 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
       <macroFirst>false</macroFirst>
     </org.jenkinsci.plugins.buildnameupdater.BuildNameUpdater>
     <hudson.tasks.Shell>
-      <command>logFilename=${JENKINS_HOME}/${JOB_URL:${#JENKINS_URL}}
+      <command>use_elm_version 0.19.0
+
+logFilename=${JENKINS_HOME}/${JOB_URL:${#JENKINS_URL}}
 export logFilename=${logFilename//job\//jobs\/}builds/${BUILD_ID}/log
 ${WORKSPACE}/xap-premium/build/build.sh</command>
     </hudson.tasks.Shell>
