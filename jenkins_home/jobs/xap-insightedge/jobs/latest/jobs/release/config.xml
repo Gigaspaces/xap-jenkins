@@ -43,7 +43,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description>Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH</description>
-          <defaultValue>m9</defaultValue>
+          <defaultValue>m10</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_TAGS</name>
@@ -196,7 +196,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>0 17 * * *</spec>
+      <spec>0 17 * * * </spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>

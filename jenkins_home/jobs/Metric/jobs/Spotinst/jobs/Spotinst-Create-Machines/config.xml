@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.7.3">
+      <useBuildBlocker>false</useBuildBlocker>
+      <blockLevel>GLOBAL</blockLevel>
+      <scanQueueFor>DISABLED</scanQueueFor>
+      <blockingJobs></blockingJobs>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.25">
+      <autoRebuild>false</autoRebuild>
+      <rebuildDisabled>false</rebuildDisabled>
+    </com.sonyericsson.rebuild.RebuildSettings>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>KEY_NAME</name>
+          <description></description>
+          <defaultValue>YOUR KEY NAME</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AWS_REGION</name>
+          <description></description>
+          <defaultValue>eu-west-1</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>VPC_ID</name>
+          <description></description>
+          <defaultValue>vpc-ffec199a</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SECURITY_GROUP</name>
+          <description></description>
+          <defaultValue>sg-095be91b6ef33cc2d</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AMI_ID</name>
+          <description></description>
+          <defaultValue>ami-0fad7378adf284ce0</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>INSTANCE_TYPE</name>
+          <description></description>
+          <defaultValue>c5.2xlarge</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AVAILABILITY_ZONE_REGION</name>
+          <description></description>
+          <defaultValue>eu-west-1a</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AVAILABILITY_ZONE_SUBNET_ID</name>
+          <description></description>
+          <defaultValue>subnet-b545b1c2</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>PRODUCT_TYPE</name>
+          <description></description>
+          <defaultValue>Linux/UNIX (Amazon VPC)</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SPOTINST_GROUP_NAME</name>
+          <description>Must not contain special characters/spaces</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SPOTINST_INSTANCES</name>
+          <description></description>
+          <defaultValue>1</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>JAVA_URL</name>
+          <description></description>
+          <defaultValue>https://s3-eu-west-1.amazonaws.com/xap-test/test-build-newman/javas/jdk-8u45-linux-x64.tar.gz</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.FileParameterDefinition>
+          <name>pemfile</name>
+          <description></description>
+        </hudson.model.FileParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>PREPARE_FOR</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>NONE</string>
+              <string>BACKWARDS</string>
+              <string>PERFORMANCE_EMBEDDED</string>
+              <string>PERFORMANCE_REMOTE</string>
+              <string>PERFORMANCE_REMOTE_2_1</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@3.7.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/giga-dev/spotinst-ansible.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>pattern=&quot; |&apos;&quot;
+if [[ $SPOTINST_GROUP_NAME =~ $pattern ]]; then
+	echo &quot;SPOTINST_GROUP_NAME can&apos;t contain spaces&quot;
+    exit 1
+fi
+
+
+
+if [[ -e &quot;${WORKSPACE}/pemfile.pem&quot; ]]; then 
+	rm -f ${WORKSPACE}/pemfile.pem
+fi
+
+if [[ &quot;${PREPARE_FOR}&quot; == &quot;BACKWARDS&quot; ]]; then
+	export HOSTS_FILE=&quot;${WORKSPACE}/../Backwards/all_hosts&quot;
+elif [[ &quot;${PREPARE_FOR}&quot; == &quot;PERFORMANCE_EMBEDDED&quot; ]]; then
+	export HOSTS_FILE=&quot;${WORKSPACE}/../Performance-Embedded/all_hosts&quot;
+elif [[ &quot;${PREPARE_FOR}&quot; == &quot;PERFORMANCE_REMOTE&quot; ]]; then
+	export HOSTS_FILE=&quot;${WORKSPACE}/../Performance-Remote/all_hosts&quot;
+elif [[ &quot;${PREPARE_FOR}&quot; == &quot;PERFORMANCE_REMOTE_2_1&quot; ]]; then
+	export HOSTS_FILE=&quot;${WORKSPACE}/../Performance-Remote-2-1/all_hosts&quot;
+else 
+	export HOSTS_FILE=&quot;${WORKSPACE}/all_hosts&quot;
+fi
+
+HOSTS_DIR=$(dirname ${HOSTS_FILE})
+if [[ ! -e &quot;${HOSTS_DIR}&quot; ]]; then
+	mkdir -p ${HOSTS_DIR}
+fi
+
+
+
+
+cd ansible
+if [[ ! -e &quot;${WORKSPACE}/pemfile&quot; ]]; then
+	echo &quot;Pem file was not provided&quot;
+    exit 1
+fi
+cp ${WORKSPACE}/pemfile ${WORKSPACE}/pemfile.pem
+export PEM_FILE_LOCATION=${WORKSPACE}/pemfile.pem
+    
+chmod 400 ${WORKSPACE}/pemfile.pem
+
+./create_varsfile.sh
+
+curl -X GET http://localhost:8080/job/Metric/job/Spotinst/job/Templates/job/Spotinst-Delete-Machines-Template/config.xml -u jenkins:ec11e72141e663c7bc9ade972b2c0ab4 -o myconfig.xml
+lineNum=$(awk &apos;/ALL_CONTENT_HERE/{ print NR; exit }&apos; myconfig.xml)
+if [[ -z &quot;${lineNum}&quot; ]]; then
+	echo &quot;could not find text in file&quot;
+    exit 1
+fi
+
+head -n $(( ${lineNum} - 1 )) myconfig.xml &gt; newconfig.xml
+echo &quot;&lt;defaultValue&gt;&quot; &gt;&gt; newconfig.xml
+cat ${WORKSPACE}/ansible/group_vars/all &gt;&gt; newconfig.xml
+echo &quot;&lt;/defaultValue&gt;&quot; &gt;&gt; newconfig.xml
+tail -n +$(( ${lineNum} + 1 )) myconfig.xml &gt;&gt; newconfig.xml
+
+
+#cat newconfig.xml
+curl -s -XPOST &quot;http://localhost:8080/job/Metric/job/Spotinst/createItem?name=Spotinst-Delete-${SPOTINST_GROUP_NAME}&quot; -u jenkins:ec11e72141e663c7bc9ade972b2c0ab4 --data-binary @newconfig.xml -H &quot;Content-Type:text/xml&quot;
+
+
+
+./start.sh</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers>
+    <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper plugin="credentials-binding@1.10">
+      <bindings>
+        <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+          <credentialsId>ec2developers</credentialsId>
+          <usernameVariable>ACCOUNT</usernameVariable>
+          <passwordVariable>SPOTINST_TOKEN</passwordVariable>
+        </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+      </bindings>
+    </org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+  </buildWrappers>
+</project>

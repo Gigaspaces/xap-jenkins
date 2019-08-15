@@ -195,6 +195,7 @@
     <permission>hudson.model.Hudson.Read:ester</permission>
     <permission>hudson.model.Hudson.Read:evgeny</permission>
     <permission>hudson.model.Hudson.Read:inbar</permission>
+    <permission>hudson.model.Hudson.Read:jenkins</permission>
     <permission>hudson.model.Hudson.Read:meshi</permission>
     <permission>hudson.model.Hudson.Read:moran</permission>
     <permission>hudson.model.Hudson.Read:niv</permission>
@@ -272,6 +273,7 @@
     <permission>hudson.model.Item.Configure:ester</permission>
     <permission>hudson.model.Item.Configure:evgeny</permission>
     <permission>hudson.model.Item.Configure:inbar</permission>
+    <permission>hudson.model.Item.Configure:jenkins</permission>
     <permission>hudson.model.Item.Configure:meshi</permission>
     <permission>hudson.model.Item.Configure:moran</permission>
     <permission>hudson.model.Item.Configure:niv</permission>
@@ -292,6 +294,7 @@
     <permission>hudson.model.Item.Create:ester</permission>
     <permission>hudson.model.Item.Create:evgeny</permission>
     <permission>hudson.model.Item.Create:inbar</permission>
+    <permission>hudson.model.Item.Create:jenkins</permission>
     <permission>hudson.model.Item.Create:meshi</permission>
     <permission>hudson.model.Item.Create:moran</permission>
     <permission>hudson.model.Item.Create:niv</permission>
@@ -322,6 +325,7 @@
     <permission>hudson.model.Item.Discover:ester</permission>
     <permission>hudson.model.Item.Discover:evgeny</permission>
     <permission>hudson.model.Item.Discover:inbar</permission>
+    <permission>hudson.model.Item.Discover:jenkins</permission>
     <permission>hudson.model.Item.Discover:meshi</permission>
     <permission>hudson.model.Item.Discover:moran</permission>
     <permission>hudson.model.Item.Discover:niv</permission>
@@ -346,6 +350,7 @@
     <permission>hudson.model.Item.Read:ester</permission>
     <permission>hudson.model.Item.Read:evgeny</permission>
     <permission>hudson.model.Item.Read:inbar</permission>
+    <permission>hudson.model.Item.Read:jenkins</permission>
     <permission>hudson.model.Item.Read:meshi</permission>
     <permission>hudson.model.Item.Read:moran</permission>
     <permission>hudson.model.Item.Read:niv</permission>
@@ -368,6 +373,7 @@
     <permission>hudson.model.Item.Workspace:ester</permission>
     <permission>hudson.model.Item.Workspace:evgeny</permission>
     <permission>hudson.model.Item.Workspace:inbar</permission>
+    <permission>hudson.model.Item.Workspace:jenkins</permission>
     <permission>hudson.model.Item.Workspace:meshi</permission>
     <permission>hudson.model.Item.Workspace:moran</permission>
     <permission>hudson.model.Item.Workspace:niv</permission>

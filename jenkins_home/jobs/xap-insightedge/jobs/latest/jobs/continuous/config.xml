@@ -31,7 +31,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m9</defaultValue>
+          <defaultValue>m10</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>InsightEdge</name>
