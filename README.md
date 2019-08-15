@@ -20,8 +20,7 @@ I you don't do this, the folders will be created with root user. In this case, j
 3. Create a keypair for this user `ssh-keygen -t rsa -b 4096 -C "xap-builder@gigaspaces.com"` and upload the public key to github as xap-dev (https://github.com/settings/keys) the folder ~/.ssh will be mounted in the container to /home/jenkins/.ssh
 4. Run the script `run.sh` from the `jenkins-docker` folder.
 5. login to jenkins with barak:barak and update the users remove the users you do not need.
-6.
-
+6. create aws-cradentials.sh under /var/jenkins_home/  , you can find the template here https://github.com/Gigaspaces/yardstick/blob/master/spotinst/aws-credentials.sh-template
 
 ## Configuration
 
