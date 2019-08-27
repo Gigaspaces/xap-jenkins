@@ -28,7 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>xapUrl</name>
           <description></description>
-          <defaultValue>https://gigaspaces-releases-eu.s3-eu-west-1.amazonaws.com/xap/14.2.0/gigaspaces-xap-enterprise-14.2.0-ga-b20400.zip</defaultValue>
+          <defaultValue>http://gigaspaces-releases-eu.s3.amazonaws.com/xap/14.5.0/gigaspaces-xap-enterprise-14.5.0.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>xlsFilename</name>
@@ -38,17 +38,17 @@
         <hudson.model.StringParameterDefinition>
           <name>mail_title</name>
           <description></description>
-          <defaultValue>Embedded results - 14.2.0 ga build 20400</defaultValue>
+          <defaultValue>Embedded results - 14.5.0-ga</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>xapVersion</name>
           <description>XAP Maven version to compile with</description>
-          <defaultValue>14.2.0</defaultValue>
+          <defaultValue>14.5.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>METRICS_BRANCH_NAME</name>
           <description></description>
-          <defaultValue>14.2.0-ga-build</defaultValue>
+          <defaultValue>master</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.FileParameterDefinition>
           <name>pemfile</name>

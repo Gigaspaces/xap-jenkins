@@ -28,7 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>branch</name>
           <description></description>
-          <defaultValue>dev-yohana-metrics-spotinst</defaultValue>
+          <defaultValue>master</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>client_xapUrl</name>
@@ -39,7 +39,7 @@
           <name>agent1_xapUrl</name>
           <description>link to build zip in hercules 
 (Important: don&apos;t use &apos;hercules.gspace.com&apos; in link address)</description>
-          <defaultValue>http://gigaspaces-releases-eu.s3.amazonaws.com/xap/14.5.0/gigaspaces-xap-enterprise-14.5.0.zip</defaultValue>
+          <defaultValue>https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.0.0/gigaspaces-xap-enterprise-15.0.0-m9.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent1_licenseKey</name>
@@ -50,7 +50,7 @@
           <name>agent2_xapUrl</name>
           <description>link to build zip in hercules 
 (Important: don&apos;t use &apos;hercules.gspace.com&apos; in link address)</description>
-          <defaultValue>http://gigaspaces-releases-eu.s3.amazonaws.com/xap/14.5.0/gigaspaces-xap-enterprise-14.5.0.zip</defaultValue>
+          <defaultValue>https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.0.0/gigaspaces-xap-enterprise-15.0.0-m9.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>agent2_licenseKey</name>

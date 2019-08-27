@@ -5,7 +5,7 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.7.3">
-      <useBuildBlocker>true</useBuildBlocker>
+      <useBuildBlocker>false</useBuildBlocker>
       <blockLevel>GLOBAL</blockLevel>
       <scanQueueFor>DISABLED</scanQueueFor>
       <blockingJobs>.*continuous
@@ -43,7 +43,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description>Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH</description>
-          <defaultValue>m10</defaultValue>
+          <defaultValue>m11</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_TAGS</name>
@@ -90,6 +90,16 @@
           <description>Patch number (integer which increases for each release of the same version+patchId).</description>
           <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>ELM_VERSION</name>
+          <description>ELM Version to build with</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>0.19.0</string>
+              <string>0.18.0</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -196,7 +206,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>0 17 * * * </spec>
+      <spec>0 17 * * *</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
@@ -218,7 +228,7 @@ ${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
       <macroFirst>false</macroFirst>
     </org.jenkinsci.plugins.buildnameupdater.BuildNameUpdater>
     <hudson.tasks.Shell>
-      <command>use_elm_version 0.19.0
+      <command>use_elm_version ${ELM_VERSION}
 
 logFilename=${JENKINS_HOME}/${JOB_URL:${#JENKINS_URL}}
 export logFilename=${logFilename//job\//jobs\/}builds/${BUILD_ID}/log
