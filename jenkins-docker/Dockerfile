@@ -174,7 +174,7 @@ USER ${user}
 
 RUN helm init --client-only
 
-RUN /opt/elm-env.sh install_elm 0.18.0 && /opt/elm-env.sh install_elm 0.19.0
+RUN /opt/elm-env.sh install_elm 0.18.0 && /opt/elm-env.sh install_elm 0.19.0 && /opt/elm-env.sh install_elm_test 0.19.0 0.19.0-rev6
 
 #RUN mkdir -p /var/jenkins_home/build/ssh
 COPY plugins.txt /usr/share/jenkins/plugins.txt

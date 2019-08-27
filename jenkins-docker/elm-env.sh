@@ -26,5 +26,12 @@ function install_elm {
     npm install -g elm@${elmVersion}
 }
 
+function install_elm_test {
+    local elmVersion=$1
+    local elmTestVersion=$2
+    use_elm_version $1
+
+    npm install -g elm-test@${elmTestVersion}
+}
 
 $@
