@@ -17,7 +17,6 @@ TD.console { font-family:Courier New; }
 <BODY>
 <%
     def branchName = build.getEnvironment(listener).get("BRANCH_NAME")
-    publishGsctl = build.getEnvironment(listener).get("PUBLISH_GSCTL")
 %>
 
 
@@ -66,10 +65,6 @@ if(build.result.toString() == 'SUCCESS') {
         <TR><TD>XAP Enterprise:</TD><TD><A href="${xapUrlPrefix}/${xapEnterprisePackage}">${xapEnterprisePackage}</A></TD></TR>
         <TR><TD>InsightEdge:</TD><TD><A href="${insightedgeUrlPrefix}/${insightedgePackage}">${insightedgePackage}</A></TD></TR>
         <TR><TD>InsightEdge Enterprise:</TD><TD><A href="${insightedgeUrlPrefix}/${insightedgeEnterprisePackage}">${insightedgeEnterprisePackage}</A></TD></TR>
-              if (publishGsctl == 'true'){
-             %>
-          	  <TR><TD>Gsctl:</TD><TD><A href="https://gigaspaces-releases-eu/gsctl-ha/%{mavenVersion}/gsctl.jar">gsctl.jar</A></TD></TR>
-             <%
 </table>
 <% } %>
 <BR/>
