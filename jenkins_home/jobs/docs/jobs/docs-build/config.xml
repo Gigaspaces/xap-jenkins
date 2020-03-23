@@ -4,6 +4,12 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.7.3">
+      <useBuildBlocker>false</useBuildBlocker>
+      <blockLevel>GLOBAL</blockLevel>
+      <scanQueueFor>DISABLED</scanQueueFor>
+      <blockingJobs></blockingJobs>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
         <daysToKeep>10</daysToKeep>
@@ -26,6 +32,17 @@
             <a class="string-array">
               <string>staging</string>
               <string>production</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>Sites</name>
+          <description>Determines which sites to build (when Destination is production, this is ignored and all is used)</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>all</string>
+              <string>flare</string>
+              <string>hugo</string>
             </a>
           </choices>
         </hudson.model.ChoiceParameterDefinition>
@@ -62,7 +79,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>cd &quot;%WORKSPACE%&quot; &amp; call build-site.bat %Destination%</command>
+      <command>cd &quot;%WORKSPACE%&quot; &amp; call build-site.bat %Destination% %Sites%</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers/>

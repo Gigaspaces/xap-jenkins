@@ -31,12 +31,17 @@
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m1</defaultValue>
+          <defaultValue>rc2</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>InsightEdge</name>
           <description></description>
           <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>PUBLISH_GSCTL</name>
+          <description></description>
+          <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_TAGS</name>
@@ -217,6 +222,7 @@ use_elm_version ${ELM_VERSION}
 
 logFilename=${JENKINS_HOME}/${JOB_URL:${#JENKINS_URL}}
 export logFilename=${logFilename//job\//jobs\/}builds/${BUILD_ID}/log
+#export ZEPPELIN_INTERPRETER_DEP_MVNREPO=https://repo1.maven.org/maven2
 ${WORKSPACE}/xap-premium/build/build.sh</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>

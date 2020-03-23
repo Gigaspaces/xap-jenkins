@@ -73,6 +73,15 @@
 5bf160bb1f31eb789fc0fa65 - OPENJDK_11</description>
           <defaultValue>5b4c9342b3859411ee82c265</defaultValue>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>NEWMAN_JOB_PRIORITY</name>
+          <description>0- daily-default
+1- low
+2- high
+3- release-default
+4- urgent</description>
+          <defaultValue>1</defaultValue>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>

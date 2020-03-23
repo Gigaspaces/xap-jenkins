@@ -43,7 +43,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description>Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH</description>
-          <defaultValue>m1</defaultValue>
+          <defaultValue>rc2</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_TAGS</name>
@@ -78,6 +78,11 @@
         <hudson.model.BooleanParameterDefinition>
           <name>PUBLISH_DOCKER</name>
           <description>Trigger automated docker build in Docker Hub</description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>PUBLISH_GSCTL</name>
+          <description>Deploy gsctl artifacts to s3</description>
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.StringParameterDefinition>
@@ -234,6 +239,7 @@ use_elm_version ${ELM_VERSION}
 
 logFilename=${JENKINS_HOME}/${JOB_URL:${#JENKINS_URL}}
 export logFilename=${logFilename//job\//jobs\/}builds/${BUILD_ID}/log
+#export ZEPPELIN_INTERPRETER_DEP_MVNREPO=https://repo1.maven.org/maven2
 ${WORKSPACE}/xap-premium/build/build.sh</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.5">
