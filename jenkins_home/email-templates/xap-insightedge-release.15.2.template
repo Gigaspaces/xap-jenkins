@@ -31,6 +31,7 @@ TD.console { font-family:Courier New; }
      mavenVersion = build.getEnvironment(listener).get("FINAL_MAVEN_VERSION")
      deployArtifacts = build.getEnvironment(listener).get("DEPLOY_ARTIFACTS")
      publishGsctl = build.getEnvironment(listener).get("PUBLISH_GSCTL")
+     mode = build.getEnvironment(listener).get("MODE")
    } catch(all){ 
    }
    def xapPackage = "gigaspaces-xap-" + buildName + ".zip"
@@ -59,14 +60,20 @@ TD.console { font-family:Courier New; }
    %>
 	<TR><TD>XAP:</TD><TD><A href="${xapUrlPrefix}/${xapPackage}">${xapPackage}</A></TD></TR> 
 	<TR><TD>XAP Enterprise:</TD><TD><A href="${xapUrlPrefix}/${xapEnterprisePackage}">${xapEnterprisePackage}</A></TD></TR>
-    <TR><TD>XAP.NET:</TD><TD><A href="${xapUrlPrefix}/${xapNetPackage}">${xapNetPackage}</A><TD></TR>
+        <TR><TD>XAP.NET:</TD><TD><A href="${xapUrlPrefix}/${xapNetPackage}">${xapNetPackage}</A><TD></TR>
 	<TR><TD>InsightEdge:</TD><TD><A href="${insightedgeUrlPrefix}/${insightedgePackage}">${insightedgePackage}</A></TD></TR>
   	<TR><TD>InsightEdge Enterprise:</TD><TD><A href="${insightedgeUrlPrefix}/${insightedgeEnterprisePackage}">${insightedgeEnterprisePackage}</A></TD></TR>
   	<%
     if (publishGsctl == 'true'){
+       if(mode == 'ga'){
     %>
-    <TR><TD>Gsctl:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/gsctl/${mavenVersion}/gsctl.jar">gsctl.jar</A></TD></TR>
-    <% } %>
+    <TR><TD>Gsctl:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/gsctl/${mavenVersion}/gsctl.jar">gsctl.jar</A></TD></TR><TR><TD>Gsctl:</TD></TR>
+    <%
+       }else {
+    %>
+    <TR><TD>Gsctl:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/gsctl-ea/${mavenVersion}/gsctl.jar">gsctl.jar</A></TD></TR>
+    <%
+       } } %>
    <%
   	}
 
