@@ -38,12 +38,12 @@
         <hudson.model.StringParameterDefinition>
           <name>XAP_VERSION</name>
           <description></description>
-          <defaultValue>15.2.0</defaultValue>
+          <defaultValue>15.5.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description>Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH</description>
-          <defaultValue>rc2</defaultValue>
+          <defaultValue>m1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_TAGS</name>
@@ -338,7 +338,7 @@ ${WORKSPACE}/xap-premium/build/build.sh</command>
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>${SCRIPT, template=&quot;xap-insightedge-release.template&quot;}</defaultContent>
+      <defaultContent>${SCRIPT, template=&quot;xap-insightedge-release.15.2.template&quot;}</defaultContent>
       <attachmentsPattern></attachmentsPattern>
       <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
       <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
