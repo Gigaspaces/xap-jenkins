@@ -1,4 +1,4 @@
-FROM ubuntu 
+FROM ubuntu:18.04 
 
 ARG STORAGE_SERVER="imc-srv01"
 RUN echo "Using STORAGE_SERVER=${STORAGE_SERVER}"
@@ -132,7 +132,6 @@ RUN apt-get install gcc-7 g++-7 -y
 RUN apt-get install build-essential -y
 
 RUN apt-get install net-tools
-
 RUN apt-get install python2.7 python-pip -y
 
 RUN pip2 install -I ansible==2.2.1.0
