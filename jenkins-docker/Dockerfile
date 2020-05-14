@@ -1,16 +1,9 @@
 FROM ubuntu:18.04 
 
-ARG STORAGE_SERVER="imc-srv01"
-RUN echo "Using STORAGE_SERVER=${STORAGE_SERVER}"
-RUN bash -c 'if [[ "${STORAGE_SERVER}" == "" ]]; then echo "STORAGE_SERVER can not be empty"; exit 1; fi'
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-RUN apt-get update && apt-get install -y curl zip nano vim sudo wget
-
-# Install Java.
-
-RUN wget http://${STORAGE_SERVER}/javas/jdk-8u191-linux-x64.tar.gz -O /tmp/jdk-8u191-linux-x64.tar.gz && cd /tmp && tar -zxvf jdk-8u191-linux-x64.tar.gz && mkdir -p /usr/lib/jvm/ && mv jdk1.8.0_191 /usr/lib/jvm/java-8-oracle
+RUN apt-get update && apt-get install -y curl zip nano vim sudo wget openjdk-8-jdk
 
 
 
@@ -28,7 +21,7 @@ RUN apt-get install -y sshpass
 
 RUN apt-get install -y bzip2
 
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle 
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 ENV PATH=$JAVA_HOME/bin:$PATH
 
 # && rm -rf /var/lib/apt/lists/*
