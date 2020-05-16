@@ -45,6 +45,11 @@
           <description>[REQUIRED PARAMETER] Boolean indicator if to deploy artifacts to s3</description>
           <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>PUBLISH_TO_NEWMAN</name>
+          <description>[REQUIRED PARAMETER] Boolean indicator if to publish build to Newman</description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -88,7 +93,7 @@
       <macroFirst>false</macroFirst>
     </org.jenkinsci.plugins.buildnameupdater.BuildNameUpdater>
     <hudson.tasks.BatchFile>
-      <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call BuildAll.bat &quot;%JAVA_BUILD_URL%&quot; &quot;%BRANCH_NAME%&quot; &quot;%DEPLOY_ARTIFACTS%&quot;</command>
+      <command>cd &quot;%WORKSPACE%\Build&quot; &amp; call BuildAll.bat &quot;%JAVA_BUILD_URL%&quot; &quot;%BRANCH_NAME%&quot; &quot;%DEPLOY_ARTIFACTS%&quot; &quot;%PUBLISH_TO_NEWMAN%&quot;</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>

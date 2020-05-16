@@ -27,7 +27,9 @@
       <parameterDefinitions>
         <hudson.model.ChoiceParameterDefinition>
           <name>Destination</name>
-          <description></description>
+          <description>Determines the publish destination
+* staging: https://docs-staging.gigaspaces.com
+* production: https://docs.gigaspaces.com</description>
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
               <string>staging</string>
@@ -36,8 +38,18 @@
           </choices>
         </hudson.model.ChoiceParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
+          <name>Profile</name>
+          <description>Determines which flare profile should be built (when Destination is &apos;production&apos;, this is ignored and &apos;full&apos; is used)</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>default</string>
+              <string>full</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
           <name>Sites</name>
-          <description>Determines which sites to build (when Destination is production, this is ignored and all is used)</description>
+          <description>Determines which sites to build (when Destination is &apos;production&apos;, this is ignored and &apos;all&apos; is used)</description>
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
               <string>all</string>
@@ -79,7 +91,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>cd &quot;%WORKSPACE%&quot; &amp; call build-site.bat %Destination% %Sites%</command>
+      <command>cd &quot;%WORKSPACE%&quot; &amp; call build-site.bat %Destination% %Profile% %Sites%</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers/>
