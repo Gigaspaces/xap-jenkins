@@ -128,7 +128,7 @@ RUN apt-get install net-tools
 RUN apt-get install python2.7 python-pip -y
 
 RUN pip2 install ansible
-RUN pip install spotinst_sdk
+RUN pip install spotinst-sdk
 
 # get node
 RUN echo 'get node tar.gz'
