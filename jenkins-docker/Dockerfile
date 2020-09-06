@@ -127,12 +127,12 @@ RUN apt-get install build-essential -y
 RUN apt-get install net-tools
 RUN apt-get install python2.7 python-pip -y
 
-RUN pip2 install -I ansible==2.2.1.0
+RUN pip2 install -I ansible==2.8.1
 
-RUN pip install requests
-RUN pip install spotinst
+#RUN pip install requests
+#RUN pip install spotinst
 #RUN pip2 install ansible
-#RUN pip install spotinst_sdk
+RUN pip install spotinst_sdk
 
 # get node
 RUN echo 'get node tar.gz'
