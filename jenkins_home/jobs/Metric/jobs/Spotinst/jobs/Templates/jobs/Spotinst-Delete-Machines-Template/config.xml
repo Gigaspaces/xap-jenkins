@@ -29,7 +29,7 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>https://github.com/yohanakh/spots-starter.git</url>
+        <url>https://github.com/giga-dev/spotinst-ansible.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
