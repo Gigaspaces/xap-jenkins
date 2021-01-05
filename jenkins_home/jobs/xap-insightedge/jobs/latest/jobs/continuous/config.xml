@@ -286,7 +286,7 @@ ${WORKSPACE}/xap-premium/build/build.sh</command>
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>${SCRIPT, template=&quot;continuous-aws-15.2.template&quot;}</defaultContent>
+      <defaultContent>${SCRIPT, template=&quot;xap-insightedge/15.8/continuous.template&quot;}</defaultContent>
       <attachmentsPattern></attachmentsPattern>
       <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
       <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
