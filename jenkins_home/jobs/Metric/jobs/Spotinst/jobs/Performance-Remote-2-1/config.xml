@@ -50,11 +50,11 @@
           <description>Ignored in embedded mode</description>
           <defaultValue>2,1</defaultValue>
         </hudson.model.StringParameterDefinition>
-	<hudson.model.StringParameterDefinition>
-	  <name>remote_gscPerAgent</name>
-	  <description>Number of GSCs started in each agent machine</description>
-	  <defaultValue>2</defaultValue>
-	</hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>remote_gscPerAgent</name>
+          <description>Number of GSCs started in each agent machine</description>
+          <defaultValue>2</defaultValue>
+        </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>mail_title</name>
           <description></description>

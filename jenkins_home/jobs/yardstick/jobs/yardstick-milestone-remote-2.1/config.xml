@@ -109,8 +109,9 @@ UPLOAD_RESULTS=true
 UNDELPOY=false
 MILESTONE_RUN=true
 CONFIGS=\
--r 10000 -b 1 -w 6 -d 30 -t 4 -dn GSReadByIdBenchmark -sn GigaspacesNode -ds base-cluster-remote-read -spn atomic-space,\
--r 10000 -b 1 -w 6 -d 30 -t 4 -dn GSTakeByIdBenchmark -sn GigaspacesNode -ds base-cluster-remote-take -spn atomic-space</properties>
+-r 10000 -b 1 -w 6 -d 30 -t 4 -dn GSWriteBenchmark -sn GigaspacesNode -ds current-cluster-remote-write -spn atomic-space,\
+-r 10000 -b 1 -w 6 -d 30 -t 4 -dn GSReadByIdBenchmark -sn GigaspacesNode -ds current-cluster-remote-read -spn atomic-space,\
+-r 10000 -b 1 -w 6 -d 30 -t 4 -dn GSTakeByIdBenchmark -sn GigaspacesNode -ds current-cluster-remote-take -spn atomic-space</properties>
               <textParamValueOnNewLine>false</textParamValueOnNewLine>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>

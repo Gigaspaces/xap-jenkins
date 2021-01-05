@@ -305,54 +305,6 @@ CONFIGS=\
         </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
       </configs>
     </hudson.plugins.parameterizedtrigger.TriggerBuilder>
-    <hudson.plugins.parameterizedtrigger.TriggerBuilder plugin="parameterized-trigger@2.35.2">
-      <configs>
-        <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-          <configs>
-            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-              <properties>BRANCH_NAME=${YARDSTICK_BRANCH}
-INSTANCES_COUNT=5
-XAP_VERSION=${BASE_VERSION}
-MACHINE_PREFIX=milestone
-SEND_EMAIL=false
-CLEAR_WORKSPACE=false
-DEPLOY=false
-INSTALL=false
-RUN=false
-UPLOAD_RESULTS=false
-UNDEPLOY=true
-CONFIGS=</properties>
-              <textParamValueOnNewLine>false</textParamValueOnNewLine>
-            </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-          </configs>
-          <projects>yardstick</projects>
-          <condition>ALWAYS</condition>
-          <triggerWithNoParameters>false</triggerWithNoParameters>
-          <triggerFromChildProjects>false</triggerFromChildProjects>
-          <block>
-            <buildStepFailureThreshold>
-              <name>FAILURE</name>
-              <ordinal>2</ordinal>
-              <color>RED</color>
-              <completeBuild>true</completeBuild>
-            </buildStepFailureThreshold>
-            <unstableThreshold>
-              <name>UNSTABLE</name>
-              <ordinal>1</ordinal>
-              <color>YELLOW</color>
-              <completeBuild>true</completeBuild>
-            </unstableThreshold>
-            <failureThreshold>
-              <name>FAILURE</name>
-              <ordinal>2</ordinal>
-              <color>RED</color>
-              <completeBuild>true</completeBuild>
-            </failureThreshold>
-          </block>
-          <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
-        </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-      </configs>
-    </hudson.plugins.parameterizedtrigger.TriggerBuilder>
   </builders>
   <publishers/>
   <buildWrappers/>

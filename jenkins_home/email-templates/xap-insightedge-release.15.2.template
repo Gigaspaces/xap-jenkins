@@ -34,10 +34,8 @@ TD.console { font-family:Courier New; }
      mode = build.getEnvironment(listener).get("MODE")
    } catch(all){ 
    }
-   def xapPackage = "gigaspaces-xap-" + buildName + ".zip"
    def xapEnterprisePackage = "gigaspaces-xap-enterprise-" + buildName + ".zip"
    def xapNetPackage = "gigaspaces-xap.net-" + buildName + ".msi"
-   def insightedgePackage = "gigaspaces-insightedge-" + buildName + ".zip"
    def insightedgeEnterprisePackage = "gigaspaces-insightedge-enterprise-" + buildName + ".zip"
    def xapUrlPrefix = "https://gigaspaces-releases-eu.s3.amazonaws.com/xap/${xapVersion}"
    def insightedgeUrlPrefix = "https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/${xapVersion}"
@@ -55,30 +53,28 @@ TD.console { font-family:Courier New; }
 <% if(build.result.toString() == 'SUCCESS') { %>
   <TR><TD>Maven version:</TD><TD>${mavenVersion}</TD></TR> 
   <TR><TD>Git tag:</TD><TD>${tagName} (<A href="https://github.com/xap/xap/tree/${tagName}">xap</A>, <A href="https://github.com/Gigaspaces/xap-premium/tree/${tagName}">xap-premium</A>, <A href="https://github.com/Gigaspaces/xap-dotnet/tree/${tagName}">xap-dotnet</A>, <A href="https://github.com/InsightEdge/insightedge/tree/${tagName}">insightedge</A>)</TD></TR>
-  <% 
+<% 
   	if (deployArtifacts == 'true'){
-   %>
-	<TR><TD>XAP:</TD><TD><A href="${xapUrlPrefix}/${xapPackage}">${xapPackage}</A></TD></TR> 
-	<TR><TD>XAP Enterprise:</TD><TD><A href="${xapUrlPrefix}/${xapEnterprisePackage}">${xapEnterprisePackage}</A></TD></TR>
+%>
+	<TR><TD>XAP:</TD><TD><A href="${xapUrlPrefix}/${xapEnterprisePackage}">${xapEnterprisePackage}</A></TD></TR>
+  	<TR><TD>InsightEdge:</TD><TD><A href="${insightedgeUrlPrefix}/${insightedgeEnterprisePackage}">${insightedgeEnterprisePackage}</A></TD></TR>
         <TR><TD>XAP.NET:</TD><TD><A href="${xapUrlPrefix}/${xapNetPackage}">${xapNetPackage}</A><TD></TR>
-	<TR><TD>InsightEdge:</TD><TD><A href="${insightedgeUrlPrefix}/${insightedgePackage}">${insightedgePackage}</A></TD></TR>
-  	<TR><TD>InsightEdge Enterprise:</TD><TD><A href="${insightedgeUrlPrefix}/${insightedgeEnterprisePackage}">${insightedgeEnterprisePackage}</A></TD></TR>
-  	<%
-    if (publishGsctl == 'true'){
-       if(mode == 'ga'){
-    %>
-    <TR><TD>Gsctl:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/gsctl/${mavenVersion}/gsctl.jar">gsctl.jar</A></TD></TR><TR><TD>Gsctl:</TD></TR>
-    <%
-       }else {
-    %>
-    <TR><TD>Gsctl:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/gsctl-ea/${mavenVersion}/gsctl.jar">gsctl.jar</A></TD></TR>
-    <%
-       } } %>
-   <%
-  	}
+<%
+           if (publishGsctl == 'true'){
+              if(mode == 'GA'){
+%>
+                 <TR><TD>Gsctl:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/gsctl/${mavenVersion}/gsctl.jar">gsctl.jar</A></TD></TR>
+<%
+              } else {
+%>
+                 <TR><TD>Gsctl:</TD><TD><A href="https://gigaspaces-releases-eu.s3.amazonaws.com/gsctl-ea/${mavenVersion}/gsctl.jar">gsctl.jar</A></TD></TR>
+<%
+              }
+            }
+         }
 
-    }
-  %>
+   }
+%>
 </TABLE>
 <BR/>
 

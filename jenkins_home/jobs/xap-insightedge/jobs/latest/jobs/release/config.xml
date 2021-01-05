@@ -38,12 +38,12 @@
         <hudson.model.StringParameterDefinition>
           <name>XAP_VERSION</name>
           <description></description>
-          <defaultValue>15.5.0</defaultValue>
+          <defaultValue>15.8.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description>Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH</description>
-          <defaultValue>m6</defaultValue>
+          <defaultValue>rc1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_TAGS</name>

@@ -96,7 +96,7 @@ CONFIGS=</properties>
         <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
           <configs>
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-              <properties>BRANCH_NAME=base-version-yardstick
+              <properties>BRANCH_NAME=master
 INSTANCES_COUNT=2
 XAP_VERSION=${BASE_VERSION}
 MACHINE_PREFIX=milestone

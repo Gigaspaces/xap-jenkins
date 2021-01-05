@@ -51,10 +51,8 @@ if(build.result.toString() == 'SUCCESS') {
      publishGsctl = build.getEnvironment(listener).get("PUBLISH_GSCTL")
    } catch(all){
    }
-   def xapPackage = "gigaspaces-xap-" + buildName + ".zip"
    def xapEnterprisePackage = "gigaspaces-xap-enterprise-" + buildName + ".zip"
    def xapNetPackage = "gigaspaces-xap.net-" + buildName + ".msi"
-   def insightedgePackage = "gigaspaces-insightedge-" + buildName + ".zip"
    def insightedgeEnterprisePackage = "gigaspaces-insightedge-enterprise-" + buildName + ".zip"
    def xapUrlPrefix = "https://gigaspaces-releases-eu.s3.amazonaws.com/xap/${xapVersion}"
    def insightedgeUrlPrefix = "https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/${xapVersion}"
@@ -62,10 +60,8 @@ if(build.result.toString() == 'SUCCESS') {
 <hr/>
 <h3>Links:</h3>
 <table>
-	<TR><TD>XAP:</TD><TD><A href="${xapUrlPrefix}/${xapPackage}">${xapPackage}</A></TD></TR> 
-        <TR><TD>XAP Enterprise:</TD><TD><A href="${xapUrlPrefix}/${xapEnterprisePackage}">${xapEnterprisePackage}</A></TD></TR>
-        <TR><TD>InsightEdge:</TD><TD><A href="${insightedgeUrlPrefix}/${insightedgePackage}">${insightedgePackage}</A></TD></TR>
-        <TR><TD>InsightEdge Enterprise:</TD><TD><A href="${insightedgeUrlPrefix}/${insightedgeEnterprisePackage}">${insightedgeEnterprisePackage}</A></TD></TR>
+        <TR><TD>XAP:</TD><TD><A href="${xapUrlPrefix}/${xapEnterprisePackage}">${xapEnterprisePackage}</A></TD></TR>
+        <TR><TD>InsightEdge:</TD><TD><A href="${insightedgeUrlPrefix}/${insightedgeEnterprisePackage}">${insightedgeEnterprisePackage}</A></TD></TR>
          <%
          if (publishGsctl == 'true'){
          %>
