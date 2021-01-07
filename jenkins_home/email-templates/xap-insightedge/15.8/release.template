@@ -40,6 +40,7 @@ TD.console { font-family:Courier New; }
    def smartOdsPackage = "gigaspaces-smart-ods-enterprise-" + buildName + ".zip"
    def smartAugmentedTransactionsPackage = "gigaspaces-smart-augmented-transactions-enterprise-" + buildName + ".zip"
    def xapNetPackage = "gigaspaces-xap.net-" + buildName + ".msi"
+   def smartCacheNetPackage = "gigaspaces-smart-cache.net-enterprise-" + buildName + ".msi"
    def xapUrlPrefix = "https://gigaspaces-releases-eu.s3.amazonaws.com/xap/${xapVersion}"
    def insightedgeUrlPrefix = "https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/${xapVersion}"
 %>
@@ -65,6 +66,7 @@ TD.console { font-family:Courier New; }
   	<TR><TD>InsightEdge:</TD><TD><A href="${insightedgeUrlPrefix}/${insightedgePackage}">${insightedgePackage}</A></TD></TR>
 	<TR><TD>Smart Augmented Transactions:</TD><TD><A href="${insightedgeUrlPrefix}/${smartAugmentedTransactionsPackage}">${smartAugmentedTransactionsPackage}</A></TD></TR>
     <TR><TD>XAP.NET:</TD><TD><A href="${xapUrlPrefix}/${xapNetPackage}">${xapNetPackage}</A><TD></TR>
+    <TR><TD>Smart Cache.NET:</TD><TD><A href="${xapUrlPrefix}/${smartCacheNetPackage}">${smartCacheNetPackage}</A><TD></TR>
 <%
            if (publishGsctl == 'true'){
               if(mode == 'GA'){
