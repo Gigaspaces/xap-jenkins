@@ -26,12 +26,12 @@
         <hudson.model.StringParameterDefinition>
           <name>XAP_VERSION</name>
           <description></description>
-          <defaultValue>15.8.0</defaultValue>
+          <defaultValue>16.0.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>rc1</defaultValue>
+          <defaultValue>m1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>InsightEdge</name>
