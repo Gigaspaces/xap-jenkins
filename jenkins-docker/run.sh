@@ -22,6 +22,12 @@ if [[ ! -e "${M2S}" ]]; then
     mkdir -p ${M2S}
 fi
 
+M2S_DEPENDENCY_CHECK=`pwd`/../m2_dependency_check
+if [[ ! -e "${M2S_DEPENDENCY_CHECK}" ]]; then
+    mkdir -p ${M2S_DEPENDENCY_CHECK}
+fi
+
+
 #NEWMAN_SERVER_IP is the IP of the host machine
 NEWMAN_SERVER_IP=$(hostname -I | awk '{ print $1 }')
 
@@ -29,6 +35,7 @@ docker run -e JAVA_OPTS=-Duser.timezone=Asia/Jerusalem ${MODE} -p 8080:8080 -p 5
     --volume `pwd`/../jenkins_home:/var/jenkins_home \
     --volume ${WORKSPACES}:/var/workspaces \
     --volume ${M2S}:/var/m2s \
+    --volume ${M2S_DEPENDENCY_CHECK}:/var/m2_dependency_check \
     --volume `pwd`/../ssh:/home/jenkins/.ssh \
     --volume ${M2}:/home/jenkins/.m2 \
     --volume `pwd`/../m2_release:/home/jenkins/.m2_release \
