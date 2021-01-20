@@ -17,7 +17,7 @@ TD.console { font-family:Courier New; }
 <BODY>
 
 <%
-def xapVersion = build.getEnvironment(listener).get("XAP_VERSION")
+def xapVersion = build.getEnvironment(listener).get("GS_VERSION")
 def branchName = build.getEnvironment(listener).get("BRANCH_NAME")
 %>
 
@@ -38,6 +38,6 @@ def branchName = build.getEnvironment(listener).get("BRANCH_NAME")
 
 <TABLE>
     <TR><TD valign="center"><B style="font-size: 150%;">Dependency Check - ${xapVersion}</B></TD></TR>
-    <TR><TD>read</TD><TD><A href="https://s3-eu-west-1.amazonaws.com/dependecy-check-results/dependency-check-results/${xapVersion}/dependency-check-report.html">${xapVersion}/Results</A></TD></TR>
+    <TR><TD><A href="https://dependency-check-results.s3.us-east-2.amazonaws.com/dependency-check-results/${xapVersion}/dependency-check-report.html">${xapVersion}/Results</A></TD></TR>
 </TABLE>
 
