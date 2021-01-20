@@ -19,7 +19,6 @@ TD.console { font-family:Courier New; }
 <%
 def xapVersion = build.getEnvironment(listener).get("GS_VERSION")
 def gsProduct = build.getEnvironment(listener).get("GS_PRODUCT")
-def timestamp = build.getEnvironment(listener).get("TIMESTAMP")
 %>
 
 <TABLE>
@@ -38,6 +37,5 @@ def timestamp = build.getEnvironment(listener).get("TIMESTAMP")
 
 <TABLE>
     <TR><TD valign="center"><B style="font-size: 150%;">Dependency Check - ${gsProduct} ${xapVersion}</B></TD></TR>
-    <TR><TD valign="center"><B style="font-size: 150%;">Dependency Check - ${timestamp}</B></TD></TR>
     <TR><TD><A href="https://dependency-check-results.s3.us-east-2.amazonaws.com/dependency-check-results/${gsProduct}/${xapVersion}/dependency-check-report.html">${xapVersion}/Results</A></TD></TR>
 </TABLE>
