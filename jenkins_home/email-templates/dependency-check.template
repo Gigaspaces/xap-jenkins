@@ -18,7 +18,8 @@ TD.console { font-family:Courier New; }
 
 <%
 def xapVersion = build.getEnvironment(listener).get("GS_VERSION")
-def branchName = build.getEnvironment(listener).get("BRANCH_NAME")
+def gsProduct = build.getEnvironment(listener).get("GS_PRODUCT")
+def timestamp = build.getEnvironment(listener).get("TIMESTAMP")
 %>
 
 <TABLE>
@@ -26,7 +27,6 @@ def branchName = build.getEnvironment(listener).get("BRANCH_NAME")
     </TD><TD valign="center"><B style="font-size: 200%;">BUILD ${build.result}</B></TD></TR>
     <TR><TD>URL</TD><TD><A href="${rooturl}${build.url}">${rooturl}${build.url}</A></TD></TR>
     <TR><TD>Project:</TD><TD>${project.name}</TD></TR>
-    <TR><TD>Branch:</TD><TD>${branchName}</TD></TR>
     <TR><TD>Date:</TD><TD>${it.timestampString}</TD></TR>
     <TR><TD>Duration:</TD><TD>${build.durationString}</TD></TR>
     <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ${cause.shortDescription} <%  } %></TD></TR>
@@ -37,7 +37,7 @@ def branchName = build.getEnvironment(listener).get("BRANCH_NAME")
 <BR/>
 
 <TABLE>
-    <TR><TD valign="center"><B style="font-size: 150%;">Dependency Check - ${xapVersion}</B></TD></TR>
-    <TR><TD><A href="https://dependency-check-results.s3.us-east-2.amazonaws.com/dependency-check-results/${xapVersion}/dependency-check-report.html">${xapVersion}/Results</A></TD></TR>
+    <TR><TD valign="center"><B style="font-size: 150%;">Dependency Check - ${gsProduct} ${xapVersion}</B></TD></TR>
+    <TR><TD valign="center"><B style="font-size: 150%;">Dependency Check - ${timestamp}</B></TD></TR>
+    <TR><TD><A href="https://dependency-check-results.s3.us-east-2.amazonaws.com/dependency-check-results/${gsProduct}/${xapVersion}/dependency-check-report.html">${xapVersion}/Results</A></TD></TR>
 </TABLE>
-
