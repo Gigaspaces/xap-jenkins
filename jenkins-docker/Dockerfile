@@ -164,7 +164,7 @@ ADD elm-env.sh /opt/elm-env.sh
 RUN chmod 777 /opt/elm-env.sh
 USER ${user}
 
-RUN helm init --client-only
+RUN helm init --stable-repo-url=https://charts.helm.sh/stable --client-only
 
 RUN /opt/elm-env.sh install_elm 0.18.0 && /opt/elm-env.sh install_elm 0.19.0 && /opt/elm-env.sh install_elm_test 0.19.0 0.19.0-rev6
 
