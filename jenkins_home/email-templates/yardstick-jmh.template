@@ -60,4 +60,5 @@ def branchName = build.getEnvironment(listener).get("BRANCH_NAME")
     <TR><TD>write</TD><TD><A href="https://s3-eu-west-1.amazonaws.com/yardstick-results/results/${xapVersion}/results-files/single-embedded-write/result-compound-single-embedded-write/Results.html">${xapVersion}/single-embedded-write</A></TD></TR>
     <TR><TD>take</TD><TD><A href="https://s3-eu-west-1.amazonaws.com/yardstick-results/results/${xapVersion}/results-files/single-embedded-take/result-compound-single-embedded-take/Results.html">${xapVersion}/single-embedded-take</A></TD></TR>
     <TR><TD>notify</TD><TD><A href="https://s3-eu-west-1.amazonaws.com/yardstick-results/results/${xapVersion}/results-files/single-embedded-notify/result-compound-single-embedded-notify/Results.html">${xapVersion}/single-embedded-notify</A></TD></TR>
+    <TR><TD>update</TD><TD><A href="https://s3-eu-west-1.amazonaws.com/yardstick-results/results/${xapVersion}/results-files/single-embedded-update/result-compound-single-embedded-update/Results.html">${xapVersion}/single-embedded-update</A></TD></TR>
 </TABLE>
