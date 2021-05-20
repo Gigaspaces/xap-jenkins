@@ -23,7 +23,7 @@ function install_elm {
     npm config set prefix "${globalDir}"
 
     use_elm_version ${elmVersion}
-    npm install -g elm@${elmVersion}
+    #npm install -g elm@${elmVersion}
 }
 
 function install_elm_test {
