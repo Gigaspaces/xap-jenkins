@@ -3,7 +3,8 @@ FROM ubuntu:18.04
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-RUN apt-get update && apt-get install -y curl zip nano vim sudo wget openjdk-8-jdk
+RUN apt-get update && apt-get install -y curl zip nano vim sudo wget \
+    openjdk-8-jdk-headless=8u162-b12-1 openjdk-8-jre=8u162-b12-1 openjdk-8-jdk=8u162-b12-1 openjdk-8-jre-headless=8u162-b12-1
 
 
 
