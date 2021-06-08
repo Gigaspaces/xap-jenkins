@@ -62,3 +62,7 @@ def branchName = build.getEnvironment(listener).get("BRANCH_NAME")
     <TR><TD>notify</TD><TD><A href="https://s3-eu-west-1.amazonaws.com/yardstick-results/results/${xapVersion}/results-files/single-embedded-notify/result-compound-single-embedded-notify/Results.html">${xapVersion}/single-embedded-notify</A></TD></TR>
     <TR><TD>update</TD><TD><A href="https://s3-eu-west-1.amazonaws.com/yardstick-results/results/${xapVersion}/results-files/single-embedded-update/result-compound-single-embedded-update/Results.html">${xapVersion}/single-embedded-update</A></TD></TR>
 </TABLE>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes

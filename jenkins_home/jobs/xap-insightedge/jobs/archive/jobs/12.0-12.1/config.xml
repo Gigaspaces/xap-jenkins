@@ -2,6 +2,7 @@
 <com.cloudbees.hudson.plugins.folder.Folder plugin="cloudbees-folder@5.17">
   <actions/>
   <description></description>
+  <displayName>12.0-12.1 - use old Jenkins to build</displayName>
   <properties>
     <org.jenkinsci.plugins.pipeline.modeldefinition.config.FolderConfig plugin="pipeline-model-definition@1.0">
       <dockerLabel></dockerLabel>

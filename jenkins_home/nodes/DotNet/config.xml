@@ -1,12 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <slave>
   <name>DotNet</name>
-  <description></description>
+  <description>(192.168.10.49)</description>
   <remoteFS>c:\Jenkins</remoteFS>
   <numExecutors>1</numExecutors>
   <mode>EXCLUSIVE</mode>
   <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
   <launcher class="hudson.slaves.JNLPLauncher"/>
   <label></label>
-  <nodeProperties/>
+  <nodeProperties>
+    <org.jenkinsci.plugins.mailwatcher.WatcherNodeProperty plugin="mail-watcher-plugin@1.16">
+      <onlineAddresses></onlineAddresses>
+      <offlineAddresses>rnd@gigaspaces.com</offlineAddresses>
+    </org.jenkinsci.plugins.mailwatcher.WatcherNodeProperty>
+  </nodeProperties>
 </slave>
