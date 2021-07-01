@@ -4,9 +4,8 @@ FROM ubuntu:18.04
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 RUN apt-get update && apt-get install -y curl zip nano vim sudo wget \
-    openjdk-8-jdk-headless=8u162-b12-1 openjdk-8-jre=8u162-b12-1 openjdk-8-jdk=8u162-b12-1 openjdk-8-jre-headless=8u162-b12-1
-
-
+    openjdk-8-jdk-headless=8u162-b12-1 openjdk-8-jre=8u162-b12-1 openjdk-8-jdk=8u162-b12-1 openjdk-8-jre-headless=8u162-b12-1 \
+    openjdk-11-jdk-headless=11.0.11+9-0ubuntu2~18.04
 
 RUN apt-get update
 RUN apt-get install -y software-properties-common
@@ -22,7 +21,9 @@ RUN apt-get install -y sshpass
 
 RUN apt-get install -y bzip2
 
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+ENV JAVA_HOME_8  /usr/lib/jvm/java-8-openjdk-amd64/
+ENV JAVA_HOME_11 /usr/lib/jvm/java-11-openjdk-amd64/
+ENV JAVA_HOME $JAVA_HOME_8
 ENV PATH=$JAVA_HOME/bin:$PATH
 
 # && rm -rf /var/lib/apt/lists/*
