@@ -103,7 +103,7 @@ RUN wget --no-verbose -O /tmp/apache-maven-$MAVEN_VERSION.tar.gz \
     http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz
 
 # stop building if md5sum does not match
-RUN echo "516923b3955b6035ba6b0a5b031fbd8b  /tmp/apache-maven-$MAVEN_VERSION.tar.gz" | \
+RUN echo "9792c717f5845d952907d5144b8253c3  /tmp/apache-maven-$MAVEN_VERSION.tar.gz" | \
     md5sum -c
 
 # add gspaces.com to resolv.conf
