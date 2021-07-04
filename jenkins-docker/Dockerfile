@@ -98,11 +98,12 @@ COPY plugins.sh /usr/local/bin/plugins.sh
 
 USER root
 RUN apt-get -y install wget
-RUN wget --no-verbose -O /tmp/apache-maven-3.3.9.tar.gz \
-    http://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+ENV MAVEN_VERSION=3.6.3
+RUN wget --no-verbose -O /tmp/apache-maven-$MAVEN_VERSION.tar.gz \
+    http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz
 
 # stop building if md5sum does not match
-RUN echo "516923b3955b6035ba6b0a5b031fbd8b  /tmp/apache-maven-3.3.9.tar.gz" | \
+RUN echo "516923b3955b6035ba6b0a5b031fbd8b  /tmp/apache-maven-$MAVEN_VERSION.tar.gz" | \
     md5sum -c
 
 # add gspaces.com to resolv.conf
@@ -112,11 +113,11 @@ RUN echo "search gspaces.com" >> /etc/resolv.conf
 # install in /opt/maven
 RUN mkdir -p /opt/maven
 
-RUN tar xzf /tmp/apache-maven-3.3.9.tar.gz --strip-components=1 \
+RUN tar xzf /tmp/apache-maven-$MAVEN_VERSION.tar.gz --strip-components=1 \
     -C /opt/maven
 
 RUN ln -s /opt/maven/bin/mvn /usr/local/bin
-RUN rm -f /tmp/apache-maven-3.3.9.tar.gz
+RUN rm -f /tmp/apache-maven-$MAVEN_VERSION.tar.gz
 
 #install gcc 7
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
