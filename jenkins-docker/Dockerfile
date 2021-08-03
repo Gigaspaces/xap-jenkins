@@ -135,6 +135,10 @@ RUN pip2 install -I ansible==2.8.1
 #RUN pip install requests
 #RUN pip install spotinst
 #RUN pip2 install ansible
+<<<<<<< Updated upstream
+=======
+#RUN pip install spotinst_sdk
+>>>>>>> Stashed changes
 RUN pip install -Iv https://github.com/spotinst/spotinst-sdk-python/archive/refs/tags/1.0.40.tar.gz
 
 # get node

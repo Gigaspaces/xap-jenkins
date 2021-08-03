@@ -683,7 +683,7 @@
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>xap-insightedge/latest</string>
+        <string>xap-insightedge/archive/16.0.0/latest</string>
       </jobNames>
       <jobFilters/>
       <columns>

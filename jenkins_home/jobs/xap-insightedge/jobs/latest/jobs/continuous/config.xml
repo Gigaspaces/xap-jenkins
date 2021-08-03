@@ -26,12 +26,12 @@
         <hudson.model.StringParameterDefinition>
           <name>XAP_VERSION</name>
           <description></description>
-          <defaultValue>16.0.0</defaultValue>
+          <defaultValue>16.1.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m19</defaultValue>
+          <defaultValue>m1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>InsightEdge</name>
@@ -67,7 +67,7 @@
 59f25af7b3859424cac590b9  - wan
 5b6c24e7b385941b3b8ce4bf - dev-demote
 5f9fe92cf10dba603d82bb9e - elasticgrid
-</description>
+59f25e0f6d98c14e1daa5000 - performance</description>
           <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
@@ -82,7 +82,7 @@
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_AGENT_GROUPS</name>
           <description></description>
-          <defaultValue>imc-srv01,imc-srv02,DotNet</defaultValue>
+          <defaultValue>imc-srv01,imc-srv02,DotNet,Bynet</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_JOB_PRIORITY</name>
@@ -189,7 +189,7 @@
     </scms>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
@@ -286,7 +286,7 @@ ${WORKSPACE}/xap-premium/build/build.sh</command>
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>${SCRIPT, template=&quot;xap-insightedge/15.8/continuous.template&quot;}</defaultContent>
+      <defaultContent>${SCRIPT, template=&quot;xap-insightedge/16.0/continuous.template&quot;}</defaultContent>
       <attachmentsPattern></attachmentsPattern>
       <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
       <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
