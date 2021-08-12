@@ -135,11 +135,8 @@ RUN pip2 install -I ansible==2.8.1
 #RUN pip install requests
 #RUN pip install spotinst
 #RUN pip2 install ansible
-<<<<<<< Updated upstream
-=======
-#RUN pip install spotinst_sdk
->>>>>>> Stashed changes
-RUN pip install -Iv https://github.com/spotinst/spotinst-sdk-python/archive/refs/tags/1.0.40.tar.gz
+
+RUN pip install spotinst_sdk==1.0.41
 
 # get node
 RUN echo 'get node tar.gz'
@@ -156,7 +153,7 @@ RUN echo 'unpacking node tar.gz' && \
 
 RUN ln -s /opt/node/bin/node /usr/local/bin && ln -s /opt/node/bin/npm /usr/local/bin
 
-RUN node --version && \
+RUN node --version && \pip install -Iv https://github.com/spotinst/spotinst-sdk-python/archive/refs/tags/1.0.40.tar.gz
      npm --version
 
 RUN echo 'installing helm' && \
