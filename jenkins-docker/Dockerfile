@@ -153,7 +153,7 @@ RUN echo 'unpacking node tar.gz' && \
 
 RUN ln -s /opt/node/bin/node /usr/local/bin && ln -s /opt/node/bin/npm /usr/local/bin
 
-RUN node --version && \pip install -Iv https://github.com/spotinst/spotinst-sdk-python/archive/refs/tags/1.0.40.tar.gz
+RUN node --version && \
      npm --version
 
 RUN echo 'installing helm' && \
