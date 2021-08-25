@@ -37,7 +37,7 @@ TD.console { font-family:Courier New; }
    def xapPackage = "gigaspaces-xap-enterprise-" + buildName + ".zip"
    def insightedgePackage = "gigaspaces-insightedge-enterprise-" + buildName + ".zip"
    def smartCachePackage = "gigaspaces-smart-cache-enterprise-" + buildName + ".zip"
-   def smartOdsPackage = "gigaspaces-smart-ods-enterprise-" + buildName + ".zip"
+   def smartDihPackage = "gigaspaces-smart-dih-enterprise-" + buildName + ".zip"
    def smartAugmentedTransactionsPackage = "gigaspaces-smart-augmented-transactions-enterprise-" + buildName + ".zip"
    def xapNetPackage = "gigaspaces-xap.net-" + buildName + ".msi"
    def smartCacheNetPackage = "gigaspaces-smart-cache.net-enterprise-" + buildName + ".msi"
@@ -62,7 +62,7 @@ TD.console { font-family:Courier New; }
 %>
 	<TR><TD>XAP:</TD><TD><A href="${xapUrlPrefix}/${xapPackage}">${xapPackage}</A></TD></TR>
 	<TR><TD>Smart Cache:</TD><TD><A href="${insightedgeUrlPrefix}/${smartCachePackage}">${smartCachePackage}</A></TD></TR>
-	<TR><TD>Smart ODS:</TD><TD><A href="${insightedgeUrlPrefix}/${smartOdsPackage}">${smartOdsPackage}</A></TD></TR>
+	<TR><TD>Smart DIH:</TD><TD><A href="${insightedgeUrlPrefix}/${smartDihPackage}">${smartDihPackage}</A></TD></TR>
   	<TR><TD>InsightEdge:</TD><TD><A href="${insightedgeUrlPrefix}/${insightedgePackage}">${insightedgePackage}</A></TD></TR>
 	<TR><TD>Smart Augmented Transactions:</TD><TD><A href="${insightedgeUrlPrefix}/${smartAugmentedTransactionsPackage}">${smartAugmentedTransactionsPackage}</A></TD></TR>
     <TR><TD>XAP.NET:</TD><TD><A href="${xapUrlPrefix}/${xapNetPackage}">${xapNetPackage}</A><TD></TR>
