@@ -73,10 +73,11 @@ lastSuccessful
 nextBuildNumber
 
 m2
+m2s
 m2_release
 workspaces
 *~
-ssh
+ssh*
 
 .idea
 *.iml
