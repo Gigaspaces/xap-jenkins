@@ -11,6 +11,7 @@
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.GlobalMatrixAuthorizationStrategy">
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:alons</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:anton</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:ayeletm</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:barak</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:efrat</permission>
@@ -29,6 +30,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:yohana</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:yonatan</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:alons</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:anton</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:ayeletm</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:barak</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:efrat</permission>
@@ -47,6 +49,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:yohana</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:yonatan</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:alons</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:anton</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:ayeletm</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:barak</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:efrat</permission>
@@ -65,6 +68,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:yohana</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:yonatan</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:alons</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:anton</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:ayeletm</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:barak</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:efrat</permission>
@@ -83,6 +87,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:yohana</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:yonatan</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:alons</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:anton</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:ayeletm</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:barak</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:efrat</permission>
@@ -101,6 +106,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:yohana</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:yonatan</permission>
     <permission>hudson.model.Computer.Build:alons</permission>
+    <permission>hudson.model.Computer.Build:anton</permission>
     <permission>hudson.model.Computer.Build:ayeletm</permission>
     <permission>hudson.model.Computer.Build:barak</permission>
     <permission>hudson.model.Computer.Build:docs-node</permission>
@@ -120,6 +126,7 @@
     <permission>hudson.model.Computer.Build:yohana</permission>
     <permission>hudson.model.Computer.Build:yonatan</permission>
     <permission>hudson.model.Computer.Configure:alons</permission>
+    <permission>hudson.model.Computer.Configure:anton</permission>
     <permission>hudson.model.Computer.Configure:ayeletm</permission>
     <permission>hudson.model.Computer.Configure:barak</permission>
     <permission>hudson.model.Computer.Configure:docs-node</permission>
@@ -139,6 +146,7 @@
     <permission>hudson.model.Computer.Configure:yohana</permission>
     <permission>hudson.model.Computer.Configure:yonatan</permission>
     <permission>hudson.model.Computer.Connect:alons</permission>
+    <permission>hudson.model.Computer.Connect:anton</permission>
     <permission>hudson.model.Computer.Connect:ayeletm</permission>
     <permission>hudson.model.Computer.Connect:barak</permission>
     <permission>hudson.model.Computer.Connect:docs-node</permission>
@@ -158,6 +166,7 @@
     <permission>hudson.model.Computer.Connect:yohana</permission>
     <permission>hudson.model.Computer.Connect:yonatan</permission>
     <permission>hudson.model.Computer.Create:alons</permission>
+    <permission>hudson.model.Computer.Create:anton</permission>
     <permission>hudson.model.Computer.Create:ayeletm</permission>
     <permission>hudson.model.Computer.Create:barak</permission>
     <permission>hudson.model.Computer.Create:docs-node</permission>
@@ -177,6 +186,7 @@
     <permission>hudson.model.Computer.Create:yohana</permission>
     <permission>hudson.model.Computer.Create:yonatan</permission>
     <permission>hudson.model.Computer.Delete:alons</permission>
+    <permission>hudson.model.Computer.Delete:anton</permission>
     <permission>hudson.model.Computer.Delete:ayeletm</permission>
     <permission>hudson.model.Computer.Delete:barak</permission>
     <permission>hudson.model.Computer.Delete:docs-node</permission>
@@ -196,6 +206,7 @@
     <permission>hudson.model.Computer.Delete:yohana</permission>
     <permission>hudson.model.Computer.Delete:yonatan</permission>
     <permission>hudson.model.Computer.Disconnect:alons</permission>
+    <permission>hudson.model.Computer.Disconnect:anton</permission>
     <permission>hudson.model.Computer.Disconnect:ayeletm</permission>
     <permission>hudson.model.Computer.Disconnect:barak</permission>
     <permission>hudson.model.Computer.Disconnect:docs-node</permission>
@@ -215,6 +226,7 @@
     <permission>hudson.model.Computer.Disconnect:yohana</permission>
     <permission>hudson.model.Computer.Disconnect:yonatan</permission>
     <permission>hudson.model.Hudson.Administer:alons</permission>
+    <permission>hudson.model.Hudson.Administer:anton</permission>
     <permission>hudson.model.Hudson.Administer:ayeletm</permission>
     <permission>hudson.model.Hudson.Administer:barak</permission>
     <permission>hudson.model.Hudson.Administer:efrat</permission>
@@ -233,6 +245,7 @@
     <permission>hudson.model.Hudson.Administer:yohana</permission>
     <permission>hudson.model.Hudson.Administer:yonatan</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:alons</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:anton</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:ayeletm</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:barak</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:efrat</permission>
@@ -252,6 +265,7 @@
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:yonatan</permission>
     <permission>hudson.model.Hudson.Read:alani</permission>
     <permission>hudson.model.Hudson.Read:alons</permission>
+    <permission>hudson.model.Hudson.Read:anton</permission>
     <permission>hudson.model.Hudson.Read:ayeletm</permission>
     <permission>hudson.model.Hudson.Read:barak</permission>
     <permission>hudson.model.Hudson.Read:davidf</permission>
@@ -277,6 +291,7 @@
     <permission>hudson.model.Hudson.Read:yonatan</permission>
     <permission>hudson.model.Hudson.Read:yuval</permission>
     <permission>hudson.model.Hudson.RunScripts:alons</permission>
+    <permission>hudson.model.Hudson.RunScripts:anton</permission>
     <permission>hudson.model.Hudson.RunScripts:ayeletm</permission>
     <permission>hudson.model.Hudson.RunScripts:barak</permission>
     <permission>hudson.model.Hudson.RunScripts:efrat</permission>
@@ -295,6 +310,7 @@
     <permission>hudson.model.Hudson.RunScripts:yohana</permission>
     <permission>hudson.model.Hudson.RunScripts:yonatan</permission>
     <permission>hudson.model.Hudson.UploadPlugins:alons</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:anton</permission>
     <permission>hudson.model.Hudson.UploadPlugins:ayeletm</permission>
     <permission>hudson.model.Hudson.UploadPlugins:barak</permission>
     <permission>hudson.model.Hudson.UploadPlugins:efrat</permission>
@@ -314,6 +330,7 @@
     <permission>hudson.model.Hudson.UploadPlugins:yonatan</permission>
     <permission>hudson.model.Item.Build:alani</permission>
     <permission>hudson.model.Item.Build:alons</permission>
+    <permission>hudson.model.Item.Build:anton</permission>
     <permission>hudson.model.Item.Build:ayeletm</permission>
     <permission>hudson.model.Item.Build:barak</permission>
     <permission>hudson.model.Item.Build:davidf</permission>
@@ -337,6 +354,7 @@
     <permission>hudson.model.Item.Build:yonatan</permission>
     <permission>hudson.model.Item.Build:yuval</permission>
     <permission>hudson.model.Item.Cancel:alons</permission>
+    <permission>hudson.model.Item.Cancel:anton</permission>
     <permission>hudson.model.Item.Cancel:ayeletm</permission>
     <permission>hudson.model.Item.Cancel:barak</permission>
     <permission>hudson.model.Item.Cancel:efrat</permission>
@@ -358,6 +376,7 @@
     <permission>hudson.model.Item.Cancel:yonatan</permission>
     <permission>hudson.model.Item.Cancel:yuval</permission>
     <permission>hudson.model.Item.Configure:alons</permission>
+    <permission>hudson.model.Item.Configure:anton</permission>
     <permission>hudson.model.Item.Configure:ayeletm</permission>
     <permission>hudson.model.Item.Configure:barak</permission>
     <permission>hudson.model.Item.Configure:efrat</permission>
@@ -380,6 +399,7 @@
     <permission>hudson.model.Item.Configure:yonatan</permission>
     <permission>hudson.model.Item.Configure:yuval</permission>
     <permission>hudson.model.Item.ConfigureVersions:alons</permission>
+    <permission>hudson.model.Item.ConfigureVersions:anton</permission>
     <permission>hudson.model.Item.ConfigureVersions:ayeletm</permission>
     <permission>hudson.model.Item.ConfigureVersions:efrat</permission>
     <permission>hudson.model.Item.ConfigureVersions:meshi</permission>
@@ -388,6 +408,7 @@
     <permission>hudson.model.Item.ConfigureVersions:tomer</permission>
     <permission>hudson.model.Item.ConfigureVersions:yonatan</permission>
     <permission>hudson.model.Item.Create:alons</permission>
+    <permission>hudson.model.Item.Create:anton</permission>
     <permission>hudson.model.Item.Create:ayeletm</permission>
     <permission>hudson.model.Item.Create:barak</permission>
     <permission>hudson.model.Item.Create:efrat</permission>
@@ -409,6 +430,7 @@
     <permission>hudson.model.Item.Create:yohana</permission>
     <permission>hudson.model.Item.Create:yonatan</permission>
     <permission>hudson.model.Item.Delete:alons</permission>
+    <permission>hudson.model.Item.Delete:anton</permission>
     <permission>hudson.model.Item.Delete:ayeletm</permission>
     <permission>hudson.model.Item.Delete:barak</permission>
     <permission>hudson.model.Item.Delete:efrat</permission>
@@ -429,6 +451,7 @@
     <permission>hudson.model.Item.Delete:yohana</permission>
     <permission>hudson.model.Item.Delete:yonatan</permission>
     <permission>hudson.model.Item.Discover:alons</permission>
+    <permission>hudson.model.Item.Discover:anton</permission>
     <permission>hudson.model.Item.Discover:ayeletm</permission>
     <permission>hudson.model.Item.Discover:barak</permission>
     <permission>hudson.model.Item.Discover:efrat</permission>
@@ -489,6 +512,7 @@
     <permission>hudson.model.Item.Release:sagiv</permission>
     <permission>hudson.model.Item.Workspace:alani</permission>
     <permission>hudson.model.Item.Workspace:alons</permission>
+    <permission>hudson.model.Item.Workspace:anton</permission>
     <permission>hudson.model.Item.Workspace:ayeletm</permission>
     <permission>hudson.model.Item.Workspace:barak</permission>
     <permission>hudson.model.Item.Workspace:davidf</permission>
@@ -513,6 +537,7 @@
     <permission>hudson.model.Item.Workspace:yonatan</permission>
     <permission>hudson.model.Item.Workspace:yuval</permission>
     <permission>hudson.model.Run.Delete:alons</permission>
+    <permission>hudson.model.Run.Delete:anton</permission>
     <permission>hudson.model.Run.Delete:ayeletm</permission>
     <permission>hudson.model.Run.Delete:barak</permission>
     <permission>hudson.model.Run.Delete:efrat</permission>
@@ -534,6 +559,7 @@
     <permission>hudson.model.Run.Delete:yonatan</permission>
     <permission>hudson.model.Run.Delete:yuval</permission>
     <permission>hudson.model.Run.Replay:alons</permission>
+    <permission>hudson.model.Run.Replay:anton</permission>
     <permission>hudson.model.Run.Replay:ayeletm</permission>
     <permission>hudson.model.Run.Replay:efrat</permission>
     <permission>hudson.model.Run.Replay:inbar</permission>
@@ -549,6 +575,7 @@
     <permission>hudson.model.Run.Replay:yonatan</permission>
     <permission>hudson.model.Run.Replay:yuval</permission>
     <permission>hudson.model.Run.Update:alons</permission>
+    <permission>hudson.model.Run.Update:anton</permission>
     <permission>hudson.model.Run.Update:ayeletm</permission>
     <permission>hudson.model.Run.Update:barak</permission>
     <permission>hudson.model.Run.Update:efrat</permission>
@@ -570,6 +597,7 @@
     <permission>hudson.model.Run.Update:yonatan</permission>
     <permission>hudson.model.Run.Update:yuval</permission>
     <permission>hudson.model.View.Configure:alons</permission>
+    <permission>hudson.model.View.Configure:anton</permission>
     <permission>hudson.model.View.Configure:ayeletm</permission>
     <permission>hudson.model.View.Configure:barak</permission>
     <permission>hudson.model.View.Configure:efrat</permission>
@@ -590,6 +618,7 @@
     <permission>hudson.model.View.Configure:yonatan</permission>
     <permission>hudson.model.View.Configure:yuval</permission>
     <permission>hudson.model.View.Create:alons</permission>
+    <permission>hudson.model.View.Create:anton</permission>
     <permission>hudson.model.View.Create:ayeletm</permission>
     <permission>hudson.model.View.Create:barak</permission>
     <permission>hudson.model.View.Create:efrat</permission>
@@ -610,6 +639,7 @@
     <permission>hudson.model.View.Create:yonatan</permission>
     <permission>hudson.model.View.Create:yuval</permission>
     <permission>hudson.model.View.Delete:alons</permission>
+    <permission>hudson.model.View.Delete:anton</permission>
     <permission>hudson.model.View.Delete:ayeletm</permission>
     <permission>hudson.model.View.Delete:barak</permission>
     <permission>hudson.model.View.Delete:efrat</permission>
@@ -629,6 +659,7 @@
     <permission>hudson.model.View.Read:alani</permission>
     <permission>hudson.model.View.Read:alons</permission>
     <permission>hudson.model.View.Read:anonymous</permission>
+    <permission>hudson.model.View.Read:anton</permission>
     <permission>hudson.model.View.Read:ayeletm</permission>
     <permission>hudson.model.View.Read:barak</permission>
     <permission>hudson.model.View.Read:davidf</permission>
@@ -683,7 +714,6 @@
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>xap-insightedge/archive/16.0.0/latest</string>
       </jobNames>
       <jobFilters/>
       <columns>

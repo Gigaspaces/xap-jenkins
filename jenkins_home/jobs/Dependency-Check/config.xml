@@ -20,7 +20,7 @@
         <hudson.model.StringParameterDefinition>
           <name>GS_VERSION</name>
           <description></description>
-          <defaultValue>16.0.0-m1</defaultValue>
+          <defaultValue>16.1.0-m1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>GS_PRODUCT</name>

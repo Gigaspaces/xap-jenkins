@@ -5,11 +5,11 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.7.3">
-      <useBuildBlocker>false</useBuildBlocker>
+      <useBuildBlocker>true</useBuildBlocker>
       <blockLevel>GLOBAL</blockLevel>
       <scanQueueFor>DISABLED</scanQueueFor>
-      <blockingJobs>.*continuous
-.*release</blockingJobs>
+      <blockingJobs>.*continuous.*
+</blockingJobs>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
     <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.25">
@@ -31,7 +31,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m1</defaultValue>
+          <defaultValue>m9</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>InsightEdge</name>
@@ -67,7 +67,8 @@
 59f25af7b3859424cac590b9  - wan
 5b6c24e7b385941b3b8ce4bf - dev-demote
 5f9fe92cf10dba603d82bb9e - elasticgrid
-59f25e0f6d98c14e1daa5000 - performance</description>
+59f25e0f6d98c14e1daa5000 - performance
+607420ac4cedfd0009ec8b20 - v3driver</description>
           <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
@@ -189,7 +190,7 @@
     </scms>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
