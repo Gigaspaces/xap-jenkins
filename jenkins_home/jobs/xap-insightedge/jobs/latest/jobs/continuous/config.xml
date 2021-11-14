@@ -26,12 +26,12 @@
         <hudson.model.StringParameterDefinition>
           <name>XAP_VERSION</name>
           <description></description>
-          <defaultValue>16.1.0</defaultValue>
+          <defaultValue>16.2.0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MILESTONE</name>
           <description></description>
-          <defaultValue>m9</defaultValue>
+          <defaultValue>m1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>InsightEdge</name>
@@ -77,7 +77,8 @@
 
 5b4c9342b3859411ee82c265 - ORACLE_8
 5b4c9825b3859411ee82c2f3  - ORACLE_9
-5bf160bb1f31eb789fc0fa65 - OPENJDK_11</description>
+5bf160bb1f31eb789fc0fa65 - OPENJDK_11
+5bf160bb1f31eb789fc0fb78 - OPENJDK_17</description>
           <defaultValue>5b4c9342b3859411ee82c265</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
@@ -204,7 +205,8 @@
     <hudson.tasks.Shell>
       <command>export M2=&quot;${WORKSPACE//\/var\/workspaces/\/var\/m2s}&quot;
 export MODE=&quot;CONTINUOUS&quot;
-${WORKSPACE}/xap-premium/build/create_setenv.sh</command>
+${WORKSPACE}/xap-premium/build/create_setenv.sh
+echo $M2</command>
     </hudson.tasks.Shell>
     <EnvInjectBuilder plugin="envinject@1.93.1">
       <info>
@@ -287,7 +289,7 @@ ${WORKSPACE}/xap-premium/build/build.sh</command>
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>${SCRIPT, template=&quot;xap-insightedge/16.0/continuous.template&quot;}</defaultContent>
+      <defaultContent>${SCRIPT, template=&quot;xap-insightedge/16.1/continuous.template&quot;}</defaultContent>
       <attachmentsPattern></attachmentsPattern>
       <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
       <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
