@@ -75,7 +75,7 @@ ENV JENKINS_SHA ${JENKINS_SHA:-1b65dc498ba7ab1f5cce64200b920a8716d90834}
 
 # could use ADD but this one does not check Last-Modified header 
 # see https://github.com/docker/docker/issues/8331
-RUN curl -fsSL http://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war -o /usr/share/jenkins/jenkins.war \
+RUN curl -fsSL -C - http://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war -o /usr/share/jenkins/jenkins.war \
   && echo "$JENKINS_SHA  /usr/share/jenkins/jenkins.war" | sha1sum -c -
 
 ENV JENKINS_UC https://updates.jenkins.io
