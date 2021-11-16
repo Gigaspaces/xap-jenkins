@@ -107,7 +107,7 @@ RUN echo "9792c717f5845d952907d5144b8253c3  /tmp/apache-maven-$MAVEN_VERSION.tar
     md5sum -c
 
 # add gspaces.com to resolv.conf
-RUN echo "search gspaces.com" >> /etc/resolv.conf
+RUN sudo bash -c 'echo "search gspaces.com" > /etc/resolv.cnf'
 
 
 # install in /opt/maven
