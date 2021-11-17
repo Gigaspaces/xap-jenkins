@@ -75,10 +75,11 @@ ENV JENKINS_SHA ${JENKINS_SHA:-1b65dc498ba7ab1f5cce64200b920a8716d90834}
 
 # could use ADD but this one does not check Last-Modified header 
 # see https://github.com/docker/docker/issues/8331
-RUN curl -fsSL http://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war -o /usr/share/jenkins/jenkins.war \
+RUN curl -fsSL -C - http://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war -o /usr/share/jenkins/jenkins.war \
   && echo "$JENKINS_SHA  /usr/share/jenkins/jenkins.war" | sha1sum -c -
 
 ENV JENKINS_UC https://updates.jenkins.io
+RUN mkdir -p $JENKINS_HOME
 RUN chown -R ${user} "$JENKINS_HOME" /usr/share/jenkins/ref
 
 # for main web interface:
@@ -135,11 +136,8 @@ RUN pip2 install -I ansible==2.8.1
 #RUN pip install requests
 #RUN pip install spotinst
 #RUN pip2 install ansible
-<<<<<<< Updated upstream
-=======
-#RUN pip install spotinst_sdk
->>>>>>> Stashed changes
-RUN pip install -Iv https://github.com/spotinst/spotinst-sdk-python/archive/refs/tags/1.0.40.tar.gz
+
+RUN pip install spotinst_sdk==1.0.41
 
 # get node
 RUN echo 'get node tar.gz'
