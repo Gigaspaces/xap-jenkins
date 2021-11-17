@@ -15,11 +15,9 @@ export -f use_elm_version
 
 function install_elm {
     local elmVersion=$1
-    local globalDir="/home/jenkins/.npm-global_${elmVersion}"
-    export PATH="${globalDir}/bin:${PATH}"
+    local globalDir="/home/jenkins/.npm-global_${elmVersion}/bin"
     if [[ -e "${globalDir}" ]]; then echo "Elm version ${elmVersion} already exist"; exit 1; fi
     mkdir "${globalDir}"
-    npm config set prefix "${globalDir}"
     if [[ "${elmVersion}" = "0.19.0" ]]
     then
         wget --no-verbose -O "${globalDir}"/elm.gz https://github.com/elm/compiler/releases/download/${elmVersion}/binary-for-linux-64-bit.gz
@@ -29,15 +27,13 @@ function install_elm {
     fi
     gunzip "${globalDir}"/elm.gz
     chmod +x "${globalDir}"/elm
-    use_elm_version ${elmVersion}
-    #npm install -g elm@${elmVersion}
 }
 
 function install_elm_test {
     local elmVersion=$1
     local elmTestVersion=$2
-    use_elm_version $1
-
+    local globalDir="/home/jenkins/.npm-global_${elmVersion}"
+    npm config set prefix "${globalDir}"
     npm install -g elm-test@${elmTestVersion}
 }
 
