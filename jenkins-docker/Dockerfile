@@ -79,6 +79,7 @@ RUN curl -fsSL -C - http://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkin
   && echo "$JENKINS_SHA  /usr/share/jenkins/jenkins.war" | sha1sum -c -
 
 ENV JENKINS_UC https://updates.jenkins.io
+RUN mkdir -p $JENKINS_HOME
 RUN chown -R ${user} "$JENKINS_HOME" /usr/share/jenkins/ref
 
 # for main web interface:
