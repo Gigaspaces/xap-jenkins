@@ -16,7 +16,7 @@ export -f use_elm_version
 function install_elm {
     local elmVersion=$1
     local globalDir="/home/jenkins/.npm-global_${elmVersion}/bin"
-    if [[ -e "${globalDir}" ]]; then echo "Elm version ${elmVersion} already exist"; exit 1; fi
+    if [[ -f "${globalDir}/elm" ]]; then echo "Elm version ${elmVersion} already exist"; exit 1; fi
     mkdir "${globalDir}"
     if [[ "${elmVersion}" = "0.19.0" ]]
     then
