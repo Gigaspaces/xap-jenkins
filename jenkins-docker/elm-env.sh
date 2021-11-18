@@ -1,23 +1,18 @@
 #!/bin/bash
 set -e
 
-if [[ -z "${ORIG_PATH}" ]]; then
-    export ORIG_PATH="${PATH}"
-fi
-
 function use_elm_version {
     local elmVersion=$1
     local globalDir="/home/jenkins/.npm-global_${elmVersion}"
     if [[ ! -e "${globalDir}" ]]; then echo "Elm version ${elmVersion} does not exist (${globalDir})";exit 1; fi
-    export PATH="${globalDir}/bin:${ORIG_PATH}"
 }
 export -f use_elm_version
 
 function install_elm {
     local elmVersion=$1
     local globalDir="/home/jenkins/.npm-global_${elmVersion}/bin"
-    if [[ -f "${globalDir}/elm" ]]; then echo "Elm version ${elmVersion} already exist"; exit 1; fi
-    mkdir "${globalDir}"
+    if [[ -e "${globalDir}" ]]; then echo "Elm version ${elmVersion} already exist"; exit 1; fi
+    mkdir -p "${globalDir}"
     if [[ "${elmVersion}" = "0.19.0" ]]
     then
         wget --no-verbose -O "${globalDir}"/elm.gz https://github.com/elm/compiler/releases/download/${elmVersion}/binary-for-linux-64-bit.gz
