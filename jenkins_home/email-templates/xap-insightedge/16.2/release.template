@@ -29,7 +29,7 @@ TD.console { font-family:Courier New; }
      buildName = build.getEnvironment(listener).get("GS_BUILD_NAME")
      tagName = build.getEnvironment(listener).get("TAG_NAME")
      mavenVersion = build.getEnvironment(listener).get("FINAL_MAVEN_VERSION")
-     deployArtifacts = build.getEnvironment(listener).get("DEPLOY_ARTIFACTS")
+     deployArtifacts = build.getEnvironment(listener).get("DEPLOY_MVN_ARTIFACTS")
      publishGsctl = build.getEnvironment(listener).get("PUBLISH_GSCTL")
      mode = build.getEnvironment(listener).get("MODE")
    } catch(all){ 
