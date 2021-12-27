@@ -160,18 +160,16 @@ RUN node --version && \
 RUN echo 'installing helm' && \
  echo 'Current directory' && \
  pwd && \
- wget https://get.helm.sh/helm-v2.11.0-linux-amd64.tar.gz && \
- tar -zxvf helm-v2.11.0-linux-amd64.tar.gz && \
+ wget https://get.helm.sh/helm-v3.7.2-linux-amd64.tar.gz && \
+ tar -zxvf helm-v3.7.2-linux-amd64.tar.gz && \
  mv linux-amd64/helm /usr/local/bin/helm && \
- rm -rf linux-amd64 helm-v2.11.0-linux-amd64.tar.gz
+ rm -rf linux-amd64 helm-v3.7.2-linux-amd64.tar.gz
 
 RUN echo '    StrictHostKeyChecking no' >> /etc/ssh/ssh_config
 
 ADD elm-env.sh /opt/elm-env.sh
 RUN chmod 777 /opt/elm-env.sh
 USER ${user}
-
-RUN helm init --stable-repo-url=https://charts.helm.sh/stable --client-only
 
 ENV PATH=/home/jenkins/.npm-global_0.19.0/bin:$PATH
 RUN /opt/elm-env.sh install_elm 0.19.0 && /opt/elm-env.sh install_elm_test 0.19.0 0.19.0-rev6
