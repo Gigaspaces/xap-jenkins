@@ -344,7 +344,7 @@ ${WORKSPACE}/xap-premium/build/build.sh</command>
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>${SCRIPT, template=&quot;xap-insightedge/16.2/release.template&quot;}</defaultContent>
+      <defaultContent>${SCRIPT, template=&quot;xap-insightedge/16.3/release.template&quot;}</defaultContent>
       <attachmentsPattern></attachmentsPattern>
       <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
       <postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
