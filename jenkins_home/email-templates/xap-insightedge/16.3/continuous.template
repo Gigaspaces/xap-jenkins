@@ -50,13 +50,14 @@ if(build.result.toString() == 'SUCCESS') {
      mavenVersion = build.getEnvironment(listener).get("FINAL_MAVEN_VERSION")
      publishInsightEdge = build.getEnvironment(listener).get("InsightEdge")
      publishGsctl = build.getEnvironment(listener).get("PUBLISH_GSCTL")
+     buildS3Bucket = build.getEnvironment(listener).get("S3_BUILD_BUCKET")
    } catch(all){
    }
    def insightedgePackage = "gigaspaces-insightedge-enterprise-" + buildName + ".zip"
    def smartCachePackage = "gigaspaces-smart-cache-enterprise-" + buildName + ".zip"
 
-   def smartcacheUrlPrefix = "https://gigaspaces-releases-eu.s3.amazonaws.com/smart-cache/${xapVersion}"
-   def insightedgeUrlPrefix = "https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/${xapVersion}"
+   def smartcacheUrlPrefix = "https://" + buildS3Bucket + ".s3.amazonaws.com/smart-cache/${xapVersion}"
+   def insightedgeUrlPrefix = "https://" + buildS3Bucket + ".s3.amazonaws.com/insightedge/${xapVersion}"
 %>
 <hr/>
 <h3>Links:</h3>
