@@ -4,8 +4,8 @@ FROM ubuntu:18.04
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 RUN apt-get update && apt-get install -y curl zip nano vim sudo wget \
-    openjdk-8-jdk-headless=8u162-b12-1 openjdk-8-jre=8u162-b12-1 openjdk-8-jdk=8u162-b12-1 openjdk-8-jre-headless=8u162-b12-1 \
-    openjdk-11-jdk-headless=11.0.11+9-0ubuntu2~18.04
+    openjdk-8-jdk-headless openjdk-8-jre openjdk-8-jdk openjdk-8-jre-headless \
+    openjdk-11-jdk-headless
 
 RUN apt-get update
 RUN apt-get install -y software-properties-common
@@ -108,7 +108,7 @@ RUN echo "9792c717f5845d952907d5144b8253c3  /tmp/apache-maven-$MAVEN_VERSION.tar
     md5sum -c
 
 # add gspaces.com to resolv.conf
-RUN echo "search gspaces.com" >> /etc/resolv.conf
+# RUN echo "search gspaces.com" >> /etc/resolv.conf
 
 
 # install in /opt/maven
@@ -176,6 +176,7 @@ RUN /opt/elm-env.sh install_elm 0.19.0 && /opt/elm-env.sh install_elm_test 0.19.
 
 #RUN mkdir -p /var/jenkins_home/build/ssh
 COPY plugins.txt /usr/share/jenkins/plugins.txt
+COPY known_hosts /home/${user}/.ssh/known_hosts
 RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
 
 COPY gitconfig /home/${user}/.gitconfig
