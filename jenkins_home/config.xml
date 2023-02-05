@@ -722,7 +722,7 @@
           <string></string>
           <string></string>
           <string>NEWMAN_AGENT_GROUPS</string>
-          <string> imc-srv01,imc-srv02,DotNet</string>
+          <string>DotNet</string>
         </tree-map>
       </envVars>
     </hudson.slaves.EnvironmentVariablesNodeProperty>

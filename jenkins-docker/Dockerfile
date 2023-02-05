@@ -68,16 +68,11 @@ RUN curl -fsSL https://github.com/krallin/tini/releases/download/v0.5.0/tini-sta
 COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
 
 ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.32.1}
-ARG JENKINS_SHA
-ENV JENKINS_SHA ${JENKINS_SHA:-1b65dc498ba7ab1f5cce64200b920a8716d90834}
-
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.375.1}
 
 # could use ADD but this one does not check Last-Modified header 
 # see https://github.com/docker/docker/issues/8331
-RUN curl -fsSL http://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war -o /usr/share/jenkins/jenkins.war \
-  && echo "$JENKINS_SHA  /usr/share/jenkins/jenkins.war" | sha1sum -c -
-
+RUN curl -fsSL https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war -o /usr/share/jenkins/jenkins.war 
 ENV JENKINS_UC https://updates.jenkins.io
 RUN mkdir -p $JENKINS_HOME
 RUN chown -R ${user} "$JENKINS_HOME" /usr/share/jenkins/ref
@@ -106,6 +101,9 @@ RUN wget --no-verbose -O /tmp/apache-maven-$MAVEN_VERSION.tar.gz \
 # stop building if md5sum does not match
 RUN echo "9792c717f5845d952907d5144b8253c3  /tmp/apache-maven-$MAVEN_VERSION.tar.gz" | \
     md5sum -c
+
+# add $user user to sudoers
+RUN echo "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 # add gspaces.com to resolv.conf
 # RUN echo "search gspaces.com" >> /etc/resolv.conf

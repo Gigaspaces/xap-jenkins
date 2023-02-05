@@ -76,7 +76,7 @@
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_AGENT_GROUPS</name>
           <description></description>
-          <defaultValue>imc-srv01,imc-srv02,DotNet</defaultValue>
+          <defaultValue>DotNet</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NEWMAN_JOB_PRIORITY</name>
