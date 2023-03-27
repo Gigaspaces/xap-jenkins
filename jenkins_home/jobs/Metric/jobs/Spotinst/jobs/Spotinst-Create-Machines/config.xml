@@ -75,7 +75,7 @@
         <hudson.model.StringParameterDefinition>
           <name>JAVA_URL</name>
           <description></description>
-          <defaultValue>https://s3-eu-west-1.amazonaws.com/xap-test/test-build-newman/javas/jdk-8u45-linux-x64.tar.gz</defaultValue>
+          <defaultValue>https://gs-storage-server.s3.amazonaws.com/jdk/jdk-8u45-linux-x64.tar.gz</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.FileParameterDefinition>
           <name>pemfile</name>
