@@ -16,7 +16,7 @@ TD.console { font-family:Courier New; }
 </STYLE>
 <BODY>
 <%
-    def branchName = build.getEnvironment(listener).get("BRANCH_NAME")
+    String branchName = script.env.BRANCH_NAME
 %>
 
 
@@ -36,22 +36,22 @@ TD.console { font-family:Courier New; }
 </TABLE>
 
 <% 
-if(build.result.toString() == 'SUCCESS') {
+if(script.currentBuild.result == 'SUCCESS') {
 
-   def xapVersion = "unknown"
-   def buildName = "unknown"
-   def tagName = "unknown"
-   def mavenVersion = "unknown"
+   String xapVersion = "unknown"
+   String buildName = "unknown"
+   String tagName = "unknown"
+   String mavenVersion = "unknown"
 
    try{
-     xapVersion = build.getEnvironment(listener).get("XAP_VERSION") 
-     buildName = build.getEnvironment(listener).get("GS_BUILD_NAME")
-     tagName = build.getEnvironment(listener).get("TAG_NAME")
-     mavenVersion = build.getEnvironment(listener).get("FINAL_MAVEN_VERSION")
-     publishInsightEdge = build.getEnvironment(listener).get("InsightEdge")
-     publishGsctl = build.getEnvironment(listener).get("PUBLISH_GSCTL")
-     buildS3Bucket = build.getEnvironment(listener).get("S3_BUILD_BUCKET")
-   } catch(all){
+     xapVersion = script.env.XAP_VERSION
+     buildName = script.env.GS_BUILD_NAME
+     tagName = script.env.TAG_NAME
+     //mavenVersion = build.getEnvironment(listener).get("FINAL_MAVEN_VERSION")
+     publishInsightEdge = script.env.InsightEdge
+     //publishGsctl = build.getEnvironment(listener).get("PUBLISH_GSCTL")
+     buildS3Bucket = script.env.S3_BUILD_BUCKET
+   } catch(all) {
    }
    def insightedgePackage = "gigaspaces-insightedge-enterprise-" + buildName + ".zip"
    def smartCachePackage = "gigaspaces-smart-cache-enterprise-" + buildName + ".zip"
