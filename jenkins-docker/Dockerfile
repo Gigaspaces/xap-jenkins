@@ -1,11 +1,11 @@
-FROM ubuntu:18.04 
+FROM ubuntu:22.04 
 
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 RUN apt-get update && apt-get install -y curl zip nano vim sudo wget \
-    openjdk-8-jdk-headless=8u162-b12-1 openjdk-8-jre=8u162-b12-1 openjdk-8-jdk=8u162-b12-1 openjdk-8-jre-headless=8u162-b12-1 \
-    openjdk-11-jdk-headless=11.0.11+9-0ubuntu2~18.04
+    openjdk-8-jdk-headless openjdk-8-jre openjdk-8-jdk openjdk-8-jre-headless \
+    openjdk-11-jdk-headless
 
 RUN apt-get update
 RUN apt-get install -y software-properties-common
@@ -108,7 +108,7 @@ RUN echo "9792c717f5845d952907d5144b8253c3  /tmp/apache-maven-$MAVEN_VERSION.tar
     md5sum -c
 
 # add gspaces.com to resolv.conf
-RUN echo "search gspaces.com" >> /etc/resolv.conf
+# RUN echo "search gspaces.com" >> /etc/resolv.conf
 
 
 # install in /opt/maven
@@ -123,7 +123,7 @@ RUN rm -f /tmp/apache-maven-$MAVEN_VERSION.tar.gz
 #install gcc 7
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
 RUN apt-get update
-RUN apt-get install gcc-7 g++-7 -y
+RUN apt-get install gcc g++ -y
 
 #install make
 RUN apt-get install build-essential -y
@@ -137,7 +137,7 @@ RUN pip2 install -I ansible==2.8.1
 #RUN pip install spotinst
 #RUN pip2 install ansible
 
-RUN pip install spotinst_sdk==1.0.41
+RUN pip2 install spotinst_sdk==1.0.41
 
 # get node
 RUN echo 'get node tar.gz'
